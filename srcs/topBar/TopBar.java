@@ -32,11 +32,5 @@ public class TopBar {
         new TurretsBox();
         new UnitsBox();
         new UpgradesBox();
-        JPanel topBar3 = new JPanel();
-        JPanel topBar4 = new JPanel();
-        topBar3.setBackground(Color.gray);
-        topBar.add(topBar3);
-        topBar4.setBackground(Color.pink);
-        topBar.add(topBar4);
     }
 }

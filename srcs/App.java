@@ -1,7 +1,6 @@
 package srcs;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import srcs.lowerBar.LowerBar;
 import srcs.mainGame.MainGame;
