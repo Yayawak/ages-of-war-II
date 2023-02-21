@@ -14,9 +14,15 @@ public class MainGame {
     public MainGame() {
         mainGame.setBackground(Color.blue);
         mainGame.setOpaque(true);
+        Dimension dim = new Dimension(
+            App.mainFrame.getWidth(),
+            (int)(App.mainFrame.getHeight() * 0.8f)
+        );
+        // mainGame.setSize(dim);
+        mainGame.setPreferredSize(dim);
 
-        // App.mainFrame.add(mainGame, BorderLayout.CENTER);
+        App.mainFrame.add(mainGame, BorderLayout.CENTER);
         // App.mainFrame.add(mainGame, 1);
-        App.mainFrame.add(mainGame);
+        // App.mainFrame.add(mainGame);
     }
 }
