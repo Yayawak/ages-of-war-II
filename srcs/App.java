@@ -12,6 +12,7 @@ import java.awt.*;
 // public class App extends JFrame {
 public class App {
     public static JFrame mainFrame;
+
     public App() {
         mainFrame = new JFrame();
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
