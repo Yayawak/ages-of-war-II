@@ -1,6 +1,5 @@
 package srcs.topBar;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import srcs.App;
 import srcs.topBar.specialsBox.SpecialsBox;
@@ -26,18 +25,15 @@ public class TopBar {
         App.mainFrame.add(topBar, BorderLayout.NORTH);
         // App.mainFrame.add(topBar, 1);
         // App.mainFrame.add(topBar);
-        App.mainFrame.add(topBar);
+        // App.mainFrame.add(topBar);
 
         topBar.setLayout(new GridLayout(0, 4));
         new SpecialsBox();
         new TurretsBox();
         new UnitsBox();
         new UpgradesBox();
-        JPanel topBar2 = new JPanel();
         JPanel topBar3 = new JPanel();
         JPanel topBar4 = new JPanel();
-        topBar2.setBackground(Color.DARK_GRAY);
-        topBar.add(topBar2);
         topBar3.setBackground(Color.gray);
         topBar.add(topBar3);
         topBar4.setBackground(Color.pink);

@@ -1,9 +1,7 @@
 package srcs.topBar.specialsBox;
 
 import javax.swing.JPanel;
-
 import srcs.topBar.TopBar;
-
 import java.awt.*;;
 
 public class SpecialsBox {
@@ -13,5 +11,4 @@ public class SpecialsBox {
         specialsBox.setBackground(Color.CYAN);
         TopBar.topBar.add(specialsBox);
     }
-
 }
