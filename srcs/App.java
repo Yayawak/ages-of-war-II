@@ -18,6 +18,7 @@ public class App {
 
         mainFrame.setLayout(new BorderLayout());
         // todo 1: topbar : 15%
+        // topbar is here
         new TopBar();
 
         // todo 2: middle game 80%
