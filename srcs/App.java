@@ -25,10 +25,10 @@ public class App {
         mainGame.setBackground(Color.blue);
         mainFrame.add(mainGame, BorderLayout.CENTER);
 
-
         // todo 3: lower game 80%
         JPanel lowerBar = new JPanel();
         lowerBar.setBackground(Color.green);
         mainFrame.add(lowerBar, BorderLayout.SOUTH);
+
     }
 }
