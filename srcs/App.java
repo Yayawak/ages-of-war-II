@@ -11,6 +11,7 @@ import java.awt.*;
 // public class App extends JFrame {
 public class App {
     public static JFrame mainFrame;
+
     public App() {
         mainFrame = new JFrame();
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -18,7 +19,7 @@ public class App {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // mainFrame.setLayout(new BorderLayout());
-        mainFrame.setLayout(new GridLayout(3,0));
+        mainFrame.setLayout(new GridLayout(3, 0));
         // todo 1: topbar : 15%
         // topbar is here
         new TopBar();
