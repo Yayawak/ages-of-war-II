@@ -25,10 +25,11 @@ public class App extends JFrame {
         mainGame.setBackground(Color.blue);
         add(mainGame, BorderLayout.CENTER);
 
-
         // todo 3: lower game 80%
         JPanel lowerBar = new JPanel();
         lowerBar.setBackground(Color.green);
         add(lowerBar, BorderLayout.SOUTH);
+
+        // try
     }
 }
