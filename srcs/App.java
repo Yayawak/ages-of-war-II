@@ -2,41 +2,38 @@ package srcs;
 
 import javax.swing.JFrame;
 
-import srcs.lowerBar.LowerBar;
-import srcs.mainGame.MainGame;
-import srcs.topBar.TopBar;
+import srcs.interfaces.ComponentSizeItf;
+import srcs.UI.lowerBar.LowerBar;
+import srcs.UI.mainGame.MainGame;
+import srcs.UI.topBar.TopBar;
 
 import java.awt.*;
 
 // public class App extends JFrame {
-public class App {
+public class App implements ComponentSizeItf {
     public static JFrame mainFrame;
 
-    public App() {
+    public App(){
         mainFrame = new JFrame();
-        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mainFrame.setSize(new Dimension(1440, 1300));
         // mainFrame.setUndecorated(true);
+        // mainFrame.setSize(new Dimension(1240, 900));
+        // mainFrame.setResizable(false);
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        System.out.println("W & H of App is :");
-        System.out.println(mainFrame.getSize().getWidth());
-        System.out.println(mainFrame.getSize().getHeight());
-
+        showComponentSize("App", mainFrame);
         mainFrame.setLayout(new BorderLayout());
-        // mainFrame.setLayout(new FlowLayout());
-        // mainFrame.setLayout(new GridLayout(3,0));
+
         // todo 1: topbar : 15%
-        // topbar is here
         new TopBar();
 
         // todo 2: middle game 80%
         new MainGame();
 
-        // todo 3: lower game 80%
+        // todo 3: lower game 5%
         new LowerBar();
 
-        // mainFrame.pack();
-
+        mainFrame.pack();
+        // mainFrame.setVisible(true);
     }
 }

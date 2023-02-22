@@ -1,4 +1,4 @@
-package srcs.lowerBar;
+package srcs.UI.lowerBar;
 import javax.swing.*;
 
 import srcs.App;
@@ -6,9 +6,16 @@ import srcs.App;
 import java.awt.*;
 
 public class LowerBar {
+    public static final JPanel lowerBar = new JPanel();
+
     public LowerBar() {
-        JPanel lowerBar = new JPanel();
         lowerBar.setBackground(Color.green);
+        Dimension dim = new Dimension(
+            App.mainFrame.getWidth(),
+            (int)(App.mainFrame.getHeight() * 0.05)
+        );
+        lowerBar.setPreferredSize(dim);
+
         App.mainFrame.add(lowerBar, BorderLayout.SOUTH);
         // mainFrame.add(lowerBar, 1);
         // mainFrame.add(lowerBar);
