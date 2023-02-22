@@ -15,16 +15,18 @@ public class TopBar {
 
     public TopBar() {
         topBar.setBackground(Color.red);
-        // no use for ratio test
         Dimension dim = new Dimension(
                 App.mainFrame.getWidth(),
-                (int) (App.mainFrame.getHeight() * 0.15f)
-        // 500
+                (int)(App.mainFrame.getHeight() * 0.15f)
         );
-        topBar.setSize(dim);
+        topBar.setPreferredSize(dim);
+        // topBar.setSize(dim);
+
+        System.out.println("Size Topbar w : " + dim.getWidth());
+        System.out.println("Size Topbar h : " + dim.getHeight());
+
         App.mainFrame.add(topBar, BorderLayout.NORTH);
         // App.mainFrame.add(topBar, 1);
-        // App.mainFrame.add(topBar);
         // App.mainFrame.add(topBar);
 
         topBar.setLayout(new GridLayout(0, 4));

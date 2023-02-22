@@ -14,29 +14,29 @@ public class App {
 
     public App() {
         mainFrame = new JFrame();
-        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        // mainFrame.setUndecorated(true);
+        // mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mainFrame.setSize(new Dimension(1440, 1300));
+        // mainFrame.setSize(new Dimension(1240, 900));
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        System.out.println("W & H of App is :");
-        System.out.println(mainFrame.getSize().getWidth());
-        System.out.println(mainFrame.getSize().getHeight());
+        System.out.format("W & H of App is : %.0f, %.0f\n",
+            mainFrame.getSize().getWidth(),
+            mainFrame.getSize().getHeight()
+        );
 
         mainFrame.setLayout(new BorderLayout());
-        // mainFrame.setLayout(new FlowLayout());
-        // mainFrame.setLayout(new GridLayout(3,0));
+
         // todo 1: topbar : 15%
-        // topbar is here
         new TopBar();
 
         // todo 2: middle game 80%
         new MainGame();
 
-        // todo 3: lower game 80%
+        // todo 3: lower game 5%
         new LowerBar();
 
-        // mainFrame.pack();
+        mainFrame.pack();
 
     }
 }
