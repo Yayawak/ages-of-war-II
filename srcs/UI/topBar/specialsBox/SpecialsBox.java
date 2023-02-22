@@ -1,8 +1,10 @@
-package srcs.topBar.specialsBox;
+package srcs.UI.topBar.specialsBox;
+
+import java.awt.Color;
 
 import javax.swing.JPanel;
-import srcs.topBar.TopBar;
-import java.awt.*;;
+
+import srcs.UI.topBar.TopBar;;
 
 public class SpecialsBox {
     public static final JPanel specialsBox = new JPanel();

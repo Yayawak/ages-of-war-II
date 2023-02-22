@@ -1,7 +1,7 @@
-package srcs.topBar.upgradesBox;
+package srcs.UI.topBar.upgradesBox;
 import javax.swing.JPanel;
 
-import srcs.topBar.TopBar;
+import srcs.UI.topBar.TopBar;
 
 import java.awt.*;;
 

@@ -1,7 +1,7 @@
-package srcs.topBar.unitsBox;
+package srcs.UI.topBar.unitsBox;
 import javax.swing.JPanel;
 
-import srcs.topBar.TopBar;
+import srcs.UI.topBar.TopBar;
 
 import java.awt.*;;
 

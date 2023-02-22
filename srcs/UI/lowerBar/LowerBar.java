@@ -1,4 +1,4 @@
-package srcs.lowerBar;
+package srcs.UI.lowerBar;
 import javax.swing.*;
 
 import srcs.App;
