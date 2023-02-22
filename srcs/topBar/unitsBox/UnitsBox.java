@@ -1,15 +1,14 @@
 package srcs.topBar.unitsBox;
-import javax.swing.JPanel;
 
 import srcs.topBar.TopBar;
-
-import java.awt.*;;
+import javax.swing.*;
 
 public class UnitsBox {
     public static final JPanel unitsBox = new JPanel();
 
     public UnitsBox() {
-        unitsBox.setBackground(Color.gray);
+        JLabel bg = new JLabel(new ImageIcon("/Users/ppichyyy/Desktop/ages-of-war-II/images/Main.jpeg"));
+        unitsBox.add(bg);
         TopBar.topBar.add(unitsBox);
     }
 

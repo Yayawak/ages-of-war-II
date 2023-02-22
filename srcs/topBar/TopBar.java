@@ -28,9 +28,9 @@ public class TopBar {
         // App.mainFrame.add(topBar);
 
         topBar.setLayout(new GridLayout(0, 4));
+        new UnitsBox();
         new SpecialsBox();
         new TurretsBox();
-        new UnitsBox();
         new UpgradesBox();
     }
 }

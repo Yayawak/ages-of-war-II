@@ -1,6 +1,6 @@
 package srcs.topBar.turretsBox;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import srcs.topBar.TopBar;
 import java.awt.*;;
 
