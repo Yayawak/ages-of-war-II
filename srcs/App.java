@@ -15,18 +15,13 @@ public class App implements ComponentSizeItf {
 
     public App(){
         mainFrame = new JFrame();
-        // mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainFrame.setSize(new Dimension(1440, 1300));
+        // mainFrame.setUndecorated(true);
         // mainFrame.setSize(new Dimension(1240, 900));
+        // mainFrame.setResizable(false);
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         showComponentSize("App", mainFrame);
-        // System.out.format("W & H of App is : %.0f, %.0f\n",
-        //     mainFrame.getSize().getWidth(),
-        //     mainFrame.getSize().getHeight()
-        // );
-
         mainFrame.setLayout(new BorderLayout());
 
         // todo 1: topbar : 15%
@@ -39,6 +34,6 @@ public class App implements ComponentSizeItf {
         new LowerBar();
 
         mainFrame.pack();
-
+        // mainFrame.setVisible(true);
     }
 }

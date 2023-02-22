@@ -9,11 +9,13 @@ public abstract class Character {
     private int gold;
     private int hp;
     private int movementSpeed;
+    private int attackSpeed;
     private TeamType team = TeamType.PLAYER;
     private ImageData imageData;
 
     public Character(String characterName, int experiance, int gold,
-        int hp, int movementSpeed, TeamType team,
+        int hp, int movementSpeed, int attackSpeed,
+        TeamType team,
         ImageData imageData
     ) {
         this.characterName = characterName;
@@ -21,6 +23,7 @@ public abstract class Character {
         this.gold = gold;
         this.hp = hp;
         this.movementSpeed = movementSpeed;
+        this.attackSpeed = attackSpeed;
         this.team = team;
         this.imageData = imageData;
     }
@@ -79,6 +82,14 @@ public abstract class Character {
 
     public void setImageData(ImageData imageData) {
         this.imageData = imageData;
+    }
+
+    public int getAttackSpeed() {
+        return attackSpeed;
+    }
+
+    public void setAttackSpeed(int attackSpeed) {
+        this.attackSpeed = attackSpeed;
     }
 
 
