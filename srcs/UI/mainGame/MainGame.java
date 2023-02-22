@@ -3,52 +3,46 @@ package srcs.UI.mainGame;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-
-import srcs.App;
+import srcs.MainUI;
 import srcs.interfaces.ComponentSizeItf;
 
 import java.awt.*;
 import java.io.File;
+import javax.swing.GroupLayout;
+import helpers.ImageData;
 
-// public class MainGame extends JPanel implements ComponentSizeItf {
 public class MainGame implements ComponentSizeItf {
     public static JPanel mainGame = new JPanel();
     public MainGame() {
-        mainGame.setBackground(Color.blue);
-        mainGame.setOpaque(true);
-        // setBackground(Color.blue);
-        // setOpaque(true);
-        Dimension dim = new Dimension(
-            App.mainFrame.getWidth(),
-            (int)(App.mainFrame.getHeight() * 0.80f)
+        init();
+    }
+
+    private void init() {
+        mainGame.setBackground(new Color(242, 42, 242));
+        mainGame.setForeground(new Color(100, 0, 0));
+        mainGame.setPreferredSize(new Dimension(625, 400));
+
+        GroupLayout mainGameLayout = new GroupLayout(mainGame);
+        mainGame.setLayout(mainGameLayout);
+        mainGameLayout.setHorizontalGroup(
+            mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
-        mainGame.setSize(dim); // can prevent error of background unstable setting bg size
-        // mainGame.setPreferredSize(dim);
-        // setSize(dim); // can prevent error of background unstable setting bg size
-
-        // App.mainFrame.add(this, BorderLayout.CENTER);
-        App.mainFrame.add(mainGame, BorderLayout.CENTER);
-
-        // addBg();
-        // showComponentSize("MainGame", this);
+        mainGameLayout.setVerticalGroup(
+            mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 297, Short.MAX_VALUE)
+        );
+        addBg();
         showComponentSize("MainGame", mainGame);
     }
 
     private void addBg() {
         String imagePath = "/images/backgrounds/aow_bg.png";
         // String imagePath = "/images/characterImages/np.png";
-        String basePath = new File("").getAbsolutePath();
-        String fullImgPath = basePath + imagePath;
-        try {
-            // Image img = new ImageIcon(fullImgPath).getImage();
-            // img = img.getScaledInstance(
-            //     // getWidth(), getHeight(), Image.SCALE_DEFAULT);
-            //     mainGame.getWidth(), mainGame.getHeight(), Image.SCALE_DEFAULT);
-            // JLabel imageLabel = new JLabel(new ImageIcon(img));
-            // mainGame.add(imageLabel);
-        } catch (Exception e) { System.out.println(e); }
 
+        ImageData imgData = new ImageData(imagePath, 500, 500);
+        JLabel imageLabel = new JLabel(new ImageIcon(imgData.getSprite()));
+        mainGame.add(imageLabel);
 
     }
 }

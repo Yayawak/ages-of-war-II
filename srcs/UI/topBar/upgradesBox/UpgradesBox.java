@@ -10,7 +10,7 @@ public class UpgradesBox {
 
     public UpgradesBox() {
         upgradesBox.setBackground(Color.pink);
-        TopBar.topBar.add(upgradesBox);
+        TopBar.getInstance().add(upgradesBox);
     }
 
 }

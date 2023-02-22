@@ -11,6 +11,6 @@ public class SpecialsBox {
 
     public SpecialsBox() {
         specialsBox.setBackground(Color.CYAN);
-        TopBar.topBar.add(specialsBox);
+        TopBar.getInstance().add(specialsBox);
     }
 }
