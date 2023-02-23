@@ -9,9 +9,7 @@ public class TurretsBox extends JPanel {
     private static TurretsBox single_instance = null;
 
     private TurretsBox() {
-        System.out.println("Hello i am singleton from class TurretBox");
         init();
-        // TopBar.topBar.add(getInstance());
         TopBar.getInstance().add(this);
     }
 

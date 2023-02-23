@@ -2,9 +2,6 @@ import srcs.MainUI;
 
 class Main {
     public static void main(String[] args) {
-        // App a1 = new App();
-        // new App();
-        // new MainUI().setVisible(true);
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

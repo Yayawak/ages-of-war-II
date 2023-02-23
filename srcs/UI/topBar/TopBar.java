@@ -31,7 +31,7 @@ public class TopBar extends JPanel implements ComponentSizeItf {
 
     private void init() {
         setBackground(new Color(242, 242, 42));
-        setPreferredSize(new Dimension(0, 175));
+        setPreferredSize(new Dimension(0, 55));
         setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
     }
 }
