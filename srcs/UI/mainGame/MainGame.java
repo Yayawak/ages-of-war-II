@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import srcs.MainUI;
+import srcs.Characters.CharactersData.CharactersData;
 import srcs.interfaces.ComponentSizeItf;
 import java.awt.*;
 import java.io.File;
@@ -61,6 +62,12 @@ public class MainGame extends JPanel implements ComponentSizeItf {
         // System.out.println(imgData.getPathToImage());
         Image sprite = imgData.getSprite();
         g.drawImage(sprite, 0, 0, this);
+
+
+        Image grimImg = CharactersData.getInstance()
+            .getCharactersList().get(0).getImageData()
+            .getSprite();
+        g.drawImage(grimImg, 0, 0, this);
 
     }
 }

@@ -2,6 +2,9 @@ package srcs.UI.topBar.unitsBox;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 
+import org.w3c.dom.CharacterData;
+
+import srcs.Characters.CharactersData.CharactersData;
 import srcs.UI.topBar.TopBar;
 import srcs.UI.topBar.unitsBox.SubUnit.SubUnit;
 
@@ -9,9 +12,10 @@ import java.awt.*;
 import java.util.ArrayList;;
 
 public class UnitsBox extends JPanel {
-    private static UnitsBox unitsBox = null;
+    private static UnitsBox instance = null;
     private int numberOfUnits = 4;
-    private ArrayList<JPanel> unitBoxes = new ArrayList<>();
+    private static ArrayList<JPanel> unitBoxes = new ArrayList<>();
+    private Graphics g;
 
     private UnitsBox() {
         init();
@@ -19,9 +23,9 @@ public class UnitsBox extends JPanel {
     }
 
     public static UnitsBox getInstance() {
-        if (unitsBox == null)
-            unitsBox = new UnitsBox();
-        return unitsBox;
+        if (instance == null)
+            instance = new UnitsBox();
+        return instance;
     }
 
     private void init() {
@@ -32,13 +36,38 @@ public class UnitsBox extends JPanel {
         // System.out.println(subUnitPanelDimension.toString());
 
         for (int i = 0; i < numberOfUnits; i++) {
-            SubUnit unit = new SubUnit();
-            unitBoxes.add(unit);
+            try {
+                Image img = CharactersData.getInstance()
+                    .getCharactersList().get(i % 2).getImageData()
+                    .getSprite();
+                SubUnit unit = new SubUnit();
+                unit.setImg(img);
+                unitBoxes.add(unit);
+
+            } catch (Exception e) { System.out.println(e); }
         }
         unitBoxes.stream().forEach(panel -> {
             add(panel);
-            // System.out.println(panel.toString());
+            repaint();
         });
+
     }
+
+    public int getNumberOfUnits() {
+        return numberOfUnits;
+    }
+
+    public void setNumberOfUnits(int numberOfUnits) {
+        this.numberOfUnits = numberOfUnits;
+    }
+
+    public static ArrayList<JPanel> getUnitBoxes() {
+        return unitBoxes;
+    }
+
+    public static void setUnitBoxes(ArrayList<JPanel> unitBoxes) {
+        UnitsBox.unitBoxes = unitBoxes;
+    }
+
 
 }

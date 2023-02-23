@@ -4,6 +4,7 @@ import srcs.Enums.TeamType;
 import helpers.ImageData;
 
 public abstract class Character {
+// public class Character {
     private String characterName;
     private int experiance;
     private int gold;
@@ -12,6 +13,10 @@ public abstract class Character {
     private int attackSpeed;
     private TeamType team = TeamType.PLAYER;
     private ImageData imageData;
+
+    public Character() {
+
+    }
 
     public Character(String characterName, int experiance, int gold,
         int hp, int movementSpeed, int attackSpeed,

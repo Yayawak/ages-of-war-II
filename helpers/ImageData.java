@@ -3,7 +3,6 @@ import java.awt.Image;
 import java.io.File;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import java.awt.image.*;
 
 public class ImageData {
@@ -59,5 +58,30 @@ public class ImageData {
     public void setPathToImage(String relativePath) {
         this.relativePath = relativePath;
         readImageFromFile(relativePath);
+    }
+
+    public String getRelativePath() {
+        return relativePath;
+    }
+    public void setRelativePath(String relativePath) {
+        this.relativePath = relativePath;
+    }
+    public String getFullPath() {
+        return fullPath;
+    }
+    public void setFullPath(String fullPath) {
+        this.fullPath = fullPath;
+    }
+    public int getImgWidth() {
+        return imgWidth;
+    }
+    public void setImgWidth(int imgWidth) {
+        this.imgWidth = imgWidth;
+    }
+    public int getImgHeight() {
+        return imgHeight;
+    }
+    public void setImgHeight(int imgHeight) {
+        this.imgHeight = imgHeight;
     }
 }
