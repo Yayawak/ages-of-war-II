@@ -2,15 +2,34 @@ package srcs.UI.topBar.unitsBox.SubUnit;
 
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
-import java.awt.*;
 
-public class SubUnit extends JPanel {
+import srcs.UI.mainGame.MainGame;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class SubUnit extends JPanel{
     private Image img;
     public SubUnit() {
-        init();
+        initGraphic();
+        initEvent();
     }
 
-    private void init() {
+    private void initEvent() {
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println(e);
+                // MainGame.getInstance().drawObject(getImg(),
+                //     (int)(Math.random() * 1000),
+                //     (int)(Math.random() * 1000)
+                // );
+                MainGame.getInstance().repaint();
+            }
+        });
+    }
+
+    private void initGraphic() {
         GroupLayout unitPanelLayout = new GroupLayout(this);
         setLayout(unitPanelLayout);
         unitPanelLayout.setHorizontalGroup(
@@ -53,5 +72,6 @@ public class SubUnit extends JPanel {
         this.img = img;
         repaint();
     }
+
 
 }

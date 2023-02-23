@@ -14,8 +14,7 @@ public class ImageData {
     private BufferedImage bfImg = null;
 
     public ImageData(String relativePath,
-        int imgWidth, int imgHeight)
-    {
+        int imgWidth, int imgHeight) {
         this.relativePath = relativePath;
         this.imgWidth = imgWidth;
         this.imgHeight = imgHeight;

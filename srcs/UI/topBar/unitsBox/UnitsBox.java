@@ -1,13 +1,8 @@
 package srcs.UI.topBar.unitsBox;
-import javax.swing.GroupLayout;
 import javax.swing.JPanel;
-
-import org.w3c.dom.CharacterData;
-
 import srcs.Characters.CharactersData.CharactersData;
 import srcs.UI.topBar.TopBar;
 import srcs.UI.topBar.unitsBox.SubUnit.SubUnit;
-
 import java.awt.*;
 import java.util.ArrayList;;
 
@@ -15,7 +10,6 @@ public class UnitsBox extends JPanel {
     private static UnitsBox instance = null;
     private int numberOfUnits = 4;
     private static ArrayList<JPanel> unitBoxes = new ArrayList<>();
-    private Graphics g;
 
     private UnitsBox() {
         init();
@@ -48,7 +42,6 @@ public class UnitsBox extends JPanel {
         }
         unitBoxes.stream().forEach(panel -> {
             add(panel);
-            repaint();
         });
 
     }
