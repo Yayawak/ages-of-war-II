@@ -1,7 +1,7 @@
 package srcs.UI.topBar;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import srcs.App;
 import srcs.interfaces.ComponentSizeItf;
 import srcs.UI.topBar.specialsBox.SpecialsBox;
 import srcs.UI.topBar.turretsBox.TurretsBox;
@@ -10,28 +10,28 @@ import srcs.UI.topBar.unitsBox.UnitsBox;
 import java.awt.*;
 
 // public class TopBar extends JPanel {
-public class TopBar implements ComponentSizeItf {
-    public static final JPanel topBar = new JPanel();
-    // public static JPanel topBar;
+public class TopBar extends JPanel implements ComponentSizeItf {
+    private static TopBar instance = null;
 
-    public TopBar() {
-        // topBar = new JPanel();
-        topBar.setBackground(Color.red);
-        Dimension dim = new Dimension(
-                App.mainFrame.getWidth(),
-                (int)(App.mainFrame.getHeight() * 0.15f)
-        );
-        topBar.setLayout(new GridLayout(0, 3));
-        // * Must use setPreferredSize because We use LayoutManager
-        topBar.setPreferredSize(dim); // if use setSize it will error becuase of it will set this panel relative to it's parent ??
-        // topBar.setSize(dim);
-        showComponentSize("TopBar", topBar);
+    public static TopBar getInstance() {
+        if (instance == null)
+            instance = new TopBar();
+        return instance;
+    }
 
-        new UnitsBox();
-        new TurretsBox();
-        new SpecialsBox();
+    private TopBar() {
+        init();
+        // new UnitsBox();
+        // new TurretsBox();
+        // new SpecialsBox();
         // new UpgradesBox();
 
-        App.mainFrame.add(topBar, BorderLayout.NORTH);
+        // App.mainFrame.add(topBar, BorderLayout.NORTH);
+    }
+
+    private void init() {
+        setBackground(new Color(242, 242, 42));
+        setPreferredSize(new Dimension(0, 55));
+        setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
     }
 }
