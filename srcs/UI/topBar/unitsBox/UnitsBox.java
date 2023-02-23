@@ -33,11 +33,10 @@ public class UnitsBox extends JPanel {
 
         for (int i = 0; i < numberOfUnits; i++) {
             SubUnit unit = new SubUnit();
-            // unitBoxes.add(unit);
-            // add(unit);
+            unitBoxes.add(unit);
         }
         unitBoxes.stream().forEach(panel -> {
-            // add(panel);
+            add(panel);
             // System.out.println(panel.toString());
         });
     }

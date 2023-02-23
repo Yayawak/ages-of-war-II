@@ -5,11 +5,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import srcs.MainUI;
 import srcs.interfaces.ComponentSizeItf;
-
 import java.awt.*;
 import java.io.File;
+
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import helpers.ImageData;
+import java.awt.image.*;
 
 public class MainGame extends JPanel implements ComponentSizeItf {
     private static MainGame instance = null;
@@ -39,17 +41,26 @@ public class MainGame extends JPanel implements ComponentSizeItf {
             mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 297, Short.MAX_VALUE)
         );
-        addBg();
-        showComponentSize("MainGame", this);
+        // showComponentSize("MainGame", this);
+
     }
 
-    private void addBg() {
-        String imagePath = "/images/backgrounds/aow_bg.png";
-        // String imagePath = "/images/characterImages/np.png";
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        drawBg(g);
+    }
 
-        ImageData imgData = new ImageData(imagePath, 500, 500);
-        JLabel imageLabel = new JLabel(new ImageIcon(imgData.getSprite()));
-        add(imageLabel);
+    public void drawBg(Graphics g) {
+        String imagePath = "/images/backgrounds/aow_bg.png";
+        // Image img = new ImageData(imagePath,
+        ImageData imgData = new ImageData(imagePath,
+            getWidth(),
+            getHeight()
+        );
+        // System.out.println(imgData.getPathToImage());
+        Image sprite = imgData.getSprite();
+        g.drawImage(sprite, 0, 0, this);
 
     }
 }
