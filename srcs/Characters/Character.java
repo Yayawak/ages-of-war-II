@@ -2,8 +2,9 @@ package srcs.Characters;
 
 import srcs.Enums.TeamType;
 import helpers.ImageData;
+import java.awt.Point;
 
-public abstract class Character {
+public class Character {
 // public class Character {
     private String characterName;
     private int experiance;
@@ -13,6 +14,8 @@ public abstract class Character {
     private int attackSpeed;
     private TeamType team = TeamType.PLAYER;
     private ImageData imageData;
+    private Point position = new Point(0,0);
+
 
     public Character() {
 
@@ -97,5 +100,12 @@ public abstract class Character {
         this.attackSpeed = attackSpeed;
     }
 
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
 
 }

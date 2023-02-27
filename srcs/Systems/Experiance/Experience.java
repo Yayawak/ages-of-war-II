@@ -1,4 +1,4 @@
-package srcs.UI.lowerBar;
+package srcs.Systems.Experiance;
 
 public class Experience {
     public int currentexperience;

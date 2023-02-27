@@ -1,15 +1,14 @@
 package srcs.Characters.CharactersData.CharLists;
 
 import helpers.ImageData;
-import srcs.Characters.Malee.MaleeUnit;
+import srcs.Characters.Character;
 import srcs.Enums.TeamType;
 
-public class NatureProphet extends MaleeUnit {
+public class NatureProphet extends Character{
 
     public NatureProphet() {
         ImageData grimImageData = new ImageData(
-            "/images/characters/np.png",
-            50, 50
+            "characters/np.png"
         );
         setCharacterName("Nature prophet");
         setExperiance(2);

@@ -4,13 +4,13 @@ import helpers.ImageData;
 import srcs.Characters.Character;
 import srcs.Enums.TeamType;
 
-public class GrimStroke extends Character {
+public class Morphling extends Character {
 
-    public GrimStroke() {
+    public Morphling() {
         ImageData grimImageData = new ImageData(
-            "characters/grimStroke.png"
+            "characters/morphling.png"
         );
-        setCharacterName("grim");
+        setCharacterName("morphling");
         setExperiance(1);
         setGold(10);
         setHp(15);

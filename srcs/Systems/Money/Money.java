@@ -1,4 +1,4 @@
-package srcs.UI.lowerBar;
+package srcs.Systems.Money;
 
 public class Money {
     public int currentmoney;

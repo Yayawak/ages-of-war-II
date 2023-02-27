@@ -13,6 +13,12 @@ public class ImageData {
     private int imgHeight;
     private BufferedImage bfImg = null;
 
+    public ImageData(String relativePath) {
+        this.relativePath = relativePath;
+        this.imgWidth = 100;
+        this.imgHeight = 100;
+        init();
+    }
     public ImageData(String relativePath,
         int imgWidth, int imgHeight) {
         this.relativePath = relativePath;
@@ -20,14 +26,17 @@ public class ImageData {
         this.imgHeight = imgHeight;
         init();
     }
+
     private void init() {
         readImageFromFile(relativePath);
     }
 
     private void readImageFromFile(String relativePath) {
-        String basePath = new File("").getAbsolutePath();
+        // String basePath = new File("").getAbsolutePath();
+        String basePath = "/Users/rio/Desktop/ages-of-war-II/images/";
         fullPath = basePath + relativePath;
-        // relativePath = "/Users/rio/Desktop/ages-of-war-II/images/backgrounds/aow_bg.png";
+        // fullPath = "/Users/rio/Desktop/ages-of-war-II/images/backgrounds/aow_bg.png";
+        System.out.println(fullPath);
         try {
             bfImg = ImageIO.read(new File(fullPath));
             resizeSprite(imgWidth, imgHeight);

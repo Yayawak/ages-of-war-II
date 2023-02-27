@@ -1,6 +1,9 @@
 package srcs.UI.topBar.unitsBox;
 import javax.swing.JPanel;
+
+
 import srcs.Characters.CharactersData.CharactersData;
+import srcs.Characters.Character;
 import srcs.UI.topBar.TopBar;
 import srcs.UI.topBar.unitsBox.SubUnit.SubUnit;
 import java.awt.*;
@@ -31,10 +34,10 @@ public class UnitsBox extends JPanel {
 
         for (int i = 0; i < numberOfUnits; i++) {
             try {
-                Image img = CharactersData.getInstance()
-                    .getCharactersList().get(i % 2).getImageData()
-                    .getSprite();
-                SubUnit unit = new SubUnit();
+                Character character = CharactersData.getInstance().getCharactersList().get(i);
+                Image img = character.getImageData().getSprite();
+                // System.out.println("unit box img path = " + imgPath);
+                SubUnit unit = new SubUnit(character);
                 unit.setImg(img);
                 unitBoxes.add(unit);
 

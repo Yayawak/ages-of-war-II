@@ -1,19 +1,17 @@
 package srcs.Characters.CharactersData;
 import java.util.ArrayList;
 import helpers.ImageData;
-import srcs.Characters.Malee.MaleeUnit;
 import srcs.Enums.TeamType;
 import srcs.Characters.Character;
 import srcs.Characters.CharactersData.CharLists.GrimStroke;
-import srcs.Characters.CharactersData.CharLists.NatureProphet;;
+import srcs.Characters.CharactersData.CharLists.Morphling;
+import srcs.Characters.CharactersData.CharLists.NatureProphet;
+import srcs.Characters.CharactersData.CharLists.Rubick;;
 
 public class CharactersData {
     private static CharactersData instance = null;
     private ArrayList<Character> charactersList = new ArrayList<>();
 
-    public static void setInstance(CharactersData instance) {
-        CharactersData.instance = instance;
-    }
     public ArrayList<Character> getCharactersList() {
         return charactersList;
     }
@@ -32,10 +30,10 @@ public class CharactersData {
         //movement speed : 1 - 5
         // atk speed : 1 - 5
 
-        // charactersList.add((Character)grimUnit);
-        // new GrimStroke();
         charactersList.add((Character)new GrimStroke());
         charactersList.add((Character)new NatureProphet());
+        charactersList.add((Character)new Rubick());
+        charactersList.add((Character)new Morphling());
     }
 
 }
