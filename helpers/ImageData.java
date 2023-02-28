@@ -1,4 +1,5 @@
 package helpers;
+
 import java.awt.Image;
 import java.io.File;
 
@@ -19,8 +20,9 @@ public class ImageData {
         this.imgHeight = 100;
         init();
     }
+
     public ImageData(String relativePath,
-        int imgWidth, int imgHeight) {
+            int imgWidth, int imgHeight) {
         this.relativePath = relativePath;
         this.imgWidth = imgWidth;
         this.imgHeight = imgHeight;
@@ -33,23 +35,23 @@ public class ImageData {
 
     private void readImageFromFile(String relativePath) {
         // String basePath = new File("").getAbsolutePath();
-        String basePath = "/Users/rio/Desktop/ages-of-war-II/images/";
+        String basePath = "/Users/ppichyyy/Desktop/ages-of-war-II/images/";
         fullPath = basePath + relativePath;
         // fullPath = "/Users/rio/Desktop/ages-of-war-II/images/backgrounds/aow_bg.png";
         // System.out.println(fullPath);
         try {
             bfImg = ImageIO.read(new File(fullPath));
             resizeSprite(imgWidth, imgHeight);
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        catch (Exception e) { System.out.println(e); }
     }
 
     public void resizeSprite(int w, int h) {
         if (bfImg != null) {
             sprite = bfImg.getScaledInstance(
-                imgWidth, imgHeight, Image.SCALE_FAST);
-        }
-        else {
+                    imgWidth, imgHeight, Image.SCALE_FAST);
+        } else {
             System.out.println("No have bufferedImage");
         }
     }
@@ -57,12 +59,15 @@ public class ImageData {
     public Image getSprite() {
         return sprite;
     }
+
     public void setSprite(Image sprite) {
         this.sprite = sprite;
     }
+
     public String getPathToImage() {
         return relativePath;
     }
+
     public void setPathToImage(String relativePath) {
         this.relativePath = relativePath;
         readImageFromFile(relativePath);
@@ -71,24 +76,31 @@ public class ImageData {
     public String getRelativePath() {
         return relativePath;
     }
+
     public void setRelativePath(String relativePath) {
         this.relativePath = relativePath;
     }
+
     public String getFullPath() {
         return fullPath;
     }
+
     public void setFullPath(String fullPath) {
         this.fullPath = fullPath;
     }
+
     public int getImgWidth() {
         return imgWidth;
     }
+
     public void setImgWidth(int imgWidth) {
         this.imgWidth = imgWidth;
     }
+
     public int getImgHeight() {
         return imgHeight;
     }
+
     public void setImgHeight(int imgHeight) {
         this.imgHeight = imgHeight;
     }
