@@ -45,6 +45,10 @@ public class CharacterGObject extends GameObject {
         if (getX() > screenWidth / 2) {
             IntegratedSystem.getInstance().getPlayerGoldSystem()
                 .increasedGold(character.getGold());
+            IntegratedSystem.getInstance().getPlayerExpSystem()
+                .increasedExperience(character.getExperiance());
+
+            // todo : add exp to team
             destroyGameObject();
             // isCollide = true;
         }

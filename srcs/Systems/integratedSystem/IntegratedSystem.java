@@ -1,13 +1,15 @@
 package srcs.Systems.integratedSystem;
 
+import srcs.Systems.Exp.ExpSystem;
 import srcs.Systems.Gold.GoldSystem;
 
 public class IntegratedSystem {
     private static IntegratedSystem instance;
     private GoldSystem playerGoldSystem;
     private GoldSystem enemyGoldSystem;
-    // private static GoldSystem playerGoldSystem;
-    // private static GoldSystem enemyGoldSystem;
+
+    private ExpSystem playerExpSystem;
+    private ExpSystem enemyExpSystem;
 
     public static IntegratedSystem getInstance() {
         if (instance == null)
@@ -22,6 +24,9 @@ public class IntegratedSystem {
     private void startSystem() {
         playerGoldSystem = new GoldSystem(300);
         enemyGoldSystem = new GoldSystem(500);
+
+        playerExpSystem = new ExpSystem(50);
+        enemyExpSystem = new ExpSystem(75);
     }
 
     public GoldSystem getPlayerGoldSystem() {
@@ -30,5 +35,13 @@ public class IntegratedSystem {
 
     public GoldSystem getEnemyGoldSystem() {
         return enemyGoldSystem;
+    }
+
+    public ExpSystem getPlayerExpSystem() {
+        return playerExpSystem;
+    }
+
+    public ExpSystem getEnemyExpSystem() {
+        return enemyExpSystem;
     }
 }

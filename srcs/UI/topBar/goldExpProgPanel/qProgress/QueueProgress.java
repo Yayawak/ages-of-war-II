@@ -51,7 +51,6 @@ public class QueueProgress extends JProgressBar implements
                         if (getValue() >= 100) {
                             setValue(0);
                             isEnableCounting = false;
-                            // System.out.println("VAlue of bar is beyound 100 !!");
                             break;
                         }
                         long ms = ((long)timeToUseInSec * 10);

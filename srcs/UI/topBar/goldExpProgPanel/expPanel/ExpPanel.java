@@ -1,13 +1,24 @@
 package srcs.UI.topBar.goldExpProgPanel.expPanel;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.plaf.DimensionUIResource;
+import javax.swing.plaf.FontUIResource;
 
-public class ExpPanel extends JPanel {
+import srcs.Systems.Exp.ExpSystem;
+import srcs.Systems.integratedSystem.IntegratedSystem;
+import srcs.interfaces.Loopable;
+import java.awt.Dimension;
+import java.awt.Font;
+
+public class ExpPanel extends JPanel implements
+    Loopable {
     private static ExpPanel instance = null;
-    private JLabel goldLabel;
+    private JLabel expLabel;
+    private int expToShow;
 
     public static ExpPanel getInstance() {
         if (instance == null)
@@ -19,11 +30,25 @@ public class ExpPanel extends JPanel {
     }
 
     private void init() {
-        // setPreferredSize(getPreferredSize());
-        // setSize(getPreferredSize());
         setBackground(Color.blue);
-        goldLabel = new JLabel("EXP : ");
-        add(goldLabel);
-        System.out.println("Exp label inited");
+        expLabel = new JLabel("EXP : ");
+        Font f = new Font(Font.SANS_SERIF, Font.ROMAN_BASELINE, 40);
+        expLabel.setFont(f);
+        expLabel.setForeground(Color.green);
+        add(expLabel);
+
+    }
+    @Override
+    public void update() {
+        expToShow = IntegratedSystem.getInstance()
+            .getPlayerExpSystem().getExperiance();
+    }
+    @Override
+    public void draw(Graphics g) {
+        String expString = String.valueOf(expToShow + "🌟");
+        expLabel.setPreferredSize(new Dimension(
+            200, 100
+        ));
+        expLabel.setText(expString);
     }
 }

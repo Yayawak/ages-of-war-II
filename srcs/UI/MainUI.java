@@ -6,6 +6,7 @@ import srcs.UI.lowerBar.LowerBar;
 import srcs.UI.mainGame.MainGame;
 import srcs.UI.topBar.TopBar;
 import srcs.UI.topBar.goldExpProgPanel.GoldExpProgPanel;
+import srcs.UI.topBar.goldExpProgPanel.expPanel.ExpPanel;
 import srcs.UI.topBar.goldExpProgPanel.goldPanel.GoldPanel;
 import srcs.UI.topBar.goldExpProgPanel.qProgress.QueueProgress;
 import srcs.UI.topBar.specialsBox.SpecialsBox;
@@ -98,6 +99,7 @@ public class MainUI extends JPanel implements Runnable {
         // System.out.println("kkkk");
         MainGame.getInstance().update();
         GoldPanel.getInstance().update();
+        ExpPanel.getInstance().update();
         QueueProgress.getInstance().update();
     }
 
@@ -106,6 +108,7 @@ public class MainUI extends JPanel implements Runnable {
         super.paintComponent(g);
         MainGame.getInstance().draw(g);
         GoldPanel.getInstance().draw(g);
+        ExpPanel.getInstance().draw(g);
         QueueProgress.getInstance().draw(g);
     }
 

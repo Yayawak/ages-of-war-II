@@ -12,6 +12,9 @@ import srcs.interfaces.Loopable;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.function.ObjIntConsumer;
+
 import javax.swing.GroupLayout;
 import helpers.ImageData;
 import java.awt.image.*;
