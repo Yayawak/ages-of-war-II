@@ -3,7 +3,7 @@ package srcs.UI.topBar.unitsBox.SubUnit;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 
-import srcs.Characters.Character;
+import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.mainGame.MainGame;
 import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
@@ -15,12 +15,12 @@ import java.awt.event.*;
 
 public class SubUnit extends JPanel{
     private Image img; // pointer is points to the same object as character's image
-    private Character character;
-    public SubUnit(Character c) {
+    private CharacterPrototype character;
+    public SubUnit(CharacterPrototype c) {
         initGraphic();
         initEvent();
         this.character = c;
-        this.img = character.getImageData().getSprite();
+        this.img = character.getImgData().getSprite();
     }
 
     private void initEvent() {
@@ -94,11 +94,11 @@ public class SubUnit extends JPanel{
         // repaint();
     }
 
-    public Character getCharacter() {
+    public CharacterPrototype getCharacter() {
         return character;
     }
 
-    public void setCharacter(Character character) {
+    public void setCharacter(CharacterPrototype character) {
         this.character = character;
     }
 

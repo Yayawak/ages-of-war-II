@@ -3,13 +3,15 @@ package srcs.UI.mainGame;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import srcs.Characters.CharactersData.CharactersData;
-import srcs.Characters.CharactersData.CharLists.NatureProphet;
+
 import srcs.Enums.TeamType;
+import srcs.Interfaces.ComponentSizeItf;
+import srcs.Interfaces.Loopable;
+import srcs.Prototypes.Characters.*;
+import srcs.Prototypes.Characters.CharactersData.CharactersData;
+import srcs.Prototypes.Characters.CharactersData.CharLists.NatureProphet;
 import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
-import srcs.interfaces.ComponentSizeItf;
-import srcs.interfaces.Loopable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -19,9 +21,7 @@ import java.util.function.ObjIntConsumer;
 import javax.swing.GroupLayout;
 import helpers.ImageData;
 import java.awt.image.*;
-import java.awt.event.*;
-import srcs.Characters.*;
-import srcs.Characters.Character;;
+import java.awt.event.*;;
 
 public class MainGame extends JPanel implements ComponentSizeItf,
     Loopable
@@ -57,7 +57,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
 
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                Character np = new NatureProphet(TeamType.PLAYER);
+                CharacterPrototype np = new NatureProphet(TeamType.PLAYER);
                 np.setPosition(getMousePosition());
                 GameObject go = new CharacterGObject(np);
                 objectsInScene.add(go);

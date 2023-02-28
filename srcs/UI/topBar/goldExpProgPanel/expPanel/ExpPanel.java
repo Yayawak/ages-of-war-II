@@ -8,9 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.FontUIResource;
 
+import srcs.Interfaces.Loopable;
 import srcs.Systems.Exp.ExpSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
-import srcs.interfaces.Loopable;
+
 import java.awt.Dimension;
 import java.awt.Font;
 

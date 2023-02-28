@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JProgressBar;
 
-import srcs.interfaces.Loopable;
+import srcs.Interfaces.Loopable;
 
 public class QueueProgress extends JProgressBar implements
     Loopable {

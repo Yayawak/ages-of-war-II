@@ -1,24 +1,24 @@
-package srcs.Characters.CharactersData.CharLists;
+package srcs.Prototypes.Characters.CharactersData.CharLists;
 
 import helpers.ImageData;
-import srcs.Characters.Character;
 import srcs.Enums.TeamType;
+import srcs.Prototypes.Characters.CharacterPrototype;
 
-public class GrimStroke extends Character {
+public class GrimStroke extends CharacterPrototype {
 
     public GrimStroke(TeamType teamType) {
         super(teamType);
         ImageData grimImageData = new ImageData(
             "characters/grimStroke.png"
         );
-        setCharacterName("grim");
+        setName("grim");
         setExperiance(1);
         setGold(10);
         setHp(15);
         setMovementSpeed(3);
         setAttackSpeed(2);
         // setTeam(teamType);
-        setImageData(grimImageData);
+        setImgData(grimImageData);
         setBuildTime(1);
     }
 

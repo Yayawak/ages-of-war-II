@@ -1,4 +1,4 @@
-package srcs.interfaces;
+package srcs.Interfaces;
 import java.awt.Graphics;
 
 public interface Loopable {
