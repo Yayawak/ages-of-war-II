@@ -8,19 +8,19 @@ import java.util.Random;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-
-import srcs.Characters.Character;
-import srcs.Characters.CharactersData.CharactersData;
-import srcs.Characters.CharactersData.CharLists.Morphling;
-import srcs.Characters.CharactersData.CharLists.NatureProphet;
-import srcs.Characters.CharactersData.CharLists.Rubick;
 import srcs.Enums.TeamType;
+import srcs.Interfaces.Loopable;
+import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Characters.CharactersData.CharactersData;
+import srcs.Prototypes.Characters.CharactersData.CharLists.Morphling;
+import srcs.Prototypes.Characters.CharactersData.CharLists.NatureProphet;
+import srcs.Prototypes.Characters.CharactersData.CharLists.Rubick;
 import srcs.Systems.Gold.GoldSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.mainGame.MainGame;
 import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
-import srcs.interfaces.Loopable;
+
 import java.awt.Color;
 
 public class EnemyIntegratedSystem implements Loopable {
@@ -61,7 +61,7 @@ public class EnemyIntegratedSystem implements Loopable {
             Thread.sleep(100);
             // Thread.sleep(10);
         } catch (Exception e) {System.out.println(e); }
-        System.out.println("Enemy Gold = " + enemyGoldSystem.getGold());
+        // System.out.println("Enemy Gold = " + enemyGoldSystem.getGold());
 
         if (enemyGoldSystem.getGold() > 0) {
             // int ranI = (int)(Math.random() * 4);
@@ -71,11 +71,11 @@ public class EnemyIntegratedSystem implements Loopable {
 
 
             // * it's Work
-            Character dummy = new Morphling(TeamType.ENEMY);
-            dummy.setTeam(TeamType.ENEMY);
+            CharacterPrototype dummy = new Morphling(TeamType.ENEMY);
+            dummy.setTeamType(TeamType.ENEMY);
             CharacterGObject c = new CharacterGObject(dummy);
             //todo : make this enemy system usable
-            // MainGame.getObjectsInScene().add(c);
+            MainGame.getObjectsInScene().add(c);
             enemyGoldSystem.decreasedGold(c
                 .getCharacter().getGold());
 

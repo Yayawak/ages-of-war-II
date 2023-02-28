@@ -2,7 +2,8 @@ package srcs.UI.topBar;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import srcs.interfaces.ComponentSizeItf;
+
+import srcs.Interfaces.ComponentSizeItf;
 import srcs.UI.topBar.goldExpProgPanel.GoldExpProgPanel;
 import srcs.UI.topBar.specialsBox.SpecialsBox;
 import srcs.UI.topBar.turretsBox.TurretsBox;

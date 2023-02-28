@@ -1,27 +1,27 @@
 package srcs.UI.mainGame.SubScene.GameObject;
 
 import java.awt.*;
-import srcs.Characters.*;
-import srcs.Characters.Character;
+
 import srcs.Enums.Direction;
 import srcs.Enums.TeamType;
+import srcs.Prototypes.Characters.*;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.MainUI;
 import srcs.UI.mainGame.MainGame;
 
 public class CharacterGObject extends GameObject {
 
-    private Character character;
+    private CharacterPrototype character;
     private Point position;
-    public CharacterGObject(Character character) {
-        super(character.getImageData().getSprite(),
+    public CharacterGObject(CharacterPrototype character) {
+        super(character.getImgData().getSprite(),
             new Point(
                 (int)character.getPosition().getX(),
                 (int)character.getPosition().getY()
             ),
             new Dimension(
-                character.getImageData().getImgWidth(),
-                character.getImageData().getImgHeight()
+                character.getImgData().getImgWidth(),
+                character.getImgData().getImgHeight()
             )
         );
         this.character = character;
@@ -29,10 +29,13 @@ public class CharacterGObject extends GameObject {
     }
 
     @Override
+    // ? check logic
     public void update() {
         //? reset collsion : make character movable again
+        System.out.println("Enter update function");
         isCollide = false;
         for (GameObject go : MainGame.getObjectsInScene()) {
+            // * Collide = ชน = Collsion
             if (isCollideWith((CharacterGObject)go)) {
                 isCollide = true;
             }
@@ -43,7 +46,7 @@ public class CharacterGObject extends GameObject {
     public void draw(Graphics g) {
         super.draw(g);
         if (!isCollide) {
-            switch (character.getTeam()) {
+            switch (character.getTeamType()) {
                 case PLAYER:
                     move(Direction.RIGHT);
                     break;
@@ -57,6 +60,7 @@ public class CharacterGObject extends GameObject {
         }else {
             // move(Direction.LEFT);
         }
+
         int screenWidth = MainUI.getInstance().getScreenSize().width;
         if (getX() > screenWidth) {
             IntegratedSystem.getInstance().getPlayerGoldSystem()
@@ -90,11 +94,11 @@ public class CharacterGObject extends GameObject {
         }
     }
 
-    public Character getCharacter() {
+    public CharacterPrototype getCharacter() {
         return character;
     }
 
-    public void setCharacter(Character character) {
+    public void setCharacter(CharacterPrototype character) {
         this.character = character;
     }
 
@@ -103,7 +107,7 @@ public class CharacterGObject extends GameObject {
     }
 
     public CharacterGObject copy() {
-        return new CharacterGObject(new Character(character, getCharacter().getTeam()));
+        return new CharacterGObject(new CharacterPrototype(character));
         // return new CharacterGObject(character);
     }
 
@@ -117,7 +121,7 @@ public class CharacterGObject extends GameObject {
             &&
             getBounds() != null && cgo.getBounds() != null
             &&
-            character.getTeam() == cgo.getCharacter().getTeam()
+            character.getTeamType() == cgo.getCharacter().getTeamType()
         ) {
             // System.out.println("Collsion Occcured");
             // ? if spawn before -> stop younger gameobject

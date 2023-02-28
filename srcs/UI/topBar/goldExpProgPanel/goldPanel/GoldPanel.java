@@ -6,8 +6,9 @@ import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import srcs.Interfaces.Loopable;
 import srcs.Systems.integratedSystem.IntegratedSystem;
-import srcs.interfaces.Loopable;
+
 import java.awt.*;
 
 public class GoldPanel extends JPanel implements Loopable {

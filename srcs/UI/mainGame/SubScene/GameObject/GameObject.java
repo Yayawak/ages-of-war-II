@@ -7,16 +7,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import srcs.Characters.Character;
+import srcs.Interfaces.Loopable;
+import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.UI.mainGame.MainGame;
-import srcs.interfaces.Loopable;
 
 import java.awt.*;
 
 public class GameObject extends JPanel implements Loopable {
     protected Image img;
-    Point pos;
-    Dimension imgSize;
+    protected Point pos;
+    protected Dimension imgSize;
     protected boolean isCollide = false;
     protected long spawnTime;
 

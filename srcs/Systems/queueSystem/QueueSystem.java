@@ -1,9 +1,9 @@
 package srcs.Systems.queueSystem;
 
-import srcs.Characters.Character;
+import srcs.Prototypes.Characters.CharacterPrototype;
 
 public class QueueSystem {
-    Character currentBuildCharacter;
+    CharacterPrototype currentBuildCharacter;
     int buildPercentage;
 
     public QueueSystem() {
