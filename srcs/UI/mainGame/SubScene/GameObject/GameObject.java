@@ -46,14 +46,6 @@ public class GameObject extends JPanel implements Loopable {
     }
     @Override
     public void update() {
-        // throw new UnsupportedOperationException("Unimplemented method 'update'");
-        //? reset collsion : make character movable again
-        isCollide = false;
-        for (GameObject go : MainGame.getObjectsInScene()) {
-            if (isCollideWith(go)) {
-                isCollide = true;
-            }
-        }
     }
 
     public void destroyGameObject() {
@@ -62,22 +54,7 @@ public class GameObject extends JPanel implements Loopable {
         MainGame.getObjectsInScene().remove(this);
     }
 
-    public boolean isCollideWith(GameObject otherGameObject) {
-        // System.out.println("W = " + this.imgSize.width);
-        // System.out.println("H = " + getHeight());
-        if (getBounds().
-            intersects(otherGameObject.getBounds())
-            &&
-            this != otherGameObject // collision itself
-        ) {
-            // System.out.println("Collsion Occcured");
-            // ? if spawn before -> stop younger gameobject
-            if (this.spawnTime < otherGameObject.spawnTime) {
-                return false;
-            }
-            return true;
-        } else {
-            return false;
-        }
+    public GameObject copy() {
+        return new GameObject(img, pos, imgSize);
     }
 }

@@ -6,7 +6,8 @@ import srcs.Enums.TeamType;
 
 public class Morphling extends Character {
 
-    public Morphling() {
+    public Morphling(TeamType teamType) {
+        super(teamType);
         ImageData grimImageData = new ImageData(
             "characters/morphling.png"
         );
@@ -16,7 +17,7 @@ public class Morphling extends Character {
         setHp(15);
         setMovementSpeed(3);
         setAttackSpeed(2);
-        setTeam(TeamType.PLAYER);
+        // setTeam(TeamType.PLAYER);
         setImageData(grimImageData);
         setBuildTime(3);
     }

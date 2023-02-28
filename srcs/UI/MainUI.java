@@ -2,6 +2,7 @@ package srcs.UI;
 
 import javax.swing.*;
 
+import srcs.Systems.EnemySystem.EnemyIntegratedSystem;
 import srcs.UI.lowerBar.LowerBar;
 import srcs.UI.mainGame.MainGame;
 import srcs.UI.topBar.TopBar;
@@ -101,6 +102,7 @@ public class MainUI extends JPanel implements Runnable {
         GoldPanel.getInstance().update();
         ExpPanel.getInstance().update();
         QueueProgress.getInstance().update();
+        EnemyIntegratedSystem.getInstance().update();
     }
 
     @Override
@@ -110,6 +112,7 @@ public class MainUI extends JPanel implements Runnable {
         GoldPanel.getInstance().draw(g);
         ExpPanel.getInstance().draw(g);
         QueueProgress.getInstance().draw(g);
+        EnemyIntegratedSystem.getInstance().draw(g);
     }
 
     public Dimension getScreenSize() {

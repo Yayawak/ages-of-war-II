@@ -6,7 +6,8 @@ import srcs.Enums.TeamType;
 
 public class GrimStroke extends Character {
 
-    public GrimStroke() {
+    public GrimStroke(TeamType teamType) {
+        super(teamType);
         ImageData grimImageData = new ImageData(
             "characters/grimStroke.png"
         );
@@ -16,7 +17,7 @@ public class GrimStroke extends Character {
         setHp(15);
         setMovementSpeed(3);
         setAttackSpeed(2);
-        setTeam(TeamType.PLAYER);
+        // setTeam(teamType);
         setImageData(grimImageData);
         setBuildTime(1);
     }

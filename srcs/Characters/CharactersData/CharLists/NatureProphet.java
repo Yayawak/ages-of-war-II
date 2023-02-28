@@ -6,7 +6,8 @@ import srcs.Enums.TeamType;
 
 public class NatureProphet extends Character{
 
-    public NatureProphet() {
+    public NatureProphet(TeamType teamType) {
+        super(teamType);
         ImageData grimImageData = new ImageData(
             "characters/np.png"
         );
@@ -16,7 +17,7 @@ public class NatureProphet extends Character{
         setHp(35);
         setMovementSpeed(5);
         setAttackSpeed(4);
-        setTeam(TeamType.PLAYER);
+        // setTeam(TeamType.PLAYER);
         setImageData(grimImageData);
         setBuildTime(4);
     }

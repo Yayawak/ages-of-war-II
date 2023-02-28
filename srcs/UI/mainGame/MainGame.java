@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import srcs.Characters.CharactersData.CharactersData;
 import srcs.Characters.CharactersData.CharLists.NatureProphet;
+import srcs.Enums.TeamType;
 import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
 import srcs.interfaces.ComponentSizeItf;
@@ -56,7 +57,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
 
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                Character np = new NatureProphet();
+                Character np = new NatureProphet(TeamType.PLAYER);
                 np.setPosition(getMousePosition());
                 GameObject go = new CharacterGObject(np);
                 objectsInScene.add(go);

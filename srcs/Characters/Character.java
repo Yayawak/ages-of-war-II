@@ -1,6 +1,7 @@
 package srcs.Characters;
 
 import srcs.Enums.TeamType;
+import srcs.UI.MainUI;
 import helpers.ImageData;
 import java.awt.Point;
 
@@ -14,12 +15,27 @@ public class Character {
     private int attackSpeed;
     private TeamType team = TeamType.PLAYER;
     private ImageData imageData;
-    private Point position = new Point(0,0);
+    // private Point position = new Point(0,0);
+    // private Point position = new Point(50, 50);
+    // private Point position = new Point(500, 200);
+    private Point position = new Point(999, 200);
     private float buildTime;
+    private Character copyInstance;
 
 
-    public Character() {
+    public Character(TeamType teamType) {
+        // int spawnX = (team == TeamType.PLAYER) ? 0 : (int)MainUI.getInstance().getScreenSize().getWidth();
+        this.team = teamType;
+        int spawnX = (team == TeamType.PLAYER) ? 0 : (int)MainUI.getInstance().getScreenSize().getWidth();
+        this.position = new Point(spawnX, position.y);
+        // int spawnX = (team == TeamType.PLAYER) ? 600 : 1209;
+    }
 
+    public Character(Character anotherChar, TeamType teamType) {
+        this.copyInstance = anotherChar;
+        this.team = teamType;
+        int spawnX = (team == TeamType.PLAYER) ? 0 : (int)MainUI.getInstance().getScreenSize().getWidth();
+        this.position = new Point(spawnX, position.y);
     }
 
     public Character(String characterName, int experiance, int gold,
@@ -37,7 +53,9 @@ public class Character {
         this.team = team;
         this.imageData = imageData;
         this.buildTime = buildTime;
-    }
+        int spawnX = (team == TeamType.PLAYER) ? 0 : (int)MainUI.getInstance().getScreenSize().getWidth();
+        this.position = new Point(spawnX, position.y);
+}
 
     public String getCharacterName() {
         return characterName;
@@ -117,6 +135,14 @@ public class Character {
 
     public void setBuildTime(float buildTime) {
         this.buildTime = buildTime;
+    }
+
+    public Character getCopyInstance() {
+        return copyInstance;
+    }
+
+    public void setCopyInstance(Character copyInstance) {
+        this.copyInstance = copyInstance;
     }
 
 }

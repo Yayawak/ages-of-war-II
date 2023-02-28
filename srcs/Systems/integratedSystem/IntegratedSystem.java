@@ -27,6 +27,8 @@ public class IntegratedSystem {
 
         playerExpSystem = new ExpSystem(50);
         enemyExpSystem = new ExpSystem(75);
+
+
     }
 
     public GoldSystem getPlayerGoldSystem() {

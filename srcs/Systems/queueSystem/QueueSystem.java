@@ -4,5 +4,9 @@ import srcs.Characters.Character;
 
 public class QueueSystem {
     Character currentBuildCharacter;
-    int builPercentage;
+    int buildPercentage;
+
+    public QueueSystem() {
+
+    }
 }

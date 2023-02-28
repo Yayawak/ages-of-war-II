@@ -30,10 +30,10 @@ public class CharactersData {
         //movement speed : 1 - 5
         // atk speed : 1 - 5
 
-        charactersList.add((Character)new GrimStroke());
-        charactersList.add((Character)new NatureProphet());
-        charactersList.add((Character)new Rubick());
-        charactersList.add((Character)new Morphling());
+        charactersList.add((Character)new GrimStroke(TeamType.PLAYER));
+        charactersList.add((Character)new NatureProphet(TeamType.PLAYER));
+        charactersList.add((Character)new Rubick(TeamType.PLAYER));
+        charactersList.add((Character)new Morphling(TeamType.PLAYER));
     }
 
 }

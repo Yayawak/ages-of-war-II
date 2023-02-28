@@ -5,7 +5,8 @@ import srcs.Characters.Character;
 import srcs.Enums.TeamType;
 
 public class Rubick extends Character {
-    public Rubick() {
+    public Rubick(TeamType teamType) {
+        super(teamType);
         ImageData imgData = new ImageData(
             "characters/rubick.png"
         );
@@ -15,7 +16,7 @@ public class Rubick extends Character {
         setHp(30);
         setMovementSpeed(2);
         setAttackSpeed(1);
-        setTeam(TeamType.PLAYER);
+        // setTeam(TeamType.PLAYER);
         setImageData(imgData);
         setBuildTime(2);
     }
