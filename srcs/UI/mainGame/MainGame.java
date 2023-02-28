@@ -8,6 +8,8 @@ import srcs.Characters.CharactersData.CharLists.NatureProphet;
 import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
 import srcs.interfaces.ComponentSizeItf;
+import srcs.interfaces.Loopable;
+
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.GroupLayout;
@@ -17,7 +19,9 @@ import java.awt.event.*;
 import srcs.Characters.*;
 import srcs.Characters.Character;;
 
-public class MainGame extends JPanel implements ComponentSizeItf {
+public class MainGame extends JPanel implements ComponentSizeItf,
+    Loopable
+{
     private static MainGame instance = null;
     private static ArrayList<GameObject> objectsInScene = new ArrayList<>();
 
@@ -59,14 +63,6 @@ public class MainGame extends JPanel implements ComponentSizeItf {
     }
 
 
-    // from updateGrahic loop
-    public void draw(Graphics g) {
-        objectsInScene.forEach(obj -> {
-            obj.draw(g);
-        });
-        // new CharacterGObject()
-        // drawOnMainGame(g);
-    }
 
     private void drawBg(Graphics g) {
         String imagePath = "backgrounds/aow_bg.png";
@@ -99,5 +95,32 @@ public class MainGame extends JPanel implements ComponentSizeItf {
     // todo : recieve data from event mouse click
     public void addGameObjectToScene(GameObject go) {
         objectsInScene.add(go);
+    }
+
+    @Override
+    public void update() {
+        // System.out.println("update from MainGame");
+        objectsInScene.forEach(obj -> {
+            if (obj != null)
+                obj.update();
+        });
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        objectsInScene.forEach(obj -> {
+            if (obj != null)
+                obj.draw(g);
+        });
+        // new CharacterGObject()
+        // drawOnMainGame(g);
+    }
+
+    public static ArrayList<GameObject> getObjectsInScene() {
+        return objectsInScene;
+    }
+
+    public static void setObjectsInScene(ArrayList<GameObject> objectsInScene) {
+        MainGame.objectsInScene = objectsInScene;
     }
 }

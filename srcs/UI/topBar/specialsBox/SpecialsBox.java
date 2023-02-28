@@ -20,7 +20,8 @@ public class SpecialsBox extends JPanel {
     }
 
     private void init() {
-        setBackground(new java.awt.Color(2, 150, 22));
+        // setBackground(new java.awt.Color(2, 150, 22));
+        setBackground(Color.orange);
 
         GroupLayout upgradesBoxLayout = new GroupLayout(this);
         setLayout(upgradesBoxLayout);
@@ -33,6 +34,5 @@ public class SpecialsBox extends JPanel {
             .addGap(0, 55, Short.MAX_VALUE)
         );
 
-        TopBar.getInstance().add(this);
     }
 }

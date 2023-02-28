@@ -14,11 +14,13 @@ public class MainFrame extends JFrame {
         // setResizable(false);
         // setLocationRelativeTo(null); //center
 
+        // setPreferredSize(new Dimension(1400, 850));
+        setPreferredSize(new Dimension(1400, 700));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(1400, 850));
         // setSize(new Dimension(1400, 850));
         add(MainUI.getInstance());
 
         pack();
+        // validate();
     }
 }

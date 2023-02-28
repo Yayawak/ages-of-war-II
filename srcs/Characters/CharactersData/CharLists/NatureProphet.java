@@ -14,7 +14,7 @@ public class NatureProphet extends Character{
         setExperiance(2);
         setGold(20);
         setHp(35);
-        setMovementSpeed(3);
+        setMovementSpeed(5);
         setAttackSpeed(4);
         setTeam(TeamType.PLAYER);
         setImageData(grimImageData);

@@ -10,7 +10,7 @@ public class TurretsBox extends JPanel {
 
     private TurretsBox() {
         init();
-        TopBar.getInstance().add(this);
+        // TopBar.getInstance().add(this);
     }
 
     public static TurretsBox getInstance() {

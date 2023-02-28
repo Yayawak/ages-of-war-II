@@ -5,10 +5,12 @@ import javax.swing.*;
 import srcs.UI.lowerBar.LowerBar;
 import srcs.UI.mainGame.MainGame;
 import srcs.UI.topBar.TopBar;
+import srcs.UI.topBar.goldExpPanel.GoldExpPanel;
+import srcs.UI.topBar.goldExpPanel.goldPanel.GoldPanel;
 import srcs.UI.topBar.specialsBox.SpecialsBox;
 import srcs.UI.topBar.turretsBox.TurretsBox;
 import srcs.UI.topBar.unitsBox.UnitsBox;
-import srcs.UI.topBar.upgradesBox.UpgradesBox;
+
 import java.awt.*;
 
 
@@ -18,6 +20,8 @@ public class MainUI extends JPanel implements Runnable {
     private JPanel mainGame;
     private JPanel topBar;
     private static MainUI instance = null;
+    private Dimension screenSize = Toolkit.getDefaultToolkit()
+        .getScreenSize();
     private final int FPS = 60;
 
 
@@ -66,9 +70,6 @@ public class MainUI extends JPanel implements Runnable {
         }
     }
 
-    public void update() {
-        // System.out.println("kkkk");
-    }
 
     private void init() {
 
@@ -79,7 +80,7 @@ public class MainUI extends JPanel implements Runnable {
         topBar.add(UnitsBox.getInstance());
         topBar.add(TurretsBox.getInstance());
         topBar.add(SpecialsBox.getInstance());
-        topBar.add(UpgradesBox.getInstance());
+        topBar.add(GoldExpPanel.getInstance());
 
 
         mainGame = MainGame.getInstance();
@@ -88,15 +89,28 @@ public class MainUI extends JPanel implements Runnable {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(topBar);
-        // add(MainGame.getInstance());
         add(mainGame);
         add(lowerBar);
+    }
+
+    private void update() {
+        // System.out.println("kkkk");
+        MainGame.getInstance().update();
+        GoldPanel.getInstance().update();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         MainGame.getInstance().draw(g);
-        // mainGame.draw);
+        GoldPanel.getInstance().draw(g);
+    }
+
+    public Dimension getScreenSize() {
+        return screenSize;
+    }
+
+    public int getFPS() {
+        return FPS;
     }
 }
