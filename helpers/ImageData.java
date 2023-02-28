@@ -36,7 +36,7 @@ public class ImageData {
         String basePath = "/Users/rio/Desktop/ages-of-war-II/images/";
         fullPath = basePath + relativePath;
         // fullPath = "/Users/rio/Desktop/ages-of-war-II/images/backgrounds/aow_bg.png";
-        System.out.println(fullPath);
+        // System.out.println(fullPath);
         try {
             bfImg = ImageIO.read(new File(fullPath));
             resizeSprite(imgWidth, imgHeight);

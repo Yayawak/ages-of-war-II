@@ -15,6 +15,7 @@ public class Character {
     private TeamType team = TeamType.PLAYER;
     private ImageData imageData;
     private Point position = new Point(0,0);
+    private float buildTime;
 
 
     public Character() {
@@ -24,7 +25,8 @@ public class Character {
     public Character(String characterName, int experiance, int gold,
         int hp, int movementSpeed, int attackSpeed,
         TeamType team,
-        ImageData imageData
+        ImageData imageData,
+        float buildTime
     ) {
         this.characterName = characterName;
         this.experiance = experiance;
@@ -34,6 +36,7 @@ public class Character {
         this.attackSpeed = attackSpeed;
         this.team = team;
         this.imageData = imageData;
+        this.buildTime = buildTime;
     }
 
     public String getCharacterName() {
@@ -106,6 +109,14 @@ public class Character {
 
     public void setPosition(Point position) {
         this.position = position;
+    }
+
+    public float getBuildTime() {
+        return buildTime;
+    }
+
+    public void setBuildTime(float buildTime) {
+        this.buildTime = buildTime;
     }
 
 }

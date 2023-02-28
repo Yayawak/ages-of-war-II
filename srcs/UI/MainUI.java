@@ -5,8 +5,9 @@ import javax.swing.*;
 import srcs.UI.lowerBar.LowerBar;
 import srcs.UI.mainGame.MainGame;
 import srcs.UI.topBar.TopBar;
-import srcs.UI.topBar.goldExpPanel.GoldExpPanel;
-import srcs.UI.topBar.goldExpPanel.goldPanel.GoldPanel;
+import srcs.UI.topBar.goldExpProgPanel.GoldExpProgPanel;
+import srcs.UI.topBar.goldExpProgPanel.goldPanel.GoldPanel;
+import srcs.UI.topBar.goldExpProgPanel.qProgress.QueueProgress;
 import srcs.UI.topBar.specialsBox.SpecialsBox;
 import srcs.UI.topBar.turretsBox.TurretsBox;
 import srcs.UI.topBar.unitsBox.UnitsBox;
@@ -80,7 +81,7 @@ public class MainUI extends JPanel implements Runnable {
         topBar.add(UnitsBox.getInstance());
         topBar.add(TurretsBox.getInstance());
         topBar.add(SpecialsBox.getInstance());
-        topBar.add(GoldExpPanel.getInstance());
+        topBar.add(GoldExpProgPanel.getInstance());
 
 
         mainGame = MainGame.getInstance();
@@ -97,6 +98,7 @@ public class MainUI extends JPanel implements Runnable {
         // System.out.println("kkkk");
         MainGame.getInstance().update();
         GoldPanel.getInstance().update();
+        QueueProgress.getInstance().update();
     }
 
     @Override
@@ -104,6 +106,7 @@ public class MainUI extends JPanel implements Runnable {
         super.paintComponent(g);
         MainGame.getInstance().draw(g);
         GoldPanel.getInstance().draw(g);
+        QueueProgress.getInstance().draw(g);
     }
 
     public Dimension getScreenSize() {

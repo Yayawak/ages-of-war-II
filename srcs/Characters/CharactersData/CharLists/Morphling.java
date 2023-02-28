@@ -18,6 +18,7 @@ public class Morphling extends Character {
         setAttackSpeed(2);
         setTeam(TeamType.PLAYER);
         setImageData(grimImageData);
+        setBuildTime(3);
     }
 
 }

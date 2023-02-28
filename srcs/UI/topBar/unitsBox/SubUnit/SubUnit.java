@@ -4,14 +4,14 @@ import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 
 import srcs.Characters.Character;
-import srcs.UI.MainUI;
+import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.mainGame.MainGame;
 import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
+import srcs.UI.topBar.goldExpProgPanel.qProgress.QueueProgress;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.time.chrono.MinguoDate;
 
 public class SubUnit extends JPanel{
     private Image img; // pointer is points to the same object as character's image
@@ -27,10 +27,20 @@ public class SubUnit extends JPanel{
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println(e);
+                // System.out.println(e);
                 // todo : send character data by mouse clikc
                 GameObject go = new CharacterGObject(character);
-                MainGame.getInstance().addGameObjectToScene(go);
+                if (
+                    QueueProgress.getInstance().isProgressBarAvailable()
+                    &&
+                    IntegratedSystem.getInstance().getPlayerGoldSystem()
+                        .getGold() > character.getGold()
+                ) {
+                    MainGame.getInstance().addGameObjectToScene(go);
+                    QueueProgress.getInstance().startQueue(character.getBuildTime());
+                    IntegratedSystem.getInstance().getPlayerGoldSystem()
+                        .decreasedGold(character.getGold());
+                }
             }
         });
     }
@@ -68,7 +78,7 @@ public class SubUnit extends JPanel{
                 0, 0,
                 getWidth(), getHeight(), null);
                 // 100, 100, null);
-                // 100, 100, null);
+                // 50, 50, null);
 
         } else {
             System.out.println("Image does not exist");

@@ -70,8 +70,8 @@ public class GameObject extends JPanel implements Loopable {
             &&
             this != otherGameObject // collision itself
         ) {
-            System.out.println("Collsion Occcured");
-            // if spawn before -> stop younger gameobject
+            // System.out.println("Collsion Occcured");
+            // ? if spawn before -> stop younger gameobject
             if (this.spawnTime < otherGameObject.spawnTime) {
                 return false;
             }

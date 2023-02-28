@@ -18,6 +18,7 @@ public class GrimStroke extends Character {
         setAttackSpeed(2);
         setTeam(TeamType.PLAYER);
         setImageData(grimImageData);
+        setBuildTime(1);
     }
 
 }

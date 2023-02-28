@@ -29,22 +29,24 @@ public class CharacterGObject extends GameObject {
 
     @Override
     public void update() {
+        super.update(); // collsion detection
     }
 
     @Override
     public void draw(Graphics g) {
-        System.out.println("Collsion status = " + isCollide);
+        super.draw(g);
         if (!isCollide) {
             move(Direction.RIGHT);
+        //* stand still
         }else {
-            // stand still
             // move(Direction.LEFT);
         }
         int screenWidth = MainUI.getInstance().getScreenSize().width;
-        if (getX() > screenWidth) {
+        if (getX() > screenWidth / 2) {
             IntegratedSystem.getInstance().getPlayerGoldSystem()
                 .increasedGold(character.getGold());
             destroyGameObject();
+            // isCollide = true;
         }
     }
 

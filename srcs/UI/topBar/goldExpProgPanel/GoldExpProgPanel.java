@@ -1,25 +1,26 @@
-package srcs.UI.topBar.goldExpPanel;
+package srcs.UI.topBar.goldExpProgPanel;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicBorders;
 
 import srcs.UI.topBar.TopBar;
-import srcs.UI.topBar.goldExpPanel.expPanel.ExpPanel;
-import srcs.UI.topBar.goldExpPanel.goldPanel.GoldPanel;
+import srcs.UI.topBar.goldExpProgPanel.expPanel.ExpPanel;
+import srcs.UI.topBar.goldExpProgPanel.goldPanel.GoldPanel;
+import srcs.UI.topBar.goldExpProgPanel.qProgress.QueueProgress;
 
 import java.awt.*;;
 
-public class GoldExpPanel extends JPanel {
-    private static GoldExpPanel instance = null;
+public class GoldExpProgPanel extends JPanel {
+    private static GoldExpProgPanel instance = null;
 
-    public static GoldExpPanel getInstance() {
+    public static GoldExpProgPanel getInstance() {
         if (instance == null)
-            instance = new GoldExpPanel();
+            instance = new GoldExpProgPanel();
         return instance;
     }
 
-    private GoldExpPanel() {
+    private GoldExpProgPanel() {
         init();
     }
 
@@ -41,10 +42,19 @@ public class GoldExpPanel extends JPanel {
         );
 
 
-        // setLayout(new FlowLayout());
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        add(ExpPanel.getInstance());
-        add(GoldPanel.getInstance());
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        JPanel topPan = new JPanel();
+        topPan.setLayout(new BoxLayout(topPan, BoxLayout.X_AXIS));
+        topPan.add(ExpPanel.getInstance());
+        topPan.add(GoldPanel.getInstance());
+        add(topPan);
+
+        //todo : progress Q bar
+        JPanel botPan = new JPanel();
+        botPan.add(QueueProgress.getInstance());
+        add(botPan);
+
 
         // setLayout(new BorderLayout());
         // add(ExpPanel.getInstance(), BorderLayout.WEST);

@@ -1,4 +1,4 @@
-package srcs.UI.topBar.goldExpPanel.expPanel;
+package srcs.UI.topBar.goldExpProgPanel.expPanel;
 
 import java.awt.Color;
 

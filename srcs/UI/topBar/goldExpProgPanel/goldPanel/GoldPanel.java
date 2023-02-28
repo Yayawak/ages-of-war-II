@@ -1,4 +1,4 @@
-package srcs.UI.topBar.goldExpPanel.goldPanel;
+package srcs.UI.topBar.goldExpProgPanel.goldPanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -34,6 +34,7 @@ public class GoldPanel extends JPanel implements Loopable {
         goldLabel.setFont(goldFont);
         add(goldLabel);
         System.out.println("gold label inited");
+        goldLabel.setForeground(Color.orange);
     }
 
     // @Override

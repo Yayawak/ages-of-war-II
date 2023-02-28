@@ -18,11 +18,13 @@ public class NatureProphet extends Character{
         setAttackSpeed(4);
         setTeam(TeamType.PLAYER);
         setImageData(grimImageData);
+        setBuildTime(4);
     }
 
     public NatureProphet(String characterName, int experiance, int gold, int hp, int movementSpeed, int attackSpeed,
-            TeamType team, ImageData imageData) {
-        super(characterName, experiance, gold, hp, movementSpeed, attackSpeed, team, imageData);
+            TeamType team, ImageData imageData, float buildTime) {
+        super(characterName, experiance, gold, hp, movementSpeed
+        , attackSpeed, team, imageData, buildTime);
     }
 
 }

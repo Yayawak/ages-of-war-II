@@ -66,6 +66,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
 
     private void drawBg(Graphics g) {
         String imagePath = "backgrounds/aow_bg.png";
+        // String imagePath = "backgrounds/war_bg.jpeg";
         ImageData imgData = new ImageData(imagePath, getWidth(), getHeight());
         Image sprite = imgData.getSprite();
         g.drawImage(sprite, 0, 0, this);

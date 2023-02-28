@@ -17,6 +17,7 @@ public class Rubick extends Character {
         setAttackSpeed(1);
         setTeam(TeamType.PLAYER);
         setImageData(imgData);
+        setBuildTime(2);
     }
 
 }
