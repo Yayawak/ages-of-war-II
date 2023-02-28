@@ -13,17 +13,15 @@ public class CharacterGObject extends GameObject {
 
     private CharacterPrototype character;
     private Point position;
+
     public CharacterGObject(CharacterPrototype character) {
         super(character.getImgData().getSprite(),
-            new Point(
-                (int)character.getPosition().getX(),
-                (int)character.getPosition().getY()
-            ),
-            new Dimension(
-                character.getImgData().getImgWidth(),
-                character.getImgData().getImgHeight()
-            )
-        );
+                new Point(
+                        (int) character.getPosition().getX(),
+                        (int) character.getPosition().getY()),
+                new Dimension(
+                        character.getImgData().getImgWidth(),
+                        character.getImgData().getImgHeight()));
         this.character = character;
         this.position = character.getPosition();
     }
@@ -31,13 +29,15 @@ public class CharacterGObject extends GameObject {
     @Override
     // ? check logic
     public void update() {
-        //? reset collsion : make character movable again
+        // ? reset collsion : make character movable again
         System.out.println("Enter update function");
         isCollide = false;
         for (GameObject go : MainGame.getObjectsInScene()) {
             // * Collide = ชน = Collsion
-            if (isCollideWith((CharacterGObject)go)) {
-                isCollide = true;
+            if (go instanceof CharacterGObject) {
+                if (isCollideWith((CharacterGObject) go)) {
+                    isCollide = true;
+                }
             }
         }
     }
@@ -56,17 +56,17 @@ public class CharacterGObject extends GameObject {
                 default:
                     break;
             }
-        //* stand still
-        }else {
+            // * stand still
+        } else {
             // move(Direction.LEFT);
         }
 
         int screenWidth = MainUI.getInstance().getScreenSize().width;
         if (getX() > screenWidth) {
             IntegratedSystem.getInstance().getPlayerGoldSystem()
-                .increasedGold(character.getGold());
+                    .increasedGold(character.getGold());
             IntegratedSystem.getInstance().getPlayerExpSystem()
-                .increasedExperience(character.getExperiance());
+                    .increasedExperience(character.getExperiance());
 
             // todo : add exp to team
             destroyGameObject();
@@ -79,14 +79,14 @@ public class CharacterGObject extends GameObject {
         switch (dir) {
             case RIGHT:
                 setLocation(getX() +
-                    character.getMovementSpeed() * mul,
-                    character.getPosition().y);
+                        character.getMovementSpeed() * mul,
+                        character.getPosition().y);
                 break;
 
             case LEFT:
                 setLocation(getX() -
-                    character.getMovementSpeed() * mul,
-                    character.getPosition().y);
+                        character.getMovementSpeed() * mul,
+                        character.getPosition().y);
                 break;
 
             default:
@@ -114,15 +114,13 @@ public class CharacterGObject extends GameObject {
     public boolean isCollideWith(CharacterGObject cgo) {
         // System.out.println("W = " + this.imgSize.width);
         // System.out.println("H = " + getHeight());
-        if (getBounds().
-            intersects(cgo.getBounds())
-            &&
-            this != cgo // collision itself
-            &&
-            getBounds() != null && cgo.getBounds() != null
-            &&
-            character.getTeamType() == cgo.getCharacter().getTeamType()
-        ) {
+        if (getBounds().intersects(cgo.getBounds())
+                &&
+                this != cgo // collision itself
+                &&
+                getBounds() != null && cgo.getBounds() != null
+                &&
+                character.getTeamType() == cgo.getCharacter().getTeamType()) {
             // System.out.println("Collsion Occcured");
             // ? if spawn before -> stop younger gameobject
             if (this.spawnTime < cgo.spawnTime) {

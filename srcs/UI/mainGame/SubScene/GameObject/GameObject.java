@@ -31,7 +31,6 @@ public class GameObject extends JPanel implements Loopable {
         // repaint();
     }
 
-
     public Image getImg() {
         return img;
     }
@@ -44,8 +43,10 @@ public class GameObject extends JPanel implements Loopable {
     public void draw(Graphics g) {
         // moveRight(g);
     }
+
     @Override
     public void update() {
+        // System.out.println("update from GameObject");
     }
 
     public void destroyGameObject() {
