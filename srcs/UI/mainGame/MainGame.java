@@ -105,6 +105,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
             if (obj != null)
                 obj.draw(g);
         });
+        // draw(g);
     }
 
     // todo : recieve data from event mouse click
@@ -124,10 +125,10 @@ public class MainGame extends JPanel implements ComponentSizeItf,
     @Override
     public void draw(Graphics g) {
         // ! identical 2.
-        objectsInScene.forEach(obj -> {
-            if (obj != null)
-                obj.draw(g);
-        });
+        // objectsInScene.forEach(obj -> {
+        //     if (obj != null)
+        //         obj.draw(g);
+        // });
 
         // System.out.println("Draw from MainGame");
         // g.drawLine(

@@ -102,4 +102,36 @@ public class GameObject extends JPanel implements Loopable {
         return closetCharacter;
 
     }
+
+    public Point getPos() {
+        return pos;
+    }
+
+    public void setPos(Point pos) {
+        this.pos = pos;
+    }
+
+    public Dimension getImgSize() {
+        return imgSize;
+    }
+
+    public void setImgSize(Dimension imgSize) {
+        this.imgSize = imgSize;
+    }
+
+    public boolean isCollide() {
+        return isCollide;
+    }
+
+    public void setCollide(boolean isCollide) {
+        this.isCollide = isCollide;
+    }
+
+    public long getSpawnTime() {
+        return spawnTime;
+    }
+
+    public void setSpawnTime(long spawnTime) {
+        this.spawnTime = spawnTime;
+    }
 }
