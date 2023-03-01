@@ -22,7 +22,8 @@ public class GoldPanel extends JPanel implements Loopable {
             instance = new GoldPanel();
         return instance;
     }
-    public GoldPanel() {
+
+    private GoldPanel() {
         init();
     }
 
@@ -40,7 +41,7 @@ public class GoldPanel extends JPanel implements Loopable {
 
     // @Override
     // protected void paintComponent(Graphics g) {
-    //     super.paintComponent(g);
+    // super.paintComponent(g);
     // }
     @Override
     public void update() {
@@ -48,22 +49,21 @@ public class GoldPanel extends JPanel implements Loopable {
         // goldAmout = GoldSystem.getInstance().
         // ? on changing stage of gold -> update goldLabel size
         // if (goldAmout != IntegratedSystem.getInstance().
-        //     getPlayerGoldSystem().getGold()
+        // getPlayerGoldSystem().getGold()
         // ) {
-        //     goldLabel.setFont(new Font(
-        //         Font.SANS_SERIF, Font.BOLD,
-        //         // (int)(Math.random() * 50)
-        //         goldFont.getSize() * 2
-        //     ));
+        // goldLabel.setFont(new Font(
+        // Font.SANS_SERIF, Font.BOLD,
+        // // (int)(Math.random() * 50)
+        // goldFont.getSize() * 2
+        // ));
         // }
         // goldLabel.setFont(new Font(
-        //     Font.SANS_SERIF, Font.BOLD,
-        //     // (int)(Math.random() * 50)
-        //     goldFont.getSize() / 2
+        // Font.SANS_SERIF, Font.BOLD,
+        // // (int)(Math.random() * 50)
+        // goldFont.getSize() / 2
         // ));
 
-        goldAmout = IntegratedSystem.getInstance().
-            getPlayerGoldSystem().getGold();
+        goldAmout = IntegratedSystem.getInstance().getPlayerGoldSystem().getGold();
 
         // System.out.println("gold amout = " + goldAmout);
     }

@@ -28,28 +28,29 @@ public class EnemyIntegratedSystem implements Loopable {
     private GoldSystem enemyGoldSystem;
     private ArrayList<GameObject> currentAvailableCharacters
     // private List<CharacterGObject> currentAvailableCharacters
-        = new ArrayList<>();
+            = new ArrayList<>();
 
     public static EnemyIntegratedSystem getInstance() {
         if (instance == null)
             instance = new EnemyIntegratedSystem();
         return instance;
     }
+
     public EnemyIntegratedSystem() {
         startSystem();
     }
 
     private void startSystem() {
         // currentAvailableCharacters = CharactersData.getInstance().
-        //     getCharactersList().stream().map(cData -> new CharacterGObject(cData))
-        //     .collect(Collectors.toList());
+        // getCharactersList().stream().map(cData -> new CharacterGObject(cData))
+        // .collect(Collectors.toList());
         CharactersData.getInstance().getCharactersList()
-            .forEach(character -> {
-                GameObject go = new CharacterGObject(character);
-                currentAvailableCharacters.add(go);
-            });
+                .forEach(character -> {
+                    GameObject go = new CharacterGObject(character);
+                    currentAvailableCharacters.add(go);
+                });
         // currentAvailableCharacters.forEach(cgo -> {
-            // GameObject go = new CharacterGObject(character);
+        // GameObject go = new CharacterGObject(character);
         // });
     }
 
@@ -60,24 +61,26 @@ public class EnemyIntegratedSystem implements Loopable {
         try {
             Thread.sleep(100);
             // Thread.sleep(10);
-        } catch (Exception e) {System.out.println(e); }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         // System.out.println("Enemy Gold = " + enemyGoldSystem.getGold());
 
         if (enemyGoldSystem.getGold() > 0) {
             // int ranI = (int)(Math.random() * 4);
-            // CharacterGObject cgo = (CharacterGObject)currentAvailableCharacters.get(ranI).copy();
+            // CharacterGObject cgo =
+            // (CharacterGObject)currentAvailableCharacters.get(ranI).copy();
             // cgo.getCharacter().setTeam(TeamType.ENEMY);
             // MainGame.getObjectsInScene().add(cgo);
-
 
             // * it's Work
             CharacterPrototype dummy = new Morphling(TeamType.ENEMY);
             dummy.setTeamType(TeamType.ENEMY);
             CharacterGObject c = new CharacterGObject(dummy);
-            //todo : make this enemy system usable
+            // todo : make this enemy system usable
             MainGame.getObjectsInScene().add(c);
             enemyGoldSystem.decreasedGold(c
-                .getCharacter().getGold());
+                    .getCharacter().getGold());
 
             // MainGame.getObjectsInScene().add()
         } else {

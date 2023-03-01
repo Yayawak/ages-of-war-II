@@ -34,10 +34,11 @@ public class ImageData {
     }
 
     private void readImageFromFile(String relativePath) {
-        // String basePath = new File("").getAbsolutePath();
+        String basePath = new File("").getAbsolutePath();
         // String basePath = "/Users/ppichyyy/Desktop/ages-of-war-II/images/";
         // String = new File("").getAbsolutePath();
-        String basePath = "/Users/rio/Desktop/ages-of-war-II/images/";
+        basePath += "/images/";
+        // String basePath = "/Users/rio/Desktop/ages-of-war-II/images/";
         fullPath = basePath + relativePath;
         // fullPath = "/Users/rio/Desktop/ages-of-war-II/images/backgrounds/aow_bg.png";
         // System.out.println(fullPath);

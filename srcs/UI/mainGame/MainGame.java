@@ -10,22 +10,26 @@ import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
 import srcs.Prototypes.Characters.CharactersData.CharactersData;
 import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.NatureProphet;
+import srcs.Prototypes.Turrets.TurretPrototype;
+import srcs.Prototypes.Turrets.TurretsData;
+import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
 import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
+import srcs.UI.topBar.turretsBox.SingleTurret.TurretGObject;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.function.ObjIntConsumer;
 
+import javax.imageio.stream.FileImageInputStream;
 import javax.swing.GroupLayout;
 import helpers.ImageData;
 import java.awt.image.*;
 import java.awt.event.*;;
 
 public class MainGame extends JPanel implements ComponentSizeItf,
-    Loopable
-{
+        Loopable {
     private static MainGame instance = null;
     private static ArrayList<GameObject> objectsInScene = new ArrayList<>();
 
@@ -47,26 +51,27 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         GroupLayout mainGameLayout = new GroupLayout(this);
         setLayout(mainGameLayout);
         mainGameLayout.setHorizontalGroup(
-            mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
-        );
+                mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 625, Short.MAX_VALUE));
         mainGameLayout.setVerticalGroup(
-            mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 297, Short.MAX_VALUE)
-        );
+                mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 297, Short.MAX_VALUE));
 
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                CharacterPrototype np = new NatureProphet(TeamType.PLAYER);
-                np.setPosition(getMousePosition());
-                GameObject go = new CharacterGObject(np);
-                objectsInScene.add(go);
-                System.out.println("Enter main game mouse clicked.");
+                // CharacterPrototype np = new NatureProphet(TeamType.PLAYER);
+                // np.setPosition(getMousePosition());
+                // GameObject go = new CharacterGObject(np);
+                // objectsInScene.add(go);
+                // System.out.println("Enter main game mouse clicked.");
+                FireGunTurret fgt = new FireGunTurret(TeamType.PLAYER);
+                fgt.setPosition(getMousePosition());
+                TurretGObject turret = new TurretGObject(fgt);
+                turret.setLocation(getMousePosition());
+                objectsInScene.add(turret);
             }
         });
     }
-
-
 
     private void drawBg(Graphics g) {
         String imagePath = "backgrounds/aow_bg.png";
@@ -80,21 +85,26 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         objectsInScene.stream().forEach(obj -> {
             if (obj != null) {
                 g.drawImage(obj.getImg(),
-                    obj.getX(), obj.getY(),
-                    this
-                );
+                        obj.getX(), obj.getY(),
+                        this);
             } else {
                 System.out.println("SceneObject is null");
             }
         });
     }
 
-    @Override //! loop but why
+    @Override // ! loop but why
     public void paintComponent(Graphics g) {
-    // public void draw(Graphics g) {
+        // public void draw(Graphics g) {
         super.paintComponent(g);
+        System.out.println("Paint component from MainGame");
         drawBg(g);
         drawGameObjects(g);
+        // ! identical 1.
+        objectsInScene.forEach(obj -> {
+            if (obj != null)
+                obj.draw(g);
+        });
     }
 
     // todo : recieve data from event mouse click
@@ -113,10 +123,19 @@ public class MainGame extends JPanel implements ComponentSizeItf,
 
     @Override
     public void draw(Graphics g) {
+        // ! identical 2.
         objectsInScene.forEach(obj -> {
             if (obj != null)
                 obj.draw(g);
         });
+
+        // System.out.println("Draw from MainGame");
+        // g.drawLine(
+        //     (int)( Math.random() * 500),
+        //     (int)( Math.random() * 500),
+        //     (int)( Math.random() * 500),
+        //     (int)( Math.random() * 500)
+        // );
         // new CharacterGObject()
         // drawOnMainGame(g);
     }
