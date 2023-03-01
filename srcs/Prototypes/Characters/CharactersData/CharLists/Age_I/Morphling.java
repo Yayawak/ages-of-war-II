@@ -1,25 +1,25 @@
-package srcs.Prototypes.Characters.CharactersData.CharLists;
+package srcs.Prototypes.Characters.CharactersData.CharLists.Age_I;
 
 import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
 
-public class GrimStroke extends CharacterPrototype {
+public class Morphling extends CharacterPrototype {
 
-    public GrimStroke(TeamType teamType) {
+    public Morphling(TeamType teamType) {
         super(teamType);
         ImageData grimImageData = new ImageData(
-            "characters/grimStroke.png"
+            "characters/morphling.png"
         );
-        setName("grim");
+        setName("morphling");
         setExperiance(1);
         setGold(10);
         setHp(15);
         setMovementSpeed(3);
         setAttackSpeed(2);
-        // setTeam(teamType);
+        // setTeam(TeamType.PLAYER);
         setImgData(grimImageData);
-        setBuildTime(1);
+        setBuildTime(3);
     }
 
 }

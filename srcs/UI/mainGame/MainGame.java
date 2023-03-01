@@ -9,7 +9,7 @@ import srcs.Interfaces.ComponentSizeItf;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
 import srcs.Prototypes.Characters.CharactersData.CharactersData;
-import srcs.Prototypes.Characters.CharactersData.CharLists.NatureProphet;
+import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.NatureProphet;
 import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
 

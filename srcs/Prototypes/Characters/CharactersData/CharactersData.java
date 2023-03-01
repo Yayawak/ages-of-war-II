@@ -3,10 +3,10 @@ import java.util.ArrayList;
 import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
-import srcs.Prototypes.Characters.CharactersData.CharLists.GrimStroke;
-import srcs.Prototypes.Characters.CharactersData.CharLists.Morphling;
-import srcs.Prototypes.Characters.CharactersData.CharLists.NatureProphet;
-import srcs.Prototypes.Characters.CharactersData.CharLists.Rubick;;
+import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.GrimStroke;
+import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.Morphling;
+import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.NatureProphet;
+import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.Rubick;;
 
 public class CharactersData {
     private static CharactersData instance = null;
