@@ -79,14 +79,14 @@ public class CharacterGObject extends GameObject {
         switch (dir) {
             case RIGHT:
                 setLocation(getX() +
-                        character.getMovementSpeed() * mul,
-                        character.getPosition().y);
+                    character.getMovementSpeed() * mul,
+                    character.getPosition().y);
                 break;
 
             case LEFT:
                 setLocation(getX() -
-                        character.getMovementSpeed() * mul,
-                        character.getPosition().y);
+                    character.getMovementSpeed() * mul,
+                    character.getPosition().y);
                 break;
 
             default:
@@ -114,18 +114,28 @@ public class CharacterGObject extends GameObject {
     public boolean isCollideWith(CharacterGObject cgo) {
         // System.out.println("W = " + this.imgSize.width);
         // System.out.println("H = " + getHeight());
-        if (getBounds().intersects(cgo.getBounds())
+        if (this.getBounds().intersects(cgo.getBounds())
                 &&
                 this != cgo // collision itself
                 &&
                 getBounds() != null && cgo.getBounds() != null
-                &&
-                character.getTeamType() == cgo.getCharacter().getTeamType()) {
+                // &&
+                // character.getTeamType() == cgo.getCharacter().getTeamType()
+                // character.getTeamType() != cgo.getCharacter().getTeamType()
+                ) {
             // System.out.println("Collsion Occcured");
             // ? if spawn before -> stop younger gameobject
             if (this.spawnTime < cgo.spawnTime) {
                 return false;
             }
+            if (this.getCharacter().getTeamType() !=
+                cgo.getCharacter().getTeamType()) {
+                cgo.setCollide(true); //* for other stop
+                return true;
+            }
+            System.out.format("%s is Collided with %s\n",
+                this.getCharacter().getName(),
+                cgo.getCharacter().getName());
             return true;
         } else {
             return false;

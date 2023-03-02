@@ -83,7 +83,7 @@ public class TurretGObject extends GameObject implements RangeUnit {
             );
 
             // ! : find bug of this
-            MainGame.getObjectsInScene().add(bulletGo);
+            // MainGame.getObjectsInScene().add(bulletGo);
             // MainGame.getInstance().add(bulletGo);
             // Mi
         }

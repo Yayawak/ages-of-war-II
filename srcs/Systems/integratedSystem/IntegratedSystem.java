@@ -24,7 +24,8 @@ public class IntegratedSystem {
     private void startSystem() {
         playerGoldSystem = new GoldSystem(300);
         // enemyGoldSystem = new GoldSystem(500);
-        enemyGoldSystem = new GoldSystem(100);
+        // enemyGoldSystem = new GoldSystem(100);
+        enemyGoldSystem = new GoldSystem(30);
 
         playerExpSystem = new ExpSystem(50);
         enemyExpSystem = new ExpSystem(75);
