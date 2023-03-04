@@ -21,6 +21,8 @@ public class GameObject extends JPanel implements Loopable {
     protected Dimension imgSize;
     protected boolean isCollide = false;
     protected long spawnTime;
+    protected boolean isAttacking = false;
+    protected boolean isBusyOnAttacking = false;
 
     public GameObject(Image img, Point pos, Dimension imgSize) {
         spawnTime = System.nanoTime();
@@ -103,8 +105,10 @@ public class GameObject extends JPanel implements Loopable {
                     != ent.getTeamType()
             ) {
                 // todo : combat
-                // isAttacking = true;
-                attackOpponent(ent, closetCharacter.getCharacter());
+                isAttacking = true;
+                if (isAttacking) {
+                    attackOpponent(ent, closetCharacter.getCharacter());
+                }
                 // attackOpponent(closestCgo.getCharacter(), character);
                 System.out.println("combat occured");
                 // System.out.println("Min = " + min);
@@ -117,22 +121,33 @@ public class GameObject extends JPanel implements Loopable {
 
     }
 
-    // protected void attackOpponent(CharacterPrototype attacker,
     protected void attackOpponent(EntityPrototype attacker,
-        CharacterPrototype damager) {
-        // if (isAttacking)
-        new Thread(
-            () -> {
-                int atkRate = attacker.getAttackSpeed();
-                while (damager != null) {
-                    long ms = (atkRate * 10000);
-                    damager.decreaseHp(attacker.getAttackDamage());
-                    try {
-                        Thread.sleep(ms);
-                    } catch (Exception e) { }
+            CharacterPrototype damager) {
+        if (!isBusyOnAttacking) {
+            // isBusyOnAttacking = true;
+            new Thread(
+                () -> {
+                    int atkRate = attacker.getAttackSpeed();
+                    while (true) {
+                        System.out.println("thread attacking");
+                        // if (damager == null || this == null) {
+                        // if (damager == null) {
+                        // if (this == null) {
+                        //     isBusyOnAttacking = false;
+                        //     break;
+                        // }
+                        long ms = (atkRate * 10000);
+                        damager.decreaseHp(attacker.getAttackDamage());
+                        System.out.format("damager name : %s, hp : %d\n"
+                            , damager.getName(), damager.getHp()
+                        );
+                        try {
+                            Thread.sleep(ms);
+                        } catch (Exception e) { }
+                    }
                 }
-            }
-        ).start();
+            ).start();
+        }
     }
 
 

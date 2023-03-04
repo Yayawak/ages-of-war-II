@@ -1,10 +1,6 @@
 package srcs.UI.mainGame.SubScene.GameObject;
 
 import java.awt.*;
-
-import javax.swing.JLabel;
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import srcs.Enums.Direction;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.*;
@@ -39,38 +35,11 @@ public class CharacterGObject extends GameObject {
                 character.getName(),
                 hpBar.toString()
                 );
-            // setLayout(null);
-            //todo  : make hp bar appear on screen
-            // MainUI.getInstance().add(hpBar);
-            // MainUI.getInstance().revalidate();
-            // MainUI.getInstance().repaint();
             MainGame.getInstance().add(hpBar);
             MainGame.getInstance().revalidate();
             MainGame.getInstance().repaint();
-            // this.add(hpBar);
-            // this.revalidate();
-            // this.repaint();
-            // add(hpBar);
-            // revalidate();
-            // repaint();
-            // updateUI();
-            // this.setVisible(false);
         }
-        // setVisible(true);
     }
-
-    // ? not called
-    // @Override
-    // public void paintComponent(Graphics g) {
-    //     System.out.println("paint component from cgo");
-    //     super.paintComponent(g);
-    //     if (hpBar != null) {
-    //         this.add(hpBar);
-    //         this.revalidate();
-    //         this.repaint();
-    //     }
-    // }
-
     @Override
     public void update() {
         // System.out.println("Enter update function");
@@ -89,6 +58,7 @@ public class CharacterGObject extends GameObject {
         }
 
         findClosestOpponent(character);
+        checkIfCharacterOutOfScreen();
 
         if (character.getHp() <= 0) {
             destroyGameObject();
@@ -113,7 +83,8 @@ public class CharacterGObject extends GameObject {
             // stand still
         }
 
-        checkIfCharacterOutOfScreen();
+        // findClosestOpponent(character);
+        // checkIfCharacterOutOfScreen();
 
         if (hpBar != null) {
             hpBar.draw(g);
@@ -224,6 +195,8 @@ public class CharacterGObject extends GameObject {
         }
         MainGame.getInstance().remove(hpBar);
         super.destroyGameObject();
+        // this = null;
+        // removeAll();
 
     }
 }//
