@@ -48,14 +48,14 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         setForeground(new Color(100, 0, 0));
         setPreferredSize(new Dimension(625, 400));
 
-        GroupLayout mainGameLayout = new GroupLayout(this);
-        setLayout(mainGameLayout);
-        mainGameLayout.setHorizontalGroup(
-                mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGap(0, 625, Short.MAX_VALUE));
-        mainGameLayout.setVerticalGroup(
-                mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGap(0, 297, Short.MAX_VALUE));
+        // GroupLayout mainGameLayout = new GroupLayout(this);
+        // setLayout(mainGameLayout);
+        // mainGameLayout.setHorizontalGroup(
+        //         mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        //                 .addGap(0, 625, Short.MAX_VALUE));
+        // mainGameLayout.setVerticalGroup(
+        //         mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        //                 .addGap(0, 297, Short.MAX_VALUE));
 
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -71,6 +71,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                 objectsInScene.add(turret);
             }
         });
+        // setLayout(null);
     }
 
     private void drawBg(Graphics g) {
@@ -97,7 +98,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
     public void paintComponent(Graphics g) {
         // public void draw(Graphics g) {
         super.paintComponent(g);
-        System.out.println("Paint component from MainGame");
+        // System.out.println("Paint component from MainGame");
         drawBg(g);
         drawGameObjects(g);
         // ! identical 1.
@@ -116,10 +117,12 @@ public class MainGame extends JPanel implements ComponentSizeItf,
     @Override
     public void update() {
         // System.out.println("update from MainGame");
-        objectsInScene.forEach(obj -> {
-            if (obj != null)
-                obj.update();
-        });
+        try {
+            objectsInScene.forEach(obj -> {
+                if (obj != null)
+                    obj.update();
+            });
+        } catch (Exception e) { System.out.println(e); }
     }
 
     @Override
@@ -129,16 +132,6 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         //     if (obj != null)
         //         obj.draw(g);
         // });
-
-        // System.out.println("Draw from MainGame");
-        // g.drawLine(
-        //     (int)( Math.random() * 500),
-        //     (int)( Math.random() * 500),
-        //     (int)( Math.random() * 500),
-        //     (int)( Math.random() * 500)
-        // );
-        // new CharacterGObject()
-        // drawOnMainGame(g);
     }
 
     public static ArrayList<GameObject> getObjectsInScene() {

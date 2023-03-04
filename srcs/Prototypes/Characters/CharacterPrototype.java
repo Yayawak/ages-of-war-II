@@ -11,6 +11,7 @@ public class CharacterPrototype extends EntityPrototype {
     private int experiance;
     private int hp;
     private int movementSpeed;
+    private int maxHp;
     // private Point position = new Point(0,0);
     // private Point position = new Point(50, 50);
     // private Point position = new Point(500, 200);
@@ -18,10 +19,15 @@ public class CharacterPrototype extends EntityPrototype {
 
     public CharacterPrototype(EntityPrototype entProt) {
         super(entProt);
+        // hp = maxHp;
+        // maxHp = hp;
     }
 
     public CharacterPrototype(TeamType teamType) {
         super(teamType);
+        // System.out.println("Max hp init = " + maxHp);
+        // hp = maxHp;
+        // maxHp = hp;
     }
 
     public int getExperiance() {
@@ -37,6 +43,12 @@ public class CharacterPrototype extends EntityPrototype {
     }
 
     public void setHp(int hp) {
+        if (hp > this.maxHp) {
+            hp = this.maxHp;
+        }
+        if (hp < 0) {
+            hp = 0;
+        }
         this.hp = hp;
     }
 
@@ -48,5 +60,28 @@ public class CharacterPrototype extends EntityPrototype {
         this.movementSpeed = movementSpeed;
     }
 
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+        setHp(maxHp);
+    }
+
+
+    public void decreaseHp(int amount) {
+        // int currentHp = cgo.getCharacter().getHp();
+        // cgo.getCharacter().setHp(
+            // currentHp - amount
+        // );
+        setHp(getHp() - amount);
+    }
+
+    public void increaseHp(int amount) {
+        // int currentHp = cgo.getCharacter().getHp();
+        // cgo.getCharacter().setHp( currentHp + amount);
+        setHp(getHp() + amount);
+    }
 
 }

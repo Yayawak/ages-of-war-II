@@ -20,11 +20,12 @@ public class TurretPrototype extends EntityPrototype {
         int gold, Point position,
         float buildTime, int projectileSpeed,
         ImageData bulletImgData,
-        int attackRange) {
-        super(teamType, attackSpeed, imgData, name, gold, position, buildTime);
+        int attackRange, int attackDamage)
+    {
+        super(teamType, attackSpeed, imgData, name, gold, position, buildTime, attackRange
+            ,attackDamage);
         this.projectileSpeed = projectileSpeed;
         this.bulletImgData = bulletImgData;
-        this.attackRange = attackRange;
     }
 
     public int getProjectileSpeed() {

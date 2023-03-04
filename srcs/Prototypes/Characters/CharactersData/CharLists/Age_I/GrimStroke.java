@@ -14,12 +14,14 @@ public class GrimStroke extends CharacterPrototype {
         setName("grim");
         setExperiance(1);
         setGold(10);
-        setHp(15);
+        setMaxHp(20);
         setMovementSpeed(3);
         setAttackSpeed(2);
         // setTeam(teamType);
         setImgData(grimImageData);
         setBuildTime(1);
+        setAttackRange(300);
+        setAttackDamage(10);
     }
 
 }

@@ -14,12 +14,14 @@ public class NatureProphet extends CharacterPrototype{
         setName("Nature prophet");
         setExperiance(2);
         setGold(20);
-        setHp(35);
+        setMaxHp(35);
         setMovementSpeed(5);
         setAttackSpeed(4);
         // setTeam(TeamType.PLAYER);
         setImgData(grimImageData);
         setBuildTime(4);
+        setAttackRange(150);
+        setAttackDamage(5);
     }
 
     // public NatureProphet(String characterName, int experiance, int gold, int hp, int movementSpeed, int attackSpeed,

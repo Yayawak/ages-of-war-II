@@ -28,9 +28,16 @@ public class GameObject extends JPanel implements Loopable {
         setImg(img);
         // System.out.println("Position = " + xPos + " : " + yPos);
         setSize(imgSize); // ? Important for collsion detection
+        setPreferredSize(imgSize); // ? Important for collsion detection
         this.imgSize = imgSize;
         this.pos = pos;
         // repaint();
+        init();
+    }
+
+    private void init() {
+        setLayout(null);
+        // setLayout(getLayout());
     }
 
     public Image getImg() {
@@ -87,21 +94,47 @@ public class GameObject extends JPanel implements Loopable {
                 }
             }
         }
-        System.out.println("==========================".repeat(4));
+        // System.out.println("==========================".repeat(4));
         if (min <= ent.getAttackRange()) {
-            System.out.println("get attack");
-            if (closetCharacter != null) {
-                System.out.println("Min = " + min);
-                System.out.format("Name of closest character is : %s\n",
-                    closetCharacter.getCharacter().getName());
+            // System.out.println("get attack");
+            if (closetCharacter != null
+                &&
+                closetCharacter.getCharacter().getTeamType()
+                    != ent.getTeamType()
+            ) {
+                // todo : combat
+                // isAttacking = true;
+                attackOpponent(ent, closetCharacter.getCharacter());
+                // attackOpponent(closestCgo.getCharacter(), character);
+                System.out.println("combat occured");
+                // System.out.println("Min = " + min);
+                // System.out.format("Name of closest character is : %s\n",
+                    // closetCharacter.getCharacter().getName());
             }
-        } else {
-            closetCharacter = null;
         }
-        if (closetCharacter == null) { System.out.println("Closest character = NULL");}
+        // if (closetCharacter == null) { System.out.println("Closest character = NULL");}
         return closetCharacter;
 
     }
+
+    // protected void attackOpponent(CharacterPrototype attacker,
+    protected void attackOpponent(EntityPrototype attacker,
+        CharacterPrototype damager) {
+        // if (isAttacking)
+        new Thread(
+            () -> {
+                int atkRate = attacker.getAttackSpeed();
+                while (damager != null) {
+                    long ms = (atkRate * 10000);
+                    damager.decreaseHp(attacker.getAttackDamage());
+                    try {
+                        Thread.sleep(ms);
+                    } catch (Exception e) { }
+                }
+            }
+        ).start();
+    }
+
 
     public Point getPos() {
         return pos;

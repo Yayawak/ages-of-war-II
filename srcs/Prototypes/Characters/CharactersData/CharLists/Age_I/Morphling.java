@@ -14,12 +14,16 @@ public class Morphling extends CharacterPrototype {
         setName("morphling");
         setExperiance(1);
         setGold(10);
-        setHp(15);
+        setMaxHp(25);
+        // setHp(getMaxHp());
+        // System.out.println("max hp morph : " + getMaxHp());
         setMovementSpeed(3);
         setAttackSpeed(2);
         // setTeam(TeamType.PLAYER);
         setImgData(grimImageData);
         setBuildTime(3);
+        setAttackRange(100);
+        setAttackDamage(8);
     }
 
 }

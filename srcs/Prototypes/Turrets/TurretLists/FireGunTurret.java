@@ -32,9 +32,16 @@ public class FireGunTurret extends TurretPrototype {
         setBulletImgData(turretImgData);
         setAttackRange(400);
     }
+    // public FireGunTurret(TeamType teamType, int attackSpeed, ImageData imgData, String name, int gold, Point position,
+    //         float buildTime, int projectileSpeed, ImageData bulletImgData, int attackRange,
+    //         int atta) {
+    //     super(teamType, attackSpeed, imgData, name, gold, position, buildTime, projectileSpeed, bulletImgData, attackRange);
+    // }
+
     public FireGunTurret(TeamType teamType, int attackSpeed, ImageData imgData, String name, int gold, Point position,
-            float buildTime, int projectileSpeed, ImageData bulletImgData, int attackRange) {
-        super(teamType, attackSpeed, imgData, name, gold, position, buildTime, projectileSpeed, bulletImgData, attackRange);
+            float buildTime, int projectileSpeed, ImageData bulletImgData, int attackRange, int attackDamage) {
+        super(teamType, attackSpeed, imgData, name, gold, position, buildTime, projectileSpeed, bulletImgData,
+                attackRange, attackDamage);
     }
 
 }

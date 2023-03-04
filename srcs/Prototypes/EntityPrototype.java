@@ -16,6 +16,7 @@ public class EntityPrototype {
     protected float buildTime;
     protected EntityPrototype copyInstance;
     protected int attackRange;
+    protected int attackDamage;
 
     public EntityPrototype(EntityPrototype entProt) {
         init();
@@ -27,7 +28,8 @@ public class EntityPrototype {
     }
 
     public EntityPrototype(TeamType teamType, int attackSpeed, ImageData imgData, String name, int gold, Point position,
-            float buildTime) {
+            // float buildTime, EntityPrototype copyInstance, int attackRange, int attackDamage) {
+            float buildTime, int attackRange, int attackDamage) {
         this.teamType = teamType;
         this.attackSpeed = attackSpeed;
         this.imgData = imgData;
@@ -35,7 +37,8 @@ public class EntityPrototype {
         this.gold = gold;
         this.position = position;
         this.buildTime = buildTime;
-        init();
+        this.attackRange = attackRange;
+        this.attackDamage = attackDamage;
     }
 
     public EntityPrototype getCopyInstance() {
@@ -45,7 +48,10 @@ public class EntityPrototype {
     }
 
     private void init() {
-        int spawnX = (teamType == TeamType.PLAYER) ? 0 : (int) MainUI.getInstance().getScreenSize().getWidth();
+        int spawnX = (teamType == TeamType.PLAYER) ?
+            0 :
+            // (int) MainUI.getInstance().getScreenSize().getWidth()
+            (int) MainUI.getInstance().getScreenSize().getWidth() - 200;
         if (position == null) {
             position = new Point();
         }
@@ -127,6 +133,14 @@ public class EntityPrototype {
 
     public void setAttackRange(int attackRange) {
         this.attackRange = attackRange;
+    }
+
+    public int getAttackDamage() {
+        return attackDamage;
+    }
+
+    public void setAttackDamage(int attackDamage) {
+        this.attackDamage = attackDamage;
     }
 
 }

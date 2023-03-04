@@ -2,18 +2,23 @@ package srcs.UI.mainGame.SubScene.GameObject;
 
 import java.awt.*;
 
+import javax.swing.JLabel;
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import srcs.Enums.Direction;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.*;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.MainUI;
 import srcs.UI.mainGame.MainGame;
+import srcs.UI.mainGame.SubScene.characterHpBar.CharacterHpBar;
 
 public class CharacterGObject extends GameObject {
 
     private CharacterPrototype character;
     private Point position;
-
+    CharacterHpBar hpBar;
+    // private boolean isAttacking = false;
     public CharacterGObject(CharacterPrototype character) {
         super(character.getImgData().getSprite(),
                 new Point(
@@ -24,21 +29,69 @@ public class CharacterGObject extends GameObject {
                         character.getImgData().getImgHeight()));
         this.character = character;
         this.position = character.getPosition();
+        init();
     }
 
+    private void init() {
+        hpBar = new CharacterHpBar(this);
+        if (hpBar != null) {
+            System.out.format("hpBar of %s is exists : %s\n\n",
+                character.getName(),
+                hpBar.toString()
+                );
+            // setLayout(null);
+            //todo  : make hp bar appear on screen
+            // MainUI.getInstance().add(hpBar);
+            // MainUI.getInstance().revalidate();
+            // MainUI.getInstance().repaint();
+            MainGame.getInstance().add(hpBar);
+            MainGame.getInstance().revalidate();
+            MainGame.getInstance().repaint();
+            // this.add(hpBar);
+            // this.revalidate();
+            // this.repaint();
+            // add(hpBar);
+            // revalidate();
+            // repaint();
+            // updateUI();
+            // this.setVisible(false);
+        }
+        // setVisible(true);
+    }
+
+    // ? not called
+    // @Override
+    // public void paintComponent(Graphics g) {
+    //     System.out.println("paint component from cgo");
+    //     super.paintComponent(g);
+    //     if (hpBar != null) {
+    //         this.add(hpBar);
+    //         this.revalidate();
+    //         this.repaint();
+    //     }
+    // }
+
     @Override
-    // ? check logic
     public void update() {
-        // ? reset collsion : make character movable again
         // System.out.println("Enter update function");
+        // ? reset collsion : make character movable again
         isCollide = false;
         for (GameObject go : MainGame.getObjectsInScene()) {
-            // * Collide = ชน = Collsion
             if (go instanceof CharacterGObject) {
-                if (isCollideWith((CharacterGObject) go)) {
+                CharacterGObject cgo = (CharacterGObject)go;
+                if (isCollideWith(cgo)) {
                     isCollide = true;
                 }
             }
+        }
+        if (hpBar != null) {
+            hpBar.update();
+        }
+
+        findClosestOpponent(character);
+
+        if (character.getHp() <= 0) {
+            destroyGameObject();
         }
     }
 
@@ -56,26 +109,33 @@ public class CharacterGObject extends GameObject {
                 default:
                     break;
             }
-            // * stand still
         } else {
-            // move(Direction.LEFT);
+            // stand still
         }
 
-        int screenWidth = MainUI.getInstance().getScreenSize().width;
-        if (getX() > screenWidth) {
-            IntegratedSystem.getInstance().getPlayerGoldSystem()
-                    .increasedGold(character.getGold());
-            IntegratedSystem.getInstance().getPlayerExpSystem()
-                    .increasedExperience(character.getExperiance());
+        checkIfCharacterOutOfScreen();
 
-            // todo : add exp to team
+        if (hpBar != null) {
+            hpBar.draw(g);
+        }
+    }
+
+    private void checkIfCharacterOutOfScreen() {
+        int screenWidth = MainUI.getInstance().getScreenSize().width;
+        if (getCharacter().getTeamType() == TeamType.PLAYER
+            && getX() > screenWidth) {
             destroyGameObject();
-            // isCollide = true;
+        }
+
+        if (getCharacter().getTeamType() == TeamType.ENEMY
+            && getX() < 0
+            ) {
+            destroyGameObject();
         }
     }
 
     private void move(Direction dir) {
-        int mul = 6;
+        int mul = 8;
         switch (dir) {
             case RIGHT:
                 setLocation(getX() +
@@ -133,12 +193,35 @@ public class CharacterGObject extends GameObject {
                 cgo.setCollide(true); //* for other stop
                 return true;
             }
-            System.out.format("%s is Collided with %s\n",
-                this.getCharacter().getName(),
-                cgo.getCharacter().getName());
+            // System.out.format("%s is Collided with %s\n",
+            //     this.getCharacter().getName(),
+            //     cgo.getCharacter().getName());
             return true;
         } else {
             return false;
         }
     }
-}
+
+    @Override
+    public void destroyGameObject() {
+        switch (getCharacter().getTeamType()) {
+            case PLAYER:
+                IntegratedSystem.getInstance().getEnemyGoldSystem()
+                    .increasedGold(character.getGold());
+                IntegratedSystem.getInstance().getPlayerExpSystem()
+                        .increasedExperience(character.getExperiance());
+                break;
+            case ENEMY:
+                IntegratedSystem.getInstance().getPlayerGoldSystem()
+                        .increasedGold(character.getGold());
+                IntegratedSystem.getInstance().getPlayerExpSystem()
+                        .increasedExperience(character.getExperiance());
+                break;
+            default:
+                break;
+        }
+        MainGame.getInstance().remove(hpBar);
+        super.destroyGameObject();
+
+    }
+}//

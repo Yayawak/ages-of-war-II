@@ -13,12 +13,14 @@ public class Rubick extends CharacterPrototype {
         setName("rubick");
         setExperiance(3);
         setGold(40);
-        setHp(30);
+        setMaxHp(30);
         setMovementSpeed(2);
         setAttackSpeed(1);
         // setTeam(TeamType.PLAYER);
         setImgData(imgData);
         setBuildTime(2);
+        setAttackRange(200);
+        setAttackDamage(2);
     }
 
 }

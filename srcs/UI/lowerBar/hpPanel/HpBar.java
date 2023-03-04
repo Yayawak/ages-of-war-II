@@ -14,6 +14,7 @@ public class HpBar extends JProgressBar {
         // setBackground(new java.awt.Color(255, 109, 109));
         // setBackground(Color.red);
         setPreferredSize(getPreferredSize());
+        // setForeground(Color.orange);
         // setPreferredSize(new Dimension(200, 35));
         // setPreferredSize(new Dimension(10, 100));
         // setPreferredSize(new Dimension(100,10));
