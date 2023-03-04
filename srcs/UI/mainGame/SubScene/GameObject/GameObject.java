@@ -1,6 +1,7 @@
 package srcs.UI.mainGame.SubScene.GameObject;
 
 import java.awt.Graphics;
+import java.nio.channels.ClosedSelectorException;
 
 import javax.print.attribute.standard.RequestingUserName;
 import javax.swing.ImageIcon;
@@ -17,20 +18,20 @@ import java.awt.*;
 
 public class GameObject extends JPanel implements Loopable {
     protected Image img;
-    protected Point pos;
+    protected Point position;
     protected Dimension imgSize;
     protected boolean isCollide = false;
     protected long spawnTime;
 
-    public GameObject(Image img, Point pos, Dimension imgSize) {
+    public GameObject(Image img, Point position,
+        Dimension imgSize) {
         spawnTime = System.nanoTime();
-        setLocation(pos);
+        setLocation(position);
         setImg(img);
         // System.out.println("Position = " + xPos + " : " + yPos);
         setSize(imgSize); // ? Important for collsion detection
         setPreferredSize(imgSize); // ? Important for collsion detection
         this.imgSize = imgSize;
-        this.pos = pos;
         // repaint();
         init();
     }
@@ -65,11 +66,13 @@ public class GameObject extends JPanel implements Loopable {
     }
 
     public GameObject copy() {
-        return new GameObject(img, pos, imgSize);
+        return new GameObject(img, position, imgSize);
     }
 
     public CharacterGObject findClosestOpponent(EntityPrototype ent) {
-        double min = Integer.MAX_VALUE;
+    // public CharacterGObject findClosestOpponent(GameObject finder) {
+        // int min = Integer.MAX_VALUE;
+        double min = Double.MAX_VALUE;
         CharacterGObject closetCharacter = null;
         for (GameObject gameObject : MainGame.getObjectsInScene()) {
             if (gameObject instanceof CharacterGObject
@@ -78,70 +81,87 @@ public class GameObject extends JPanel implements Loopable {
             ) {
                 CharacterGObject cgo = (CharacterGObject) gameObject;
                 TeamType anotherCgoTeam = cgo.getCharacter().getTeamType();
+                // if (ent.getTeamType() == anotherCgoTeam) continue;
                 if (ent.getTeamType() == anotherCgoTeam) continue;
-                // System.out.println("turret position " + ent.getPosition());
-                // System.out.println("cgo postion " + cgo.getPosition());
-                long dx = (long) (ent.getPosition().getX() - cgo.getLocation().getX());
-                long dy = (long) (ent.getPosition().getY() - cgo.getLocation().getY());
-                // System.out.println("turret position " + turret.getPosition());
-                // System.out.println("cgo postion " + cgo.getPosition());
-                // System.out.println("dx = " + dx);
-                // System.out.println("dy = " + dy);
-                double d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-                if (d < min) {
+                double x1 = ent.getPosition().getX();
+                double y1 = ent.getPosition().getY();
+                double x2 = cgo.getX();
+                double y2 = cgo.getY();
+                // long dy = (long) (Math.abs(y1 - y2));
+                System.out.println("x1 = " + x1);
+                System.out.println("x2 = " + x2);
+                long dx = (long) (x1 - x2);
+                long dy = (long) (y1 - y2);
+                // long dx = (long) (Math.abs(x2 - x1));
+                // long dy = (long) (Math.abs(y2 - y1));
+                double d = Math.sqrt(dx * dx + dy * dy);
+                System.out.println("dx = " + dx);
+                System.out.println("dy = " + dy);
+                if (d <= min) {
                     min = d;
                     closetCharacter = cgo;
+                    // System.out.println(
+                    //     "closest char name : "
+                    //     + closetCharacter.getCharacter().getName()
+                    // );
                 }
+                // else { min = 0; }
             }
         }
         // System.out.println("==========================".repeat(4));
+        System.out.println("min = " + min);
+        System.out.println(
+            "closest char name : "
+            + closetCharacter.getCharacter().getName()
+        );
+        System.out.println("atk range = " + ent.getAttackRange());
         if (min <= ent.getAttackRange()) {
-            // System.out.println("get attack");
-            if (closetCharacter != null
+            if (
+                closetCharacter != null
                 &&
                 closetCharacter.getCharacter().getTeamType()
                     != ent.getTeamType()
             ) {
                 // todo : combat
+                System.out.println("combat occured");
                 // isAttacking = true;
                 attackOpponent(ent, closetCharacter.getCharacter());
-                // attackOpponent(closestCgo.getCharacter(), character);
-                System.out.println("combat occured");
-                // System.out.println("Min = " + min);
-                // System.out.format("Name of closest character is : %s\n",
-                    // closetCharacter.getCharacter().getName());
+                // if (ent instanceof CharacterPrototype) {
+                //     CharacterPrototype damager = (CharacterPrototype)ent;
+                //     attackOpponent(closetCharacter.getCharacter(), damager);
+                // }
             }
+        } else {
+            closetCharacter = null;
         }
-        // if (closetCharacter == null) { System.out.println("Closest character = NULL");}
         return closetCharacter;
 
     }
 
-    // protected void attackOpponent(CharacterPrototype attacker,
     protected void attackOpponent(EntityPrototype attacker,
         CharacterPrototype damager) {
-        // if (isAttacking)
+        System.out.println("Attack opponent");
         new Thread(
             () -> {
-                int atkRate = attacker.getAttackSpeed();
-                while (damager != null) {
-                    long ms = (atkRate * 10000);
-                    damager.decreaseHp(attacker.getAttackDamage());
-                    try {
-                        Thread.sleep(ms);
-                    } catch (Exception e) { }
-                }
+                int atkRate = attacker.getAttackSpeed() | 1;
+                // while (damager != null) {
+                long ms = (atkRate * 10000);
+                damager.decreaseHp(attacker.getAttackDamage());
+                try {
+                    Thread.sleep(ms);
+                } catch (Exception e) { }
+                // }
             }
         ).start();
     }
 
 
-    public Point getPos() {
-        return pos;
+    public Point getPostion() {
+        return position;
     }
 
-    public void setPos(Point pos) {
-        this.pos = pos;
+    public void setPosition(Point position) {
+        this.position = position;
     }
 
     public Dimension getImgSize() {
