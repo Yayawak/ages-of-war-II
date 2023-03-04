@@ -49,7 +49,7 @@ public class EntityPrototype {
 
     private void init() {
         int spawnX = (teamType == TeamType.PLAYER) ?
-            0 :
+            200 :
             // (int) MainUI.getInstance().getScreenSize().getWidth()
             (int) MainUI.getInstance().getScreenSize().getWidth() - 200;
         if (position == null) {

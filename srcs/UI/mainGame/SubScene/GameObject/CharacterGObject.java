@@ -136,22 +136,24 @@ public class CharacterGObject extends GameObject {
 
     private void move(Direction dir) {
         int mul = 8;
+        int x = getX();
+        int y = getY();
+        int speed = character.getMovementSpeed() * mul;
+        Point newPos = new Point(x, y);
         switch (dir) {
             case RIGHT:
-                setLocation(getX() +
-                    character.getMovementSpeed() * mul,
-                    character.getPosition().y);
+                newPos.setLocation(x + speed, y);
                 break;
 
             case LEFT:
-                setLocation(getX() -
-                    character.getMovementSpeed() * mul,
-                    character.getPosition().y);
+                newPos.setLocation(x - speed, y);
                 break;
 
             default:
                 break;
         }
+        character.setPosition(newPos);
+        setLocation(character.getPosition());
     }
 
     public CharacterPrototype getCharacter() {
