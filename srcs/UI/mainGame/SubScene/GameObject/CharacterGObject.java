@@ -135,7 +135,7 @@ public class CharacterGObject extends GameObject {
     }
 
     private void move(Direction dir) {
-        int mul = 8;
+        int mul = 20;
         int x = getX();
         int y = getY();
         int speed = character.getMovementSpeed() * mul;
