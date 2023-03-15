@@ -48,6 +48,7 @@ public class SubTurret extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 // TowerPrototype.
                 //todo : ADD TURRET OT PLAYER'S TOWER
+                System.out.println(e);
             }
         });
     }

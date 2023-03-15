@@ -61,12 +61,12 @@ public class CharacterHpBar extends JProgressBar
 
     @Override
     public void update() {
-        System.out.println("update from character hp bar ");
-        System.out.println("current hp is " +
-            cgo.getCharacter().getHp());
-        System.out.format("location of hp bar is : %s\n",
-            this.getLocation());
-        System.out.println("===".repeat(20));
+        // System.out.println("update from character hp bar ");
+        // System.out.println("current hp is " +
+        //     cgo.getCharacter().getHp());
+        // System.out.format("location of hp bar is : %s\n",
+        //     this.getLocation());
+        // System.out.println("===".repeat(20));
 
         setValue(cgo.getCharacter().getHp());
     }
