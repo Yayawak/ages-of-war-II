@@ -1,5 +1,5 @@
 package srcs.Enums;
 
 public enum TeamType {
-    PLAYER, ENEMY;
+    PLAYER, ENEMY, NONE;
 }

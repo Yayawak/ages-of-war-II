@@ -16,6 +16,7 @@ import srcs.UI.mainGame.MainGame;
 import java.awt.*;
 
 public class GameObject extends JPanel implements Loopable {
+    protected TeamType teamType;
     protected Image img;
     protected Point pos;
     protected Dimension imgSize;
@@ -166,5 +167,72 @@ public class GameObject extends JPanel implements Loopable {
 
     public void setSpawnTime(long spawnTime) {
         this.spawnTime = spawnTime;
+    }
+
+    // public boolean isCollideWith(CharacterGObject cgo) {
+    // public boolean isCollideWith(
+    //     CharacterGObject thisCgo,
+    //     CharacterGObject cgo
+    // ) {
+    //     // System.out.println("W = " + this.imgSize.width);
+    //     // System.out.println("H = " + getHeight());
+    //     if (this.getBounds().intersects(cgo.getBounds())
+    //             &&
+    //             this != cgo // collision itself
+    //             &&
+    //             getBounds() != null && cgo.getBounds() != null
+    //             // &&
+    //             // character.getTeamType() == cgo.getCharacter().getTeamType()
+    //             // character.getTeamType() != cgo.getCharacter().getTeamType()
+    //             ) {
+    //         // System.out.println("Collsion Occcured");
+    //         // ? if spawn before -> stop younger gameobject
+    //         if (this.spawnTime < cgo.spawnTime) {
+    //             return false;
+    //         }
+    //         if (thisCgo.getCharacter().getTeamType() !=
+    //             cgo.getCharacter().getTeamType()) {
+    //             cgo.setCollide(true); //* for other stop
+    //             return true;
+    //         }
+    //         // System.out.format("%s is Collided with %s\n",
+    //         //     this.getCharacter().getName(),
+    //         //     cgo.getCharacter().getName());
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+    public boolean isCollideWith(
+        GameObject thisGo,
+        GameObject thatGo
+    ) {
+        // System.out.println("W = " + this.imgSize.width);
+        // System.out.println("H = " + getHeight());
+        if (thisGo.getBounds().intersects(thatGo.getBounds())
+                &&
+                thisGo != thatGo // collision itself
+                &&
+                thisGo.getBounds() != null && thatGo.getBounds() != null
+                // &&
+                // character.getTeamType() == cgo.getCharacter().getTeamType()
+                // character.getTeamType() != cgo.getCharacter().getTeamType()
+                ) {
+            // System.out.println("Collsion Occcured");
+            // ? if spawn before -> stop younger gameobject
+            if (this.spawnTime < thatGo.spawnTime) {
+                return false;
+            }
+            if (thisGo.teamType != thatGo.teamType) {
+                thisGo.setCollide(true); //* for other stop
+                return true;
+            }
+            // System.out.format("%s is Collided with %s\n",
+            //     this.getCharacter().getName(),
+            //     cgo.getCharacter().getName());
+            return true;
+        } else {
+            return false;
+        }
     }
 }
