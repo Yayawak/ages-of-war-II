@@ -43,7 +43,27 @@ public class SubUnit extends JPanel{
                 }
             }
         });
+
+        // addMouseListener(new MouseAdapter() {
+        //     @Override
+        //     public void mouseEntered(MouseEvent e) {
+        //         // Color randCol =
+        //         Color randCol = new Color(
+        //             (float)(Math.random()),
+        //             (float)(Math.random()),
+        //             (float)(Math.random())
+        //         );
+        //         setBackground(randCol);
+        //         // setForeground(Color.red);
+        //         revalidate();
+        //         repaint();
+        //         System.out.println(e);
+        //         // IntegratedSystem.getInstance().getEnemyGoldSystem()
+        //         //     .increasedGold(30);
+        //     }
+        // });
     }
+
 
     private void initGraphic() {
         GroupLayout unitPanelLayout = new GroupLayout(this);

@@ -106,16 +106,23 @@ public class GameObject extends JPanel implements Loopable {
             ) {
                 // todo : combat
                 isAttacking = true;
-                if (isAttacking) {
-                    attackOpponent(ent, closetCharacter.getCharacter());
-                }
+                // if (isAttacking) {
+                //     attackOpponent(ent, closetCharacter.getCharacter());
+                // }
+                attackOpponent(ent, closetCharacter.getCharacter());
                 // attackOpponent(closestCgo.getCharacter(), character);
                 System.out.println("combat occured");
                 // System.out.println("Min = " + min);
                 // System.out.format("Name of closest character is : %s\n",
                     // closetCharacter.getCharacter().getName());
+            }else {
+                isAttacking = false;
             }
         }
+        else {
+            isAttacking = false;
+        }
+        System.out.println("is attacking = " + isAttacking);
         // if (closetCharacter == null) { System.out.println("Closest character = NULL");}
         return closetCharacter;
 
@@ -123,12 +130,15 @@ public class GameObject extends JPanel implements Loopable {
 
     protected void attackOpponent(EntityPrototype attacker,
             CharacterPrototype damager) {
+        // ! created new thread every millisecond depended on update function
+        // todo : make single thread not 100 threads so it's very decrease opponent health
         if (!isBusyOnAttacking) {
             // isBusyOnAttacking = true;
             new Thread(
                 () -> {
                     int atkRate = attacker.getAttackSpeed();
-                    while (true) {
+                    while (isAttacking) {
+                    // while (true) {
                         System.out.println("thread attacking");
                         // if (damager == null || this == null) {
                         // if (damager == null) {
@@ -136,7 +146,9 @@ public class GameObject extends JPanel implements Loopable {
                         //     isBusyOnAttacking = false;
                         //     break;
                         // }
-                        long ms = (atkRate * 10000);
+                        // long ms = (atkRate * 10000);
+                        long ms = (atkRate * 10000000);
+                        // long ms = (atkRate * 1000);
                         damager.decreaseHp(attacker.getAttackDamage());
                         System.out.format("damager name : %s, hp : %d\n"
                             , damager.getName(), damager.getHp()
