@@ -2,7 +2,6 @@ package srcs.UI.mainGame.SubScene.GameObject;
 
 import java.awt.Graphics;
 
-import javax.print.attribute.standard.RequestingUserName;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -169,40 +168,6 @@ public class GameObject extends JPanel implements Loopable {
         this.spawnTime = spawnTime;
     }
 
-    // public boolean isCollideWith(CharacterGObject cgo) {
-    // public boolean isCollideWith(
-    //     CharacterGObject thisCgo,
-    //     CharacterGObject cgo
-    // ) {
-    //     // System.out.println("W = " + this.imgSize.width);
-    //     // System.out.println("H = " + getHeight());
-    //     if (this.getBounds().intersects(cgo.getBounds())
-    //             &&
-    //             this != cgo // collision itself
-    //             &&
-    //             getBounds() != null && cgo.getBounds() != null
-    //             // &&
-    //             // character.getTeamType() == cgo.getCharacter().getTeamType()
-    //             // character.getTeamType() != cgo.getCharacter().getTeamType()
-    //             ) {
-    //         // System.out.println("Collsion Occcured");
-    //         // ? if spawn before -> stop younger gameobject
-    //         if (this.spawnTime < cgo.spawnTime) {
-    //             return false;
-    //         }
-    //         if (thisCgo.getCharacter().getTeamType() !=
-    //             cgo.getCharacter().getTeamType()) {
-    //             cgo.setCollide(true); //* for other stop
-    //             return true;
-    //         }
-    //         // System.out.format("%s is Collided with %s\n",
-    //         //     this.getCharacter().getName(),
-    //         //     cgo.getCharacter().getName());
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
     public boolean isCollideWith(
         GameObject thisGo,
         GameObject thatGo

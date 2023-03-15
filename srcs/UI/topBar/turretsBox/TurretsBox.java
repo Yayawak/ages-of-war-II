@@ -6,7 +6,7 @@ import srcs.UI.topBar.TopBar;
 import java.awt.*;;
 
 public class TurretsBox extends JPanel {
-    private static TurretsBox single_instance = null;
+    private static TurretsBox instance = null;
 
     private TurretsBox() {
         init();
@@ -14,10 +14,10 @@ public class TurretsBox extends JPanel {
     }
 
     public static TurretsBox getInstance() {
-        if (single_instance == null) {
-            single_instance = new TurretsBox();
+        if (instance == null) {
+            instance = new TurretsBox();
         }
-        return single_instance;
+        return instance;
     }
 
     private void init() {
