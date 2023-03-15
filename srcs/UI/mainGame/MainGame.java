@@ -16,7 +16,7 @@ import srcs.Prototypes.Turrets.TurretsData;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
 import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
-import srcs.UI.mainGame.SubScene.GameObject.TowerGameObject.TowerGameObject;
+import srcs.UI.mainGame.SubScene.GameObject.TowerGameObject;
 import srcs.UI.topBar.turretsBox.SingleTurret.TurretGObject;
 
 import java.awt.*;

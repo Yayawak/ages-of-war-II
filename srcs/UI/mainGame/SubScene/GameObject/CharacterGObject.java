@@ -7,7 +7,6 @@ import javax.swing.text.StyledEditorKit.BoldAction;
 
 import srcs.Enums.Direction;
 import srcs.Enums.TeamType;
-import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.MainUI;
@@ -178,6 +177,37 @@ public class CharacterGObject extends GameObject {
         }
     }
 
+    // public boolean isCollideWith(CharacterGObject cgo) {
+    //     // System.out.println("W = " + this.imgSize.width);
+    //     // System.out.println("H = " + getHeight());
+    //     if (this.getBounds().intersects(cgo.getBounds())
+    //             &&
+    //             this != cgo // collision itself
+    //             &&
+    //             getBounds() != null && cgo.getBounds() != null
+    //             // &&
+    //             // character.getTeamType() == cgo.getCharacter().getTeamType()
+    //             // character.getTeamType() != cgo.getCharacter().getTeamType()
+    //             ) {
+    //         // System.out.println("Collsion Occcured");
+    //         // ? if spawn before -> stop younger gameobject
+    //         if (this.spawnTime < cgo.spawnTime) {
+    //             return false;
+    //         }
+    //         if (this.getCharacter().getTeamType() !=
+    //             cgo.getCharacter().getTeamType()) {
+    //             cgo.setCollide(true); //* for other stop
+    //             return true;
+    //         }
+    //         // System.out.format("%s is Collided with %s\n",
+    //         //     this.getCharacter().getName(),
+    //         //     cgo.getCharacter().getName());
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
     @Override
     public void destroyGameObject() {
         switch (getCharacter().getTeamType()) {
@@ -201,4 +231,4 @@ public class CharacterGObject extends GameObject {
         // removeAll();
 
     }
-}
+}//
