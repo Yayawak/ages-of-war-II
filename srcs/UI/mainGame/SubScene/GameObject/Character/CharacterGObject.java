@@ -1,4 +1,4 @@
-package srcs.UI.mainGame.SubScene.GameObject;
+package srcs.UI.mainGame.SubScene.GameObject.Character;
 
 import java.awt.*;
 
@@ -11,6 +11,7 @@ import srcs.Prototypes.Characters.*;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.MainUI;
 import srcs.UI.mainGame.MainGame;
+import srcs.UI.mainGame.SubScene.GameObject.GameObject;
 import srcs.UI.mainGame.SubScene.characterHpBar.CharacterHpBar;
 
 public class CharacterGObject extends GameObject {

@@ -14,10 +14,10 @@ import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretsData;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
-import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
-import srcs.UI.mainGame.SubScene.GameObject.TowerGameObject.TowerGameObject;
-import srcs.UI.topBar.turretsBox.SingleTurret.TurretGObject;
+import srcs.UI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.UI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
+import srcs.UI.mainGame.SubScene.GameObject.Turret.TurretGObject;
 
 import java.awt.*;
 import java.util.ArrayList;

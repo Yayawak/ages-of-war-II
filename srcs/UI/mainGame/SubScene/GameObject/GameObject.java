@@ -11,6 +11,7 @@ import srcs.Interfaces.Loopable;
 import srcs.Prototypes.EntityPrototype;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.UI.mainGame.MainGame;
+import srcs.UI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 
 import java.awt.*;
 

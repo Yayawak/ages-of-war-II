@@ -1,4 +1,4 @@
-package srcs.UI.mainGame.SubScene.GameObject.TowerGameObject;
+package srcs.UI.mainGame.SubScene.GameObject.Tower;
 
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;

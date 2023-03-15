@@ -7,7 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import srcs.Interfaces.Loopable;
-import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
+import srcs.UI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+
 import java.awt.Dimension;
 
 public class CharacterHpBar extends JProgressBar

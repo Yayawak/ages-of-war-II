@@ -18,8 +18,8 @@ import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.Rubick;
 import srcs.Systems.Gold.GoldSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.mainGame.MainGame;
-import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
+import srcs.UI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 
 import java.awt.Color;
 

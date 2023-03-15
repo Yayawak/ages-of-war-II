@@ -1,4 +1,4 @@
-package srcs.UI.topBar.turretsBox.SingleTurret;
+package srcs.UI.mainGame.SubScene.GameObject.Turret;
 
 import srcs.Enums.TeamType;
 import srcs.Interfaces.Loopable;
@@ -6,8 +6,9 @@ import srcs.Interfaces.RangeUnit;
 import srcs.Prototypes.EntityPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.UI.mainGame.MainGame;
-import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
+import srcs.UI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+
 import java.awt.*;
 import java.awt.image.*;
 

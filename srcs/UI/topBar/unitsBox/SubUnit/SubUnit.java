@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.mainGame.MainGame;
-import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
+import srcs.UI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.UI.topBar.goldExpProgPanel.qProgress.QueueProgress;
 
 import java.awt.*;

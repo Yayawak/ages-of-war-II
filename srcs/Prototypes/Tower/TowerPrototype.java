@@ -4,7 +4,8 @@ import javax.swing.text.Position;
 
 import helpers.ImageData;
 import srcs.Enums.TeamType;
-import srcs.UI.topBar.turretsBox.SingleTurret.TurretGObject;
+import srcs.UI.mainGame.SubScene.GameObject.Turret.TurretGObject;
+
 import java.awt.*;
 
 public class TowerPrototype {
