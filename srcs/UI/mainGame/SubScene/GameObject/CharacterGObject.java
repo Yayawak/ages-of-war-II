@@ -12,7 +12,6 @@ import srcs.UI.mainGame.SubScene.characterHpBar.CharacterHpBar;
 public class CharacterGObject extends GameObject {
 
     private CharacterPrototype character;
-    private Point position;
     CharacterHpBar hpBar;
     // private boolean isAttacking = false;
     public CharacterGObject(CharacterPrototype character) {
@@ -42,6 +41,7 @@ public class CharacterGObject extends GameObject {
     }
     @Override
     public void update() {
+        super.update();
         // System.out.println("Enter update function");
         // ? reset collsion : make character movable again
         isCollide = false;
@@ -81,6 +81,7 @@ public class CharacterGObject extends GameObject {
             }
         } else {
             // stand still
+            // System.out.println("collided");
         }
 
         // findClosestOpponent(character);
@@ -106,7 +107,7 @@ public class CharacterGObject extends GameObject {
     }
 
     private void move(Direction dir) {
-        int mul = 8;
+        int mul = 4;
         int x = getX();
         int y = getY();
         int speed = character.getMovementSpeed() * mul;
@@ -115,13 +116,10 @@ public class CharacterGObject extends GameObject {
             case RIGHT:
                 newPos.setLocation(x + speed, y);
                 break;
-
             case LEFT:
                 newPos.setLocation(x - speed, y);
                 break;
-
-            default:
-                break;
+            default: break;
         }
         character.setPosition(newPos);
         setLocation(character.getPosition());
@@ -141,21 +139,16 @@ public class CharacterGObject extends GameObject {
 
     public CharacterGObject copy() {
         return new CharacterGObject(new CharacterPrototype(character));
-        // return new CharacterGObject(character);
     }
 
     public boolean isCollideWith(CharacterGObject cgo) {
-        // System.out.println("W = " + this.imgSize.width);
-        // System.out.println("H = " + getHeight());
         if (this.getBounds().intersects(cgo.getBounds())
-                &&
-                this != cgo // collision itself
-                &&
-                getBounds() != null && cgo.getBounds() != null
-                // &&
-                // character.getTeamType() == cgo.getCharacter().getTeamType()
+            && this != cgo // collision itself
+            && getBounds() != null && cgo.getBounds() != null
+            // &&
+            // character.getTeamType() == cgo.getCharacter().getTeamType()
                 // character.getTeamType() != cgo.getCharacter().getTeamType()
-                ) {
+            ) {
             // System.out.println("Collsion Occcured");
             // ? if spawn before -> stop younger gameobject
             if (this.spawnTime < cgo.spawnTime) {
@@ -166,9 +159,9 @@ public class CharacterGObject extends GameObject {
                 cgo.setCollide(true); //* for other stop
                 return true;
             }
-            // System.out.format("%s is Collided with %s\n",
-            //     this.getCharacter().getName(),
-            //     cgo.getCharacter().getName());
+            System.out.format("%s is Collided with %s\n",
+                this.getCharacter().getName(),
+                cgo.getCharacter().getName());
             return true;
         } else {
             return false;
@@ -190,8 +183,7 @@ public class CharacterGObject extends GameObject {
                 IntegratedSystem.getInstance().getPlayerExpSystem()
                         .increasedExperience(character.getExperiance());
                 break;
-            default:
-                break;
+            default: break;
         }
         MainGame.getInstance().remove(hpBar);
         super.destroyGameObject();
