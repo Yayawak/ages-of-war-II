@@ -1,8 +1,13 @@
 package srcs.UI.mainGame.SubScene.GameObject;
 
 import java.awt.*;
+
+import javax.swing.JLabel;
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import srcs.Enums.Direction;
 import srcs.Enums.TeamType;
+import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.MainUI;
@@ -12,6 +17,7 @@ import srcs.UI.mainGame.SubScene.characterHpBar.CharacterHpBar;
 public class CharacterGObject extends GameObject {
 
     private CharacterPrototype character;
+    private Point position;
     CharacterHpBar hpBar;
     // private boolean isAttacking = false;
     public CharacterGObject(CharacterPrototype character) {
@@ -48,7 +54,7 @@ public class CharacterGObject extends GameObject {
         for (GameObject go : MainGame.getObjectsInScene()) {
             if (go instanceof CharacterGObject) {
                 CharacterGObject cgo = (CharacterGObject)go;
-                if (isCollideWith(cgo)) {
+                if (isCollideWith(this, cgo)) {
                     isCollide = true;
                 }
             }
@@ -107,7 +113,7 @@ public class CharacterGObject extends GameObject {
     }
 
     private void move(Direction dir) {
-        int mul = 4;
+        int mul = 8;
         int x = getX();
         int y = getY();
         int speed = character.getMovementSpeed() * mul;
@@ -142,13 +148,17 @@ public class CharacterGObject extends GameObject {
     }
 
     public boolean isCollideWith(CharacterGObject cgo) {
+        // System.out.println("W = " + this.imgSize.width);
+        // System.out.println("H = " + getHeight());
         if (this.getBounds().intersects(cgo.getBounds())
-            && this != cgo // collision itself
-            && getBounds() != null && cgo.getBounds() != null
-            // &&
-            // character.getTeamType() == cgo.getCharacter().getTeamType()
+                &&
+                this != cgo // collision itself
+                &&
+                getBounds() != null && cgo.getBounds() != null
+                // &&
+                // character.getTeamType() == cgo.getCharacter().getTeamType()
                 // character.getTeamType() != cgo.getCharacter().getTeamType()
-            ) {
+                ) {
             // System.out.println("Collsion Occcured");
             // ? if spawn before -> stop younger gameobject
             if (this.spawnTime < cgo.spawnTime) {
@@ -159,9 +169,9 @@ public class CharacterGObject extends GameObject {
                 cgo.setCollide(true); //* for other stop
                 return true;
             }
-            System.out.format("%s is Collided with %s\n",
-                this.getCharacter().getName(),
-                cgo.getCharacter().getName());
+            // System.out.format("%s is Collided with %s\n",
+            //     this.getCharacter().getName(),
+            //     cgo.getCharacter().getName());
             return true;
         } else {
             return false;
@@ -191,4 +201,4 @@ public class CharacterGObject extends GameObject {
         // removeAll();
 
     }
-}//
+}

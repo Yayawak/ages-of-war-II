@@ -10,11 +10,13 @@ import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
 import srcs.Prototypes.Characters.CharactersData.CharactersData;
 import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.NatureProphet;
+import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretsData;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
 import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
+import srcs.UI.mainGame.SubScene.GameObject.TowerGameObject.TowerGameObject;
 import srcs.UI.topBar.turretsBox.SingleTurret.TurretGObject;
 
 import java.awt.*;
@@ -51,11 +53,11 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         // GroupLayout mainGameLayout = new GroupLayout(this);
         // setLayout(mainGameLayout);
         // mainGameLayout.setHorizontalGroup(
-        //         mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-        //                 .addGap(0, 625, Short.MAX_VALUE));
+        // mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        // .addGap(0, 625, Short.MAX_VALUE));
         // mainGameLayout.setVerticalGroup(
-        //         mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-        //                 .addGap(0, 297, Short.MAX_VALUE));
+        // mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        // .addGap(0, 297, Short.MAX_VALUE));
 
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -71,11 +73,15 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                 objectsInScene.add(turret);
             }
         });
-        // setLayout(null);
+        ImageData towerImgData = new ImageData("tower/tower1.png", 116, 228);
+        TowerPrototype playerTowerPrototype = new TowerPrototype(1000, TeamType.PLAYER,
+                null, null, towerImgData, new Point(50, 210));
+        TowerGameObject playerTowerGameObject = new TowerGameObject(playerTowerPrototype);
+        objectsInScene.add(playerTowerGameObject);
     }
 
     private void drawBg(Graphics g) {
-        String imagePath = "backgrounds/aow_bg.png";
+        String imagePath = "backgrounds/dirtbackground.png";
         // String imagePath = "backgrounds/war_bg.jpeg";
         ImageData imgData = new ImageData(imagePath, getWidth(), getHeight());
         Image sprite = imgData.getSprite();
@@ -122,15 +128,17 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                 if (obj != null)
                     obj.update();
             });
-        } catch (Exception e) { System.out.println(e); }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Override
     public void draw(Graphics g) {
         // ! identical 2.
         // objectsInScene.forEach(obj -> {
-        //     if (obj != null)
-        //         obj.draw(g);
+        // if (obj != null)
+        // obj.draw(g);
         // });
     }
 
