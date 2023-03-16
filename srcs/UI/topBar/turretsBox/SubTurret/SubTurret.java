@@ -55,11 +55,10 @@ public class SubTurret extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        System.out.println("Enter paint comp from turetsBox");
+        // System.out.println("Enter paint comp from turetsBox");
         super.paintComponent(g);
         // g.drawImage(turretImage,
-        System.out.println("sprint path : " +
-            turretPrototype.getImgData().getFullPath());
+        // System.out.println("sprint path : " + turretPrototype.getImgData().getFullPath());
         if (turretPrototype.getImgData().getSprite() != null) {
             g.drawImage(turretPrototype.getImgData().getSprite(),
                 0,

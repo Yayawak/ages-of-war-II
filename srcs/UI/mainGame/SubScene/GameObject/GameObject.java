@@ -62,7 +62,7 @@ public class GameObject extends JPanel implements Loopable {
     public void destroyGameObject() {
         revalidate();
         repaint();
-        MainGame.getObjectsInScene().remove(this);
+        MainGame.getInstance().getObjectsInScene().remove(this);
     }
 
     public GameObject copy() {
@@ -72,7 +72,7 @@ public class GameObject extends JPanel implements Loopable {
     public CharacterGObject findClosestOpponent(EntityPrototype ent) {
         double min = Integer.MAX_VALUE;
         CharacterGObject closetCharacter = null;
-        for (GameObject gameObject : MainGame.getObjectsInScene()) {
+        for (GameObject gameObject : MainGame.getInstance().getObjectsInScene()) {
             if (gameObject instanceof CharacterGObject
                 && gameObject != this
                 && gameObject != null

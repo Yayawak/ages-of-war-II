@@ -50,14 +50,6 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         setForeground(new Color(100, 0, 0));
         setPreferredSize(new Dimension(625, 400));
 
-        // GroupLayout mainGameLayout = new GroupLayout(this);
-        // setLayout(mainGameLayout);
-        // mainGameLayout.setHorizontalGroup(
-        // mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-        // .addGap(0, 625, Short.MAX_VALUE));
-        // mainGameLayout.setVerticalGroup(
-        // mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-        // .addGap(0, 297, Short.MAX_VALUE));
 
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -73,11 +65,6 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                 objectsInScene.add(turret);
             }
         });
-        ImageData towerImgData = new ImageData("tower/tower1.png", 116, 228);
-        TowerPrototype playerTowerPrototype = new TowerPrototype(1000, TeamType.PLAYER,
-                null, null, towerImgData, new Point(50, 210));
-        TowerGameObject playerTowerGameObject = new TowerGameObject(playerTowerPrototype);
-        objectsInScene.add(playerTowerGameObject);
     }
 
     private void drawBg(Graphics g) {
@@ -142,11 +129,11 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         // });
     }
 
-    public static ArrayList<GameObject> getObjectsInScene() {
+    public ArrayList<GameObject> getObjectsInScene() {
         return objectsInScene;
     }
 
-    public static void setObjectsInScene(ArrayList<GameObject> objectsInScene) {
+    public void setObjectsInScene(ArrayList<GameObject> objectsInScene) {
         MainGame.objectsInScene = objectsInScene;
     }
 }

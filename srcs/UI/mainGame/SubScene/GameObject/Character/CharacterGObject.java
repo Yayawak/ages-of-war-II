@@ -35,10 +35,10 @@ public class CharacterGObject extends GameObject {
     private void init() {
         hpBar = new CharacterHpBar(this);
         if (hpBar != null) {
-            System.out.format("hpBar of %s is exists : %s\n\n",
-                character.getName(),
-                hpBar.toString()
-                );
+            // System.out.format("hpBar of %s is exists : %s\n\n",
+            //     character.getName(),
+            //     hpBar.toString()
+            //     );
             // setLayout(null);
             //todo  : make hp bar appear on screen
             // MainUI.getInstance().add(hpBar);
@@ -76,7 +76,8 @@ public class CharacterGObject extends GameObject {
         // System.out.println("Enter update function");
         // ? reset collsion : make character movable again
         isCollide = false;
-        for (GameObject go : MainGame.getObjectsInScene()) {
+        for (GameObject go : MainGame.getInstance().
+            getObjectsInScene()) {
             if (go instanceof CharacterGObject) {
                 CharacterGObject cgo = (CharacterGObject)go;
                 if (isCollideWith(this, cgo)) {
