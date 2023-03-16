@@ -10,8 +10,8 @@ import srcs.UI.topBar.goldExpProgPanel.GoldExpProgPanel;
 import srcs.UI.topBar.goldExpProgPanel.expPanel.ExpPanel;
 import srcs.UI.topBar.goldExpProgPanel.goldPanel.GoldPanel;
 import srcs.UI.topBar.goldExpProgPanel.qProgress.QueueProgress;
-import srcs.UI.topBar.specialsBox.SpecialsBox;
 import srcs.UI.topBar.turretsBox.TurretsBox;
+import srcs.UI.topBar.ultimateUpgradePanel.UltimateUpgradePanel;
 import srcs.UI.topBar.unitsBox.UnitsBox;
 
 import java.awt.*;
@@ -82,7 +82,7 @@ public class MainUI extends JPanel implements Runnable {
         topBar = TopBar.getInstance();
         topBar.add(UnitsBox.getInstance());
         topBar.add(TurretsBox.getInstance());
-        topBar.add(SpecialsBox.getInstance());
+        topBar.add(UltimateUpgradePanel.getInstance());
         topBar.add(GoldExpProgPanel.getInstance());
 
 

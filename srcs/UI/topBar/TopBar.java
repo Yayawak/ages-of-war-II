@@ -5,8 +5,8 @@ import javax.swing.JPanel;
 
 import srcs.Interfaces.ComponentSizeItf;
 import srcs.UI.topBar.goldExpProgPanel.GoldExpProgPanel;
-import srcs.UI.topBar.specialsBox.SpecialsBox;
 import srcs.UI.topBar.turretsBox.TurretsBox;
+import srcs.UI.topBar.ultimateUpgradePanel.UltimateUpgradePanel;
 import srcs.UI.topBar.unitsBox.UnitsBox;
 
 // import srcs.UI.topBar.upgradesBox.UpgradesBox;
@@ -33,7 +33,6 @@ public class TopBar extends JPanel implements ComponentSizeItf {
 
         // add(UnitsBox.getInstance());
         // add(TurretsBox.getInstance());
-        // add(SpecialsBox.getInstance());
         // add(UpgradesBox.getInstance());
     }
 }
