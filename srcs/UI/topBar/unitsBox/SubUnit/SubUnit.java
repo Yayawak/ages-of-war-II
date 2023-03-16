@@ -13,9 +13,10 @@ import srcs.UI.topBar.goldExpProgPanel.qProgress.QueueProgress;
 import java.awt.*;
 import java.awt.event.*;
 
-public class SubUnit extends JPanel{
+public class SubUnit extends JPanel {
     private Image img; // pointer is points to the same object as character's image
     private CharacterPrototype character;
+
     public SubUnit(CharacterPrototype c) {
         initGraphic();
         initEvent();
@@ -30,16 +31,14 @@ public class SubUnit extends JPanel{
                 // System.out.println(e);
                 // todo : send character data by mouse clikc
                 GameObject go = new CharacterGObject(character);
-                if (
-                    QueueProgress.getInstance().isProgressBarAvailable()
-                    &&
-                    IntegratedSystem.getInstance().getPlayerGoldSystem()
-                        .getGold() > character.getGold()
-                ) {
+                if (QueueProgress.getInstance().isProgressBarAvailable()
+                        &&
+                        IntegratedSystem.getInstance().getPlayerGoldSystem()
+                                .getGold() > character.getGold()) {
                     MainGame.getInstance().addGameObjectToScene(go);
                     QueueProgress.getInstance().startQueue(character.getBuildTime());
                     IntegratedSystem.getInstance().getPlayerGoldSystem()
-                        .decreasedGold(character.getGold());
+                            .decreasedGold(character.getGold());
                 }
             }
         });
@@ -49,17 +48,14 @@ public class SubUnit extends JPanel{
         GroupLayout unitPanelLayout = new GroupLayout(this);
         setLayout(unitPanelLayout);
         unitPanelLayout.setHorizontalGroup(
-            unitPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+                unitPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE));
         unitPanelLayout.setVerticalGroup(
-            unitPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+                unitPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE));
 
         Dimension subUnitPanelDimension = new Dimension(
-            50, 50
-        );
+                50, 50);
         setPreferredSize(subUnitPanelDimension);
         setBackground(Color.yellow);
         setOpaque(true);
@@ -75,10 +71,10 @@ public class SubUnit extends JPanel{
     private void drawUnit(Graphics g) {
         if (img != null) {
             g.drawImage(img,
-                0, 0,
-                getWidth(), getHeight(), null);
-                // 100, 100, null);
-                // 50, 50, null);
+                    0, 0,
+                    getWidth(), getHeight(), null);
+            // 100, 100, null);
+            // 50, 50, null);
 
         } else {
             System.out.println("Image does not exist");
@@ -101,6 +97,5 @@ public class SubUnit extends JPanel{
     public void setCharacter(CharacterPrototype character) {
         this.character = character;
     }
-
 
 }
