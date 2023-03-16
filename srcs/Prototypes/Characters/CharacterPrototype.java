@@ -1,8 +1,8 @@
 package srcs.Prototypes.Characters;
 
 import srcs.Enums.TeamType;
+import srcs.GameUI.MainUI;
 import srcs.Prototypes.EntityPrototype;
-import srcs.UI.MainUI;
 import helpers.ImageData;
 import java.awt.Point;
 import java.nio.charset.spi.CharsetProvider;

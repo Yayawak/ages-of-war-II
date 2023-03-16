@@ -9,6 +9,9 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import srcs.Enums.TeamType;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharactersData;
@@ -17,9 +20,6 @@ import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.NatureProphet;
 import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.Rubick;
 import srcs.Systems.Gold.GoldSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
-import srcs.UI.mainGame.MainGame;
-import srcs.UI.mainGame.SubScene.GameObject.GameObject;
-import srcs.UI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 
 import java.awt.Color;
 

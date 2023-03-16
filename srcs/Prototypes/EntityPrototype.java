@@ -2,7 +2,7 @@ package srcs.Prototypes;
 
 import helpers.ImageData;
 import srcs.Enums.TeamType;
-import srcs.UI.MainUI;
+import srcs.GameUI.MainUI;
 
 import java.awt.*;;
 

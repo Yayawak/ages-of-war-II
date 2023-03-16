@@ -2,10 +2,11 @@ package srcs.Systems.TowerSystem;
 
 import helpers.ImageData;
 import srcs.Enums.TeamType;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Tower.TowerPrototype;
-import srcs.UI.mainGame.MainGame;
-import srcs.UI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
+
 import java.awt.*;
 
 public class TowerSystem implements Loopable {

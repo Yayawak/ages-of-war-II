@@ -1,6 +1,6 @@
 package helpers;
 
-import srcs.UI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 
 public class AttackData {
     GameObject attacker;

@@ -4,7 +4,7 @@ import javax.swing.text.Position;
 
 import helpers.ImageData;
 import srcs.Enums.TeamType;
-import srcs.UI.mainGame.SubScene.GameObject.Turret.TurretGObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Turret.TurretGObject;
 
 import java.awt.*;
 

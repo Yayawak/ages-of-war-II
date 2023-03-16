@@ -1,5 +1,9 @@
 
-import srcs.UI.MainFrame;
+import javax.naming.ldap.ManageReferralControl;
+
+import srcs.GameUI.MainFrame;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.StartGameUI.StartGameFrame;
 import test.TestTooltip;
 
 public class Main {
@@ -7,8 +11,10 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                // new MainFrame().setVisible(true);
-                new TestTooltip();
+                StartGameFrame startGameFrame = new StartGameFrame();
+                startGameFrame.setVisible(true);
+
+                // new TestTooltip();
             }
         });
     }

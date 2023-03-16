@@ -1,6 +1,6 @@
 package srcs.Interfaces;
 
-import srcs.UI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 
 public interface RangeUnit {
     public void fireBulletToOpponent(
