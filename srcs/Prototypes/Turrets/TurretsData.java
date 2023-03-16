@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
+import srcs.Prototypes.Turrets.TurretLists.RedLaserTurret;
 
 public class TurretsData {
     private static TurretsData instance;
-    private ArrayList<TurretPrototype> availableTurrents
-        = new ArrayList<>();
+    private ArrayList<TurretPrototype> availableTurrents = new ArrayList<>();
+
     public static TurretsData getInstance() {
         if (instance == null)
             instance = new TurretsData();
@@ -21,6 +22,7 @@ public class TurretsData {
 
     private void init() {
         availableTurrents.add(new FireGunTurret(TeamType.PLAYER));
+        availableTurrents.add(new RedLaserTurret(TeamType.PLAYER));
     }
 
     public ArrayList<TurretPrototype> getAvailableTurrents() {

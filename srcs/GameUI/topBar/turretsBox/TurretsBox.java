@@ -38,8 +38,7 @@ public class TurretsBox extends JPanel {
         for (int i = 0; i < numberOfTurrets; i++) {
             // String relPath = "turrets/chinese_canon.png";
             TurretPrototype turretPrototype = TurretsData.getInstance()
-                .getAvailableTurrents().get(0);
-
+                    .getAvailableTurrents().get(i);
 
             // System.out.println(turretPrototype.getImgData().getFullPath());
             // System.out.println(turretPrototype.getName());

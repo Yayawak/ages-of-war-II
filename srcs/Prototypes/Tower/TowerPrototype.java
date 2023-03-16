@@ -12,8 +12,8 @@ public class TowerPrototype {
     private int hp;
     private String towerName;
     private TeamType teamType;
-    private TurretGObject turretAbove;
-    private TurretGObject turretBelow;
+    private TurretGObject turretAbove = null;
+    private TurretGObject turretBelow = null;
     private ImageData imageData;
     private Point position;
 
@@ -57,6 +57,13 @@ public class TowerPrototype {
 
     public void setTurretAbove(TurretGObject turretAbove) {
         this.turretAbove = turretAbove;
+        System.out.println("positions of tower is : " + position);
+        turretAbove.getTurretPrototype().setPosition(new Point(
+                (int) (position.getX()), (int) (position.getY() - 150)));
+        // turretAbove.setLocation(turretAbove.getTurret().getPosition());
+        MainGame.getInstance().addGameObjectToScene(turretAbove);
+        System.out.println("positions of turret is : " + turretAbove.getTurretPrototype().getPosition());
+        // repai
     }
 
     public TurretGObject getTurretBelow() {
@@ -65,6 +72,11 @@ public class TowerPrototype {
 
     public void setTurretBelow(TurretGObject turretBelow) {
         this.turretBelow = turretBelow;
+        System.out.println("positions of tower is : " + position);
+        turretBelow.getTurretPrototype().setPosition(position);
+        // turretBelow.setLocation(turretAbove.getTurret().getPosition());
+        MainGame.getInstance().addGameObjectToScene(turretBelow);
+        System.out.println("positions of turret is : " + turretBelow.getTurretPrototype().getPosition());
     }
 
     public ImageData getImageData() {

@@ -15,17 +15,15 @@ public class TowerSystem implements Loopable {
 
     public TowerSystem(String initTowerRelPath) {
         ImageData towerImgData = new ImageData(
-            // "tower/tower1.png", 116, 228);
-            initTowerRelPath, 116, 228);
+                // "tower/tower1.png", 116, 228);
+                initTowerRelPath, 116, 228);
         towerPrototype = new TowerPrototype(1000,
-            TeamType.PLAYER,
-            null,
-            null,
-            towerImgData,
-            new Point(50, 210)
-        );
-        TowerGameObject playerTowerGameObject =
-            new TowerGameObject(towerPrototype);
+                TeamType.PLAYER,
+                null,
+                null,
+                towerImgData,
+                new Point(50, 210));
+        TowerGameObject playerTowerGameObject = new TowerGameObject(towerPrototype);
         MainGame.getInstance().addGameObjectToScene(playerTowerGameObject);
 
     }
@@ -37,5 +35,13 @@ public class TowerSystem implements Loopable {
     @Override
     public void draw(Graphics g) {
 
+    }
+
+    public TowerPrototype getTowerPrototype() {
+        return towerPrototype;
+    }
+
+    public void setTowerPrototype(TowerPrototype towerPrototype) {
+        this.towerPrototype = towerPrototype;
     }
 }

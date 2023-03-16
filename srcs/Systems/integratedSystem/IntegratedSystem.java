@@ -36,7 +36,6 @@ public class IntegratedSystem {
 
         playerTowerSystem = new TowerSystem("tower/tower1.png");
 
-
     }
 
     public GoldSystem getPlayerGoldSystem() {
@@ -53,5 +52,13 @@ public class IntegratedSystem {
 
     public ExpSystem getEnemyExpSystem() {
         return enemyExpSystem;
+    }
+
+    public TowerSystem getPlayerTowerSystem() {
+        return playerTowerSystem;
+    }
+
+    public TowerSystem getEnemyTowerSystem() {
+        return enemyTowerSystem;
     }
 }
