@@ -75,16 +75,21 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         g.drawImage(sprite, 0, 0, this);
     }
 
+    // ! bug on start game when first clicked happend delay for 5 sec
     private void drawGameObjects(Graphics g) {
-        objectsInScene.stream().forEach(obj -> {
-            if (obj != null) {
-                g.drawImage(obj.getImg(),
-                        obj.getX(), obj.getY(),
-                        this);
-            } else {
-                System.out.println("SceneObject is null");
-            }
-        });
+        try {
+            objectsInScene.stream().forEach(obj -> {
+                if (obj != null) {
+                    g.drawImage(obj.getImg(),
+                            obj.getX(), obj.getY(),
+                            this);
+                } else {
+                    System.out.println("SceneObject is null");
+                }
+            });
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Override // ! loop but why
@@ -93,13 +98,20 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         super.paintComponent(g);
         // System.out.println("Paint component from MainGame");
         drawBg(g);
+    // ? bug on start game when first clicked happend delay for 5 sec
+        // ! FOR DRAW ()
         drawGameObjects(g);
         // ! identical 1.
-        objectsInScene.forEach(obj -> {
-            if (obj != null)
-                obj.draw(g);
-        });
-        // draw(g);
+        // ! UPDATE ALL MOVING GRAPHICS IN GAME (FOR MOVE)
+        try {
+            objectsInScene.forEach(obj -> {
+                if (obj != null)
+                    obj.draw(g);
+            });
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        draw(g);
     }
 
     // todo : recieve data from event mouse click
@@ -110,6 +122,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
     @Override
     public void update() {
         // System.out.println("update from MainGame");
+        // System.out.println(Math.random());
         try {
             objectsInScene.forEach(obj -> {
                 if (obj != null)
@@ -135,5 +148,12 @@ public class MainGame extends JPanel implements ComponentSizeItf,
 
     public void setObjectsInScene(ArrayList<GameObject> objectsInScene) {
         MainGame.objectsInScene = objectsInScene;
+    }
+
+    public void removeGameObjectFromScene(GameObject go) {
+        try {
+            objectsInScene.remove(go);
+        } catch (Exception e) { System.out.println(e);
+        }
     }
 }

@@ -73,18 +73,10 @@ public class CharacterGObject extends GameObject {
 
     @Override
     public void update() {
+        super.update();
         // System.out.println("Enter update function");
+        // System.out.println(Math.random());
         // ? reset collsion : make character movable again
-        isCollide = false;
-        for (GameObject go : MainGame.getInstance().
-            getObjectsInScene()) {
-            if (go instanceof CharacterGObject) {
-                CharacterGObject cgo = (CharacterGObject)go;
-                if (isCollideWith(this, cgo)) {
-                    isCollide = true;
-                }
-            }
-        }
         if (hpBar != null) {
             hpBar.update();
         }
@@ -94,12 +86,8 @@ public class CharacterGObject extends GameObject {
         if (character.getHp() <= 0) {
             destroyGameObject();
         }
-    }
 
-    @Override
-    public void draw(Graphics g) {
-        super.draw(g);
-        if (!isCollide) {
+        if (!getCollide()) {
             switch (character.getTeamType()) {
                 case PLAYER:
                     move(Direction.RIGHT);
@@ -110,11 +98,17 @@ public class CharacterGObject extends GameObject {
                 default:
                     break;
             }
-        } else {
-            // stand still
+        } else { // stand still
         }
 
         checkIfCharacterOutOfScreen();
+
+
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
 
         if (hpBar != null) {
             hpBar.draw(g);
