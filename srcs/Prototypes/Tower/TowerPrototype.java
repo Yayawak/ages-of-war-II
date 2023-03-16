@@ -59,6 +59,13 @@ public class TowerPrototype {
 
     public void setTurretAbove(TurretGObject turretAbove) {
         this.turretAbove = turretAbove;
+        System.out.println("positions of tower is : " + position);
+        turretAbove.getTurretPrototype().setPosition(new Point(
+                (int) (position.getX()), (int) (position.getY() - 150)));
+        // turretAbove.setLocation(turretAbove.getTurret().getPosition());
+        MainGame.getInstance().addGameObjectToScene(turretAbove);
+        System.out.println("positions of turret is : " + turretAbove.getTurretPrototype().getPosition());
+        // repai
     }
 
     public TurretGObject getTurretBelow() {
@@ -66,13 +73,12 @@ public class TowerPrototype {
     }
 
     public void setTurretBelow(TurretGObject turretBelow) {
-        if (this.turretBelow == null) {
-            this.turretBelow = turretBelow;
-            System.out.println("potions of tower is : " + position);
-            turretBelow.getTurret().setPosition(position);
-            MainGame.getInstance().addGameObjectToScene(turretBelow);
-            System.out.println("potions of turret is : " + turretBelow.getTurret().getPosition());
-        }
+        this.turretBelow = turretBelow;
+        System.out.println("positions of tower is : " + position);
+        turretBelow.getTurretPrototype().setPosition(position);
+        // turretBelow.setLocation(turretAbove.getTurret().getPosition());
+        MainGame.getInstance().addGameObjectToScene(turretBelow);
+        System.out.println("positions of turret is : " + turretBelow.getTurretPrototype().getPosition());
     }
 
     public ImageData getImageData() {

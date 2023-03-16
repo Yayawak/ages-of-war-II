@@ -30,7 +30,11 @@ public class TurretGObject extends GameObject implements RangeUnit {
         // super.update();
         // System.out.println("update from Turret game object");
         closestCgo = findClosestOpponent(turretPrototype);
-        repaint();
+        // repaint();
+        // System.out.println("POSITIOn of turet = " + turretPrototype.getPosition());
+        // System.out.println("POSITIOn of turet = " + getLocation());
+
+        setLocation(turretPrototype.getPosition());
     }
 
     @Override
@@ -68,7 +72,7 @@ public class TurretGObject extends GameObject implements RangeUnit {
             // TurretPrototype tpt = tgo.getEn
             // tgo.
             // todo : draw bullet to scene
-            ImageData bulletImgData = tgo.getTurret().getBulletImgData();
+            ImageData bulletImgData = tgo.getTurretPrototype().getBulletImgData();
             // if (bulletImgData == null) {
             // System.out.println("bullet image data is null");
             // }
@@ -89,7 +93,7 @@ public class TurretGObject extends GameObject implements RangeUnit {
 
     }
 
-    public TurretPrototype getTurret() {
+    public TurretPrototype getTurretPrototype() {
         return turretPrototype;
     }
 

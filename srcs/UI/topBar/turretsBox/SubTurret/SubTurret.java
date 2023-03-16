@@ -56,11 +56,26 @@ public class SubTurret extends JPanel {
                 // turretGObject.getTurret().setPosition(
                 // new Point(500, 300));
                 // MainGame.getInstance().addGameObjectToScene(turretGObject);
-                IntegratedSystem.getInstance().getPlayerTowerSystem()
-                        // // .setTowerPrototype();
-                        .getTowerPrototype()
-                        .setTurretBelow(turretGObject);
+                TowerPrototype playerTowerPrototype = IntegratedSystem.getInstance().getPlayerTowerSystem()
+                        .getTowerPrototype();
+                if (IntegratedSystem.getInstance().getPlayerGoldSystem().getGold() > turretGObject.getTurretPrototype()
+                        .getGold()) {
+                    if (playerTowerPrototype.getTurretBelow() == null) {
+                        playerTowerPrototype.setTurretBelow(turretGObject);
 
+                        IntegratedSystem.getInstance().getPlayerGoldSystem()
+                                .decreasedGold(
+                                        turretGObject.getTurretPrototype().getGold());
+                    } else if (playerTowerPrototype.getTurretAbove() == null) {
+                        playerTowerPrototype.setTurretAbove(turretGObject);
+                        IntegratedSystem.getInstance().getPlayerGoldSystem()
+                                .decreasedGold(
+                                        turretGObject.getTurretPrototype().getGold());
+                    }
+                } else {
+                    System.out.println("Not enough money!!!");
+                }
+                // turretGObject.repaint();
             }
         });
     }

@@ -1,10 +1,9 @@
-package srcs.UI.topBar.turretsBox.SingleTurret;
+package srcs.UI.mainGame.SubScene.GameObject.Turret;
 
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.mainGame.MainGame;
-import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
 import srcs.UI.topBar.goldExpProgPanel.qProgress.QueueProgress;
 import javax.swing.JPanel;
@@ -12,11 +11,11 @@ import java.awt.*;
 import javax.swing.GroupLayout;
 import java.awt.event.*;
 
-public class SubTerretBox extends JPanel {
+public class SubTurretBox extends JPanel {
     private Image img;
     private TurretPrototype TurretPrototype;
 
-    public SubTerretBox(TurretPrototype turretPrototype) {
+    public SubTurretBox(TurretPrototype turretPrototype) {
         initEvent();
         this.TurretPrototype = turretPrototype;
         this.img = turretPrototype.getImgData().getSprite();
