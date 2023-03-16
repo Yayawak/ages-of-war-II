@@ -4,6 +4,8 @@ import javax.swing.text.Position;
 
 import helpers.ImageData;
 import srcs.Enums.TeamType;
+import srcs.UI.MainFrame;
+import srcs.UI.mainGame.MainGame;
 import srcs.UI.mainGame.SubScene.GameObject.Turret.TurretGObject;
 
 import java.awt.*;
@@ -12,8 +14,8 @@ public class TowerPrototype {
     private int hp;
     private String towerName;
     private TeamType teamType;
-    private TurretGObject turretAbove;
-    private TurretGObject turretBelow;
+    private TurretGObject turretAbove = null;
+    private TurretGObject turretBelow = null;
     private ImageData imageData;
     private Point position;
 
@@ -64,7 +66,13 @@ public class TowerPrototype {
     }
 
     public void setTurretBelow(TurretGObject turretBelow) {
-        this.turretBelow = turretBelow;
+        if (this.turretBelow == null) {
+            this.turretBelow = turretBelow;
+            System.out.println("potions of tower is : " + position);
+            turretBelow.getTurret().setPosition(position);
+            MainGame.getInstance().addGameObjectToScene(turretBelow);
+            System.out.println("potions of turret is : " + turretBelow.getTurret().getPosition());
+        }
     }
 
     public ImageData getImageData() {

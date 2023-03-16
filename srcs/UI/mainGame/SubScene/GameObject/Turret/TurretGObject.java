@@ -16,40 +16,39 @@ import helpers.ImageData;;
 
 public class TurretGObject extends GameObject implements RangeUnit {
 
-    private TurretPrototype turret;
+    private TurretPrototype turretPrototype;
     private CharacterGObject closestCgo;
 
-    public TurretGObject(TurretPrototype turret) {
-        super(turret.getImgData().getSprite(), turret.getPosition(),
-                new Dimension(turret.getImgData().getImgWidth(), turret.getImgData().getImgHeight()));
-        this.turret = turret;
+    public TurretGObject(TurretPrototype turretPrototype) {
+        super(turretPrototype.getImgData().getSprite(), turretPrototype.getPosition(),
+                new Dimension(turretPrototype.getImgData().getImgWidth(), turretPrototype.getImgData().getImgHeight()));
+        this.turretPrototype = turretPrototype;
     }
 
     @Override
     public void update() {
         // super.update();
         // System.out.println("update from Turret game object");
-        closestCgo = findClosestOpponent(turret);
+        closestCgo = findClosestOpponent(turretPrototype);
+        repaint();
     }
-
 
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-        Graphics2D g2d = (Graphics2D)g;
+        Graphics2D g2d = (Graphics2D) g;
         if (closestCgo != null) {
             // todo : draw line to that gameobject
             System.out.println("Closest Object exists");
             g2d.setColor(Color.red);
             g2d.drawLine(
-                turret.getPosition().x, turret.getPosition().y,
-                closestCgo.getLocation().x, closestCgo.getLocation().y
-            );
+                    turretPrototype.getPosition().x, turretPrototype.getPosition().y,
+                    closestCgo.getLocation().x, closestCgo.getLocation().y);
             g2d.setStroke(new BasicStroke(4));
 
             // todo 2 : fire bullet to enemy -> decrease hp ->
-            //* --> descresase hp bar graphically
-            //* --> increase gold when die --> destory gObj
+            // * --> descresase hp bar graphically
+            // * --> increase gold when die --> destory gObj
             fireBulletToOpponent(this, closestCgo);
             // fireBulletToOpponent(closestCgo, this);
         }
@@ -57,31 +56,30 @@ public class TurretGObject extends GameObject implements RangeUnit {
 
     @Override
     public String toString() {
-        return String.format("turret name : ", turret.getName());
-        // return "TurretGObject [turret=" + turret + "turret prototype is \n" + turret.toString() +  "]";
+        return String.format("turretPrototype name : ", turretPrototype.getName());
+        // return "TurretGObject [turretPrototype=" + turretPrototype + "turretPrototype
+        // prototype is \n" + turretPrototype.toString() + "]";
     }
 
-	@Override
-	public void fireBulletToOpponent(GameObject sender, GameObject reciever) {
+    @Override
+    public void fireBulletToOpponent(GameObject sender, GameObject reciever) {
         if (sender instanceof TurretGObject) {
-            TurretGObject tgo = (TurretGObject)sender;
+            TurretGObject tgo = (TurretGObject) sender;
             // TurretPrototype tpt = tgo.getEn
             // tgo.
-            //todo : draw bullet to scene
+            // todo : draw bullet to scene
             ImageData bulletImgData = tgo.getTurret().getBulletImgData();
             // if (bulletImgData == null) {
-            //     System.out.println("bullet image data is null");
+            // System.out.println("bullet image data is null");
             // }
             BufferedImage bi = new BufferedImage(
-                50, 50, BufferedImage.TYPE_INT_ARGB
-            );
+                    50, 50, BufferedImage.TYPE_INT_ARGB);
             GameObject bulletGo = new GameObject(
-                bulletImgData.getSprite(),
-                // turret.get
-                // bi,
-                tgo.getLocation(),
-                tgo.getSize()
-            );
+                    bulletImgData.getSprite(),
+                    // turretPrototype.get
+                    // bi,
+                    tgo.getLocation(),
+                    tgo.getSize());
 
             // ! : find bug of this
             // MainGame.getObjectsInScene().add(bulletGo);
@@ -89,14 +87,14 @@ public class TurretGObject extends GameObject implements RangeUnit {
             // Mi
         }
 
-	}
-
-    public TurretPrototype getTurret() {
-        return turret;
     }
 
-    public void setTurret(TurretPrototype turret) {
-        this.turret = turret;
+    public TurretPrototype getTurret() {
+        return turretPrototype;
+    }
+
+    public void setTurret(TurretPrototype turretPrototype) {
+        this.turretPrototype = turretPrototype;
     }
 
     public CharacterGObject getClosestCgo() {
@@ -106,7 +104,5 @@ public class TurretGObject extends GameObject implements RangeUnit {
     public void setClosestCgo(CharacterGObject closestCgo) {
         this.closestCgo = closestCgo;
     }
-
-
 
 }
