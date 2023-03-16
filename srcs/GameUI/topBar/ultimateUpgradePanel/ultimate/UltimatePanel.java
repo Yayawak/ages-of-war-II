@@ -34,7 +34,7 @@ public class UltimatePanel extends JPanel implements
     }
 
     private void init() {
-        setBackground(Color.blue);
+        // setBackground(Color.blue);
         ultimateImage = new ImageData("characters/phynix_ck_cw.png").getSprite();
     }
 

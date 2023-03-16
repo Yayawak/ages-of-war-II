@@ -29,25 +29,24 @@ public class UltimateUpgradePanel extends JPanel {
         // setLayout(new GridLayout(1, 0));
 
         // System.out.println("Enter init Graphic");
-        // GroupLayout panelLayout = new GroupLayout(this);
-        // setLayout(panelLayout);
-        // panelLayout.setHorizontalGroup(
-        //     panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-        //     .addGap(0, 0, Short.MAX_VALUE)
-        // );
-        // panelLayout.setVerticalGroup(
-        //     panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-        //     .addGap(0, 0, Short.MAX_VALUE)
-        // );
+        GroupLayout panelLayout = new GroupLayout(this);
+        setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         Dimension imgSize = new Dimension(
             50, 50
         );
         setPreferredSize(imgSize);
-        setBackground(Color.DARK_GRAY);
+        setBackground(Color.red);
         setOpaque(true);
 
-        setLayout(new GridLayout(1,0));
         add(UltimatePanel.getInstance());
         add(UpgradePanel.getInstance());
     }
