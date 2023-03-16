@@ -14,10 +14,10 @@ import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretsData;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
-import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
-import srcs.UI.mainGame.SubScene.GameObject.TowerGameObject;
-import srcs.UI.topBar.turretsBox.SingleTurret.TurretGObject;
+import srcs.UI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.UI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
+import srcs.UI.mainGame.SubScene.GameObject.Turret.TurretGObject;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -50,14 +50,6 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         setForeground(new Color(100, 0, 0));
         setPreferredSize(new Dimension(625, 400));
 
-        // GroupLayout mainGameLayout = new GroupLayout(this);
-        // setLayout(mainGameLayout);
-        // mainGameLayout.setHorizontalGroup(
-        // mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-        // .addGap(0, 625, Short.MAX_VALUE));
-        // mainGameLayout.setVerticalGroup(
-        // mainGameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-        // .addGap(0, 297, Short.MAX_VALUE));
 
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -73,11 +65,6 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                 objectsInScene.add(turret);
             }
         });
-        ImageData towerImgData = new ImageData("tower/tower1.png", 116, 228);
-        TowerPrototype playerTowerPrototype = new TowerPrototype(1000, TeamType.PLAYER,
-                null, null, towerImgData, new Point(50, 210));
-        TowerGameObject playerTowerGameObject = new TowerGameObject(playerTowerPrototype);
-        objectsInScene.add(playerTowerGameObject);
     }
 
     private void drawBg(Graphics g) {
@@ -88,16 +75,21 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         g.drawImage(sprite, 0, 0, this);
     }
 
+    // ! bug on start game when first clicked happend delay for 5 sec
     private void drawGameObjects(Graphics g) {
-        objectsInScene.stream().forEach(obj -> {
-            if (obj != null) {
-                g.drawImage(obj.getImg(),
-                        obj.getX(), obj.getY(),
-                        this);
-            } else {
-                System.out.println("SceneObject is null");
-            }
-        });
+        try {
+            objectsInScene.stream().forEach(obj -> {
+                if (obj != null) {
+                    g.drawImage(obj.getImg(),
+                            obj.getX(), obj.getY(),
+                            this);
+                } else {
+                    System.out.println("SceneObject is null");
+                }
+            });
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Override // ! loop but why
@@ -106,13 +98,20 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         super.paintComponent(g);
         // System.out.println("Paint component from MainGame");
         drawBg(g);
+    // ? bug on start game when first clicked happend delay for 5 sec
+        // ! FOR DRAW ()
         drawGameObjects(g);
         // ! identical 1.
-        objectsInScene.forEach(obj -> {
-            if (obj != null)
-                obj.draw(g);
-        });
-        // draw(g);
+        // ! UPDATE ALL MOVING GRAPHICS IN GAME (FOR MOVE)
+        try {
+            objectsInScene.forEach(obj -> {
+                if (obj != null)
+                    obj.draw(g);
+            });
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        draw(g);
     }
 
     // todo : recieve data from event mouse click
@@ -123,6 +122,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
     @Override
     public void update() {
         // System.out.println("update from MainGame");
+        // System.out.println(Math.random());
         try {
             objectsInScene.forEach(obj -> {
                 if (obj != null)
@@ -142,11 +142,18 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         // });
     }
 
-    public static ArrayList<GameObject> getObjectsInScene() {
+    public ArrayList<GameObject> getObjectsInScene() {
         return objectsInScene;
     }
 
-    public static void setObjectsInScene(ArrayList<GameObject> objectsInScene) {
+    public void setObjectsInScene(ArrayList<GameObject> objectsInScene) {
         MainGame.objectsInScene = objectsInScene;
+    }
+
+    public void removeGameObjectFromScene(GameObject go) {
+        try {
+            objectsInScene.remove(go);
+        } catch (Exception e) { System.out.println(e);
+        }
     }
 }

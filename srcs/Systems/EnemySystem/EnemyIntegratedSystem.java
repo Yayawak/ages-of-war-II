@@ -18,8 +18,8 @@ import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.Rubick;
 import srcs.Systems.Gold.GoldSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.UI.mainGame.MainGame;
-import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
 import srcs.UI.mainGame.SubScene.GameObject.GameObject;
+import srcs.UI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 
 import java.awt.Color;
 
@@ -78,7 +78,7 @@ public class EnemyIntegratedSystem implements Loopable {
             dummy.setTeamType(TeamType.ENEMY);
             CharacterGObject c = new CharacterGObject(dummy);
             // todo : make this enemy system usable
-            MainGame.getObjectsInScene().add(c);
+            MainGame.getInstance().addGameObjectToScene(c);
             enemyGoldSystem.decreasedGold(c
                     .getCharacter().getGold());
 

@@ -2,38 +2,52 @@ package srcs.UI.topBar.turretsBox;
 
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
+
+import srcs.Prototypes.Turrets.TurretPrototype;
+import srcs.Prototypes.Turrets.TurretsData;
 import srcs.UI.topBar.TopBar;
-import java.awt.*;;
+import srcs.UI.topBar.turretsBox.SubTurret.SubTurret;
+
+import java.awt.*;
+import java.util.ArrayList;;
 
 public class TurretsBox extends JPanel {
-    private static TurretsBox single_instance = null;
+    private static TurretsBox instance = null;
+    private int numberOfTurrets = 2;
+    private ArrayList<SubTurret> subTurretBoxes = new ArrayList<>();
 
     private TurretsBox() {
-        init();
+        initLayout();
+        initTurrets();
         // TopBar.getInstance().add(this);
     }
 
     public static TurretsBox getInstance() {
-        if (single_instance == null) {
-            single_instance = new TurretsBox();
+        if (instance == null) {
+            instance = new TurretsBox();
         }
-        return single_instance;
+        return instance;
     }
 
-    private void init() {
+    private void initLayout() {
         setBackground(new Color(22, 100, 242));
+        setLayout(new GridLayout(1, 0, 20, 10));
+    }
 
-        GroupLayout turretsBoxLayout = new GroupLayout(this);
-        setLayout(turretsBoxLayout);
-        turretsBoxLayout.setHorizontalGroup(
-            turretsBoxLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 169, Short.MAX_VALUE)
-        );
-        turretsBoxLayout.setVerticalGroup(
-            turretsBoxLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 55, Short.MAX_VALUE)
-        );
+    private void initTurrets() {
+        for (int i = 0; i < numberOfTurrets; i++) {
+            // String relPath = "turrets/chinese_canon.png";
+            TurretPrototype turretPrototype = TurretsData.getInstance()
+                .getAvailableTurrents().get(0);
 
 
+            // System.out.println(turretPrototype.getImgData().getFullPath());
+            // System.out.println(turretPrototype.getName());
+            SubTurret subTurret = new SubTurret(turretPrototype);
+            subTurretBoxes.add(subTurret);
+        }
+        subTurretBoxes.stream().forEach(st -> {
+            add(st);
+        });
     }
 }

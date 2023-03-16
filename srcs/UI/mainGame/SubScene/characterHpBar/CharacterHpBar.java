@@ -7,7 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import srcs.Interfaces.Loopable;
-import srcs.UI.mainGame.SubScene.GameObject.CharacterGObject;
+import srcs.UI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+
 import java.awt.Dimension;
 
 public class CharacterHpBar extends JProgressBar
@@ -60,12 +61,12 @@ public class CharacterHpBar extends JProgressBar
 
     @Override
     public void update() {
-        System.out.println("update from character hp bar ");
-        System.out.println("current hp is " +
-            cgo.getCharacter().getHp());
-        System.out.format("location of hp bar is : %s\n",
-            this.getLocation());
-        System.out.println("===".repeat(20));
+        // System.out.println("update from character hp bar ");
+        // System.out.println("current hp is " +
+        //     cgo.getCharacter().getHp());
+        // System.out.format("location of hp bar is : %s\n",
+        //     this.getLocation());
+        // System.out.println("===".repeat(20));
 
         setValue(cgo.getCharacter().getHp());
     }

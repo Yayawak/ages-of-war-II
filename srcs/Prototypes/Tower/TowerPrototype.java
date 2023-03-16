@@ -4,11 +4,13 @@ import javax.swing.text.Position;
 
 import helpers.ImageData;
 import srcs.Enums.TeamType;
-import srcs.UI.topBar.turretsBox.SingleTurret.TurretGObject;
+import srcs.UI.mainGame.SubScene.GameObject.Turret.TurretGObject;
+
 import java.awt.*;
 
 public class TowerPrototype {
     private int hp;
+    private String towerName;
     private TeamType teamType;
     private TurretGObject turretAbove;
     private TurretGObject turretBelow;
@@ -71,5 +73,13 @@ public class TowerPrototype {
 
     public void setImageData(ImageData imageData) {
         this.imageData = imageData;
+    }
+
+    public String getTowerName() {
+        return towerName;
+    }
+
+    public void setTowerName(String towerName) {
+        this.towerName = towerName;
     }
 }
