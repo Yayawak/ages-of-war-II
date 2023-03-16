@@ -20,6 +20,43 @@ public class LowerBar extends JPanel {
         // add(new JLabel("LLLLLLLLL"));
     }
 
+    private void init2() {
+        setBackground(new Color(22, 242, 242));
+        setPreferredSize(new Dimension(0,50));
+
+
+        GroupLayout lowerBarLayout = new GroupLayout(this);
+        this.setLayout(lowerBarLayout);
+        lowerBarLayout.setHorizontalGroup(
+            lowerBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(lowerBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(
+                    TimeControlBar.getInstance()
+                    , GroupLayout.PREFERRED_SIZE
+                    , GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE
+                )
+                // .addComponent(
+                //     HpPanel.getInstance(),
+                //     GroupLayout.PREFERRED_SIZE,
+                //     GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                // .addContainerGap()
+            )
+        );
+        // lowerBarLayout.setVerticalGroup(
+        //     lowerBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        //     .addGroup(lowerBarLayout.createSequentialGroup()
+        //         .addContainerGap()
+        //         .addGroup(lowerBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        //             // .addComponent(timeControlBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        //             .addGroup(lowerBarLayout.createSequentialGroup()
+        //                 // .addComponent(hpPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        //                 .addGap(0, 0, Short.MAX_VALUE)))
+        //         .addContainerGap())
+        // );
+    }
+
     private void init() {
         // setBackground(new Color(22, 242, 242));
         setBackground(Color.orange);

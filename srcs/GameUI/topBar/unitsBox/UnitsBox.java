@@ -12,8 +12,7 @@ import java.util.ArrayList;;
 public class UnitsBox extends JPanel {
     private static UnitsBox instance = null;
     private int numberOfUnits = 4;
-    private static ArrayList<SubUnit> unitBoxes = new ArrayList<>();
-    // private static ArrayList<JPanel> unitBoxes = new ArrayList<>();
+    private static ArrayList<JPanel> unitBoxes = new ArrayList<>();
 
     private UnitsBox() {
         init();
@@ -58,11 +57,11 @@ public class UnitsBox extends JPanel {
         this.numberOfUnits = numberOfUnits;
     }
 
-    public static ArrayList<SubUnit> getUnitBoxes() {
+    public static ArrayList<JPanel> getUnitBoxes() {
         return unitBoxes;
     }
 
-    public static void setUnitBoxes(ArrayList<SubUnit> unitBoxes) {
+    public static void setUnitBoxes(ArrayList<JPanel> unitBoxes) {
         UnitsBox.unitBoxes = unitBoxes;
     }
 

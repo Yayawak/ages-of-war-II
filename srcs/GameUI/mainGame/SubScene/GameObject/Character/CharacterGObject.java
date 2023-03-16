@@ -3,6 +3,7 @@ package srcs.GameUI.mainGame.SubScene.GameObject.Character;
 import java.awt.*;
 
 import javax.swing.JLabel;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import srcs.Enums.Direction;
 import srcs.Enums.TeamType;
@@ -10,7 +11,6 @@ import srcs.GameUI.MainUI;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.characterHpBar.CharacterHpBar;
-import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
@@ -18,7 +18,8 @@ public class CharacterGObject extends GameObject {
 
     private CharacterPrototype character;
     private Point position;
-    private CharacterHpBar hpBar;
+    CharacterHpBar hpBar;
+    // private boolean isAttacking = false;
     public CharacterGObject(CharacterPrototype character) {
         super(character.getImgData().getSprite(),
                 new Point(
@@ -47,30 +48,8 @@ public class CharacterGObject extends GameObject {
             MainGame.getInstance().add(hpBar);
             MainGame.getInstance().revalidate();
             MainGame.getInstance().repaint();
-            // this.add(hpBar);
-            // this.revalidate();
-            // this.repaint();
-            // add(hpBar);
-            // revalidate();
-            // repaint();
-            // updateUI();
-            // this.setVisible(false);
         }
-        // setVisible(true);
     }
-
-    // ? not called
-    // @Override
-    // public void paintComponent(Graphics g) {
-    //     System.out.println("paint component from cgo");
-    //     super.paintComponent(g);
-    //     if (hpBar != null) {
-    //         this.add(hpBar);
-    //         this.revalidate();
-    //         this.repaint();
-    //     }
-    // }
-
     @Override
     public void update() {
         super.update();
@@ -81,13 +60,15 @@ public class CharacterGObject extends GameObject {
             hpBar.update();
         }
 
-        findClosestOpponent(character);
+        // findClosestOpponent(character);
+        checkIfCharacterOutOfScreen();
 
         if (character.getHp() <= 0) {
             destroyGameObject();
         }
 
         if (!getCollide()) {
+        // if (true) {
             switch (character.getTeamType()) {
                 case PLAYER:
                     move(Direction.RIGHT);
@@ -101,7 +82,8 @@ public class CharacterGObject extends GameObject {
         } else { // stand still
         }
 
-        checkIfCharacterOutOfScreen();
+        // findClosestOpponent(character);
+        // checkIfCharacterOutOfScreen();
 
 
     }
@@ -139,13 +121,10 @@ public class CharacterGObject extends GameObject {
             case RIGHT:
                 newPos.setLocation(x + speed, y);
                 break;
-
             case LEFT:
                 newPos.setLocation(x - speed, y);
                 break;
-
-            default:
-                break;
+            default: break;
         }
         character.setPosition(newPos);
         setLocation(character.getPosition());
@@ -165,7 +144,6 @@ public class CharacterGObject extends GameObject {
 
     public CharacterGObject copy() {
         return new CharacterGObject(new CharacterPrototype(character));
-        // return new CharacterGObject(character);
     }
 
     @Override
@@ -183,11 +161,12 @@ public class CharacterGObject extends GameObject {
                 IntegratedSystem.getInstance().getPlayerExpSystem()
                         .increasedExperience(character.getExperiance());
                 break;
-            default:
-                break;
+            default: break;
         }
         MainGame.getInstance().remove(hpBar);
         super.destroyGameObject();
+        // this = null;
+        // removeAll();
 
     }
-}
+}//
