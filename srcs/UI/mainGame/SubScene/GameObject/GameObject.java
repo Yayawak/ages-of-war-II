@@ -57,21 +57,16 @@ public class GameObject extends JPanel implements Loopable {
 
     @Override
     public void update() {
+        // System.out.println("update from gameobjct ");
         for (GameObject go : MainGame.getInstance().
-            getObjectsInScene()
-        ) {
-            if (go instanceof CharacterGObject) {
-                CharacterGObject cgo = (CharacterGObject)go;
-                checkCollision(this, cgo);
-            }
+            getObjectsInScene()) {
+            checkCollision(this, go);
         }
-        // System.out.println("update from GameObject");
     }
 
     public void destroyGameObject() {
         revalidate();
         repaint();
-        // MainGame.getInstance().getObjectsInScene().remove(this);
         MainGame.getInstance().removeGameObjectFromScene(this);
     }
 
