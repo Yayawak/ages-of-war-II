@@ -22,7 +22,7 @@ public class CharacterTooltip extends JPopupMenu {
     void init() {
         // setSize(30, 30);
         // setPreferredSize(new Dimension(30, 30));
-        setPreferredSize(new Dimension(300, 300));
+        setPreferredSize(new Dimension(150, 200));
 
         setLayout(new GridLayout(4, 2));
         // setLayout(null);
@@ -59,12 +59,14 @@ class TextWithValue extends JTextArea {
 
     void init() {
         setFont(new Font(Font.SANS_SERIF,
-        Font.CENTER_BASELINE, 15));
+        // Font.CENTER_BASELINE, 15));
+        Font.CENTER_BASELINE, 10));
         setForeground(new Color(
             (float)Math.random(),
             (float)Math.random(),
             (float)Math.random()
         ));
         setLineWrap(true);
+        setWrapStyleWord(true);
     }
 }
