@@ -1,4 +1,4 @@
-package srcs.Prototypes.Characters.CharactersData.CharLists.Age_I;
+package srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge;
 
 import helpers.ImageData;
 import srcs.Enums.TeamType;
@@ -6,8 +6,8 @@ import srcs.Prototypes.Characters.CharacterPrototype;
 
 public class GrimStroke extends CharacterPrototype {
 
-    public GrimStroke(TeamType teamType) {
-        super(teamType);
+    public GrimStroke() {
+        super();
         ImageData grimImageData = new ImageData(
             "characters/grimStroke.png"
         );

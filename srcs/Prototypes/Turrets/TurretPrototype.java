@@ -10,9 +10,9 @@ public class TurretPrototype extends EntityPrototype {
     private int projectileSpeed;
     private ImageData bulletImgData;
 
-    public TurretPrototype(TeamType teamType) {
+    public TurretPrototype() {
     // public TurretPrototype() {
-        super(teamType);
+        super();
     }
     public TurretPrototype(TeamType teamType,
         int attackSpeed,

@@ -3,10 +3,10 @@ import java.util.ArrayList;
 import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
-import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.GrimStroke;
-import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.Morphling;
-import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.NatureProphet;
-import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.Rubick;;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.GrimStroke;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Morphling;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphet;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Rubick;;
 
 public class CharactersData {
     private static CharactersData instance = null;
@@ -30,10 +30,10 @@ public class CharactersData {
         //movement speed : 1 - 5
         // atk speed : 1 - 5
 
-        charactersList.add((CharacterPrototype)new GrimStroke(TeamType.PLAYER));
-        charactersList.add((CharacterPrototype)new NatureProphet(TeamType.PLAYER));
-        charactersList.add((CharacterPrototype)new Rubick(TeamType.PLAYER));
-        charactersList.add((CharacterPrototype)new Morphling(TeamType.PLAYER));
+        charactersList.add((CharacterPrototype)new GrimStroke());
+        charactersList.add((CharacterPrototype)new NatureProphet());
+        charactersList.add((CharacterPrototype)new Rubick());
+        charactersList.add((CharacterPrototype)new Morphling());
     }
 
 }

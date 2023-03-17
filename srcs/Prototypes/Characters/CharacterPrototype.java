@@ -23,6 +23,10 @@ public class CharacterPrototype extends EntityPrototype {
         // maxHp = hp;
     }
 
+    public CharacterPrototype() {
+        super();
+    }
+
     public CharacterPrototype(TeamType teamType) {
         super(teamType);
         // System.out.println("Max hp init = " + maxHp);

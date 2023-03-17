@@ -9,8 +9,8 @@ import java.awt.Image;
 
 public class FireGunTurret extends TurretPrototype {
 
-    public FireGunTurret(TeamType teamType) {
-        super(teamType);
+    public FireGunTurret() {
+        super();
         ImageData turretImgData = new ImageData("turrets/firegun.png");
         // TurretPrototype turretData = new TurretPrototype(teamType, 2, turretImgData, "Gun",
         //     100,

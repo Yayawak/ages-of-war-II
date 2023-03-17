@@ -13,7 +13,7 @@ import srcs.Interfaces.ComponentSizeItf;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
 import srcs.Prototypes.Characters.CharactersData.CharactersData;
-import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.NatureProphet;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphet;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretsData;
@@ -58,7 +58,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                 // GameObject go = new CharacterGObject(np);
                 // objectsInScene.add(go);
                 // System.out.println("Enter main game mouse clicked.");
-                FireGunTurret fgt = new FireGunTurret(TeamType.PLAYER);
+                FireGunTurret fgt = new FireGunTurret();
                 fgt.setPosition(getMousePosition());
                 TurretGObject turret = new TurretGObject(fgt);
                 turret.setLocation(getMousePosition());

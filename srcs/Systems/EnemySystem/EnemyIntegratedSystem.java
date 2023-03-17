@@ -15,9 +15,9 @@ import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharactersData;
-import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.Morphling;
-import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.NatureProphet;
-import srcs.Prototypes.Characters.CharactersData.CharLists.Age_I.Rubick;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Morphling;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphet;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Rubick;
 import srcs.Systems.Gold.GoldSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
@@ -74,7 +74,7 @@ public class EnemyIntegratedSystem implements Loopable {
             // MainGame.getObjectsInScene().add(cgo);
 
             // * it's Work
-            CharacterPrototype dummy = new Morphling(TeamType.ENEMY);
+            CharacterPrototype dummy = new Morphling();
             dummy.setTeamType(TeamType.ENEMY);
             CharacterGObject c = new CharacterGObject(dummy);
             // todo : make this enemy system usable

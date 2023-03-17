@@ -22,6 +22,10 @@ public class EntityPrototype {
         init();
     }
 
+    public EntityPrototype() {
+        init();
+    }
+
     public EntityPrototype(TeamType teamType) {
         this.teamType = teamType;
         init();

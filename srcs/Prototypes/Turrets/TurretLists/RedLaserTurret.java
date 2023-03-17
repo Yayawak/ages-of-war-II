@@ -7,8 +7,8 @@ import srcs.Enums.TeamType;
 import srcs.Prototypes.Turrets.TurretPrototype;
 
 public class RedLaserTurret extends TurretPrototype {
-    public RedLaserTurret(TeamType teamType) {
-        super(teamType);
+    public RedLaserTurret() {
+        super();
         ImageData turretImgData = new ImageData("turrets/red_laser.png");
         setAttackSpeed(5);
         setImgData(turretImgData);

@@ -7,7 +7,7 @@ import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 
-public class AgeData {
+public  class AgeData {
     private Image backgroundImage;
     private ArrayList<CharacterPrototype>  characterPrototypes = new ArrayList<>();
     private ArrayList<TurretPrototype> turretPrototypes = new ArrayList<>();
@@ -15,17 +15,27 @@ public class AgeData {
     private TowerPrototype towerPrototype;
     private int expRequiredToUpgrade;
 
-    public AgeData(String relPathToBgImage,
-        ArrayList<CharacterPrototype> characterPrototypes,
-        ArrayList<TurretPrototype> turretPrototypes,
-        TowerPrototype towerPrototype,
-        int expRequiredToUpgrade
-    ) {
-        this.backgroundImage = new ImageData(relPathToBgImage).getSprite();
-        this.characterPrototypes = characterPrototypes;
-        this.turretPrototypes = turretPrototypes;
-        this.expRequiredToUpgrade = expRequiredToUpgrade;
+    private static AgeData instance;
+
+    public static AgeData getInstance() {
+        if (instance == null) instance = new AgeData();
+        return instance;
     }
+
+
+    // protected AgeData(String relPathToBgImage,
+    //     ArrayList<CharacterPrototype> characterPrototypes,
+    //     ArrayList<TurretPrototype> turretPrototypes,
+    //     TowerPrototype towerPrototype,
+    //     int expRequiredToUpgrade
+    // ) {
+    //     this.backgroundImage = new ImageData(relPathToBgImage).getSprite();
+    //     this.characterPrototypes = characterPrototypes;
+    //     this.turretPrototypes = turretPrototypes;
+    //     this.expRequiredToUpgrade = expRequiredToUpgrade;
+    // }
+
+    protected AgeData() { }
 
     public Image getBackgroundImage() {
         return backgroundImage;

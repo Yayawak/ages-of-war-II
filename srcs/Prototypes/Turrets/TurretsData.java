@@ -21,8 +21,8 @@ public class TurretsData {
     }
 
     private void init() {
-        availableTurrents.add(new FireGunTurret(TeamType.PLAYER));
-        availableTurrents.add(new RedLaserTurret(TeamType.PLAYER));
+        availableTurrents.add(new FireGunTurret());
+        availableTurrents.add(new RedLaserTurret());
     }
 
     public ArrayList<TurretPrototype> getAvailableTurrents() {
