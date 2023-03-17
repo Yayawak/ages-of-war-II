@@ -3,6 +3,7 @@ package srcs.GameUI.topBar.unitsBox.SubUnit;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 
+import srcs.Enums.TeamType;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
@@ -37,6 +38,7 @@ public class SubUnit extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 // System.out.println(e);
                 // todo : send character data by mouse clikc
+                character.setTeamType(TeamType.PLAYER);
                 GameObject go = new CharacterGObject(character);
                 if (QueueProgress.getInstance().isProgressBarAvailable()
                         &&

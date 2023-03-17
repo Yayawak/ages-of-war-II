@@ -5,8 +5,8 @@ import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
 
 public class Rubick extends CharacterPrototype {
-    public Rubick() {
-        super();
+    public Rubick(TeamType tt) {
+        super(tt);
         ImageData imgData = new ImageData(
             "characters/rubick.png"
         );

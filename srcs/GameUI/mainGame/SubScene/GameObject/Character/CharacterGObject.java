@@ -12,6 +12,7 @@ import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.characterHpBar.CharacterHpBar;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.SkeletonWarrior;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
 public class CharacterGObject extends GameObject {
@@ -29,6 +30,8 @@ public class CharacterGObject extends GameObject {
                         character.getImgData().getImgHeight()));
         this.character = character;
         this.position = character.getPosition();
+        super.teamType = character.getTeamType();
+        System.out.println(this.teamType);
         init();
     }
 
@@ -112,6 +115,15 @@ public class CharacterGObject extends GameObject {
 
         if (hpBar != null) {
             hpBar.draw(g);
+        }
+
+        if (character.getWalkSprites().size() != 0) {
+            if (character instanceof SkeletonWarrior) {
+                int r = (int)(Math.random() * 7);
+                setImg(character.getWalkSprites().get(r));
+            }
+        } else {
+            // System.out.println("length of charatc te walk sprint = 0");
         }
     }
 

@@ -1,6 +1,9 @@
 package srcs.GameUI.mainGame.SubScene.GameObject;
 
 import java.awt.Graphics;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.time.chrono.ThaiBuddhistChronology;
 
 import javax.swing.ImageIcon;
@@ -28,6 +31,17 @@ public class GameObject extends JPanel implements Loopable {
         spawnTime = System.nanoTime();
         setLocation(pos);
         setImg(img);
+        // img.getGraphics().flip
+        // if (teamType == TeamType.ENEMY) {
+        //     System.out.println("This is  enemy");
+        //     AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+        //     tx.translate(getImg().getWidth(null), 0);
+        //     AffineTransformOp op = new AffineTransformOp(tx,
+        //         AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        //     setImg(
+        //         op.filter((BufferedImage)getImg(), null)
+        //     );
+        // }
         // System.out.println("Position = " + xPos + " : " + yPos);
         setSize(imgSize); // ? Important for collsion detection
         setPreferredSize(imgSize); // ? Important for collsion detection
@@ -40,6 +54,18 @@ public class GameObject extends JPanel implements Loopable {
     private void init() {
         setLayout(null);
         // setLayout(getLayout());
+        // if (teamType == TeamType.ENEMY) {
+        //     System.out.println("This is  enemy");
+        //     AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+        //     tx.translate(getImg().getWidth(null), 0);
+        //     AffineTransformOp op = new AffineTransformOp(tx,
+        //         AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        //     setImg(
+        //         op.filter((BufferedImage)getImg(), null)
+        //     );
+        // } else {
+        //     // System.out.println("is player");
+        // }
     }
 
     public Image getImg() {
@@ -62,6 +88,8 @@ public class GameObject extends JPanel implements Loopable {
             getObjectsInScene()) {
             checkCollision(this, go);
         }
+
+
     }
 
     public void destroyGameObject() {
@@ -215,5 +243,30 @@ public class GameObject extends JPanel implements Loopable {
             thisGo.setCollide(false);
             thatGo.setCollide(false);
         }
+    }
+
+    public TeamType getTeamType() {
+        return teamType;
+    }
+
+    public void setTeamType(TeamType teamType) {
+        this.teamType = teamType;
+
+        // if (teamType == TeamType.ENEMY) {
+        //     System.out.println("This is  enemy");
+        //     AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+        //     tx.translate(getImg().getWidth(null), 0);
+        //     AffineTransformOp op = new AffineTransformOp(tx,
+        //         AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        //     setImg(
+        //         op.filter((BufferedImage)getImg(), null)
+        //     );
+        // } else {
+        //     // System.out.println("is player");
+        // }
+    }
+
+    public boolean isCollide() {
+        return isCollide;
     }
 }

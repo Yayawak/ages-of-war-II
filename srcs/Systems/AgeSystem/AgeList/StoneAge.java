@@ -19,14 +19,22 @@ import srcs.Prototypes.Turrets.TurretLists.RedLaserTurret;
 import srcs.Systems.AgeSystem.AgeData;
 
 public class StoneAge extends AgeData {
+    private static AgeData instance;
+
+    public static AgeData getInstance() {
+        if (instance == null) instance = new StoneAge();
+        return instance;
+    }
+
     public StoneAge() {
         setBackgroundImage(getBackgroundImage());
 
         CharacterPrototype[] cps = {
-            new GrimStroke(),
-            new NatureProphet(),
-            new Rubick(),
-            new Morphling()
+            // new GrimStroke(TeamType.PLAYER),
+            new SkeletonWarrior(TeamType.PLAYER),
+            new NatureProphet(TeamType.PLAYER),
+            new Rubick(TeamType.PLAYER),
+            new Morphling(TeamType.PLAYER)
         };
         setCharacterPrototypes(
             new ArrayList<CharacterPrototype>(
@@ -57,6 +65,13 @@ public class StoneAge extends AgeData {
     // new Tower
 
         setExpRequiredToUpgrade(1000);
+
+
+        setUpgradeImage(
+            new ImageData(
+                "upgradeIcons/stoneAgeUp.png"
+            ).getSprite()
+        );
     }
 
 }

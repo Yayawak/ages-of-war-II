@@ -7,21 +7,14 @@ import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 
-public  class AgeData {
+public abstract class AgeData {
     private Image backgroundImage;
     private ArrayList<CharacterPrototype>  characterPrototypes = new ArrayList<>();
     private ArrayList<TurretPrototype> turretPrototypes = new ArrayList<>();
     // private Image ultimateGameObject;
     private TowerPrototype towerPrototype;
     private int expRequiredToUpgrade;
-
-    private static AgeData instance;
-
-    public static AgeData getInstance() {
-        if (instance == null) instance = new AgeData();
-        return instance;
-    }
-
+    private Image upgradeImage;
 
     // protected AgeData(String relPathToBgImage,
     //     ArrayList<CharacterPrototype> characterPrototypes,
@@ -75,5 +68,13 @@ public  class AgeData {
 
     public void setExpRequiredToUpgrade(int expRequiredToUpgrade) {
         this.expRequiredToUpgrade = expRequiredToUpgrade;
+    }
+
+    public Image getUpgradeImage() {
+        return upgradeImage;
+    }
+
+    public void setUpgradeImage(Image upgradeImage) {
+        this.upgradeImage = upgradeImage;
     }
 }

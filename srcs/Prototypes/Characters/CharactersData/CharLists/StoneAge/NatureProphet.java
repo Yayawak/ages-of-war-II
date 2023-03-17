@@ -6,8 +6,8 @@ import srcs.Prototypes.Characters.CharacterPrototype;
 
 public class NatureProphet extends CharacterPrototype{
 
-    public NatureProphet() {
-        super();
+    public NatureProphet(TeamType tt) {
+        super(tt);
         ImageData grimImageData = new ImageData(
             "characters/np.png"
         );

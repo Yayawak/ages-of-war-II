@@ -4,7 +4,8 @@ import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.GameUI.MainUI;
 
-import java.awt.*;;
+import java.awt.*;
+import java.util.ArrayList;;
 
 public class EntityPrototype {
     protected TeamType teamType = TeamType.PLAYER;
@@ -17,6 +18,7 @@ public class EntityPrototype {
     protected EntityPrototype copyInstance;
     protected int attackRange;
     protected int attackDamage;
+    protected ArrayList<Image> walkSprites = new ArrayList<>();
 
     public EntityPrototype(EntityPrototype entProt) {
         init();
@@ -146,5 +148,14 @@ public class EntityPrototype {
     public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
     }
+
+    public ArrayList<Image> getWalkSprites() {
+        return walkSprites;
+    }
+
+    public void setWalkSprites(ArrayList<Image> walkSprites) {
+        this.walkSprites = walkSprites;
+    }
+
 
 }

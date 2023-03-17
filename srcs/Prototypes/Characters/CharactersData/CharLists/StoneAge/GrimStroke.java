@@ -6,8 +6,8 @@ import srcs.Prototypes.Characters.CharacterPrototype;
 
 public class GrimStroke extends CharacterPrototype {
 
-    public GrimStroke() {
-        super();
+    public GrimStroke(TeamType tt) {
+        super(tt);
         ImageData grimImageData = new ImageData(
             "characters/grimStroke.png"
         );

@@ -1,0 +1,3878 @@
+package test;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import java.awt.*;
+
+public class TestFrame extends JFrame {
+    public TestFrame() {
+        setVisible(true);
+        setSize(new Dimension(1000, 300));
+        setBackground(Color.red);
+        // setPreferredSize(new Dimension(1000, 300));
+        setVisible(true);
+
+        JPanel pan = new JPanel();
+        pan.setBackground(Color.green);
+        add(pan);
+    }
+}
+package test;
+import javax.swing.*;
+import java.awt.*;
+
+public class BoxFrame extends JFrame {
+    public BoxFrame() {
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // JLabel lb = new JLabel("This is dummy label");
+        // add(lb);
+        // new Ractangl
+        // ! TYpe A
+        // JPanel mainPanel = new JPanel();
+        // mainPanel.setBackground(Color.blue);
+        // mainPanel.setPreferredSize(new Dimension(200, 400));
+        // // mainPanel.setBounds(new Rectangle(0,0, 400, 200));
+        // // mainPanel
+        // add(mainPanel);
+        // add(new BPanel());
+        add(new APanel());
+
+        pack();
+    }
+}
+
+class BPanel extends JPanel {
+    int row = 6;
+    int col = 6;
+    // Point point = new Point(0, 0);
+    // Dimension size = new Dimension(50, 50);
+    int[] pos = {300, 200};
+    int[] size = {100, 100};
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        for (int r = 0; r < row; r++) {
+            for (int c = 0; c < col; c++) {
+                // Rectangle rect = new Rectangle(point, size);
+                // g.drawRect(c, c, r, c);
+                // g.draw
+                Color color;
+                if ((r == 0 || r == row)
+                    || (c == 0 || c == col)) {
+                    color = Color.green;
+                } else {
+                    color = Color.blue;
+                }
+
+                // Color color = ((r + c) % 2 == 0) ? Color.red : Color.black;
+                g.setColor(color);
+                g.fillRect(pos[0], pos[1], size[0], size[1]);
+
+                pos[1] = size[1] * c;
+            }
+            pos[0] = size[0] * r;
+        }
+    }
+}
+
+//! Type B
+class APanel extends JPanel {
+
+    public APanel() {
+        add(new SubA());
+    }
+
+    class SubA extends JPanel {
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.setColor(Color.green);
+            g.fillRect(xPos, 0,50, 100);
+            repaint();
+        }
+    }
+    private int xPos = 55;
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponents(g);
+        g.setColor(Color.red);
+
+        if (xPos < getWidth()) {
+            xPos += 1;
+        } else {
+            xPos = 0;
+        }
+        g.fillRect(xPos, 0, 100, 200);
+        repaint();
+    }
+}
+package test;
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class TestTooltip extends JFrame {
+    public TestTooltip() {
+        // setPreferredSize(500, 500);
+        setSize(500, 500);
+        JPopupMenu popup = new JPopupMenu("Customized tooltip");
+
+        JPanel pane = new JPanel();
+        getContentPane().add(pane);
+        // pop
+        pane.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ee) { System.out.println(ee);
+                }
+                popup.setVisible(false);
+                popup.setLocation(e.getPoint());
+                popup.removeAll();
+                System.out.println(e.getPoint());
+                popup.add(new JTextField(
+                    // String.valueOf(ALLBITS)
+                    e.getPoint().toString()
+                ));
+                // popup.sho
+
+                popup.setVisible(true);
+            }
+        });
+
+        setVisible(true);
+    }
+}
+package test;
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
+import javax.swing.text.AbstractDocument.LeafElement;
+
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
+
+public class TileGeneratorApp extends JFrame {
+    // int rows = 8;
+    // int cols = 12;
+    int rows = 25;
+    int cols = 20;
+    // int rows = 35;
+    // int cols = 30;
+    Dimension screenSize;
+    public static int[][] gridBinary;
+
+    public TileGeneratorApp() {
+        // screenSize = new Dimension(1300, 700);
+        screenSize = new Dimension(600,1000);
+        setSize(screenSize);
+        initApp();
+        // setPreferredSize(new Dimension(1300, 700));
+        System.out.println("screensize size " + getSize());
+        // System.out.println("screensize p size " + getPreferredSize());
+    }
+
+    void initApp() {
+        // int gridWidth = getWidth() / cols;
+        // int gridHeight = getHeight() / rows;
+        System.out.println("scrernsize " + getSize());
+        int gridWidth = (int)screenSize.getWidth() / cols;
+        int gridHeight = (int)screenSize.getHeight() / rows;
+        System.out.println("grid w : " + gridWidth);
+        System.out.println("grid h : " + gridHeight);
+
+        Point currentPos = getLocation();
+        // setLayout(new GridL);
+        gridBinary = new int[rows][cols];
+        setLayout(null);
+        int index = 0;
+        for (int i = 0; i < rows; i++) {
+            currentPos.setLocation(0, currentPos.getY());
+            for (int j = 0; j < cols; j++) {
+                System.out.println(currentPos);
+                CustomPanel grid = new CustomPanel(i, j);
+                grid.setSize(gridWidth, gridHeight);
+                grid.setLocation(currentPos);
+                // Color color = 0 + j % 2 == 0 ?
+                Color color = (i + j) % 2 == 0 ?
+                    // Color.green : Color.blue;
+                    Color.black : Color.white;
+                grid.setBackground(color);
+
+                getContentPane().add(grid);
+
+                currentPos.setLocation(currentPos.getX() + gridHeight, currentPos.getY());
+                index++;
+            }
+            currentPos.setLocation(currentPos.getX(), currentPos.getY() + gridHeight);
+        }
+        // setSize(
+        //     cols * getWidth(),
+        //     rows * getHeight()
+        // );
+        setSize(screenSize);
+
+
+    }
+    class CustomPanel extends JPanel {
+        private static boolean canChangeColor = false;
+
+        public CustomPanel(int i, int j) {
+            // setBackground(new Color(
+            //     (float)(Math.random()),
+            //     (float)(Math.random()),
+            //     (float)(Math.random())
+            // ));
+            addMouseMotionListener(new MouseMotionAdapter() {
+                @Override
+                public void mouseMoved(MouseEvent e) {
+                    if (canChangeColor) {
+                        setBackground(Color.red);
+                        TileGeneratorApp.gridBinary[i][j] = 1;
+                        printMatrix(gridBinary);
+                    }
+                }
+            });
+
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    setBackground(Color.pink);
+                }
+
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    canChangeColor = !canChangeColor;
+                }
+
+            });
+        }
+
+        public static void printMatrix(int[][] mat) {
+            for (int i = 0; i < mat.length; i++) {
+                for (int j = 0; j < mat[0].length; j++) {
+                    int elem = mat[i][j];
+                    String color = elem == 0 ?
+                        Colors.ANSI_BLUE :
+                        Colors.ANSI_RED;
+                        // Colors.ANSI_RED_BACKGROUND;
+                    System.out.print(
+                        color +
+                        mat[i][j] + " " +
+                        Colors.ANSI_RESET
+                    );
+                }
+                System.out.println();
+            }
+            System.out.println();
+            System.out.println();
+        }
+    }
+}
+
+
+class Colors {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
+
+    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
+public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+}
+
+
+import srcs.GameUI.MainFrame;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.StartGameUI.StartGameFrame;
+import srcs.Systems.AgeSystem.AgeList.StoneAge;
+import test.TestTooltip;
+import test.TileGeneratorApp;
+
+public class Main {
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                StartGameFrame startGameFrame = new StartGameFrame();
+                startGameFrame.setVisible(true);
+
+                // new TestTooltip();
+                // new TileGeneratorApp().setVisible(true);
+            }
+        });
+
+    }
+}
+package srcs.StartGameUI;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import helpers.ImageData;
+import srcs.GameUI.MainFrame;
+
+import java.awt.event.*;
+import java.awt.*;
+// import MainMain;
+
+public class StartGameFrame extends JFrame {
+    MainFrame mainFrame;
+
+    public StartGameFrame() {
+        setTitle("AOW");
+        setPreferredSize(new Dimension(1000, 600));
+        setLayout(new BorderLayout());
+        init();
+    }
+
+    void init() {
+        JPanel centerPane = new JPanel();
+        JPanel topPane = new JPanel();
+        JPanel botPane = new JPanel();
+        topPane.setBackground(Color.green);
+        centerPane.setBackground(Color.orange);
+        botPane.setBackground(Color.blue);
+
+        JPanel startPane = new JPanel();
+        startPane.setBackground(Color.PINK);
+        JLabel startLabel = new JLabel("START");
+        Font font = new Font(Font.SANS_SERIF,
+            Font.BOLD, 30);
+        startLabel.setFont(font);
+        startPane.add(startLabel);
+
+        startPane.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent ev) {
+                mainFrame = new MainFrame();
+                mainFrame.setVisible(true);
+
+                setVisible(false);
+                dispose();
+            }
+        });
+
+
+
+        JPanel exitPane = new JPanel();
+        exitPane.setBackground(Color.cyan);
+        JLabel exitLabel = new JLabel("EXIT");
+        exitLabel.setFont(font);
+        exitPane.add(exitLabel);
+
+        Image bgImage = new ImageData("backgrounds/war_bg.jpeg").getSprite();
+        exitPane.add(new JLabel(new ImageIcon(bgImage)));
+
+        exitPane.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent ev) {
+                dispose();
+            }
+        });
+
+        centerPane.setLayout(new GridLayout(0, 1));
+        centerPane.add(startPane);
+        centerPane.add(exitPane);
+
+        // add(topPane, BorderLayout.NORTH);
+        add(centerPane, BorderLayout.CENTER);
+        // add(botPane, BorderLayout.SOUTH);
+        // repaint();
+        pack();
+    }
+
+    @Override
+    public void paintComponents(Graphics g) {
+        // super.paintComponents(g);
+        System.out.println("paintocmponent form gameFrame initor");
+        // Image bgImage = new ImageData("backgrounds/war_bg.jpeg").getSprite();
+        // g.drawImage(bgImage, 0, 0, null);
+    }
+}
+package srcs.Enums;
+
+public enum Direction {
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN
+}
+package srcs.Enums;
+
+public enum TeamType {
+    PLAYER, ENEMY, NONE;
+}
+package srcs.Prototypes.Tower;
+
+import javax.swing.text.Position;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.Turret.TurretGObject;
+
+import java.awt.*;
+
+public class TowerPrototype {
+    private int hp;
+    private String towerName;
+    private TeamType teamType;
+    private TurretGObject turretAbove = null;
+    private TurretGObject turretBelow = null;
+    private ImageData imageData;
+    private Point position;
+
+    public TowerPrototype(int hp, TeamType teamType, TurretGObject turretAbove, TurretGObject turretBelow,
+            ImageData imageData, Point position) {
+        this.hp = hp;
+        this.teamType = teamType;
+        this.turretAbove = turretAbove;
+        this.turretBelow = turretBelow;
+        this.imageData = imageData;
+        this.position = position;
+    }
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public TeamType getTeamType() {
+        return teamType;
+    }
+
+    public void setTeamType(TeamType teamType) {
+        this.teamType = teamType;
+    }
+
+    public TurretGObject getTurretAbove() {
+        return turretAbove;
+    }
+
+    public void setTurretAbove(TurretGObject turretAbove) {
+        this.turretAbove = turretAbove;
+        System.out.println("positions of tower is : " + position);
+        turretAbove.getTurretPrototype().setPosition(new Point(
+                (int) (position.getX()), (int) (position.getY() - 150)));
+        // turretAbove.setLocation(turretAbove.getTurret().getPosition());
+        MainGame.getInstance().addGameObjectToScene(turretAbove);
+        System.out.println("positions of turret is : " + turretAbove.getTurretPrototype().getPosition());
+        // repai
+    }
+
+    public TurretGObject getTurretBelow() {
+        return turretBelow;
+    }
+
+    public void setTurretBelow(TurretGObject turretBelow) {
+        this.turretBelow = turretBelow;
+        System.out.println("positions of tower is : " + position);
+        turretBelow.getTurretPrototype().setPosition(position);
+        // turretBelow.setLocation(turretAbove.getTurret().getPosition());
+        MainGame.getInstance().addGameObjectToScene(turretBelow);
+        System.out.println("positions of turret is : " + turretBelow.getTurretPrototype().getPosition());
+    }
+
+    public ImageData getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(ImageData imageData) {
+        this.imageData = imageData;
+    }
+
+    public String getTowerName() {
+        return towerName;
+    }
+
+    public void setTowerName(String towerName) {
+        this.towerName = towerName;
+    }
+}
+package srcs.Prototypes.Turrets.TurretLists;
+
+import java.awt.Point;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.Prototypes.Turrets.TurretPrototype;
+
+public class RedLaserTurret extends TurretPrototype {
+    public RedLaserTurret() {
+        super();
+        ImageData turretImgData = new ImageData("turrets/red_laser.png");
+        setAttackSpeed(5);
+        setImgData(turretImgData);
+        setName("Red Laser hell");
+        setGold(200);
+        // ! setLocation
+        setPosition(position);
+        setBuildTime(3);
+        setProjectileSpeed(2);
+        // todo : add bullet image
+        setBulletImgData(turretImgData);
+        setAttackRange(400);
+    }
+
+    public RedLaserTurret(TeamType teamType, int attackSpeed, ImageData imgData, String name, int gold, Point position,
+            float buildTime, int projectileSpeed, ImageData bulletImgData, int attackRange, int attackDamage) {
+        super(teamType, attackSpeed, imgData, name, gold, position, buildTime, projectileSpeed, bulletImgData,
+                attackRange, attackDamage);
+    }
+}
+package srcs.Prototypes.Turrets.TurretLists;
+
+import java.awt.Point;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.Prototypes.Turrets.TurretPrototype;
+import java.awt.Image;
+
+public class FireGunTurret extends TurretPrototype {
+
+    public FireGunTurret() {
+        super();
+        ImageData turretImgData = new ImageData("turrets/firegun.png");
+        // TurretPrototype turretData = new TurretPrototype(teamType, 2, turretImgData, "Gun",
+        //     100,
+        //     getPosition()
+        //     , 1, 1, null, 400);
+
+
+        // this = new FireGunTurret()
+        setAttackSpeed(5);
+        setImgData(turretImgData);
+        setName("Fire gun hell");
+        setGold(200);
+        //! setLocation
+        setPosition(position);
+        setBuildTime(3);
+        setProjectileSpeed(2);
+        // todo : add bullet image
+        // Image bullet = new Image()
+        setBulletImgData(turretImgData);
+        setAttackRange(400);
+    }
+    // public FireGunTurret(TeamType teamType, int attackSpeed, ImageData imgData, String name, int gold, Point position,
+    //         float buildTime, int projectileSpeed, ImageData bulletImgData, int attackRange,
+    //         int atta) {
+    //     super(teamType, attackSpeed, imgData, name, gold, position, buildTime, projectileSpeed, bulletImgData, attackRange);
+    // }
+
+    public FireGunTurret(TeamType teamType, int attackSpeed, ImageData imgData, String name, int gold, Point position,
+            float buildTime, int projectileSpeed, ImageData bulletImgData, int attackRange, int attackDamage) {
+        super(teamType, attackSpeed, imgData, name, gold, position, buildTime, projectileSpeed, bulletImgData,
+                attackRange, attackDamage);
+    }
+
+}
+package srcs.Prototypes.Turrets;
+
+import java.util.ArrayList;
+
+import srcs.Enums.TeamType;
+import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
+import srcs.Prototypes.Turrets.TurretLists.RedLaserTurret;
+
+public class TurretsData {
+    private static TurretsData instance;
+    private ArrayList<TurretPrototype> availableTurrents = new ArrayList<>();
+
+    public static TurretsData getInstance() {
+        if (instance == null)
+            instance = new TurretsData();
+        return instance;
+    }
+
+    private TurretsData() {
+        init();
+    }
+
+    private void init() {
+        availableTurrents.add(new FireGunTurret());
+        availableTurrents.add(new RedLaserTurret());
+    }
+
+    public ArrayList<TurretPrototype> getAvailableTurrents() {
+        return availableTurrents;
+    }
+
+    public void setAvailableTurrents(ArrayList<TurretPrototype> availableTurrents) {
+        this.availableTurrents = availableTurrents;
+    }
+}
+package srcs.Prototypes.Turrets;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.Prototypes.EntityPrototype;
+
+import java.awt.*;;
+
+public class TurretPrototype extends EntityPrototype {
+    private int projectileSpeed;
+    private ImageData bulletImgData;
+
+    public TurretPrototype() {
+    // public TurretPrototype() {
+        super();
+    }
+    public TurretPrototype(TeamType teamType,
+        int attackSpeed,
+        ImageData imgData, String name,
+        int gold, Point position,
+        float buildTime, int projectileSpeed,
+        ImageData bulletImgData,
+        int attackRange, int attackDamage)
+    {
+        super(teamType, attackSpeed, imgData, name, gold, position, buildTime, attackRange
+            ,attackDamage);
+        this.projectileSpeed = projectileSpeed;
+        this.bulletImgData = bulletImgData;
+    }
+
+    public int getProjectileSpeed() {
+        return projectileSpeed;
+    }
+
+    public void setProjectileSpeed(int projectileSpeed) {
+        this.projectileSpeed = projectileSpeed;
+    }
+
+    public ImageData getBulletImgData() {
+        return bulletImgData;
+    }
+
+    public void setBulletImgData(ImageData bulletImgData) {
+        this.bulletImgData = bulletImgData;
+    }
+
+    @Override
+    public String toString() {
+        return
+            "Entity protype is = " + super.toString() + "\n" +
+        "TurretPrototype [projectileSpeed=" + projectileSpeed + ", bulletImgData=" + bulletImgData
+                // + ", attackRange=" + attackRange
+                + "]";
+    }
+
+}
+package srcs.Prototypes;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.GameUI.MainUI;
+
+import java.awt.*;;
+
+public class EntityPrototype {
+    protected TeamType teamType = TeamType.PLAYER;
+    protected int attackSpeed;
+    protected ImageData imgData;
+    protected String name;
+    protected int gold;
+    protected Point position;
+    protected float buildTime;
+    protected EntityPrototype copyInstance;
+    protected int attackRange;
+    protected int attackDamage;
+
+    public EntityPrototype(EntityPrototype entProt) {
+        init();
+    }
+
+    public EntityPrototype() {
+        init();
+    }
+
+    public EntityPrototype(TeamType teamType) {
+        this.teamType = teamType;
+        init();
+    }
+
+    public EntityPrototype(TeamType teamType, int attackSpeed, ImageData imgData, String name, int gold, Point position,
+            // float buildTime, EntityPrototype copyInstance, int attackRange, int attackDamage) {
+            float buildTime, int attackRange, int attackDamage) {
+        this.teamType = teamType;
+        this.attackSpeed = attackSpeed;
+        this.imgData = imgData;
+        this.name = name;
+        this.gold = gold;
+        this.position = position;
+        this.buildTime = buildTime;
+        this.attackRange = attackRange;
+        this.attackDamage = attackDamage;
+    }
+
+    public EntityPrototype getCopyInstance() {
+        if (copyInstance == null)
+            copyInstance = new EntityPrototype(this);
+        return copyInstance;
+    }
+
+    private void init() {
+        int spawnX = (teamType == TeamType.PLAYER) ?
+            200 :
+            // (int) MainUI.getInstance().getScreenSize().getWidth()
+            (int) MainUI.getInstance().getScreenSize().getWidth() - 200;
+        if (position == null) {
+            position = new Point();
+        }
+        // this.position = new Point(spawnX, position.y);
+        this.position = new Point(spawnX, 300);
+
+    }
+
+    public TeamType getTeamType() {
+        return teamType;
+    }
+
+    public void setTeamType(TeamType teamType) {
+        this.teamType = teamType;
+    }
+
+    public int getAttackSpeed() {
+        return attackSpeed;
+    }
+
+    public void setAttackSpeed(int attackSpeed) {
+        this.attackSpeed = attackSpeed;
+    }
+
+    public ImageData getImgData() {
+        return imgData;
+    }
+
+    public void setImgData(ImageData imgData) {
+        this.imgData = imgData;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+    public float getBuildTime() {
+        return buildTime;
+    }
+
+    public void setBuildTime(float buildTime) {
+        this.buildTime = buildTime;
+    }
+
+    public void setCopyInstance(EntityPrototype copyInstance) {
+        this.copyInstance = copyInstance;
+    }
+
+    @Override
+    public String toString() {
+        return "EntityPrototype [teamType=" + teamType + ", attackSpeed=" + attackSpeed + ", imgData=" + imgData
+                + ", name=" + name + ", gold=" + gold + ", position=" + position + ", buildTime=" + buildTime
+                + ", copyInstance=" + copyInstance + "]";
+    }
+
+    public int getAttackRange() {
+        return attackRange;
+    }
+
+    public void setAttackRange(int attackRange) {
+        this.attackRange = attackRange;
+    }
+
+    public int getAttackDamage() {
+        return attackDamage;
+    }
+
+    public void setAttackDamage(int attackDamage) {
+        this.attackDamage = attackDamage;
+    }
+
+}
+package srcs.Prototypes.Characters;
+
+import srcs.Enums.TeamType;
+import srcs.GameUI.MainUI;
+import srcs.Prototypes.EntityPrototype;
+import helpers.ImageData;
+import java.awt.Point;
+import java.nio.charset.spi.CharsetProvider;
+
+public class CharacterPrototype extends EntityPrototype {
+    private int experiance;
+    private int hp;
+    private int movementSpeed;
+    private int maxHp;
+    // private Point position = new Point(0,0);
+    // private Point position = new Point(50, 50);
+    // private Point position = new Point(500, 200);
+    // private Point position = new Point(999, 200);
+
+    public CharacterPrototype(EntityPrototype entProt) {
+        super(entProt);
+        // hp = maxHp;
+        // maxHp = hp;
+    }
+
+    public CharacterPrototype(TeamType teamType) {
+        super(teamType);
+        // System.out.println("Max hp init = " + maxHp);
+        // hp = maxHp;
+        // maxHp = hp;
+    }
+
+    public int getExperiance() {
+        return experiance;
+    }
+
+    public void setExperiance(int experiance) {
+        this.experiance = experiance;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        if (hp > this.maxHp) {
+            hp = this.maxHp;
+        }
+        if (hp < 0) {
+            hp = 0;
+        }
+        this.hp = hp;
+    }
+
+    public int getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    public void setMovementSpeed(int movementSpeed) {
+        this.movementSpeed = movementSpeed;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+        setHp(maxHp);
+    }
+
+
+    public void decreaseHp(int amount) {
+        // int currentHp = cgo.getCharacter().getHp();
+        // cgo.getCharacter().setHp(
+            // currentHp - amount
+        // );
+        setHp(getHp() - amount);
+    }
+
+    public void increaseHp(int amount) {
+        // int currentHp = cgo.getCharacter().getHp();
+        // cgo.getCharacter().setHp( currentHp + amount);
+        setHp(getHp() + amount);
+    }
+
+}
+package srcs.Prototypes.Characters;
+
+public class OldCharProto {
+
+}
+// public class CharacterPrototype {
+// // public class Character {
+//     private String characterName;
+//     private int experiance;
+//     private int gold;
+//     private int hp;
+//     private int movementSpeed;
+//     private int attackSpeed;
+//     private TeamType team = TeamType.PLAYER;
+//     private ImageData imageData;
+//     // private Point position = new Point(0,0);
+//     // private Point position = new Point(50, 50);
+//     // private Point position = new Point(500, 200);
+//     private Point position = new Point(999, 200);
+//     private float buildTime;
+//     private CharacterPrototype copyInstance;
+
+
+//     public CharacterPrototype(TeamType teamType) {
+//         // int spawnX = (team == TeamType.PLAYER) ? 0 : (int)MainUI.getInstance().getScreenSize().getWidth();
+//         this.team = teamType;
+//         int spawnX = (team == TeamType.PLAYER) ? 0 : (int)MainUI.getInstance().getScreenSize().getWidth();
+//         this.position = new Point(spawnX, position.y);
+//         // int spawnX = (team == TeamType.PLAYER) ? 600 : 1209;
+//     }
+
+//     public CharacterPrototype(CharacterPrototype anotherChar, TeamType teamType) {
+//         this.copyInstance = anotherChar;
+//         this.team = teamType;
+//         int spawnX = (team == TeamType.PLAYER) ? 0 : (int)MainUI.getInstance().getScreenSize().getWidth();
+//         this.position = new Point(spawnX, position.y);
+//     }
+
+//     public CharacterPrototype(String characterName, int experiance, int gold,
+//         int hp, int movementSpeed, int attackSpeed,
+//         TeamType team,
+//         ImageData imageData,
+//         float buildTime
+//     ) {
+//         this.characterName = characterName;
+//         this.experiance = experiance;
+//         this.gold = gold;
+//         this.hp = hp;
+//         this.movementSpeed = movementSpeed;
+//         this.attackSpeed = attackSpeed;
+//         this.team = team;
+//         this.imageData = imageData;
+//         this.buildTime = buildTime;
+//         int spawnX = (team == TeamType.PLAYER) ? 0 : (int)MainUI.getInstance().getScreenSize().getWidth();
+//         this.position = new Point(spawnX, position.y);
+// }
+
+//     public String getCharacterName() {
+//         return characterName;
+//     }
+
+//     public void setCharacterName(String characterName) {
+//         this.characterName = characterName;
+//     }
+
+//     public int getExperiance() {
+//         return experiance;
+//     }
+
+//     public void setExperiance(int experiance) {
+//         this.experiance = experiance;
+//     }
+
+//     public int getGold() {
+//         return gold;
+//     }
+
+//     public void setGold(int gold) {
+//         this.gold = gold;
+//     }
+
+//     public int getHp() {
+//         return hp;
+//     }
+
+//     public void setHp(int hp) {
+//         this.hp = hp;
+//     }
+
+//     public int getMovementSpeed() {
+//         return movementSpeed;
+//     }
+
+//     public void setMovementSpeed(int movementSpeed) {
+//         this.movementSpeed = movementSpeed;
+//     }
+
+//     public TeamType getTeam() {
+//         return team;
+//     }
+
+//     public void setTeam(TeamType team) {
+//         this.team = team;
+//     }
+
+//     public ImageData getImageData() {
+//         return imageData;
+//     }
+
+//     public void setImageData(ImageData imageData) {
+//         this.imageData = imageData;
+//     }
+
+//     public int getAttackSpeed() {
+//         return attackSpeed;
+//     }
+
+//     public void setAttackSpeed(int attackSpeed) {
+//         this.attackSpeed = attackSpeed;
+//     }
+
+//     public Point getPosition() {
+//         return position;
+//     }
+
+//     public void setPosition(Point position) {
+//         this.position = position;
+//     }
+
+//     public float getBuildTime() {
+//         return buildTime;
+//     }
+
+//     public void setBuildTime(float buildTime) {
+//         this.buildTime = buildTime;
+//     }
+
+//     public CharacterPrototype getCopyInstance() {
+//         // return copyInstance;
+//         if (copyInstance == null)
+//             copyInstance = new CharacterPrototype(this, team);
+//         return copyInstance;
+//     }
+
+// }
+package srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.Prototypes.Characters.CharacterPrototype;
+
+public class NatureProphet extends CharacterPrototype{
+
+    public NatureProphet(TeamType tt) {
+        super(tt);
+        ImageData grimImageData = new ImageData(
+            "characters/np.png"
+        );
+        setName("Nature prophet");
+        setExperiance(2);
+        setGold(20);
+        setMaxHp(35);
+        setMovementSpeed(5);
+        setAttackSpeed(4);
+        // setTeam(TeamType.PLAYER);
+        setImgData(grimImageData);
+        setBuildTime(4);
+        setAttackRange(150);
+        setAttackDamage(5);
+    }
+
+    // public NatureProphet(String characterName, int experiance, int gold, int hp, int movementSpeed, int attackSpeed,
+    //         TeamType team, ImageData imageData, float buildTime) {
+    //     super(characterName, experiance, gold, hp, movementSpeed
+    //     , attackSpeed, team, imageData, buildTime);
+    // }
+
+}
+
+package srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.Prototypes.Characters.CharacterPrototype;
+
+public class Morphling extends CharacterPrototype {
+
+    public Morphling(TeamType tt) {
+        super(tt);
+        ImageData grimImageData = new ImageData(
+            "characters/morphling.png"
+        );
+        setName("morphling");
+        setExperiance(1);
+        setGold(10);
+        setMaxHp(25);
+        // setHp(getMaxHp());
+        // System.out.println("max hp morph : " + getMaxHp());
+        setMovementSpeed(3);
+        setAttackSpeed(2);
+        // setTeam(TeamType.PLAYER);
+        setImgData(grimImageData);
+        setBuildTime(3);
+        setAttackRange(100);
+        setAttackDamage(8);
+    }
+
+}
+package srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.Prototypes.Characters.CharacterPrototype;
+
+public class Rubick extends CharacterPrototype {
+    public Rubick(TeamType tt) {
+        super(tt);
+        ImageData imgData = new ImageData(
+            "characters/rubick.png"
+        );
+        setName("rubick");
+        setExperiance(3);
+        setGold(40);
+        setMaxHp(30);
+        setMovementSpeed(2);
+        setAttackSpeed(1);
+        // setTeam(TeamType.PLAYER);
+        setImgData(imgData);
+        setBuildTime(2);
+        setAttackRange(200);
+        setAttackDamage(2);
+    }
+
+}
+package srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.Prototypes.Characters.CharacterPrototype;
+
+public class GrimStroke extends CharacterPrototype {
+
+    public GrimStroke(TeamType tt) {
+        super(tt);
+        ImageData grimImageData = new ImageData(
+            "characters/grimStroke.png"
+        );
+        setName("grim");
+        setExperiance(1);
+        setGold(10);
+        setMaxHp(20);
+        setMovementSpeed(3);
+        setAttackSpeed(2);
+        // setTeam(teamType);
+        setImgData(grimImageData);
+        setBuildTime(1);
+        setAttackRange(300);
+        setAttackDamage(10);
+    }
+
+}
+package srcs.Prototypes.Characters.CharactersData;
+import java.util.ArrayList;
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.GrimStroke;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Morphling;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphet;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Rubick;;
+
+public class CharactersData {
+    private static CharactersData instance = null;
+    private ArrayList<CharacterPrototype> charactersList = new ArrayList<>();
+
+    public ArrayList<CharacterPrototype> getCharactersList() {
+        return charactersList;
+    }
+    public void setCharactersList(ArrayList<CharacterPrototype> charactersList) {
+        this.charactersList = charactersList;
+    }
+    public static CharactersData getInstance() {
+        if (instance == null)
+            instance = new CharactersData();
+        return instance;
+    }
+    public CharactersData() {
+        // hp : 1 -> 100
+        // money : 1 -> 100
+        // exp : 1 -> 100
+        //movement speed : 1 - 5
+        // atk speed : 1 - 5
+
+        charactersList.add((CharacterPrototype)new GrimStroke(TeamType.PLAYER));
+        charactersList.add((CharacterPrototype)new NatureProphet(TeamType.PLAYER));
+        charactersList.add((CharacterPrototype)new Rubick(TeamType.PLAYER));
+        charactersList.add((CharacterPrototype)new Morphling(TeamType.PLAYER));
+    }
+
+}
+
+package srcs.GameUI.mainGame.SubScene.characterHpBar;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+
+import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.Interfaces.Loopable;
+
+import java.awt.Dimension;
+
+public class CharacterHpBar extends JProgressBar
+    implements Loopable {
+    private CharacterGObject cgo = null;
+
+    public CharacterHpBar(CharacterGObject cgo) {
+        if (cgo == null) System.out.println("this hpbar have no proper character to attach with.");
+        this.cgo = cgo;
+        init();
+    }
+
+    private void init() {
+        // setSize(getPreferredSize());
+        // setSize(50, 10);
+        setSize(cgo.getWidth(), 20);
+        // setBounds(0, 0, cgo.getWidth(), 20);
+        // setSize(50, 10);
+        // setPreferredSize(new Dimension(50, 10));
+        setForeground(Color.red);
+        setBackground(Color.black);
+        setStringPainted(true);
+        setValue(10);
+        // setVisible(true);
+        // repaint();
+
+        // increaseHpEveryMs(50);
+    }
+
+    public void increaseHpEveryMs(long ms) {
+        // long ms = second * 1000l;
+        new Thread(
+            () -> {
+                int maxHp = cgo.getCharacter().getMaxHp() | 100;
+                while (true) {
+                    setValue(cgo.getCharacter().getHp());
+                    if (getValue() >= maxHp) {
+                        cgo.getCharacter().setHp(0);
+                    }
+                    try {
+                        // Thread.sleep(1000);
+                        Thread.sleep(ms);
+                        cgo.getCharacter().increaseHp(1);
+                    } catch (Exception e) { System.out.println(e); }
+                }
+            }
+        ).start();
+    }
+
+
+    @Override
+    public void update() {
+        // System.out.println("update from character hp bar ");
+        // System.out.println("current hp is " +
+        //     cgo.getCharacter().getHp());
+        // System.out.format("location of hp bar is : %s\n",
+        //     this.getLocation());
+        // System.out.println("===".repeat(20));
+
+        setValue(cgo.getCharacter().getHp());
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        setLocation(cgo.getLocation());
+    }
+
+}
+package srcs.GameUI.mainGame.SubScene.GameObject.Turret;
+
+import srcs.Enums.TeamType;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.Interfaces.Loopable;
+import srcs.Interfaces.RangeUnit;
+import srcs.Prototypes.EntityPrototype;
+import srcs.Prototypes.Turrets.TurretPrototype;
+
+import java.awt.*;
+import java.awt.image.*;
+
+import helpers.ImageData;;
+
+public class TurretGObject extends GameObject implements RangeUnit {
+
+    private TurretPrototype turretPrototype;
+    private CharacterGObject closestCgo;
+
+    public TurretGObject(TurretPrototype turretPrototype) {
+        super(turretPrototype.getImgData().getSprite(), turretPrototype.getPosition(),
+                new Dimension(turretPrototype.getImgData().getImgWidth(), turretPrototype.getImgData().getImgHeight()));
+        this.turretPrototype = turretPrototype;
+    }
+
+    @Override
+    public void update() {
+        // super.update();
+        // System.out.println("update from Turret game object");
+        closestCgo = findClosestOpponent(turretPrototype);
+        // repaint();
+        // System.out.println("POSITIOn of turet = " + turretPrototype.getPosition());
+        // System.out.println("POSITIOn of turet = " + getLocation());
+
+        setLocation(turretPrototype.getPosition());
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
+        Graphics2D g2d = (Graphics2D) g;
+        if (closestCgo != null) {
+            // todo : draw line to that gameobject
+            float d = getDistanceBetweenGameObject(this, closestCgo);
+            if (d < turretPrototype.getAttackRange()) {
+                System.out.println("Closest Object exists");
+                g2d.setColor(Color.red);
+                g2d.drawLine(
+                        turretPrototype.getPosition().x, turretPrototype.getPosition().y,
+                        closestCgo.getLocation().x, closestCgo.getLocation().y);
+                g2d.setStroke(new BasicStroke(4));
+
+                // todo 2 : fire bullet to enemy -> decrease hp ->
+                attackOpponent(this.getTurretPrototype(), closestCgo.getCharacter());
+                // * --> descresase hp bar graphically
+                // * --> increase gold when die --> destory gObj
+                // fireBulletToOpponent(this, closestCgo);
+                // fireBulletToOpponent(closestCgo, this);
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("turretPrototype name : ", turretPrototype.getName());
+        // return "TurretGObject [turretPrototype=" + turretPrototype + "turretPrototype
+        // prototype is \n" + turretPrototype.toString() + "]";
+    }
+
+    @Override
+    public void fireBulletToOpponent(GameObject sender, GameObject reciever) {
+        if (sender instanceof TurretGObject) {
+            TurretGObject tgo = (TurretGObject) sender;
+            // TurretPrototype tpt = tgo.getEn
+            // tgo.
+            // todo : draw bullet to scene
+            ImageData bulletImgData = tgo.getTurretPrototype().getBulletImgData();
+            // if (bulletImgData == null) {
+            // System.out.println("bullet image data is null");
+            // }
+            BufferedImage bi = new BufferedImage(
+                    50, 50, BufferedImage.TYPE_INT_ARGB);
+            GameObject bulletGo = new GameObject(
+                    bulletImgData.getSprite(),
+                    // turretPrototype.get
+                    // bi,
+                    tgo.getLocation(),
+                    tgo.getSize());
+
+            // ! : find bug of this
+            // MainGame.getObjectsInScene().add(bulletGo);
+            // MainGame.getInstance().add(bulletGo);
+            // Mi
+        }
+
+    }
+
+    public TurretPrototype getTurretPrototype() {
+        return turretPrototype;
+    }
+
+    public void setTurret(TurretPrototype turretPrototype) {
+        this.turretPrototype = turretPrototype;
+    }
+
+    public CharacterGObject getClosestCgo() {
+        return closestCgo;
+    }
+
+    public void setClosestCgo(CharacterGObject closestCgo) {
+        this.closestCgo = closestCgo;
+    }
+
+}
+package srcs.GameUI.mainGame.SubScene.GameObject.Tower;
+
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+import srcs.Prototypes.Tower.TowerPrototype;
+
+import java.awt.Dimension;
+
+public class TowerGameObject extends GameObject {
+    private TowerPrototype towerPrototype;
+    public TowerGameObject(TowerPrototype towerPrototype) {
+        super(towerPrototype.getImageData().getSprite(),
+                towerPrototype.getPosition(), new Dimension(towerPrototype.getImageData().getImgWidth(),
+                        towerPrototype.getImageData().getImgHeight()));
+        this.towerPrototype = towerPrototype;
+    }
+
+    public TowerPrototype getTowerPrototype() {
+        return towerPrototype;
+    }
+    public void setTowerPrototype(TowerPrototype towerPrototype) {
+        this.towerPrototype = towerPrototype;
+    }
+}
+package srcs.GameUI.mainGame.SubScene.GameObject.Character;
+
+import java.awt.*;
+
+import javax.swing.JLabel;
+
+import srcs.Enums.Direction;
+import srcs.Enums.TeamType;
+import srcs.GameUI.MainUI;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.characterHpBar.CharacterHpBar;
+import srcs.Interfaces.Loopable;
+import srcs.Prototypes.Characters.*;
+import srcs.Systems.integratedSystem.IntegratedSystem;
+
+public class CharacterGObject extends GameObject {
+
+    private CharacterPrototype character;
+    private Point position;
+    private CharacterHpBar hpBar;
+    public CharacterGObject(CharacterPrototype character) {
+        super(character.getImgData().getSprite(),
+                new Point(
+                        (int) character.getPosition().getX(),
+                        (int) character.getPosition().getY()),
+                new Dimension(
+                        character.getImgData().getImgWidth(),
+                        character.getImgData().getImgHeight()));
+        this.character = character;
+        this.position = character.getPosition();
+        init();
+    }
+
+    private void init() {
+        hpBar = new CharacterHpBar(this);
+        if (hpBar != null) {
+            // System.out.format("hpBar of %s is exists : %s\n\n",
+            //     character.getName(),
+            //     hpBar.toString()
+            //     );
+            // setLayout(null);
+            //todo  : make hp bar appear on screen
+            // MainUI.getInstance().add(hpBar);
+            // MainUI.getInstance().revalidate();
+            // MainUI.getInstance().repaint();
+            MainGame.getInstance().add(hpBar);
+            MainGame.getInstance().revalidate();
+            MainGame.getInstance().repaint();
+            // this.add(hpBar);
+            // this.revalidate();
+            // this.repaint();
+            // add(hpBar);
+            // revalidate();
+            // repaint();
+            // updateUI();
+            // this.setVisible(false);
+        }
+        // setVisible(true);
+    }
+
+    // ? not called
+    // @Override
+    // public void paintComponent(Graphics g) {
+    //     System.out.println("paint component from cgo");
+    //     super.paintComponent(g);
+    //     if (hpBar != null) {
+    //         this.add(hpBar);
+    //         this.revalidate();
+    //         this.repaint();
+    //     }
+    // }
+
+    @Override
+    public void update() {
+        super.update();
+        // System.out.println("Enter update function");
+        // System.out.println(Math.random());
+        // ? reset collsion : make character movable again
+        if (hpBar != null) {
+            hpBar.update();
+        }
+
+        findClosestOpponent(character);
+
+        if (character.getHp() <= 0) {
+            destroyGameObject();
+        }
+
+        if (!getCollide()) {
+            switch (character.getTeamType()) {
+                case PLAYER:
+                    move(Direction.RIGHT);
+                    break;
+                case ENEMY:
+                    move(Direction.LEFT);
+                    break;
+                default:
+                    break;
+            }
+        } else { // stand still
+        }
+
+        checkIfCharacterOutOfScreen();
+
+
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
+
+        if (hpBar != null) {
+            hpBar.draw(g);
+        }
+    }
+
+    private void checkIfCharacterOutOfScreen() {
+        int screenWidth = MainUI.getInstance().getScreenSize().width;
+        if (getCharacter().getTeamType() == TeamType.PLAYER
+            && getX() > screenWidth) {
+            destroyGameObject();
+        }
+
+        if (getCharacter().getTeamType() == TeamType.ENEMY
+            && getX() < 0
+            ) {
+            destroyGameObject();
+        }
+    }
+
+    private void move(Direction dir) {
+        int mul = 20;
+        int x = getX();
+        int y = getY();
+        int speed = character.getMovementSpeed() * mul;
+        Point newPos = new Point(x, y);
+        switch (dir) {
+            case RIGHT:
+                newPos.setLocation(x + speed, y);
+                break;
+
+            case LEFT:
+                newPos.setLocation(x - speed, y);
+                break;
+
+            default:
+                break;
+        }
+        character.setPosition(newPos);
+        setLocation(character.getPosition());
+    }
+
+    public CharacterPrototype getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(CharacterPrototype character) {
+        this.character = character;
+    }
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public CharacterGObject copy() {
+        return new CharacterGObject(new CharacterPrototype(character));
+        // return new CharacterGObject(character);
+    }
+
+    @Override
+    public void destroyGameObject() {
+        switch (getCharacter().getTeamType()) {
+            case PLAYER:
+                IntegratedSystem.getInstance().getEnemyGoldSystem()
+                    .increasedGold(character.getGold());
+                IntegratedSystem.getInstance().getPlayerExpSystem()
+                        .increasedExperience(character.getExperiance());
+                break;
+            case ENEMY:
+                IntegratedSystem.getInstance().getPlayerGoldSystem()
+                        .increasedGold(character.getGold());
+                IntegratedSystem.getInstance().getPlayerExpSystem()
+                        .increasedExperience(character.getExperiance());
+                break;
+            default:
+                break;
+        }
+        MainGame.getInstance().remove(hpBar);
+        super.destroyGameObject();
+
+    }
+}
+package srcs.GameUI.mainGame.SubScene.GameObject;
+
+import java.awt.Graphics;
+import java.time.chrono.ThaiBuddhistChronology;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import srcs.Enums.TeamType;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.Interfaces.Loopable;
+import srcs.Prototypes.EntityPrototype;
+import srcs.Prototypes.Characters.CharacterPrototype;
+
+import java.awt.*;
+
+public class GameObject extends JPanel implements Loopable {
+    protected TeamType teamType;
+    protected Image img;
+    protected Point pos;
+    protected Dimension imgSize;
+    private boolean isCollide = false;
+    protected long spawnTime;
+
+    public GameObject(Image img, Point pos, Dimension imgSize) {
+        spawnTime = System.nanoTime();
+        setLocation(pos);
+        setImg(img);
+        // System.out.println("Position = " + xPos + " : " + yPos);
+        setSize(imgSize); // ? Important for collsion detection
+        setPreferredSize(imgSize); // ? Important for collsion detection
+        this.imgSize = imgSize;
+        this.pos = pos;
+        // repaint();
+        init();
+    }
+
+    private void init() {
+        setLayout(null);
+        // setLayout(getLayout());
+    }
+
+    public Image getImg() {
+        return img;
+    }
+
+    public void setImg(Image img) {
+        this.img = img;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        // moveRight(g);
+    }
+
+    @Override
+    public void update() {
+        // System.out.println("update from gameobjct ");
+        for (GameObject go : MainGame.getInstance().
+            getObjectsInScene()) {
+            checkCollision(this, go);
+        }
+    }
+
+    public void destroyGameObject() {
+        revalidate();
+        repaint();
+        MainGame.getInstance().removeGameObjectFromScene(this);
+    }
+
+    public GameObject copy() {
+        return new GameObject(img, pos, imgSize);
+    }
+
+    protected float getDistanceBetweenGameObject(
+        GameObject thisGo,
+        GameObject thatGo
+    ) {
+        float dx = thisGo.getX() - thatGo.getX();
+        float dy =  thisGo.getY() - thatGo.getY();
+        // System.out.println("turret position " + turret.getPosition());
+        // System.out.println("cgo postion " + cgo.getPosition());
+        // System.out.println("dx = " + dx);
+        // System.out.println("dy = " + dy);
+        double d = Math.sqrt(dx * dx + dy * dy);
+        return (float)d;
+    }
+
+    public CharacterGObject findClosestOpponent(EntityPrototype ent) {
+        double min = Integer.MAX_VALUE;
+        CharacterGObject closetCharacter = null;
+        for (GameObject gameObject : MainGame.getInstance().getObjectsInScene()) {
+            if (gameObject instanceof CharacterGObject
+                && gameObject != this
+                && gameObject != null
+            ) {
+                CharacterGObject cgo = (CharacterGObject) gameObject;
+                TeamType anotherCgoTeam = cgo.getCharacter().getTeamType();
+                if (ent.getTeamType() == anotherCgoTeam) continue;
+                // System.out.println("turret position " + ent.getPosition());
+                // System.out.println("cgo postion " + cgo.getPosition());
+                long dx = (long) (ent.getPosition().getX() - cgo.getLocation().getX());
+                long dy = (long) (ent.getPosition().getY() - cgo.getLocation().getY());
+                // System.out.println("turret position " + turret.getPosition());
+                // System.out.println("cgo postion " + cgo.getPosition());
+                // System.out.println("dx = " + dx);
+                // System.out.println("dy = " + dy);
+                double d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+                if (d < min) {
+                    min = d;
+                    closetCharacter = cgo;
+                }
+            }
+        }
+        // System.out.println("==========================".repeat(4));
+        if (min <= ent.getAttackRange()) {
+            // System.out.println("get attack");
+            if (closetCharacter != null
+                &&
+                closetCharacter.getCharacter().getTeamType()
+                    != ent.getTeamType()
+            ) {
+                // todo : combat
+                // isAttacking = true;
+                attackOpponent(ent, closetCharacter.getCharacter());
+                // attackOpponent(closestCgo.getCharacter(), character);
+                System.out.println("combat occured");
+                // System.out.println("Min = " + min);
+                // System.out.format("Name of closest character is : %s\n",
+                    // closetCharacter.getCharacter().getName());
+            }
+        }
+        // if (closetCharacter == null) { System.out.println("Closest character = NULL");}
+        return closetCharacter;
+
+    }
+
+    // protected void attackOpponent(CharacterPrototype attacker,
+    protected void attackOpponent(EntityPrototype attacker,
+        CharacterPrototype damager) {
+        // if (isAttacking)
+        new Thread(
+            () -> {
+                int atkRate = attacker.getAttackSpeed();
+                while (damager != null) {
+                    long ms = (atkRate * 10000);
+                    damager.decreaseHp(attacker.getAttackDamage());
+                    try {
+                        Thread.sleep(ms);
+                    } catch (Exception e) { }
+                }
+            }
+        ).start();
+    }
+
+
+    public Point getPos() {
+        return pos;
+    }
+
+    public void setPos(Point pos) {
+        this.pos = pos;
+    }
+
+    public Dimension getImgSize() {
+        return imgSize;
+    }
+
+    public void setImgSize(Dimension imgSize) {
+        this.imgSize = imgSize;
+    }
+
+    public boolean getCollide() {
+        return isCollide;
+    }
+
+    private void setCollide(boolean isCollide) {
+        this.isCollide = isCollide;
+    }
+
+    public long getSpawnTime() {
+        return spawnTime;
+    }
+
+    public void setSpawnTime(long spawnTime) {
+        this.spawnTime = spawnTime;
+    }
+
+    public void checkCollision(
+        GameObject thisGo,
+        GameObject thatGo
+    ) {
+        // System.out.println("W = " + this.imgSize.width);
+        // System.out.println("H = " + getHeight());
+        if (thisGo.getBounds().intersects(thatGo.getBounds()) &&
+            thisGo != thatGo &&
+            thisGo.getBounds() != null && thatGo.getBounds() != null
+        ) {
+            // ? if spawn before -> stop younger gameobject
+            // ! bug
+            if (thisGo.spawnTime < thatGo.spawnTime) {
+                thisGo.setCollide(false);
+                thatGo.setCollide(true);
+            } else {
+                thisGo.setCollide(!false);
+                thatGo.setCollide(!true);
+            }
+
+            if (thisGo.teamType != thatGo.teamType) {
+                thatGo.setCollide(true); //* for other stop
+            }
+        } else {
+            thisGo.setCollide(false);
+            thatGo.setCollide(false);
+        }
+    }
+}
+package srcs.GameUI.mainGame;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import srcs.Enums.TeamType;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Turret.TurretGObject;
+import srcs.Interfaces.ComponentSizeItf;
+import srcs.Interfaces.Loopable;
+import srcs.Prototypes.Characters.*;
+import srcs.Prototypes.Characters.CharactersData.CharactersData;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphet;
+import srcs.Prototypes.Tower.TowerPrototype;
+import srcs.Prototypes.Turrets.TurretPrototype;
+import srcs.Prototypes.Turrets.TurretsData;
+import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.function.ObjIntConsumer;
+
+import javax.imageio.stream.FileImageInputStream;
+import javax.swing.GroupLayout;
+import helpers.ImageData;
+import java.awt.image.*;
+import java.awt.event.*;;
+
+public class MainGame extends JPanel implements ComponentSizeItf,
+        Loopable {
+    private static MainGame instance = null;
+    private static ArrayList<GameObject> objectsInScene = new ArrayList<>();
+
+    public static MainGame getInstance() {
+        if (instance == null)
+            instance = new MainGame();
+        return instance;
+    }
+
+    private MainGame() {
+        init();
+    }
+
+    private void init() {
+        setBackground(new Color(242, 42, 242));
+        setForeground(new Color(100, 0, 0));
+        setPreferredSize(new Dimension(625, 400));
+
+
+        addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // CharacterPrototype np = new NatureProphet(TeamType.PLAYER);
+                // np.setPosition(getMousePosition());
+                // GameObject go = new CharacterGObject(np);
+                // objectsInScene.add(go);
+                // System.out.println("Enter main game mouse clicked.");
+                FireGunTurret fgt = new FireGunTurret();
+                fgt.setPosition(getMousePosition());
+                TurretGObject turret = new TurretGObject(fgt);
+                turret.setLocation(getMousePosition());
+                objectsInScene.add(turret);
+            }
+        });
+    }
+
+    private void drawBg(Graphics g) {
+        String imagePath = "backgrounds/dirtbackground.png";
+        // String imagePath = "backgrounds/war_bg.jpeg";
+        ImageData imgData = new ImageData(imagePath, getWidth(), getHeight());
+        Image sprite = imgData.getSprite();
+        g.drawImage(sprite, 0, 0, this);
+    }
+
+    // ! bug on start game when first clicked happend delay for 5 sec
+    private void drawGameObjects(Graphics g) {
+        try {
+            objectsInScene.stream().forEach(obj -> {
+                if (obj != null) {
+                    g.drawImage(obj.getImg(),
+                            obj.getX(), obj.getY(),
+                            this);
+                } else {
+                    System.out.println("SceneObject is null");
+                }
+            });
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override // ! loop but why
+    public void paintComponent(Graphics g) {
+        // public void draw(Graphics g) {
+        super.paintComponent(g);
+        // System.out.println("Paint component from MainGame");
+        drawBg(g);
+    // ? bug on start game when first clicked happend delay for 5 sec
+        // ! FOR DRAW ()
+        drawGameObjects(g);
+        // ! identical 1.
+        // ! UPDATE ALL MOVING GRAPHICS IN GAME (FOR MOVE)
+        try {
+            objectsInScene.forEach(obj -> {
+                if (obj != null)
+                    obj.draw(g);
+            });
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        draw(g);
+    }
+
+    // todo : recieve data from event mouse click
+    public void addGameObjectToScene(GameObject go) {
+        objectsInScene.add(go);
+    }
+
+    @Override
+    public void update() {
+        // System.out.println("update from MainGame");
+        // System.out.println(Math.random());
+        try {
+            objectsInScene.forEach(obj -> {
+                if (obj != null)
+                    obj.update();
+            });
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        // ! identical 2.
+        // objectsInScene.forEach(obj -> {
+        // if (obj != null)
+        // obj.draw(g);
+        // });
+    }
+
+    public ArrayList<GameObject> getObjectsInScene() {
+        return objectsInScene;
+    }
+
+    public void setObjectsInScene(ArrayList<GameObject> objectsInScene) {
+        MainGame.objectsInScene = objectsInScene;
+    }
+
+    public void removeGameObjectFromScene(GameObject go) {
+        try {
+            objectsInScene.remove(go);
+        } catch (Exception e) { System.out.println(e);
+        }
+    }
+}
+package srcs.GameUI.lowerBar;
+import javax.swing.*;
+
+import srcs.GameUI.lowerBar.hpPanel.HpPanel;
+import srcs.GameUI.lowerBar.timeControlBar.TimeControlBar;
+
+import java.awt.*;
+
+public class LowerBar extends JPanel {
+    private static LowerBar instance = null;
+
+    public static LowerBar getInstance() {
+        if (instance == null)
+            instance = new LowerBar();
+        return instance;
+    }
+
+    public LowerBar() {
+        init();
+        // add(new JLabel("LLLLLLLLL"));
+    }
+
+    private void init() {
+        // setBackground(new Color(22, 242, 242));
+        setBackground(Color.orange);
+        setPreferredSize(new Dimension(0,30));
+        // add(TimeControlBar.getInstance());
+
+        GroupLayout lowerBarLayout = new GroupLayout(this);
+        setLayout(lowerBarLayout);
+        lowerBarLayout.setHorizontalGroup(
+            lowerBarLayout.createParallelGroup(
+                GroupLayout.Alignment.LEADING)
+            .addGroup(
+                lowerBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TimeControlBar.getInstance(),
+                    GroupLayout.PREFERRED_SIZE,
+                    GroupLayout.DEFAULT_SIZE,
+                    GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
+                    120, Short.MAX_VALUE)
+                .addComponent(HpPanel.getInstance(),
+                    GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+            )
+        );
+        lowerBarLayout.setVerticalGroup(
+            lowerBarLayout.createParallelGroup(
+                GroupLayout.Alignment.LEADING)
+            .addGroup(lowerBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lowerBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TimeControlBar.getInstance(),
+                        GroupLayout.DEFAULT_SIZE,
+                        GroupLayout.DEFAULT_SIZE,
+                        Short.MAX_VALUE)
+                    .addGroup(lowerBarLayout.createSequentialGroup()
+                        .addComponent(HpPanel.getInstance(),
+                        GroupLayout.PREFERRED_SIZE,
+                        GroupLayout.DEFAULT_SIZE,
+                        GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                    )
+                )
+                .addContainerGap())
+        );
+    }
+
+}
+package srcs.GameUI.lowerBar.timeControlBar;
+
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.*;
+
+public class TimeControlBar extends JPanel {
+    private static TimeControlBar instance = null;
+    public static TimeControlBar getInstance() {
+        if (instance == null)
+            instance = new TimeControlBar();
+        return instance;
+    }
+
+    private TimeControlBar() {
+        init();
+    }
+
+    private void init() {
+        setBackground(new Color(142, 92, 92));
+        setPreferredSize(new Dimension(700, 100));
+        add(new JLabel("Lable me"));
+
+        GroupLayout timeControlBarLayout = new GroupLayout(this);
+        setLayout(timeControlBarLayout);
+        timeControlBarLayout.setHorizontalGroup(
+            timeControlBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 275, Short.MAX_VALUE)
+        );
+        timeControlBarLayout.setVerticalGroup(
+            timeControlBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+    }
+}
+package srcs.GameUI.lowerBar.hpPanel;
+
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.*;
+
+public class HpPanel extends JPanel {
+    private static HpPanel instance = null;
+    private HpBar playerHpBar = null;
+
+    public static HpPanel getInstance() {
+        if (instance == null)
+            instance = new HpPanel();
+        return instance;
+    }
+
+    private HpPanel() {
+        init();
+        // System.out.println("aaaaaaaaaa");
+    }
+
+    private void init() {
+        playerHpBar = new HpBar();
+        setPreferredSize(new Dimension(400, 100));
+        // setBackground(new Color(42, 242, 42));
+        setBackground(Color.blue);
+
+        // setBackground(new Color(105, 109, 109));
+        // setBackground(Color.red);
+        // add(new JLabel("HP Panel"));
+
+
+        GroupLayout hpPanelLayout = new GroupLayout(this);
+        setLayout(hpPanelLayout);
+        hpPanelLayout.setHorizontalGroup(
+            hpPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, hpPanelLayout.createSequentialGroup()
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addComponent(playerHpBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+        );
+        hpPanelLayout.setVerticalGroup(
+            hpPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(hpPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(playerHpBar, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+    }
+}
+
+package srcs.GameUI.lowerBar.hpPanel;
+
+import javax.swing.GroupLayout;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+
+import java.awt.*;
+
+public class HpBar extends JProgressBar {
+    public HpBar() {
+        init();
+    }
+    private void init() {
+        // setBackground(new java.awt.Color(255, 109, 109));
+        // setBackground(Color.red);
+        setPreferredSize(getPreferredSize());
+        // setForeground(Color.orange);
+        // setPreferredSize(new Dimension(200, 35));
+        // setPreferredSize(new Dimension(10, 100));
+        // setPreferredSize(new Dimension(100,10));
+    }
+}
+package srcs.GameUI;
+
+import javax.swing.*;
+
+import srcs.GameUI.mainGame.MainGame;
+
+import java.awt.*;
+
+
+public class MainFrame extends JFrame {
+    public MainFrame() {
+        init();
+    }
+
+    private void init() {
+        setTitle("Age of War mock");
+        // setResizable(false);
+        // setLocationRelativeTo(null); //center
+
+        // setPreferredSize(new Dimension(1400, 850));
+        setPreferredSize(new Dimension(1400, 700));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // setSize(new Dimension(1400, 850));
+        MainUI.getInstance();
+        add(MainUI.getInstance());
+        pack();
+
+    }
+}
+package srcs.GameUI.topBar.ultimateUpgradePanel.upgrade;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import srcs.Interfaces.Loopable;
+import srcs.Systems.integratedSystem.IntegratedSystem;
+
+import java.awt.*;
+
+public class UpgradePanel extends JPanel implements Loopable {
+    private static UpgradePanel instance = null;
+
+    public static UpgradePanel getInstance() {
+        if (instance == null)
+            instance = new UpgradePanel();
+        return instance;
+    }
+
+    private UpgradePanel() {
+        init();
+    }
+
+    private void init() {
+        // setPreferredSize(getPreferredSize());
+        // setSize(getPreferredSize());
+        setBackground(Color.red);
+    }
+
+    @Override
+    public void update() {
+    }
+
+    @Override
+    public void draw(Graphics g) {
+    }
+}
+package srcs.GameUI.topBar.ultimateUpgradePanel;
+
+import javax.swing.GrayFilter;
+import javax.swing.GroupLayout;
+import javax.swing.JPanel;
+
+import srcs.GameUI.topBar.TopBar;
+import srcs.GameUI.topBar.ultimateUpgradePanel.ultimate.UltimatePanel;
+import srcs.GameUI.topBar.ultimateUpgradePanel.upgrade.UpgradePanel;
+
+import java.awt.*;
+
+
+public class UltimateUpgradePanel extends JPanel {
+    private static UltimateUpgradePanel instance = null;
+
+    public static UltimateUpgradePanel getInstance() {
+        if (instance == null)
+            instance = new UltimateUpgradePanel();
+        return instance;
+    }
+    public UltimateUpgradePanel() {
+        initGraphic();
+    }
+
+    private void initGraphic() {
+
+        // setLayout(new FlowLayout());
+        // setLayout(new GridLayout(1, 0));
+
+        // System.out.println("Enter init Graphic");
+        // GroupLayout panelLayout = new GroupLayout(this);
+        // setLayout(panelLayout);
+        // panelLayout.setHorizontalGroup(
+        //     panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        //     .addGap(0, 0, Short.MAX_VALUE)
+        // );
+        // panelLayout.setVerticalGroup(
+        //     panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        //     .addGap(0, 0, Short.MAX_VALUE)
+        // );
+
+        Dimension imgSize = new Dimension(
+            50, 50
+        );
+        setPreferredSize(imgSize);
+        setBackground(Color.DARK_GRAY);
+        setOpaque(true);
+
+        setLayout(new GridLayout(1,0));
+        add(UltimatePanel.getInstance());
+        add(UpgradePanel.getInstance());
+    }
+}
+package srcs.GameUI.topBar.ultimateUpgradePanel.ultimate;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.plaf.DimensionUIResource;
+import javax.swing.plaf.FontUIResource;
+
+import helpers.ImageData;
+import srcs.Interfaces.Loopable;
+import srcs.Systems.Exp.ExpSystem;
+import srcs.Systems.integratedSystem.IntegratedSystem;
+import java.awt.*;
+import java.awt.event.*;
+
+public class UltimatePanel extends JPanel implements
+    Loopable {
+    private static UltimatePanel instance = null;
+    private Image ultimateImage;
+
+    public static UltimatePanel getInstance() {
+        if (instance == null)
+            instance = new UltimatePanel();
+        return instance;
+    }
+    public UltimatePanel() {
+        System.out.println("enter UltimatePanel");
+
+        init();
+        initEvent();
+    }
+
+    private void init() {
+        // setBackground(Color.blue);
+        ultimateImage = new ImageData("characters/phynix_ck_cw.png").getSprite();
+    }
+
+    private void initEvent() {
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //todo : metheor depends on each ages
+            }
+        });
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        g.drawImage(ultimateImage, 0, 0, null);
+    }
+
+    @Override
+    public void update() {
+    }
+
+    // not connected manually from mainUI.draw
+    @Override
+    public void draw(Graphics g) {
+    }
+}
+package srcs.GameUI.topBar.unitsBox.SubUnit;
+
+import javax.swing.GroupLayout;
+import javax.swing.JPanel;
+
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.GameUI.topBar.goldExpProgPanel.qProgress.QueueProgress;
+import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Systems.Tooltips.CharacterTooltip;
+import srcs.Systems.integratedSystem.IntegratedSystem;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.Time;
+import javax.swing.Timer;;
+
+public class SubUnit extends JPanel {
+    private Image img; // pointer is points to the same object as character's image
+    private CharacterPrototype character;
+    private CharacterTooltip characterTooltip;
+
+    public SubUnit(CharacterPrototype c) {
+        initGraphic();
+        initEvent();
+        this.character = c;
+        this.img = character.getImgData().getSprite();
+        characterTooltip = new CharacterTooltip(c);
+    }
+
+    private void initEvent() {
+        addMouseListener(new MouseAdapter() {
+            private Timer timer;
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // System.out.println(e);
+                // todo : send character data by mouse clikc
+                GameObject go = new CharacterGObject(character);
+                if (QueueProgress.getInstance().isProgressBarAvailable()
+                        &&
+                        IntegratedSystem.getInstance().getPlayerGoldSystem()
+                                .getGold() > character.getGold()) {
+                    MainGame.getInstance().addGameObjectToScene(go);
+                    QueueProgress.getInstance().startQueue(character.getBuildTime());
+                    IntegratedSystem.getInstance().getPlayerGoldSystem()
+                            .decreasedGold(character.getGold());
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                timer = new Timer(1, new ActionListener() {
+                    public void actionPerformed(ActionEvent ev) {
+
+                        // getPos
+                        // Point cursorPos = MainGame.getInstance().getMousePosition();
+                        Point cursorPos = e.getPoint(); //? relative to subUnit JPanel
+                        System.out.println("X of image : " + getX()); // absolute pos
+                        System.out.println("Width of image : " + getSize().getWidth()); // absolute pos
+                        System.out.println(cursorPos);
+                        // characterTooltip.setVisible(false);
+                        characterTooltip.setLocation(e.getPoint());
+                        // while ()
+                        // characterTooltip.setLocation(new Point(
+                        //     e.getX() + 20,
+                        //     e.getY() + 25
+                        // ));
+                        // characterTooltip.removeAll();
+                        // characterTooltip.repaint();
+                        // characterTooltip.
+                        // characterTooltip.
+                        characterTooltip.setVisible(true);
+                    }
+                });
+                timer.start();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                if (timer != null) {
+                    timer.stop();
+                    timer = null;
+                }
+                characterTooltip.setVisible(false);
+            }
+
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent ev) {
+            }
+
+        });
+    }
+
+    private void initGraphic() {
+        GroupLayout unitPanelLayout = new GroupLayout(this);
+        setLayout(unitPanelLayout);
+        unitPanelLayout.setHorizontalGroup(
+                unitPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE));
+        unitPanelLayout.setVerticalGroup(
+                unitPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE));
+
+        Dimension subUnitPanelDimension = new Dimension(
+                50, 50);
+        setPreferredSize(subUnitPanelDimension);
+        setBackground(Color.yellow);
+        setOpaque(true);
+
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        drawUnit(g);
+    }
+
+    private void drawUnit(Graphics g) {
+        if (img != null) {
+            g.drawImage(img,
+                    0, 0,
+                    getWidth(), getHeight(), null);
+            // 100, 100, null);
+            // 50, 50, null);
+
+        } else {
+            System.out.println("Image does not exist");
+        }
+    }
+
+    public Image getImg() {
+        return img;
+    }
+
+    public void setImg(Image img) {
+        this.img = img;
+        // repaint();
+    }
+
+    public CharacterPrototype getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(CharacterPrototype character) {
+        this.character = character;
+    }
+
+}
+package srcs.GameUI.topBar.unitsBox;
+import javax.swing.JPanel;
+
+import srcs.GameUI.topBar.TopBar;
+import srcs.GameUI.topBar.unitsBox.SubUnit.SubUnit;
+import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Characters.CharactersData.CharactersData;
+import srcs.Systems.AgeSystem.AgeData;
+import srcs.Systems.AgeSystem.AgeList.StoneAge;
+
+import java.awt.*;
+import java.util.ArrayList;;
+
+public class UnitsBox extends JPanel {
+    private static UnitsBox instance = null;
+    private int numberOfUnits = 4;
+    private static ArrayList<SubUnit> unitBoxes = new ArrayList<>();
+    // private static ArrayList<JPanel> unitBoxes = new ArrayList<>();
+
+    private UnitsBox() {
+        init();
+        TopBar.getInstance().add(this);
+    }
+
+    public static UnitsBox getInstance() {
+        if (instance == null)
+            instance = new UnitsBox();
+        return instance;
+    }
+
+    private void init() {
+        // setBackground(new Color(124, 50, 42));
+        setBackground(Color.cyan);
+        setLayout(new GridLayout(1, 0, 20, 10));
+
+        // System.out.println(subUnitPanelDimension.toString());
+
+        for (int i = 0; i < numberOfUnits; i++) {
+            try {
+                // CharacterPrototype character = CharactersData.getInstance().getCharactersList().get(i);
+                CharacterPrototype character = StoneAge.getInstance().
+                    getCharacterPrototypes().get(i);
+                SubUnit unit = new SubUnit(character);
+                unitBoxes.add(unit);
+
+            } catch (Exception e) { System.out.println(e); }
+        }
+        unitBoxes.stream().forEach(panel -> {
+            add(panel);
+        });
+
+    }
+
+    public int getNumberOfUnits() {
+        return numberOfUnits;
+    }
+
+    public void setNumberOfUnits(int numberOfUnits) {
+        this.numberOfUnits = numberOfUnits;
+    }
+
+    public static ArrayList<SubUnit> getUnitBoxes() {
+        return unitBoxes;
+    }
+
+    public static void setUnitBoxes(ArrayList<SubUnit> unitBoxes) {
+        UnitsBox.unitBoxes = unitBoxes;
+    }
+
+
+}
+package srcs.GameUI.topBar.goldExpProgPanel.qProgress;
+
+import java.awt.Graphics;
+
+import javax.swing.JProgressBar;
+
+import srcs.Interfaces.Loopable;
+
+public class QueueProgress extends JProgressBar implements
+    Loopable {
+    private static QueueProgress instance = null;
+    // private float timeToUseInSec = 5;
+    private float timeToUseInSec;
+    private boolean isEnableCounting = false;
+    // ! very crucial attribute
+    private boolean isProgressBarAvailable = true;
+
+
+    private QueueProgress() {
+        init();
+    }
+
+    private void init() {
+        // setSize(200, getHeight());
+        setStringPainted(true);
+        setLayout(null);
+        setValue(0);
+    }
+
+    public static QueueProgress getInstance() {
+        if (instance == null)
+            instance = new QueueProgress();
+        return instance;
+    }
+
+    public void startQueue(float timeToUseInSec) {
+        if (isProgressBarAvailable) {
+            isProgressBarAvailable = false;
+            this.timeToUseInSec = timeToUseInSec;
+            isEnableCounting = true;
+        }
+    }
+    @Override
+    public void update() {
+        if (isEnableCounting) {
+            isEnableCounting = false; // * important line : prevent thread to overly generate new thread
+            isProgressBarAvailable = false;
+            new Thread(
+                () -> {
+                    while (true) {
+                        if (getValue() >= 100) {
+                            setValue(0);
+                            isEnableCounting = false;
+                            break;
+                        }
+                        long ms = ((long)timeToUseInSec * 10);
+                        setValue(getValue() + 1);
+                        try {
+                            Thread.sleep(ms);
+                        } catch (Exception e) { System.out.println(e); }
+                    }
+                    isProgressBarAvailable = true;
+                }
+            ).start();
+        }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        // startQueue(2);
+        // if (System.nanoTime() > expectedEndTime) {
+            // setValue(0);
+        // }
+        // setValue(getValue() + 1);
+    }
+
+    public boolean isProgressBarAvailable() {
+        return isProgressBarAvailable;
+    }
+
+    public void setProgressBarAvailable(boolean isProgressBarAvailable) {
+        this.isProgressBarAvailable = isProgressBarAvailable;
+    }
+
+}
+package srcs.GameUI.topBar.goldExpProgPanel.expPanel;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.plaf.DimensionUIResource;
+import javax.swing.plaf.FontUIResource;
+
+import srcs.Interfaces.Loopable;
+import srcs.Systems.Exp.ExpSystem;
+import srcs.Systems.integratedSystem.IntegratedSystem;
+
+import java.awt.Dimension;
+import java.awt.Font;
+
+public class ExpPanel extends JPanel implements
+    Loopable {
+    private static ExpPanel instance = null;
+    private JLabel expLabel;
+    private int expToShow;
+
+    public static ExpPanel getInstance() {
+        if (instance == null)
+            instance = new ExpPanel();
+        return instance;
+    }
+    public ExpPanel() {
+        init();
+    }
+
+    private void init() {
+        setBackground(Color.blue);
+        expLabel = new JLabel("EXP : ");
+        Font f = new Font(Font.SANS_SERIF, Font.ROMAN_BASELINE, 40);
+        expLabel.setFont(f);
+        expLabel.setForeground(Color.green);
+        add(expLabel);
+
+    }
+    @Override
+    public void update() {
+        expToShow = IntegratedSystem.getInstance()
+            .getPlayerExpSystem().getExperiance();
+    }
+    @Override
+    public void draw(Graphics g) {
+        String expString = String.valueOf(expToShow + "🌟");
+        expLabel.setPreferredSize(new Dimension(
+            200, 100
+        ));
+        expLabel.setText(expString);
+    }
+}
+package srcs.GameUI.topBar.goldExpProgPanel;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
+import javax.swing.JPanel;
+import javax.swing.plaf.basic.BasicBorders;
+
+import srcs.GameUI.topBar.TopBar;
+import srcs.GameUI.topBar.goldExpProgPanel.expPanel.ExpPanel;
+import srcs.GameUI.topBar.goldExpProgPanel.goldPanel.GoldPanel;
+import srcs.GameUI.topBar.goldExpProgPanel.qProgress.QueueProgress;
+
+import java.awt.*;;
+
+public class GoldExpProgPanel extends JPanel {
+    private static GoldExpProgPanel instance = null;
+
+    public static GoldExpProgPanel getInstance() {
+        if (instance == null)
+            instance = new GoldExpProgPanel();
+        return instance;
+    }
+
+    private GoldExpProgPanel() {
+        init();
+    }
+
+    public void init() {
+        // setBackground(new Color(2, 150, 22));
+        setBackground(Color.yellow);
+        // setPreferredSize(new Dimension(100, getHeight()));
+        // setSize(new Dimension(100, getHeight()));
+
+        GroupLayout upgradesBoxLayout = new GroupLayout(this);
+        setLayout(upgradesBoxLayout);
+        upgradesBoxLayout.setHorizontalGroup(
+            upgradesBoxLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 208, Short.MAX_VALUE)
+        );
+        upgradesBoxLayout.setVerticalGroup(
+            upgradesBoxLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 55, Short.MAX_VALUE)
+        );
+
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        JPanel topPan = new JPanel();
+        topPan.setLayout(new BoxLayout(topPan, BoxLayout.X_AXIS));
+        topPan.add(ExpPanel.getInstance());
+        topPan.add(GoldPanel.getInstance());
+        add(topPan);
+
+        //todo : progress Q bar
+        JPanel botPan = new JPanel();
+        botPan.add(QueueProgress.getInstance());
+        add(botPan);
+
+
+        // setLayout(new BorderLayout());
+        // add(ExpPanel.getInstance(), BorderLayout.WEST);
+        // add(GoldPanel.getInstance(), BorderLayout.EAST);
+    }
+}
+package srcs.GameUI.topBar.goldExpProgPanel.goldPanel;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import srcs.Interfaces.Loopable;
+import srcs.Systems.integratedSystem.IntegratedSystem;
+
+import java.awt.*;
+
+public class GoldPanel extends JPanel implements Loopable {
+    private static GoldPanel instance = null;
+    private JLabel goldLabel;
+    private int goldAmout = 0;
+    private Font goldFont;
+
+    public static GoldPanel getInstance() {
+        if (instance == null)
+            instance = new GoldPanel();
+        return instance;
+    }
+
+    private GoldPanel() {
+        init();
+    }
+
+    private void init() {
+        // setPreferredSize(getPreferredSize());
+        // setSize(getPreferredSize());
+        setBackground(Color.red);
+        goldLabel = new JLabel("GOLD : ");
+        goldFont = new Font(Font.SANS_SERIF, Font.PLAIN, 50);
+        goldLabel.setFont(goldFont);
+        add(goldLabel);
+        System.out.println("gold label inited");
+        goldLabel.setForeground(Color.orange);
+    }
+
+    // @Override
+    // protected void paintComponent(Graphics g) {
+    // super.paintComponent(g);
+    // }
+    @Override
+    public void update() {
+        // System.out.println("update from goldPanel");
+        // goldAmout = GoldSystem.getInstance().
+        // ? on changing stage of gold -> update goldLabel size
+        // if (goldAmout != IntegratedSystem.getInstance().
+        // getPlayerGoldSystem().getGold()
+        // ) {
+        // goldLabel.setFont(new Font(
+        // Font.SANS_SERIF, Font.BOLD,
+        // // (int)(Math.random() * 50)
+        // goldFont.getSize() * 2
+        // ));
+        // }
+        // goldLabel.setFont(new Font(
+        // Font.SANS_SERIF, Font.BOLD,
+        // // (int)(Math.random() * 50)
+        // goldFont.getSize() / 2
+        // ));
+
+        goldAmout = IntegratedSystem.getInstance().getPlayerGoldSystem().getGold();
+
+        // System.out.println("gold amout = " + goldAmout);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        // int rand = (int)(Math.random() * 100);
+        String goldStr = String.valueOf(goldAmout + "💲");
+        goldLabel.setPreferredSize(new Dimension(200, 100));
+        goldLabel.setText(goldStr);
+    }
+}
+package srcs.GameUI.topBar.turretsBox.SubTurret;
+
+import javax.swing.JPanel;
+import javax.swing.plaf.metal.MetalBorders.PaletteBorder;
+
+import srcs.GameUI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Turret.TurretGObject;
+import srcs.Prototypes.Tower.TowerPrototype;
+import srcs.Prototypes.Turrets.TurretPrototype;
+import srcs.Systems.integratedSystem.IntegratedSystem;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;;
+
+public class SubTurret extends JPanel {
+    // private Image turretImage;
+    private TurretPrototype turretPrototype;
+
+    public SubTurret(TurretPrototype tp) {
+        // System.out.println("Enter subTurret class");
+        this.turretPrototype = tp;
+        // this.turretImage = tp.getImgData().getSprite();
+        initGraphic();
+        initEvent();
+    }
+
+    private void initGraphic() {
+        // System.out.println("Enter init Graphic");
+        GroupLayout panelLayout = new GroupLayout(this);
+        setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+                panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE));
+        panelLayout.setVerticalGroup(
+                panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE));
+
+        Dimension imgSize = new Dimension(
+                50, 50);
+        setPreferredSize(imgSize);
+        setBackground(Color.red);
+        setOpaque(true);
+
+    }
+
+    private void initEvent() {
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // TowerPrototype.
+                // todo : ADD TURRET OT PLAYER'S TOWER
+                // System.out.println(e);
+                TurretGObject turretGObject = new TurretGObject(turretPrototype);
+                // turretGObject.setLocation(getMousePosition());
+                // turretGObject.getTurret().setPosition(
+                // new Point(500, 300));
+                // MainGame.getInstance().addGameObjectToScene(turretGObject);
+                TowerPrototype playerTowerPrototype = IntegratedSystem.getInstance().getPlayerTowerSystem()
+                        .getTowerPrototype();
+                if (IntegratedSystem.getInstance().getPlayerGoldSystem().getGold() > turretGObject.getTurretPrototype()
+                        .getGold()) {
+                    if (playerTowerPrototype.getTurretBelow() == null) {
+                        playerTowerPrototype.setTurretBelow(turretGObject);
+
+                        IntegratedSystem.getInstance().getPlayerGoldSystem()
+                                .decreasedGold(
+                                        turretGObject.getTurretPrototype().getGold());
+                    } else if (playerTowerPrototype.getTurretAbove() == null) {
+                        playerTowerPrototype.setTurretAbove(turretGObject);
+                        IntegratedSystem.getInstance().getPlayerGoldSystem()
+                                .decreasedGold(
+                                        turretGObject.getTurretPrototype().getGold());
+                    }
+                } else {
+                    System.out.println("Not enough money!!!");
+                }
+                // turretGObject.repaint();
+            }
+        });
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        // System.out.println("Enter paint comp from turetsBox");
+        super.paintComponent(g);
+        // g.drawImage(turretImage,
+        // System.out.println("sprint path : " +
+        // turretPrototype.getImgData().getFullPath());
+        if (turretPrototype.getImgData().getSprite() != null) {
+            g.drawImage(turretPrototype.getImgData().getSprite(),
+                    0,
+                    0,
+                    getWidth(),
+                    getHeight(),
+                    null);
+        } else {
+            System.out.println("no turret image sprint");
+        }
+    }
+}
+package srcs.GameUI.topBar.turretsBox;
+
+import javax.swing.GroupLayout;
+import javax.swing.JPanel;
+
+import srcs.GameUI.topBar.TopBar;
+import srcs.GameUI.topBar.turretsBox.SubTurret.SubTurret;
+import srcs.Prototypes.Turrets.TurretPrototype;
+import srcs.Prototypes.Turrets.TurretsData;
+
+import java.awt.*;
+import java.util.ArrayList;;
+
+public class TurretsBox extends JPanel {
+    private static TurretsBox instance = null;
+    private int numberOfTurrets = 2;
+    private ArrayList<SubTurret> subTurretBoxes = new ArrayList<>();
+
+    private TurretsBox() {
+        initLayout();
+        initTurrets();
+        // TopBar.getInstance().add(this);
+    }
+
+    public static TurretsBox getInstance() {
+        if (instance == null) {
+            instance = new TurretsBox();
+        }
+        return instance;
+    }
+
+    private void initLayout() {
+        setBackground(new Color(22, 100, 242));
+        setLayout(new GridLayout(1, 0, 20, 10));
+    }
+
+    private void initTurrets() {
+        for (int i = 0; i < numberOfTurrets; i++) {
+            // String relPath = "turrets/chinese_canon.png";
+            TurretPrototype turretPrototype = TurretsData.getInstance()
+                    .getAvailableTurrents().get(i);
+
+            // System.out.println(turretPrototype.getImgData().getFullPath());
+            // System.out.println(turretPrototype.getName());
+            SubTurret subTurret = new SubTurret(turretPrototype);
+            subTurretBoxes.add(subTurret);
+        }
+        subTurretBoxes.stream().forEach(st -> {
+            add(st);
+        });
+    }
+}
+package srcs.GameUI.topBar;
+
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
+import srcs.GameUI.topBar.goldExpProgPanel.GoldExpProgPanel;
+import srcs.GameUI.topBar.turretsBox.TurretsBox;
+import srcs.GameUI.topBar.ultimateUpgradePanel.UltimateUpgradePanel;
+import srcs.GameUI.topBar.unitsBox.UnitsBox;
+import srcs.Interfaces.ComponentSizeItf;
+
+// import srcs.UI.topBar.upgradesBox.UpgradesBox;
+import java.awt.*;
+
+// public class TopBar extends JPanel {
+public class TopBar extends JPanel implements ComponentSizeItf {
+    private static TopBar instance = null;
+
+    public static TopBar getInstance() {
+        if (instance == null)
+            instance = new TopBar();
+        return instance;
+    }
+
+    private TopBar() {
+        init();
+    }
+
+    private void init() {
+        setBackground(new Color(242, 242, 42));
+        setPreferredSize(new Dimension(0, 55));
+        setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+
+        // add(UnitsBox.getInstance());
+        // add(TurretsBox.getInstance());
+        // add(UpgradesBox.getInstance());
+    }
+}
+package srcs.GameUI;
+
+import javax.swing.*;
+
+import srcs.GameUI.lowerBar.LowerBar;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.topBar.TopBar;
+import srcs.GameUI.topBar.goldExpProgPanel.GoldExpProgPanel;
+import srcs.GameUI.topBar.goldExpProgPanel.expPanel.ExpPanel;
+import srcs.GameUI.topBar.goldExpProgPanel.goldPanel.GoldPanel;
+import srcs.GameUI.topBar.goldExpProgPanel.qProgress.QueueProgress;
+import srcs.GameUI.topBar.turretsBox.TurretsBox;
+import srcs.GameUI.topBar.ultimateUpgradePanel.UltimateUpgradePanel;
+import srcs.GameUI.topBar.unitsBox.UnitsBox;
+import srcs.Systems.EnemySystem.EnemyIntegratedSystem;
+
+import java.awt.*;
+
+
+public class MainUI extends JPanel implements Runnable {
+    Thread gameThread;
+    private JPanel lowerBar;
+    private JPanel mainGame;
+    private JPanel topBar;
+    private static MainUI instance = null;
+    private Dimension screenSize = Toolkit.getDefaultToolkit()
+        .getScreenSize();
+    private final int FPS = 60;
+
+
+    public static MainUI getInstance() {
+        if (instance == null)
+            instance = new MainUI();
+        return instance;
+    }
+
+    private MainUI() {
+        startGameThread();
+    }
+
+    private void startGameThread() {
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+    @Override
+    public void run() {
+        init();
+        System.out.println("after init");
+        gameStart();
+    }
+
+    private void gameStart() {
+        double drawInterval = 1000000000 / FPS;
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
+        long timer = 0;
+
+        while (gameThread != null) {
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / drawInterval;
+            timer += (currentTime - lastTime);
+            lastTime = currentTime;
+            if (delta >= 1) {
+                update();
+                repaint();
+                delta--;
+            }
+            if (timer >= 1000000000) {
+                timer = 0;
+            }
+        }
+    }
+
+
+    private void init() {
+
+        // setPreferredSize(new Dimension(1400, 850));
+        setBackground(new Color(100, 22, 242));
+        System.out.println("Init in MainUI panel");
+        topBar = TopBar.getInstance();
+        topBar.add(UnitsBox.getInstance());
+        topBar.add(TurretsBox.getInstance());
+        topBar.add(UltimateUpgradePanel.getInstance());
+        topBar.add(GoldExpProgPanel.getInstance());
+
+
+        mainGame = MainGame.getInstance();
+        // mainGame.draw
+        lowerBar = LowerBar.getInstance();
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(topBar);
+        add(mainGame);
+        add(lowerBar);
+    }
+
+    private void update() {
+        // System.out.println("kkkk");
+        MainGame.getInstance().update();
+        GoldPanel.getInstance().update();
+        ExpPanel.getInstance().update();
+        QueueProgress.getInstance().update();
+        EnemyIntegratedSystem.getInstance().update();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        MainGame.getInstance().draw(g);
+        GoldPanel.getInstance().draw(g);
+        ExpPanel.getInstance().draw(g);
+        QueueProgress.getInstance().draw(g);
+        EnemyIntegratedSystem.getInstance().draw(g);
+    }
+
+    public Dimension getScreenSize() {
+        return screenSize;
+    }
+
+    public int getFPS() {
+        return FPS;
+    }
+}
+package srcs.Systems.integratedSystem;
+
+import srcs.Systems.AgeSystem.AgeList.StoneAge;
+import srcs.Systems.Exp.ExpSystem;
+import srcs.Systems.Gold.GoldSystem;
+import srcs.Systems.TowerSystem.TowerSystem;
+
+public class IntegratedSystem {
+    private static IntegratedSystem instance;
+    private GoldSystem playerGoldSystem;
+    private GoldSystem enemyGoldSystem;
+
+    private ExpSystem playerExpSystem;
+    private ExpSystem enemyExpSystem;
+
+    private TowerSystem playerTowerSystem;
+    private TowerSystem enemyTowerSystem;
+
+    public static IntegratedSystem getInstance() {
+        if (instance == null)
+            instance = new IntegratedSystem();
+        return instance;
+    }
+
+    private IntegratedSystem() {
+        startSystem();
+    }
+
+    private void startSystem() {
+        // StoneAge.getInstance();
+
+        playerGoldSystem = new GoldSystem(300);
+        // enemyGoldSystem = new GoldSystem(500);
+        // enemyGoldSystem = new GoldSystem(100);
+        enemyGoldSystem = new GoldSystem(30);
+
+        playerExpSystem = new ExpSystem(50);
+        enemyExpSystem = new ExpSystem(75);
+
+        playerTowerSystem = new TowerSystem("tower/tower1.png");
+
+
+    }
+
+    public GoldSystem getPlayerGoldSystem() {
+        return playerGoldSystem;
+    }
+
+    public GoldSystem getEnemyGoldSystem() {
+        return enemyGoldSystem;
+    }
+
+    public ExpSystem getPlayerExpSystem() {
+        return playerExpSystem;
+    }
+
+    public ExpSystem getEnemyExpSystem() {
+        return enemyExpSystem;
+    }
+
+    public TowerSystem getPlayerTowerSystem() {
+        return playerTowerSystem;
+    }
+
+    public TowerSystem getEnemyTowerSystem() {
+        return enemyTowerSystem;
+    }
+}
+package srcs.Systems.queueSystem;
+
+import srcs.Prototypes.Characters.CharacterPrototype;
+
+public class QueueSystem {
+    CharacterPrototype currentBuildCharacter;
+    int buildPercentage;
+
+    public QueueSystem() {
+
+    }
+}
+package srcs.Systems.TowerSystem;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
+import srcs.Interfaces.Loopable;
+import srcs.Prototypes.Tower.TowerPrototype;
+
+import java.awt.*;
+
+public class TowerSystem implements Loopable {
+
+    private TowerPrototype towerPrototype;
+
+    public TowerSystem(String initTowerRelPath) {
+        ImageData towerImgData = new ImageData(
+                // "tower/tower1.png", 116, 228);
+                initTowerRelPath, 116, 228);
+        towerPrototype = new TowerPrototype(1000,
+                TeamType.PLAYER,
+                null,
+                null,
+                towerImgData,
+                new Point(50, 210));
+        TowerGameObject playerTowerGameObject = new TowerGameObject(towerPrototype);
+        MainGame.getInstance().addGameObjectToScene(playerTowerGameObject);
+
+    }
+
+    @Override
+    public void update() {
+    }
+
+    @Override
+    public void draw(Graphics g) {
+
+    }
+
+    public TowerPrototype getTowerPrototype() {
+        return towerPrototype;
+    }
+
+    public void setTowerPrototype(TowerPrototype towerPrototype) {
+        this.towerPrototype = towerPrototype;
+    }
+}
+package srcs.Systems.AgeSystem.AgeList;
+
+import java.awt.Image;
+import java.awt.Point;
+import java.nio.charset.spi.CharsetProvider;
+import java.text.RuleBasedCollator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+import helpers.ImageData;
+import srcs.Enums.TeamType;
+import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.*;
+import srcs.Prototypes.Tower.TowerPrototype;
+import srcs.Prototypes.Turrets.TurretPrototype;
+import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
+import srcs.Prototypes.Turrets.TurretLists.RedLaserTurret;
+import srcs.Systems.AgeSystem.AgeData;
+
+public class StoneAge extends AgeData {
+    private static AgeData instance;
+
+    public static AgeData getInstance() {
+        if (instance == null) instance = new StoneAge();
+        return instance;
+    }
+
+    public StoneAge() {
+        setBackgroundImage(getBackgroundImage());
+
+        CharacterPrototype[] cps = {
+            new GrimStroke(TeamType.PLAYER),
+            new NatureProphet(TeamType.PLAYER),
+            new Rubick(TeamType.PLAYER),
+            new Morphling(TeamType.PLAYER)
+        };
+        setCharacterPrototypes(
+            new ArrayList<CharacterPrototype>(
+                Arrays.asList(cps)
+            )
+        );
+
+
+        TurretPrototype[] turretPrototypes = {
+            new RedLaserTurret(),
+            new FireGunTurret()
+        };
+        setTurretPrototypes(
+            new ArrayList<TurretPrototype>(
+                Arrays.asList(turretPrototypes)
+            )
+        );
+
+        ImageData towerImgData = new ImageData(
+                "tower/tower1.png", 116, 228);
+        TowerPrototype towerPrototype = new TowerPrototype(1000,
+                TeamType.PLAYER,
+                null,
+                null,
+                towerImgData,
+                new Point(50, 210));
+        setTowerPrototype(towerPrototype);
+    // new Tower
+
+        setExpRequiredToUpgrade(1000);
+    }
+
+}
+package srcs.Systems.AgeSystem;
+import java.awt.*;
+import java.util.ArrayList;
+
+import helpers.ImageData;
+import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Tower.TowerPrototype;
+import srcs.Prototypes.Turrets.TurretPrototype;
+
+public abstract class AgeData {
+    private Image backgroundImage;
+    private ArrayList<CharacterPrototype>  characterPrototypes = new ArrayList<>();
+    private ArrayList<TurretPrototype> turretPrototypes = new ArrayList<>();
+    // private Image ultimateGameObject;
+    private TowerPrototype towerPrototype;
+    private int expRequiredToUpgrade;
+
+
+
+    // protected AgeData(String relPathToBgImage,
+    //     ArrayList<CharacterPrototype> characterPrototypes,
+    //     ArrayList<TurretPrototype> turretPrototypes,
+    //     TowerPrototype towerPrototype,
+    //     int expRequiredToUpgrade
+    // ) {
+    //     this.backgroundImage = new ImageData(relPathToBgImage).getSprite();
+    //     this.characterPrototypes = characterPrototypes;
+    //     this.turretPrototypes = turretPrototypes;
+    //     this.expRequiredToUpgrade = expRequiredToUpgrade;
+    // }
+
+    protected AgeData() { }
+
+    public Image getBackgroundImage() {
+        return backgroundImage;
+    }
+
+    public void setBackgroundImage(Image backgroundImage) {
+        this.backgroundImage = backgroundImage;
+    }
+
+    public ArrayList<CharacterPrototype> getCharacterPrototypes() {
+        return characterPrototypes;
+    }
+
+    public void setCharacterPrototypes(ArrayList<CharacterPrototype> characterPrototypes) {
+        this.characterPrototypes = characterPrototypes;
+    }
+
+    public ArrayList<TurretPrototype> getTurretPrototypes() {
+        return turretPrototypes;
+    }
+
+    public void setTurretPrototypes(ArrayList<TurretPrototype> turretPrototypes) {
+        this.turretPrototypes = turretPrototypes;
+    }
+
+    public TowerPrototype getTowerPrototype() {
+        return towerPrototype;
+    }
+
+    public void setTowerPrototype(TowerPrototype towerPrototype) {
+        this.towerPrototype = towerPrototype;
+    }
+
+    public int getExpRequiredToUpgrade() {
+        return expRequiredToUpgrade;
+    }
+
+    public void setExpRequiredToUpgrade(int expRequiredToUpgrade) {
+        this.expRequiredToUpgrade = expRequiredToUpgrade;
+    }
+}
+package srcs.Systems.EnemySystem;
+
+import java.awt.Graphics;
+import java.nio.charset.CodingErrorAction;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import srcs.Enums.TeamType;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.Interfaces.Loopable;
+import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Characters.CharactersData.CharactersData;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Morphling;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphet;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Rubick;
+import srcs.Systems.Gold.GoldSystem;
+import srcs.Systems.integratedSystem.IntegratedSystem;
+
+import java.awt.Color;
+
+public class EnemyIntegratedSystem implements Loopable {
+    private static EnemyIntegratedSystem instance;
+    private GoldSystem enemyGoldSystem;
+    private ArrayList<GameObject> currentAvailableCharacters
+    // private List<CharacterGObject> currentAvailableCharacters
+            = new ArrayList<>();
+
+    public static EnemyIntegratedSystem getInstance() {
+        if (instance == null)
+            instance = new EnemyIntegratedSystem();
+        return instance;
+    }
+
+    public EnemyIntegratedSystem() {
+        startSystem();
+    }
+
+    private void startSystem() {
+        // currentAvailableCharacters = CharactersData.getInstance().
+        // getCharactersList().stream().map(cData -> new CharacterGObject(cData))
+        // .collect(Collectors.toList());
+        CharactersData.getInstance().getCharactersList()
+                .forEach(character -> {
+                    GameObject go = new CharacterGObject(character);
+                    currentAvailableCharacters.add(go);
+                });
+        // currentAvailableCharacters.forEach(cgo -> {
+        // GameObject go = new CharacterGObject(character);
+        // });
+    }
+
+    @Override
+    public void update() {
+        enemyGoldSystem = IntegratedSystem.getInstance().getEnemyGoldSystem();
+        // System.out.println("enemy start loop");
+        try {
+            Thread.sleep(100);
+            // Thread.sleep(10);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        // System.out.println("Enemy Gold = " + enemyGoldSystem.getGold());
+
+        if (enemyGoldSystem.getGold() > 0) {
+            // int ranI = (int)(Math.random() * 4);
+            // CharacterGObject cgo =
+            // (CharacterGObject)currentAvailableCharacters.get(ranI).copy();
+            // cgo.getCharacter().setTeam(TeamType.ENEMY);
+            // MainGame.getObjectsInScene().add(cgo);
+
+            // * it's Work
+            CharacterPrototype dummy = new Morphling(TeamType.ENEMY);
+            // dummy.setTeamType(TeamType.ENEMY);
+            CharacterGObject c = new CharacterGObject(dummy);
+            // todo : make this enemy system usable
+            MainGame.getInstance().addGameObjectToScene(c);
+            enemyGoldSystem.decreasedGold(c
+                    .getCharacter().getGold());
+
+            // MainGame.getObjectsInScene().add()
+        } else {
+            // enemyGoldSystem.setGold(1000);
+        }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+    }
+}
+package srcs.Systems.Gold;
+
+public class GoldSystem {
+    private int gold;
+
+    public GoldSystem(int startGold) {
+        gold = startGold;
+    }
+
+    public void increasedGold(int amount) { // kill enemies
+        gold += amount;
+    }
+
+    public void decreasedGold(int amount) { // buy or upgrade sth
+        gold -= amount;
+        if (gold < 0) {
+            restartGold();
+        }
+    }
+
+    public void restartGold() { // restart game
+        gold = 0;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+}
+package srcs.Systems.Exp;
+
+public class ExpSystem {
+    private int experiance;
+
+    public ExpSystem(int initExp) {
+        this.experiance = initExp;
+    }
+
+    public void increasedExperience(int exp) { // kill enemies
+        experiance += exp;
+    }
+
+    public void setStartExperience() {// restart game
+        experiance = 0;
+    }
+
+    public int getExperiance() {
+        return experiance;
+    }
+
+    public void setExperiance(int experiance) {
+        this.experiance = experiance;
+    }
+}
+package srcs.Systems.Tooltips;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.text.AttributeSet.CharacterAttribute;
+
+import srcs.Prototypes.Characters.CharacterPrototype;
+import java.awt.*;
+import java.util.HashMap;
+
+// public class CharacterTooltip extends JPanel {
+public class CharacterTooltip extends JPopupMenu {
+    private CharacterPrototype characterPrototype;
+    public CharacterTooltip(CharacterPrototype characterPrototype) {
+        this.characterPrototype = characterPrototype;
+        init();
+    }
+
+    void init() {
+        // setSize(30, 30);
+        // setPreferredSize(new Dimension(30, 30));
+        setPreferredSize(new Dimension(150, 200));
+
+        setLayout(new GridLayout(4, 2));
+        // setLayout(null);
+        // setLayout(new FlowLayout());
+        // set
+        // JLabel name = new JLabel("Name: " + characterPrototype.getName());
+        HashMap<String, Object> characterAtributesPair = new HashMap<>();
+        characterAtributesPair.putIfAbsent("Name", characterPrototype.getName());
+        characterAtributesPair.putIfAbsent("Gold", characterPrototype.getGold());
+        characterAtributesPair.putIfAbsent("Damage", characterPrototype.getAttackDamage());
+        characterAtributesPair.putIfAbsent("Attack speed", characterPrototype.getAttackSpeed());
+        characterAtributesPair.putIfAbsent("Attack range", characterPrototype.getAttackRange());
+        characterAtributesPair.putIfAbsent("Health point", characterPrototype.getMaxHp());
+        characterAtributesPair.putIfAbsent("Build time", characterPrototype.getBuildTime());
+        characterAtributesPair.putIfAbsent("Movement speed", characterPrototype.getMovementSpeed());
+
+        for (String attributeName : characterAtributesPair.keySet()) {
+            TextWithValue lwv = new TextWithValue(
+                attributeName,
+                characterAtributesPair.get(attributeName)
+            );
+            add(lwv);
+        }
+    }
+}
+
+
+// class TextWithValue extends JTextField {
+class TextWithValue extends JTextArea {
+    public TextWithValue(String lead, Object value) {
+        setText(lead + ": " + String.valueOf(value));
+        init();
+    }
+
+    void init() {
+        setFont(new Font(Font.SANS_SERIF,
+        // Font.CENTER_BASELINE, 15));
+        Font.CENTER_BASELINE, 10));
+        setForeground(new Color(
+            (float)Math.random(),
+            (float)Math.random(),
+            (float)Math.random()
+        ));
+        setLineWrap(true);
+        setWrapStyleWord(true);
+    }
+}
+package srcs.Systems.Tooltips;
+
+public class DummyTooltip  {
+
+}
+package srcs.Systems;
+
+public class TurretSystem {
+    private static TurretSystem instance;
+    public static TurretSystem getInstance() {
+        if (instance == null) instance = new TurretSystem();
+        return instance;
+    }
+
+    private TurretSystem() {
+
+    }
+}
+package srcs.Interfaces;
+
+import javax.swing.text.html.HTMLDocument.RunElement;
+
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+
+public interface RangeUnit {
+    public void fireBulletToOpponent(
+        GameObject sender, // sender must have Bullet Image
+        GameObject reciever
+    );
+
+}
+package srcs.Interfaces;
+
+import java.awt.Component;
+
+public interface ComponentSizeItf {
+    // public default void showComponentSize(String className, JPanel panel) {
+    public default void showComponentSize(String className, Component panel) {
+        // System.out.println(panel.toString());
+        // System.out.format("%s Size : W = %d, H = %d\n",
+        System.out.format("%s Size : W = %.0f, H = %.0f\n",
+        // System.out.format("%s Size : W = %f, H = %f\n",
+            className,
+            panel.getSize().getWidth(),
+            panel.getSize().getHeight()
+            // panel.getWidth(),
+            // panel.getHeight()
+        );
+    }
+}
+package srcs.Interfaces;
+import java.awt.Graphics;
+
+public interface Loopable {
+    public void update();
+    public void draw(Graphics g);
+
+
+}
+package helpers;
+
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+
+public class AttackData {
+    GameObject attacker;
+    GameObject damager;
+    // int
+}
+package helpers;
+
+import java.awt.Image;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import java.awt.image.*;
+
+public class ImageData {
+    private Image sprite;
+    private String relativePath;
+    private String fullPath;
+    private int imgWidth;
+    private int imgHeight;
+    private BufferedImage bfImg = null;
+
+    public ImageData(String relativePath) {
+        this.relativePath = relativePath;
+        this.imgWidth = 100;
+        this.imgHeight = 100;
+        init();
+    }
+
+    public ImageData(String relativePath,
+            int imgWidth, int imgHeight) {
+        this.relativePath = relativePath;
+        this.imgWidth = imgWidth;
+        this.imgHeight = imgHeight;
+        init();
+    }
+
+    private void init() {
+        readImageFromFile(relativePath);
+    }
+
+    private void readImageFromFile(String relativePath) {
+        String basePath = new File("").getAbsolutePath();
+        // String basePath = "/Users/ppichyyy/Desktop/ages-of-war-II/images/";
+        // String = new File("").getAbsolutePath();
+        basePath += "/images/";
+        // basePath += "/ages-of-war-II/images/";
+        // String basePath = "/Users/rio/Desktop/ages-of-war-II/images/";
+        fullPath = basePath + relativePath;
+        // fullPath = "/Users/rio/Desktop/ages-of-war-II/images/backgrounds/aow_bg.png";
+        // System.out.println(fullPath);
+        try {
+            bfImg = ImageIO.read(new File(fullPath));
+            resizeSprite(imgWidth, imgHeight);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void resizeSprite(int w, int h) {
+        if (bfImg != null) {
+            sprite = bfImg.getScaledInstance(
+                    imgWidth, imgHeight, Image.SCALE_FAST);
+        } else {
+            System.out.println("No have bufferedImage");
+        }
+    }
+
+    public Image getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(Image sprite) {
+        this.sprite = sprite;
+    }
+
+    public String getPathToImage() {
+        return relativePath;
+    }
+
+    public void setPathToImage(String relativePath) {
+        this.relativePath = relativePath;
+        readImageFromFile(relativePath);
+    }
+
+    public String getRelativePath() {
+        return relativePath;
+    }
+
+    public void setRelativePath(String relativePath) {
+        this.relativePath = relativePath;
+    }
+
+    public String getFullPath() {
+        return fullPath;
+    }
+
+    public void setFullPath(String fullPath) {
+        this.fullPath = fullPath;
+    }
+
+    public int getImgWidth() {
+        return imgWidth;
+    }
+
+    public void setImgWidth(int imgWidth) {
+        this.imgWidth = imgWidth;
+    }
+
+    public int getImgHeight() {
+        return imgHeight;
+    }
+
+    public void setImgHeight(int imgHeight) {
+        this.imgHeight = imgHeight;
+    }
+}

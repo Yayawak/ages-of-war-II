@@ -12,19 +12,11 @@ public class CharacterPrototype extends EntityPrototype {
     private int hp;
     private int movementSpeed;
     private int maxHp;
-    // private Point position = new Point(0,0);
-    // private Point position = new Point(50, 50);
-    // private Point position = new Point(500, 200);
-    // private Point position = new Point(999, 200);
 
     public CharacterPrototype(EntityPrototype entProt) {
         super(entProt);
         // hp = maxHp;
         // maxHp = hp;
-    }
-
-    public CharacterPrototype() {
-        super();
     }
 
     public CharacterPrototype(TeamType teamType) {

@@ -6,8 +6,8 @@ import srcs.Prototypes.Characters.CharacterPrototype;
 
 public class Morphling extends CharacterPrototype {
 
-    public Morphling() {
-        super();
+    public Morphling(TeamType tt) {
+        super(tt);
         ImageData grimImageData = new ImageData(
             "characters/morphling.png"
         );

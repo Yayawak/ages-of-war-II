@@ -5,6 +5,8 @@ import srcs.GameUI.topBar.TopBar;
 import srcs.GameUI.topBar.unitsBox.SubUnit.SubUnit;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharactersData;
+import srcs.Systems.AgeSystem.AgeData;
+import srcs.Systems.AgeSystem.AgeList.StoneAge;
 
 import java.awt.*;
 import java.util.ArrayList;;
@@ -35,11 +37,10 @@ public class UnitsBox extends JPanel {
 
         for (int i = 0; i < numberOfUnits; i++) {
             try {
-                CharacterPrototype character = CharactersData.getInstance().getCharactersList().get(i);
-                Image img = character.getImgData().getSprite();
-                // System.out.println("unit box img path = " + imgPath);
+                // CharacterPrototype character = CharactersData.getInstance().getCharactersList().get(i);
+                CharacterPrototype character = StoneAge.getInstance().
+                    getCharacterPrototypes().get(i);
                 SubUnit unit = new SubUnit(character);
-                unit.setImg(img);
                 unitBoxes.add(unit);
 
             } catch (Exception e) { System.out.println(e); }

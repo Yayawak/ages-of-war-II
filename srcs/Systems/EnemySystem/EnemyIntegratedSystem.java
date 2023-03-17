@@ -1,6 +1,7 @@
 package srcs.Systems.EnemySystem;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.nio.charset.CodingErrorAction;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,8 @@ import srcs.Prototypes.Characters.CharactersData.CharactersData;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Morphling;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphet;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Rubick;
+import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.SkeletonWarrior;
+import srcs.Systems.AgeSystem.AgeList.StoneAge;
 import srcs.Systems.Gold.GoldSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
@@ -67,15 +70,20 @@ public class EnemyIntegratedSystem implements Loopable {
         // System.out.println("Enemy Gold = " + enemyGoldSystem.getGold());
 
         if (enemyGoldSystem.getGold() > 0) {
-            // int ranI = (int)(Math.random() * 4);
             // CharacterGObject cgo =
             // (CharacterGObject)currentAvailableCharacters.get(ranI).copy();
             // cgo.getCharacter().setTeam(TeamType.ENEMY);
             // MainGame.getObjectsInScene().add(cgo);
 
             // * it's Work
-            CharacterPrototype dummy = new Morphling();
+            // CharacterPrototype dummy = new Morphling(TeamType.ENEMY);
+            // CharacterPrototype dummy = new SkeletonWarrior(TeamType.ENEMY);
+            int ranI = (int)(Math.random() * 4);
+            CharacterPrototype dummy = StoneAge.getInstance().getCharacterPrototypes().get(ranI);
+            // dummy.setTeamType(TeamType.ENEMY
             dummy.setTeamType(TeamType.ENEMY);
+            dummy.setPosition(new Point(1500, 300));
+
             CharacterGObject c = new CharacterGObject(dummy);
             // todo : make this enemy system usable
             MainGame.getInstance().addGameObjectToScene(c);
