@@ -1,6 +1,7 @@
 package srcs.GameUI.mainGame.SubScene.GameObject.Character;
 
 import java.awt.*;
+import java.util.Iterator;
 
 import javax.swing.JLabel;
 
@@ -31,7 +32,7 @@ public class CharacterGObject extends GameObject {
         this.character = character;
         this.position = character.getPosition();
         super.teamType = character.getTeamType();
-        System.out.println(this.teamType);
+        // System.out.println(this.teamType);
         init();
     }
 
@@ -118,12 +119,26 @@ public class CharacterGObject extends GameObject {
         }
 
         if (character.getWalkSprites().size() != 0) {
-            if (character instanceof SkeletonWarrior) {
-                int r = (int)(Math.random() * 7);
-                setImg(character.getWalkSprites().get(r));
-            }
+            // if (character instanceof SkeletonWarrior) {
+            int r = (int)(Math.random() * 7);
+            setImg(character.getWalkSprites().get(r));
+
+            // int n = character.getWalkSprites().size();
+            // for (int i = 0; i < n; i++) {
+            //     setImg(character.getWalkSprites().get(i % n));
+            // }
+            // Iterator<Image> iter = character.getWalkSprites().iterator();
+            // while (iter.hasNext()) {
+            //     // setImg(character.getWalkSprites().get(r));
+            //     // iter.ne
+            //     setImg(iter.next());
+            // }
+            // }
         } else {
             // System.out.println("length of charatc te walk sprint = 0");
+            // System.out.format("character name : %s\n\tlength of walk sprits = 0",
+            //     character.getName()
+            // );
         }
     }
 

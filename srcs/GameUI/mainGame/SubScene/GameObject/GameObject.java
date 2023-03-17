@@ -31,41 +31,15 @@ public class GameObject extends JPanel implements Loopable {
         spawnTime = System.nanoTime();
         setLocation(pos);
         setImg(img);
-        // img.getGraphics().flip
-        // if (teamType == TeamType.ENEMY) {
-        //     System.out.println("This is  enemy");
-        //     AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-        //     tx.translate(getImg().getWidth(null), 0);
-        //     AffineTransformOp op = new AffineTransformOp(tx,
-        //         AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-        //     setImg(
-        //         op.filter((BufferedImage)getImg(), null)
-        //     );
-        // }
-        // System.out.println("Position = " + xPos + " : " + yPos);
         setSize(imgSize); // ? Important for collsion detection
         setPreferredSize(imgSize); // ? Important for collsion detection
         this.imgSize = imgSize;
         this.pos = pos;
-        // repaint();
         init();
     }
 
     private void init() {
         setLayout(null);
-        // setLayout(getLayout());
-        // if (teamType == TeamType.ENEMY) {
-        //     System.out.println("This is  enemy");
-        //     AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-        //     tx.translate(getImg().getWidth(null), 0);
-        //     AffineTransformOp op = new AffineTransformOp(tx,
-        //         AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-        //     setImg(
-        //         op.filter((BufferedImage)getImg(), null)
-        //     );
-        // } else {
-        //     // System.out.println("is player");
-        // }
     }
 
     public Image getImg() {
@@ -74,11 +48,24 @@ public class GameObject extends JPanel implements Loopable {
 
     public void setImg(Image img) {
         this.img = img;
+        if (teamType == TeamType.ENEMY) {
+            // System.out.println("This is  enemy");
+            // AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+            // ! getImg() return null now
+            // tx.translate(getImg().getWidth(null), 0);
+            // AffineTransformOp op = new AffineTransformOp(tx,
+            //     AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+            // setImg(
+            // ! buf Image -> BufferedImage
+            //     op.filter((BufferedImage)getImg(), null)
+            // );
+        } else {
+            // System.out.println("this go " + "is player");
+        }
     }
 
     @Override
     public void draw(Graphics g) {
-        // moveRight(g);
     }
 
     @Override
@@ -152,7 +139,7 @@ public class GameObject extends JPanel implements Loopable {
             ) {
                 // todo : combat
                 // isAttacking = true;
-                attackOpponent(ent, closetCharacter.getCharacter());
+                // attackOpponent(ent, closetCharacter.getCharacter());
                 // attackOpponent(closestCgo.getCharacter(), character);
                 System.out.println("combat occured");
                 // System.out.println("Min = " + min);
@@ -252,18 +239,6 @@ public class GameObject extends JPanel implements Loopable {
     public void setTeamType(TeamType teamType) {
         this.teamType = teamType;
 
-        // if (teamType == TeamType.ENEMY) {
-        //     System.out.println("This is  enemy");
-        //     AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-        //     tx.translate(getImg().getWidth(null), 0);
-        //     AffineTransformOp op = new AffineTransformOp(tx,
-        //         AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-        //     setImg(
-        //         op.filter((BufferedImage)getImg(), null)
-        //     );
-        // } else {
-        //     // System.out.println("is player");
-        // }
     }
 
     public boolean isCollide() {

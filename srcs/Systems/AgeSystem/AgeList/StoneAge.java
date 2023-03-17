@@ -32,9 +32,10 @@ public class StoneAge extends AgeData {
         CharacterPrototype[] cps = {
             // new GrimStroke(TeamType.PLAYER),
             new SkeletonWarrior(TeamType.PLAYER),
+            new SkeletonArcher(TeamType.PLAYER),
             new NatureProphet(TeamType.PLAYER),
             new Rubick(TeamType.PLAYER),
-            new Morphling(TeamType.PLAYER)
+            // new Morphling(TeamType.PLAYER)
         };
         setCharacterPrototypes(
             new ArrayList<CharacterPrototype>(
