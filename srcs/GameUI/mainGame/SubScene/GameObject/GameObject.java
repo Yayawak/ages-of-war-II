@@ -74,6 +74,20 @@ public class GameObject extends JPanel implements Loopable {
         return new GameObject(img, pos, imgSize);
     }
 
+    protected float getDistanceBetweenGameObject(
+        GameObject thisGo,
+        GameObject thatGo
+    ) {
+        float dx = thisGo.getX() - thatGo.getX();
+        float dy =  thisGo.getY() - thatGo.getY();
+        // System.out.println("turret position " + turret.getPosition());
+        // System.out.println("cgo postion " + cgo.getPosition());
+        // System.out.println("dx = " + dx);
+        // System.out.println("dy = " + dy);
+        double d = Math.sqrt(dx * dx + dy * dy);
+        return (float)d;
+    }
+
     public CharacterGObject findClosestOpponent(EntityPrototype ent) {
         double min = Integer.MAX_VALUE;
         CharacterGObject closetCharacter = null;

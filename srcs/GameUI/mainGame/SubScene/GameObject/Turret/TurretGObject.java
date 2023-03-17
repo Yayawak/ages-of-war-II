@@ -43,18 +43,22 @@ public class TurretGObject extends GameObject implements RangeUnit {
         Graphics2D g2d = (Graphics2D) g;
         if (closestCgo != null) {
             // todo : draw line to that gameobject
-            System.out.println("Closest Object exists");
-            g2d.setColor(Color.red);
-            g2d.drawLine(
-                    turretPrototype.getPosition().x, turretPrototype.getPosition().y,
-                    closestCgo.getLocation().x, closestCgo.getLocation().y);
-            g2d.setStroke(new BasicStroke(4));
+            float d = getDistanceBetweenGameObject(this, closestCgo);
+            if (d < turretPrototype.getAttackRange()) {
+                System.out.println("Closest Object exists");
+                g2d.setColor(Color.red);
+                g2d.drawLine(
+                        turretPrototype.getPosition().x, turretPrototype.getPosition().y,
+                        closestCgo.getLocation().x, closestCgo.getLocation().y);
+                g2d.setStroke(new BasicStroke(4));
 
-            // todo 2 : fire bullet to enemy -> decrease hp ->
-            // * --> descresase hp bar graphically
-            // * --> increase gold when die --> destory gObj
-            fireBulletToOpponent(this, closestCgo);
-            // fireBulletToOpponent(closestCgo, this);
+                // todo 2 : fire bullet to enemy -> decrease hp ->
+                attackOpponent(this.getTurretPrototype(), closestCgo.getCharacter());
+                // * --> descresase hp bar graphically
+                // * --> increase gold when die --> destory gObj
+                // fireBulletToOpponent(this, closestCgo);
+                // fireBulletToOpponent(closestCgo, this);
+            }
         }
     }
 
