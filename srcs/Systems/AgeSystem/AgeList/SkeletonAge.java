@@ -32,7 +32,7 @@ public class SkeletonAge extends AgeData {
     public SkeletonAge() {
         setNextAgeData(StoneAge.getInstance());
         setAgeType(AgeType.SKELETON);
-        Image bgImg = new ImageData("backgrounds/war_bg.jpeg",
+        Image bgImg = new ImageData("backgrounds/dirtAge.png",
             MainUI.getInstance().getWidth(),
             (int)MainGame.getInstance().getPreferredSize().getHeight() + 50
         ).getSprite();

@@ -19,6 +19,7 @@ public class EntityPrototype {
     protected int attackRange;
     protected int attackDamage;
     protected ArrayList<Image> walkSprites = new ArrayList<>();
+    protected ArrayList<Image> attackASprites = new ArrayList<>();
 
     public EntityPrototype(EntityPrototype entProt) {
         init();
@@ -155,6 +156,14 @@ public class EntityPrototype {
 
     public void setWalkSprites(ArrayList<Image> walkSprites) {
         this.walkSprites = walkSprites;
+    }
+
+    public ArrayList<Image> getAttackASprites() {
+        return attackASprites;
+    }
+
+    public void setAttackASprites(ArrayList<Image> attackASprites) {
+        this.attackASprites = attackASprites;
     }
 
 

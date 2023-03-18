@@ -77,6 +77,7 @@ public class GameObject extends JPanel implements Loopable {
         {
             checkCollision(this, go);
         }
+        // closeest
 
     }
 
@@ -157,18 +158,18 @@ public class GameObject extends JPanel implements Loopable {
     protected void attackOpponent(EntityPrototype attacker,
         CharacterPrototype damager) {
         // if (isAttacking)
-        new Thread(
-            () -> {
-                int atkRate = attacker.getAttackSpeed();
-                while (damager != null) {
-                    long ms = (atkRate * 10000);
-                    damager.decreaseHp(attacker.getAttackDamage());
-                    try {
-                        Thread.sleep(ms);
-                    } catch (Exception e) { }
-                }
-            }
-        ).start();
+        // new Thread(
+        //     () -> {
+        //         int atkRate = attacker.getAttackSpeed();
+        //         while (damager != null) {
+        //             long ms = (atkRate * 10000);
+        //             damager.decreaseHp(attacker.getAttackDamage());
+        //             try {
+        //                 Thread.sleep(ms);
+        //             } catch (Exception e) { }
+        //         }
+        //     }
+        // ).start();
     }
 
 

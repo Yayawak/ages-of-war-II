@@ -6,6 +6,7 @@ public enum AgeType {
     EGYPT,
     KNIGHT,
     WIZARD,
+    FF7,
     SOLDER,
     ALIEN,
     NONE

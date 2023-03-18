@@ -2,12 +2,8 @@ package srcs.Systems.AgeSystem.AgeList;
 
 import java.awt.Image;
 import java.awt.Point;
-import java.nio.charset.spi.CharsetProvider;
-import java.text.RuleBasedCollator;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-
 import helpers.ImageData;
 import srcs.Enums.AgeType;
 import srcs.Enums.TeamType;
@@ -30,6 +26,7 @@ public class StoneAge extends AgeData {
     }
 
     public StoneAge() {
+        setNextAgeData(WizardAge.getInstance());
         setAgeType(AgeType.STONE);
 
         Image bgImg = new ImageData("backgrounds/stoneAge.png",
@@ -64,15 +61,16 @@ public class StoneAge extends AgeData {
         );
 
         ImageData towerImgData = new ImageData(
-                "tower/tower1.png", 116, 228);
+                // "tower/archMage.png", 116, 228);
+                "tower/terrariaEye.jpeg", 116, 228);
         TowerPrototype towerPrototype = new TowerPrototype(1000,
-                TeamType.PLAYER,
-                null,
-                null,
-                towerImgData,
-                new Point(50, 210));
+            TeamType.PLAYER,
+            null,
+            null,
+            towerImgData,
+            new Point(50, 210)
+        );
         setTowerPrototype(towerPrototype);
-    // new Tower
 
         setExpRequiredToUpgrade(1000);
 

@@ -45,28 +45,34 @@ public class TurretGObject extends GameObject implements RangeUnit {
             // todo : draw line to that gameobject
             float d = getDistanceBetweenGameObject(this, closestCgo);
             if (d < turretPrototype.getAttackRange()) {
-                System.out.println("Closest Object exists");
-                g2d.setColor(Color.red);
+                System.out.format("Turret (%s) : found enemy (%s)\n",
+                    turretPrototype.getName(),
+                    closestCgo.getCharacter().getName()
+                );
+                g2d.setStroke(new BasicStroke(10));
+                g2d.setColor(new Color(0, 255, 10));
                 g2d.drawLine(
-                        turretPrototype.getPosition().x, turretPrototype.getPosition().y,
-                        closestCgo.getLocation().x, closestCgo.getLocation().y);
-                g2d.setStroke(new BasicStroke(4));
+                    turretPrototype.getPosition().x, turretPrototype.getPosition().y,
+                    closestCgo.getLocation().x, closestCgo.getLocation().y);
 
+                // g2d.setColor(new Color(
+                //     (float)Math.random(),
+                //     (float)Math.random(),
+                //     (float)Math.random()
+                // ));
+
+                // int x = turretPrototype.getPosition().x;
+                // int y = turretPrototype.getPosition().y;
+
+                // g2d.drawOval(x, y, (int)d, (int)d);
                 // todo 2 : fire bullet to enemy -> decrease hp ->
-                attackOpponent(this.getTurretPrototype(), closestCgo.getCharacter());
+                // attackOpponent(this.getTurretPrototype(), closestCgo.getCharacter());
                 // * --> descresase hp bar graphically
                 // * --> increase gold when die --> destory gObj
                 // fireBulletToOpponent(this, closestCgo);
                 // fireBulletToOpponent(closestCgo, this);
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        return String.format("turretPrototype name : ", turretPrototype.getName());
-        // return "TurretGObject [turretPrototype=" + turretPrototype + "turretPrototype
-        // prototype is \n" + turretPrototype.toString() + "]";
     }
 
     @Override

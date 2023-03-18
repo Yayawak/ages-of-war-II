@@ -85,7 +85,7 @@ public class CharacterGObject extends GameObject {
             hpBar.update();
         }
 
-        findClosestOpponent(character);
+        // findClosestOpponent(character);
 
         if (character.getHp() <= 0) {
             destroyGameObject();
@@ -143,6 +143,15 @@ public class CharacterGObject extends GameObject {
             //     character.getName()
             // );
         }
+        // todo : animation of attacking
+        GameObject closestOpp = findClosestOpponent(getCharacter());
+        if (closestOpp != null
+            &&
+            character.getAttackASprites().size() != 0
+        ) {
+            int r = (int)(Math.random() * n);
+            setImg(character.getAttackASprites().get(r));
+        }
     }
 
     private void checkIfCharacterOutOfScreen() {
@@ -161,7 +170,8 @@ public class CharacterGObject extends GameObject {
 
     private void move(Direction dir) {
         // int mul = 20;
-        int mul = 10;
+        // int mul = 10;
+        int mul = 2;
         int x = getX();
         int y = getY();
         int speed = character.getMovementSpeed() * mul;

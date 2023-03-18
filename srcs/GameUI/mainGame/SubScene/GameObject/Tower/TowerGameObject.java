@@ -2,6 +2,7 @@ package srcs.GameUI.mainGame.SubScene.GameObject.Tower;
 
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.Prototypes.Tower.TowerPrototype;
+import srcs.Systems.integratedSystem.IntegratedSystem;
 
 import java.awt.Dimension;
 
@@ -19,5 +20,18 @@ public class TowerGameObject extends GameObject {
     }
     public void setTowerPrototype(TowerPrototype towerPrototype) {
         this.towerPrototype = towerPrototype;
+    }
+
+    public void upgradeTowerToNewAge() {
+        setImg(IntegratedSystem.getInstance()
+            .getCurrentAgeData().getTowerPrototype()
+            .getImageData().getSprite()
+        );
+        System.out.println("upgrade otwer entered");
+    }
+
+    @Override
+    public void update() {
+
     }
 }

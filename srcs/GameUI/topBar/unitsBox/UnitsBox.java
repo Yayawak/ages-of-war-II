@@ -16,12 +16,11 @@ import java.util.ArrayList;;
 public class UnitsBox extends JPanel {
     private static UnitsBox instance = null;
     private int numberOfUnits = 4;
-    private static ArrayList<SubUnit> unitBoxes = new ArrayList<>();
-    // private static ArrayList<JPanel> unitBoxes = new ArrayList<>();
+    // private static ArrayList<SubUnit> unitBoxes = new ArrayList<>();
+    private ArrayList<SubUnit> unitBoxes = new ArrayList<>();
 
     private UnitsBox() {
         init();
-        // TopBar.getInstance().add(this);
     }
 
     public static UnitsBox getInstance() {
@@ -54,9 +53,12 @@ public class UnitsBox extends JPanel {
 
     }
 
-    private void updateUnitsPanel() {
+    public void updateUnitsPanel() {
         for (int i = 0; i < unitBoxes.size(); i++) {
-            // unitBoxes.set
+            unitBoxes.get(i).setCharacter(
+                IntegratedSystem.getInstance().getCurrentAgeData()
+                .getCharacterPrototypes().get(i)
+            );
         }
     }
 
@@ -68,13 +70,13 @@ public class UnitsBox extends JPanel {
         this.numberOfUnits = numberOfUnits;
     }
 
-    public static ArrayList<SubUnit> getUnitBoxes() {
-        return unitBoxes;
-    }
+    // public static ArrayList<SubUnit> getUnitBoxes() {
+    //     return unitBoxes;
+    // }
 
-    public static void setUnitBoxes(ArrayList<SubUnit> unitBoxes) {
-        UnitsBox.unitBoxes = unitBoxes;
-    }
+    // public static void setUnitBoxes(ArrayList<SubUnit> unitBoxes) {
+    //     UnitsBox.unitBoxes = unitBoxes;
+    // }
 
 
 }

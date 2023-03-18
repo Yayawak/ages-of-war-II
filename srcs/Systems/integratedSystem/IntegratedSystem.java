@@ -2,6 +2,11 @@ package srcs.Systems.integratedSystem;
 
 import srcs.Enums.AgeType;
 import srcs.Enums.TeamType;
+import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Turret.TurretGObject;
+import srcs.GameUI.topBar.unitsBox.UnitsBox;
 import srcs.Systems.AgeSystem.AgeData;
 import srcs.Systems.AgeSystem.AgeList.SkeletonAge;
 import srcs.Systems.AgeSystem.AgeList.StoneAge;
@@ -44,7 +49,8 @@ public class IntegratedSystem {
         // enemyGoldSystem = new GoldSystem(50);
 
         // playerExpSystem = new ExpSystem(50);
-        playerExpSystem = new ExpSystem(1250);
+        playerExpSystem = new ExpSystem(10000);
+        // playerExpSystem = new ExpSystem(1250);
         enemyExpSystem = new ExpSystem(75);
 
         playerTowerSystem = new TowerSystem(
@@ -97,12 +103,21 @@ public class IntegratedSystem {
                     currentAgeData.getExpRequiredToUpgrade()
                 );
 
-                // todo : remove old tower(Skeleton) and change pointer to point to tower(Stone)
+                // todo : change bg age
                 currentAgeData = currentAgeData.getNextAgeData();
 
-                // todo : change bg age
+                // todo : remove old tower(Skeleton) and change pointer to point to tower(Stone)
+                for (GameObject go : MainGame.getInstance().getObjectsInScene()) {
+                    if (go instanceof TowerGameObject) {
+                        TowerGameObject playerTower = (TowerGameObject)go;
+                        // System.out.println("Enter tower changer state");
+                        playerTower.upgradeTowerToNewAge();
+                        break;
+                    }
+                }
 
                 // todo : replace old unitsBoxes to new one
+                UnitsBox.getInstance().updateUnitsPanel();
 
                 // todo : replace old ultimateImages to new
             }

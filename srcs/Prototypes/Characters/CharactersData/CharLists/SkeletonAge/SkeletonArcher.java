@@ -38,6 +38,6 @@ public class SkeletonArcher extends CharacterPrototype {
             Image imgWalk = new ImageData(formatter).getSprite();
             getWalkSprites().add(imgWalk);
         }
-        System.out.println(getWalkSprites());
+        // System.out.println(getWalkSprites());
     }
 }
