@@ -8,6 +8,7 @@ import srcs.Prototypes.Characters.CharactersData.CharactersData;
 import srcs.Systems.AgeSystem.AgeData;
 import srcs.Systems.AgeSystem.AgeList.SkeletonAge;
 import srcs.Systems.AgeSystem.AgeList.StoneAge;
+import srcs.Systems.Tooltips.CharacterTooltip;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
 import java.awt.*;
@@ -58,6 +59,9 @@ public class UnitsBox extends JPanel {
             unitBoxes.get(i).setCharacter(
                 IntegratedSystem.getInstance().getCurrentAgeData()
                 .getCharacterPrototypes().get(i)
+            );
+            unitBoxes.get(i).setCharacterTooltip(
+                new CharacterTooltip(unitBoxes.get(i).getCharacter())
             );
         }
     }

@@ -2,6 +2,7 @@ package srcs.GameUI.mainGame.SubScene.characterHpBar;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -24,14 +25,16 @@ public class CharacterHpBar extends JProgressBar
     private void init() {
         // setSize(getPreferredSize());
         // setSize(50, 10);
-        setSize(cgo.getWidth(), 20);
+        // setSize(cgo.getWidth(), 20);
+        setMaximum(cgo.getCharacter().getMaxHp());
+        setSize(cgo.getWidth() - 50, 20);
         // setBounds(0, 0, cgo.getWidth(), 20);
         // setSize(50, 10);
         // setPreferredSize(new Dimension(50, 10));
-        setForeground(Color.red);
-        setBackground(Color.black);
-        setStringPainted(true);
-        setValue(10);
+        // setForeground(Color.red);
+        // setBackground(Color.black);
+        // setStringPainted(true);
+        // setValue(10);
         // setVisible(true);
         // repaint();
 
@@ -42,7 +45,8 @@ public class CharacterHpBar extends JProgressBar
         // long ms = second * 1000l;
         new Thread(
             () -> {
-                int maxHp = cgo.getCharacter().getMaxHp() | 100;
+                // int maxHp = cgo.getCharacter().getMaxHp() | 100;
+                int maxHp = cgo.getCharacter().getMaxHp();
                 while (true) {
                     setValue(cgo.getCharacter().getHp());
                     if (getValue() >= maxHp) {
@@ -71,9 +75,18 @@ public class CharacterHpBar extends JProgressBar
         setValue(cgo.getCharacter().getHp());
     }
 
+    // @Override // ? not word
+    // protected void paintComponent(Graphics g) {
+    //     // g.setColor(Color.red);
+    // }
+
     @Override
     public void draw(Graphics g) {
-        setLocation(cgo.getLocation());
+        setLocation(new Point(
+            cgo.getX() + (int)(cgo.getWidth() / 2),
+            cgo.getY()
+        ));
+        setSize(40, 20);
     }
 
 }

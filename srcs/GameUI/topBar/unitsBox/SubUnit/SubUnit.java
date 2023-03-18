@@ -38,6 +38,9 @@ public class SubUnit extends JPanel {
                 // System.out.println(e);
                 // todo : send character data by mouse clikc
                     character.setTeamType(TeamType.PLAYER);
+                    // new
+                // character.get
+                    // new
                     GameObject go = new CharacterGObject(character);
                     if (QueueProgress.getInstance().isProgressBarAvailable()
                             &&
@@ -61,10 +64,10 @@ public class SubUnit extends JPanel {
 
                         // getPos
                         // Point cursorPos = MainGame.getInstance().getMousePosition();
-                        Point cursorPos = e.getPoint(); //? relative to subUnit JPanel
-                        System.out.println("X of image : " + getX()); // absolute pos
-                        System.out.println("Width of image : " + getSize().getWidth()); // absolute pos
-                        System.out.println(cursorPos);
+                        // Point cursorPos = e.getPoint(); //? relative to subUnit JPanel
+                        // System.out.println("X of image : " + getX()); // absolute pos
+                        // System.out.println("Width of image : " + getSize().getWidth()); // absolute pos
+                        // System.out.println(cursorPos);
                         // characterTooltip.setVisible(false);
                         characterTooltip.setLocation(e.getPoint());
                         // while ()
@@ -154,6 +157,14 @@ public class SubUnit extends JPanel {
 
     public void setCharacter(CharacterPrototype character) {
         this.character = character;
+    }
+
+    public CharacterTooltip getCharacterTooltip() {
+        return characterTooltip;
+    }
+
+    public void setCharacterTooltip(CharacterTooltip characterTooltip) {
+        this.characterTooltip = characterTooltip;
     }
 
 }

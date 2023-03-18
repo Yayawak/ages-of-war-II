@@ -1,6 +1,7 @@
 package srcs.GameUI.mainGame.SubScene.GameObject.Character;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JLabel;
@@ -144,13 +145,16 @@ public class CharacterGObject extends GameObject {
             // );
         }
         // todo : animation of attacking
+        // ! BUG : sephiroth attacked emptyness lol, because closestOpponent is not null
+        // ! but clossetOpponent really false null (it's not really findClosestOpponent)
         GameObject closestOpp = findClosestOpponent(getCharacter());
+        ArrayList<Image> atkAImgs = character.getAttackASprites();
         if (closestOpp != null
             &&
-            character.getAttackASprites().size() != 0
+            atkAImgs.size() != 0
         ) {
-            int r = (int)(Math.random() * n);
-            setImg(character.getAttackASprites().get(r));
+            // int r = (int)(Math.random() * atkAImgs.size());
+            // setImg(atkAImgs.get(r));
         }
     }
 

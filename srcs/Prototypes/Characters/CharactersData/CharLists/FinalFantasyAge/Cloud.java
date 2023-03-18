@@ -10,29 +10,29 @@ import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
 
-public class Sephiroth extends CharacterPrototype {
-    public Sephiroth(TeamType tt) {
+public class Cloud extends CharacterPrototype {
+    public Cloud(TeamType tt) {
         super(tt);
         ImageData imgData = new ImageData(
-            "characters/ff7Age/sephiroth/atk/stab/sephiroth_atk_00.png"
+            "characters/ff7Age/cloud/walk/walkWithSword_00.png"
 // /Users/rio/Desktop/ages-of-war-II/images/characters/ff7Age/sephiroth/atk/stab/sephiroth_atk_00.png
 // /Users/rio/Desktop/ages-of-war-II/images/characters/ff7Age/sephiroth/atk/light_fire/fire_03.png
         );
-        setName("Sephiroth");
-        setExperiance(15);
-        setGold(25);
-        setMaxHp(200);
-        setMovementSpeed(2);
-        setAttackSpeed(5);
+        setName("cloud");
+        setExperiance(30);
+        setGold(50);
+        setMaxHp(150);
+        setMovementSpeed(3);
+        setAttackSpeed(4);
         setImgData(imgData);
         setBuildTime(2);
-        setAttackRange(100);
-        setAttackDamage(15);
+        setAttackRange(150);
+        setAttackDamage(25);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             String formatter =
             String.format(
-            "characters/ff7Age/sephiroth/atk/stab/sephiroth_atk_0%d.png"
+                "characters/ff7Age/cloud/walk/walkWithSword_0%d.png"
                 , i
             );
             Image imgWalk = new ImageData(formatter).getSprite();
@@ -42,13 +42,11 @@ public class Sephiroth extends CharacterPrototype {
         for (int i = 0; i < 6; i++) {
             String formatter =
             String.format(
-            "characters/ff7Age/sephiroth/atk/heavy_fire/fire_0%d.png"
-// of-war-II/images/characters/ff7Age/sephiroth/atk/heavy_fire/fire_05.png
+                "characters/ff7Age/cloud/forwardAtk/hit_0%d.png"
                 , i
             );
-            Image imgWalk = new ImageData(formatter).getSprite();
-            getAttackASprites().add(imgWalk);
+            Image atkImg = new ImageData(formatter).getSprite();
+            getAttackASprites().add(atkImg);
         }
-        // System.out.println(getWalkSprites());
     }
 }
