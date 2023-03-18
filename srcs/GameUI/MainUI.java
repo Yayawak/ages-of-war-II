@@ -98,17 +98,34 @@ public class MainUI extends JPanel implements Runnable {
 
     private void update() {
         // System.out.println("kkkk");
-        MainGame.getInstance().update();
-        GoldPanel.getInstance().update();
-        ExpPanel.getInstance().update();
-        QueueProgress.getInstance().update();
         EnemyIntegratedSystem.getInstance().update();
+        new Thread(() -> {
+            MainGame.getInstance().update();
+        }).start();
+
+        // new Thread(() -> {
+            GoldPanel.getInstance().update();
+        // }).start();
+
+        // new Thread(() -> {
+            ExpPanel.getInstance().update();
+        // }).start();
+
+        // new Thread(() -> {
+        // }).start();
+
+        // new Thread(() -> {
+            QueueProgress.getInstance().update();
+        // }).start();
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        MainGame.getInstance().draw(g);
+        new Thread(() -> {
+            MainGame.getInstance().draw(g);
+        }).start();
         GoldPanel.getInstance().draw(g);
         ExpPanel.getInstance().draw(g);
         QueueProgress.getInstance().draw(g);

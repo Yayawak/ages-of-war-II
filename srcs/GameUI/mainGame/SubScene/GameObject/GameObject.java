@@ -24,7 +24,7 @@ public class GameObject extends JPanel implements Loopable {
     protected Image img;
     protected Point pos;
     protected Dimension imgSize;
-    private boolean isCollide = false;
+    protected boolean isCollide = false;
     protected long spawnTime;
 
     public GameObject(Image img, Point pos, Dimension imgSize) {
@@ -71,11 +71,12 @@ public class GameObject extends JPanel implements Loopable {
     @Override
     public void update() {
         // System.out.println("update from gameobjct ");
+        setCollide(false);
         for (GameObject go : MainGame.getInstance().
-            getObjectsInScene()) {
+            getObjectsInScene())
+        {
             checkCollision(this, go);
         }
-
 
     }
 
@@ -141,7 +142,7 @@ public class GameObject extends JPanel implements Loopable {
                 // isAttacking = true;
                 // attackOpponent(ent, closetCharacter.getCharacter());
                 // attackOpponent(closestCgo.getCharacter(), character);
-                System.out.println("combat occured");
+                // System.out.println("combat occured");
                 // System.out.println("Min = " + min);
                 // System.out.format("Name of closest character is : %s\n",
                     // closetCharacter.getCharacter().getName());
@@ -207,28 +208,41 @@ public class GameObject extends JPanel implements Loopable {
         GameObject thisGo,
         GameObject thatGo
     ) {
-        // System.out.println("W = " + this.imgSize.width);
-        // System.out.println("H = " + getHeight());
-        if (thisGo.getBounds().intersects(thatGo.getBounds()) &&
-            thisGo != thatGo &&
-            thisGo.getBounds() != null && thatGo.getBounds() != null
+        if (thisGo.getBounds().intersects(thatGo.getBounds())
+            &&
+            thisGo != thatGo
         ) {
-            // ? if spawn before -> stop younger gameobject
             // ! bug
+            // System.out.println("this spawn time = " + thisGo.spawnTime);
+            // System.out.println("that spawn time = " + thatGo.spawnTime);
+            // System.out.println("==================");
             if (thisGo.spawnTime < thatGo.spawnTime) {
+                if (thisGo instanceof CharacterGObject
+                    &&
+                    thatGo instanceof CharacterGObject
+                ) {
+                    CharacterGObject c1 = (CharacterGObject)thisGo;
+                    CharacterGObject c2 = (CharacterGObject)thatGo;
+
+                    // System.out.println("c1 name : " + c1.getCharacter().getName());
+                    // System.out.println("c2 name : " + c2.getCharacter().getName());
+                    // System.out.println("->".repeat(9));
+
+                }
                 thisGo.setCollide(false);
-                thatGo.setCollide(true);
+                // thatGo.setCollide(true);
             } else {
-                thisGo.setCollide(!false);
-                thatGo.setCollide(!true);
+                // thisGo.setCollide(true);
+                // thatGo.setCollide(false);
             }
 
-            if (thisGo.teamType != thatGo.teamType) {
-                thatGo.setCollide(true); //* for other stop
-            }
-        } else {
-            thisGo.setCollide(false);
-            thatGo.setCollide(false);
+            // if (thisGo.teamType != thatGo.teamType) {
+            //     thatGo.setCollide(true); //* for other stop
+            // }
+        }
+        else {
+            // thisGo.setCollide(false);
+            // thatGo.setCollide(false);
         }
     }
 

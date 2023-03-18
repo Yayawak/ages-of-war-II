@@ -1,6 +1,6 @@
 
 
-package srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge;
+package srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge;
 
 import java.awt.Image;
 import java.io.File;
@@ -14,13 +14,13 @@ public class SkeletonWarrior extends CharacterPrototype {
     public SkeletonWarrior(TeamType tt) {
         super(tt);
         ImageData imgData = new ImageData(
-            "characters/skeletonWarrior/walk/skeletonWalk_0000.png"
+            "characters/skeletonAge/skeletonWarrior/walk/skeletonWalk_0000.png"
         );
         setName("Skeleton warrior");
         setExperiance(3);
         setGold(5);
         setMaxHp(50);
-        setMovementSpeed(2);
+        setMovementSpeed(1);
         setAttackSpeed(1);
         // setTeam(TeamType.PLAYER);
         setImgData(imgData);
@@ -31,7 +31,7 @@ public class SkeletonWarrior extends CharacterPrototype {
         for (int i = 0; i < 7; i++) {
             String formatter =
                 String.format(
-            "characters/skeletonWarrior/walk/skeletonWalk_000%d.png",i
+            "characters/skeletonAge/skeletonWarrior/walk/skeletonWalk_000%d.png",i
             );
             Image imgWalk = new ImageData(formatter).getSprite();
             getWalkSprites().add(imgWalk);

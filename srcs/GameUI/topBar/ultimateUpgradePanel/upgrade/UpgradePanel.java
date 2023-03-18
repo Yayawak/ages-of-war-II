@@ -5,13 +5,17 @@ import java.awt.Graphics;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SortOrder;
 
+import srcs.Enums.AgeType;
+import srcs.Enums.TeamType;
 import srcs.Interfaces.Loopable;
 import srcs.Systems.AgeSystem.AgeList.StoneAge;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.constant.DirectMethodHandleDesc.Kind;
 
 public class UpgradePanel extends JPanel implements Loopable {
     private static UpgradePanel instance = null;
@@ -40,6 +44,7 @@ public class UpgradePanel extends JPanel implements Loopable {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //todo : upgrade new age
+                IntegratedSystem.getInstance().upgradeAge(TeamType.PLAYER);
             }
         });
     }

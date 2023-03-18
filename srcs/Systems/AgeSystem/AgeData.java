@@ -3,11 +3,14 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import helpers.ImageData;
+import srcs.Enums.AgeType;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 
 public abstract class AgeData {
+    private AgeData nextAgeData;
+    private AgeType ageType;
     private Image backgroundImage;
     private ArrayList<CharacterPrototype>  characterPrototypes = new ArrayList<>();
     private ArrayList<TurretPrototype> turretPrototypes = new ArrayList<>();
@@ -76,5 +79,21 @@ public abstract class AgeData {
 
     public void setUpgradeImage(Image upgradeImage) {
         this.upgradeImage = upgradeImage;
+    }
+
+    public AgeType getAgeType() {
+        return ageType;
+    }
+
+    public void setAgeType(AgeType ageType) {
+        this.ageType = ageType;
+    }
+
+    public AgeData getNextAgeData() {
+        return nextAgeData;
+    }
+
+    public void setNextAgeData(AgeData nextAgeData) {
+        this.nextAgeData = nextAgeData;
     }
 }

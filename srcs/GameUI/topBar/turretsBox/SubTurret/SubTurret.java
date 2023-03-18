@@ -47,36 +47,33 @@ public class SubTurret extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // TowerPrototype.
-                // todo : ADD TURRET OT PLAYER'S TOWER
-                // System.out.println(e);
-                TurretGObject turretGObject = new TurretGObject(turretPrototype);
-                // turretGObject.setLocation(getMousePosition());
-                // turretGObject.getTurret().setPosition(
-                // new Point(500, 300));
-                // MainGame.getInstance().addGameObjectToScene(turretGObject);
-                TowerPrototype playerTowerPrototype = IntegratedSystem.getInstance().getPlayerTowerSystem()
-                        .getTowerPrototype();
-                if (IntegratedSystem.getInstance().getPlayerGoldSystem().getGold() > turretGObject.getTurretPrototype()
-                        .getGold()) {
-                    if (playerTowerPrototype.getTurretBelow() == null) {
-                        playerTowerPrototype.setTurretBelow(turretGObject);
-
-                        IntegratedSystem.getInstance().getPlayerGoldSystem()
-                                .decreasedGold(
-                                        turretGObject.getTurretPrototype().getGold());
-                    } else if (playerTowerPrototype.getTurretAbove() == null) {
-                        playerTowerPrototype.setTurretAbove(turretGObject);
-                        IntegratedSystem.getInstance().getPlayerGoldSystem()
-                                .decreasedGold(
-                                        turretGObject.getTurretPrototype().getGold());
-                    }
-                } else {
-                    System.out.println("Not enough money!!!");
-                }
-                // turretGObject.repaint();
+                addThisTurretToTowerPrototype();
             }
         });
+    }
+
+    void addThisTurretToTowerPrototype() {
+        TurretGObject turretGObject = new TurretGObject(turretPrototype);
+        TowerPrototype playerTowerPrototype = IntegratedSystem.getInstance().
+            getPlayerTowerSystem().getTowerPrototype();
+        if (IntegratedSystem.getInstance().getPlayerGoldSystem().getGold() > turretGObject.getTurretPrototype()
+                .getGold()) {
+            if (playerTowerPrototype.getTurretBelow() == null) {
+                playerTowerPrototype.setTurretBelow(turretGObject);
+                System.out.println("set turret ");
+                IntegratedSystem.getInstance().getPlayerGoldSystem()
+                    .decreasedGold(
+                        turretGObject.getTurretPrototype().getGold()
+                    );
+            } else if (playerTowerPrototype.getTurretAbove() == null) {
+                playerTowerPrototype.setTurretAbove(turretGObject);
+                IntegratedSystem.getInstance().getPlayerGoldSystem()
+                    .decreasedGold(
+                            turretGObject.getTurretPrototype().getGold());
+            }
+        } else {
+            System.out.println("Not enough money!!!");
+        }
     }
 
     @Override

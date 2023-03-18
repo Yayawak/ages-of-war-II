@@ -3,6 +3,7 @@ package srcs.Systems.TowerSystem;
 import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Tower.TowerPrototype;
@@ -13,19 +14,9 @@ public class TowerSystem implements Loopable {
 
     private TowerPrototype towerPrototype;
 
-    public TowerSystem(String initTowerRelPath) {
-        ImageData towerImgData = new ImageData(
-                // "tower/tower1.png", 116, 228);
-                initTowerRelPath, 116, 228);
-        towerPrototype = new TowerPrototype(1000,
-                TeamType.PLAYER,
-                null,
-                null,
-                towerImgData,
-                new Point(50, 210));
-        TowerGameObject playerTowerGameObject = new TowerGameObject(towerPrototype);
-        MainGame.getInstance().addGameObjectToScene(playerTowerGameObject);
-
+    public TowerSystem(TowerPrototype initTp) {
+        // this.towerPrototype = initTp;
+        setTowerPrototype(initTp);
     }
 
     @Override
@@ -41,7 +32,23 @@ public class TowerSystem implements Loopable {
         return towerPrototype;
     }
 
-    public void setTowerPrototype(TowerPrototype towerPrototype) {
-        this.towerPrototype = towerPrototype;
+    public void setTowerPrototype(TowerPrototype tp) {
+        // newTowerSetup
+        if (this.towerPrototype != tp) {
+            //todo : remove old tower game object
+            for (GameObject go : MainGame.getInstance().getObjectsInScene()) {
+                if (go instanceof TowerGameObject) {
+                    TowerGameObject towerToBeReplaced = (TowerGameObject)go;
+                    if (towerPrototype.getTeamType() == towerToBeReplaced.getTeamType()) {
+                        MainGame.getInstance().removeGameObjectFromScene(towerToBeReplaced);
+                        break;
+                    }
+                }
+            }
+            //todo : add new tower
+            this.towerPrototype = tp;
+            TowerGameObject playerTowerGameObject = new TowerGameObject(towerPrototype);
+            MainGame.getInstance().addGameObjectToScene(playerTowerGameObject);
+        }
     }
 }

@@ -9,7 +9,7 @@ public class NatureProphet extends CharacterPrototype{
     public NatureProphet(TeamType tt) {
         super(tt);
         ImageData grimImageData = new ImageData(
-            "characters/np.png"
+            "characters/stoneAge/np.png"
         );
         setName("Nature prophet");
         setExperiance(2);

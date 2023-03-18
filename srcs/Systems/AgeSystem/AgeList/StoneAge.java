@@ -9,7 +9,10 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import helpers.ImageData;
+import srcs.Enums.AgeType;
 import srcs.Enums.TeamType;
+import srcs.GameUI.MainUI;
+import srcs.GameUI.mainGame.MainGame;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.*;
 import srcs.Prototypes.Tower.TowerPrototype;
@@ -27,15 +30,21 @@ public class StoneAge extends AgeData {
     }
 
     public StoneAge() {
-        setBackgroundImage(getBackgroundImage());
+        setAgeType(AgeType.STONE);
+
+        Image bgImg = new ImageData("backgrounds/stoneAge.png",
+            MainUI.getInstance().getWidth(),
+            (int)MainGame.getInstance().getPreferredSize().getHeight() + 50
+        ).getSprite();
+        setBackgroundImage(bgImg);
 
         CharacterPrototype[] cps = {
-            // new GrimStroke(TeamType.PLAYER),
-            new SkeletonWarrior(TeamType.PLAYER),
-            new SkeletonArcher(TeamType.PLAYER),
+            new GrimStroke(TeamType.PLAYER),
+            // new SkeletonWarrior(TeamType.PLAYER),
+            // new SkeletonArcher(TeamType.PLAYER),
             new NatureProphet(TeamType.PLAYER),
             new Rubick(TeamType.PLAYER),
-            // new Morphling(TeamType.PLAYER)
+            new Morphling(TeamType.PLAYER)
         };
         setCharacterPrototypes(
             new ArrayList<CharacterPrototype>(

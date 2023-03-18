@@ -14,11 +14,10 @@ import srcs.Systems.integratedSystem.IntegratedSystem;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Time;
 import javax.swing.Timer;;
 
 public class SubUnit extends JPanel {
-    private Image img; // pointer is points to the same object as character's image
+    // private Image img; // pointer is points to the same object as character's image
     private CharacterPrototype character;
     private CharacterTooltip characterTooltip;
 
@@ -26,7 +25,7 @@ public class SubUnit extends JPanel {
         initGraphic();
         initEvent();
         this.character = c;
-        this.img = character.getImgData().getSprite();
+        // this.img = character.getImgData().getSprite();
         characterTooltip = new CharacterTooltip(c);
     }
 
@@ -38,17 +37,21 @@ public class SubUnit extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 // System.out.println(e);
                 // todo : send character data by mouse clikc
-                character.setTeamType(TeamType.PLAYER);
-                GameObject go = new CharacterGObject(character);
-                if (QueueProgress.getInstance().isProgressBarAvailable()
-                        &&
+                    character.setTeamType(TeamType.PLAYER);
+                    GameObject go = new CharacterGObject(character);
+                    if (QueueProgress.getInstance().isProgressBarAvailable()
+                            &&
+                            IntegratedSystem.getInstance().getPlayerGoldSystem()
+                                    .getGold() > character.getGold())
+                    {
+                        MainGame.getInstance().addGameObjectToScene(go);
+                        QueueProgress.getInstance().startQueue(character.getBuildTime());
                         IntegratedSystem.getInstance().getPlayerGoldSystem()
-                                .getGold() > character.getGold()) {
-                    MainGame.getInstance().addGameObjectToScene(go);
-                    QueueProgress.getInstance().startQueue(character.getBuildTime());
-                    IntegratedSystem.getInstance().getPlayerGoldSystem()
-                            .decreasedGold(character.getGold());
-                }
+                                .decreasedGold(character.getGold());
+                    }
+
+
+                // System.out.println(e);
             }
 
             @Override
@@ -123,6 +126,7 @@ public class SubUnit extends JPanel {
     }
 
     private void drawUnit(Graphics g) {
+        Image img = character.getImgData().getSprite();
         if (img != null) {
             g.drawImage(img,
                     0, 0,
@@ -135,14 +139,14 @@ public class SubUnit extends JPanel {
         }
     }
 
-    public Image getImg() {
-        return img;
-    }
+    // public Image getImg() {
+    //     return img;
+    // }
 
-    public void setImg(Image img) {
-        this.img = img;
-        // repaint();
-    }
+    // public void setImg(Image img) {
+    //     this.img = img;
+    //     // repaint();
+    // }
 
     public CharacterPrototype getCharacter() {
         return character;

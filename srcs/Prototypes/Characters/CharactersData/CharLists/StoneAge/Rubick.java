@@ -8,7 +8,7 @@ public class Rubick extends CharacterPrototype {
     public Rubick(TeamType tt) {
         super(tt);
         ImageData imgData = new ImageData(
-            "characters/rubick.png"
+            "characters/stoneAge/rubick.png"
         );
         setName("rubick");
         setExperiance(3);

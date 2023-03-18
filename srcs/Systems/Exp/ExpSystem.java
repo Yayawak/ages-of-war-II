@@ -7,12 +7,18 @@ public class ExpSystem {
         this.experiance = initExp;
     }
 
-    public void increasedExperience(int exp) { // kill enemies
-        experiance += exp;
+    public void decreaseExperiance(int exp) {
+        // experiance -= exp;
+        setExperiance(
+            getExperiance() - exp
+        );
+        // setExperiance(
+        //     getExperiance() - exp
+        // );
     }
 
-    public void setStartExperience() {// restart game
-        experiance = 0;
+    public void increasedExperience(int exp) { // kill enemies
+        experiance += exp;
     }
 
     public int getExperiance() {
@@ -21,5 +27,11 @@ public class ExpSystem {
 
     public void setExperiance(int experiance) {
         this.experiance = experiance;
+        // if (experiance > this.experiance)
+            // this.experiance = experiance;
+        if (experiance < 0) {
+            experiance = 0;
+        }
+
     }
 }

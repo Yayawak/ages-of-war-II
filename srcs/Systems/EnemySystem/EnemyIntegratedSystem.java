@@ -16,10 +16,11 @@ import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharactersData;
+import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonWarrior;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Morphling;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphet;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Rubick;
-import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.SkeletonWarrior;
+import srcs.Systems.AgeSystem.AgeList.SkeletonAge;
 import srcs.Systems.AgeSystem.AgeList.StoneAge;
 import srcs.Systems.Gold.GoldSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
@@ -79,7 +80,7 @@ public class EnemyIntegratedSystem implements Loopable {
             // CharacterPrototype dummy = new Morphling(TeamType.ENEMY);
             // CharacterPrototype dummy = new SkeletonWarrior(TeamType.ENEMY);
             int ranI = (int)(Math.random() * 4);
-            CharacterPrototype dummy = StoneAge.getInstance().getCharacterPrototypes().get(ranI);
+            CharacterPrototype dummy = SkeletonAge.getInstance().getCharacterPrototypes().get(ranI);
             // dummy.setTeamType(TeamType.ENEMY
             dummy.setTeamType(TeamType.ENEMY);
             dummy.setPosition(new Point(1500, 300));

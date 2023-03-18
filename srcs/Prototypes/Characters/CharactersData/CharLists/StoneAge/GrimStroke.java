@@ -9,7 +9,7 @@ public class GrimStroke extends CharacterPrototype {
     public GrimStroke(TeamType tt) {
         super(tt);
         ImageData grimImageData = new ImageData(
-            "characters/grimStroke.png"
+            "characters/stoneAge/grimStroke.png"
         );
         setName("grim");
         setExperiance(1);

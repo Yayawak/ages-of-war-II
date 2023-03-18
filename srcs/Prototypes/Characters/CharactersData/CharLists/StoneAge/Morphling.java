@@ -9,7 +9,7 @@ public class Morphling extends CharacterPrototype {
     public Morphling(TeamType tt) {
         super(tt);
         ImageData grimImageData = new ImageData(
-            "characters/morphling.png"
+            "characters/stoneAge/morphling.png"
         );
         setName("morphling");
         setExperiance(1);
@@ -17,7 +17,7 @@ public class Morphling extends CharacterPrototype {
         setMaxHp(25);
         // setHp(getMaxHp());
         // System.out.println("max hp morph : " + getMaxHp());
-        setMovementSpeed(3);
+        setMovementSpeed(5);
         setAttackSpeed(2);
         // setTeam(TeamType.PLAYER);
         setImgData(grimImageData);

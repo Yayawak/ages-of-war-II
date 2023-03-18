@@ -13,7 +13,7 @@ import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.characterHpBar.CharacterHpBar;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
-import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.SkeletonWarrior;
+import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonWarrior;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
 public class CharacterGObject extends GameObject {
@@ -91,7 +91,9 @@ public class CharacterGObject extends GameObject {
             destroyGameObject();
         }
 
+        // if (!getCollide()) {
         if (!getCollide()) {
+        // if (false) {
             switch (character.getTeamType()) {
                 case PLAYER:
                     move(Direction.RIGHT);
@@ -118,9 +120,10 @@ public class CharacterGObject extends GameObject {
             hpBar.draw(g);
         }
 
-        if (character.getWalkSprites().size() != 0) {
+        int n =character.getWalkSprites().size();
+        if (n != 0) {
             // if (character instanceof SkeletonWarrior) {
-            int r = (int)(Math.random() * 7);
+            int r = (int)(Math.random() * n);
             setImg(character.getWalkSprites().get(r));
 
             // int n = character.getWalkSprites().size();
@@ -157,7 +160,8 @@ public class CharacterGObject extends GameObject {
     }
 
     private void move(Direction dir) {
-        int mul = 20;
+        // int mul = 20;
+        int mul = 10;
         int x = getX();
         int y = getY();
         int speed = character.getMovementSpeed() * mul;
