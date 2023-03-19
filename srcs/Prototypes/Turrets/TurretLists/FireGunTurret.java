@@ -31,6 +31,7 @@ public class FireGunTurret extends TurretPrototype {
         // Image bullet = new Image()
         setBulletImgData(turretImgData);
         setAttackRange(400);
+        setAttackDamage(1);
     }
     // public FireGunTurret(TeamType teamType, int attackSpeed, ImageData imgData, String name, int gold, Point position,
     //         float buildTime, int projectileSpeed, ImageData bulletImgData, int attackRange,

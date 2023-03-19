@@ -71,14 +71,6 @@ public class EnemyIntegratedSystem implements Loopable {
         // System.out.println("Enemy Gold = " + enemyGoldSystem.getGold());
 
         if (enemyGoldSystem.getGold() > 0) {
-            // CharacterGObject cgo =
-            // (CharacterGObject)currentAvailableCharacters.get(ranI).copy();
-            // cgo.getCharacter().setTeam(TeamType.ENEMY);
-            // MainGame.getObjectsInScene().add(cgo);
-
-            // * it's Work
-            // CharacterPrototype dummy = new Morphling(TeamType.ENEMY);
-            // CharacterPrototype dummy = new SkeletonWarrior(TeamType.ENEMY);
             int ranI = (int)(Math.random() * 4);
             CharacterPrototype dummy = SkeletonAge.getInstance().getCharacterPrototypes().get(ranI);
             // dummy.setTeamType(TeamType.ENEMY
@@ -91,7 +83,6 @@ public class EnemyIntegratedSystem implements Loopable {
             enemyGoldSystem.decreasedGold(c
                     .getCharacter().getGold());
 
-            // MainGame.getObjectsInScene().add()
         } else {
             // enemyGoldSystem.setGold(1000);
         }

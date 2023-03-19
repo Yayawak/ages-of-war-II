@@ -1,13 +1,6 @@
 package srcs.GameUI.mainGame.SubScene.GameObject;
 
 import java.awt.Graphics;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.time.chrono.ThaiBuddhistChronology;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import srcs.Enums.TeamType;
@@ -16,6 +9,7 @@ import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.EntityPrototype;
 import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.StateMachine.State;
 
 import java.awt.*;
 
@@ -26,6 +20,7 @@ public class GameObject extends JPanel implements Loopable {
     protected Dimension imgSize;
     protected boolean isCollide = false;
     protected long spawnTime;
+    protected boolean hasAttacked;
 
     public GameObject(Image img, Point pos, Dimension imgSize) {
         spawnTime = System.nanoTime();
@@ -91,6 +86,7 @@ public class GameObject extends JPanel implements Loopable {
         return new GameObject(img, pos, imgSize);
     }
 
+
     protected float getDistanceBetweenGameObject(
         GameObject thisGo,
         GameObject thatGo
@@ -140,8 +136,21 @@ public class GameObject extends JPanel implements Loopable {
                     != ent.getTeamType()
             ) {
                 // todo : combat
-                // isAttacking = true;
+                // ent.setState(State.ATTACK);
                 // attackOpponent(ent, closetCharacter.getCharacter());
+                // Check if tha attack has no been made yet
+                if (!hasAttacked) {
+                    //  Find the closet enemy and attack it
+                    // if (closetCharacter != null) {
+                    if (closetCharacter != null) {
+                        hasAttacked = true;
+                        attackOpponent(ent,
+                            closetCharacter.getCharacter()
+                        );
+                    }
+                    // if (closi)
+                }
+                // ent.getState().nex
                 // attackOpponent(closestCgo.getCharacter(), character);
                 // System.out.println("combat occured");
                 // System.out.println("Min = " + min);
@@ -155,21 +164,72 @@ public class GameObject extends JPanel implements Loopable {
     }
 
     // protected void attackOpponent(CharacterPrototype attacker,
-    protected void attackOpponent(EntityPrototype attacker,
+    private void attackOpponent(EntityPrototype attacker,
         CharacterPrototype damager) {
+
+        // is
+        // if (attacker.getState().equals(State.ATTACK)) {
+        // if (attacker.getState().equals(State.ATTACK)) {
+        // attacker.setState(State.ATTACK);
+
+        // if (attacker.getState() == State.ATTACK) {
+        //     // donothing
+        // } else {
+
+        // damager.decreaseHp(attacker.getAttackDamage());
+        // }
         // if (isAttacking)
-        // new Thread(
-        //     () -> {
-        //         int atkRate = attacker.getAttackSpeed();
-        //         while (damager != null) {
-        //             long ms = (atkRate * 10000);
-        //             damager.decreaseHp(attacker.getAttackDamage());
-        //             try {
-        //                 Thread.sleep(ms);
-        //             } catch (Exception e) { }
-        //         }
-        //     }
-        // ).start();
+        System.out.format("Attacker(%s) : id(%s) -> Damager(%s) : id(%s)\n",
+            attacker.getName(),
+            String.valueOf(attacker.hashCode()).substring(5),
+            damager.getName(),
+            String.valueOf(damager.hashCode()).substring(5)
+        );
+        // try {
+        //     // int atkInterval = 1 / attacker.getAttackSpeed();
+        //     // int atkInterval = 1 / attacker.getAttackSpeed();
+        //     Thread.sleep(1000);
+        //     damager.decreaseHp(attacker.getAttackDamage());
+        // } catch (Exception e) { System.out.println(e); }
+        // if (attacker.getState() == State.ATTACK) {
+
+        // }
+
+        // if (attacker.getState() == State.MOVE) {
+        //     attacker.setState(State.ATTACK);
+        // }
+        // else {
+
+        // }
+        System.out.println("Create new Thread" + "-->".repeat(9));
+        // return;
+        // try {
+        //     Thread.sleep(2000);
+        // } catch (Exception e) {
+        // }
+        // System.out.println("Start Thread");
+        new Thread(
+            () -> {
+                int atkRate = attacker.getAttackSpeed();
+                // while (damager != null
+                while ( damager.getHp() > 0
+                ) {
+                    System.out.format("%s -> %s\n",
+                        attacker.getName(),
+                        damager.getName()
+                    );
+                    // long ms = (atkRate * 1000);
+                    // long ms = (1000);
+                    long ms = (100);
+                    damager.decreaseHp(attacker.getAttackDamage());
+                    try {
+                        Thread.sleep(ms);
+                    } catch (Exception e) { }
+                }
+                hasAttacked = false; // reset attacker to be attack again if enemy is die
+                attacker.setState(State.MOVE);
+            }, "attacking Thread"
+        ).start();
     }
 
 

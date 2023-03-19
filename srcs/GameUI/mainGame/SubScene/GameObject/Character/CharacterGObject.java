@@ -156,6 +156,22 @@ public class CharacterGObject extends GameObject {
             // int r = (int)(Math.random() * atkAImgs.size());
             // setImg(atkAImgs.get(r));
         }
+
+        if (closestOpp != null) {
+            Graphics2D g2d = (Graphics2D)g;
+            g2d.setColor(Color.cyan);
+            g2d.setStroke(new BasicStroke(1));
+            g2d.drawString(getCharacter().getName(), getX(), getY());
+            g2d.drawLine(
+                getX(),
+                // getY() + (int)(Math.random() * 300 + 100),
+                getY(),
+                // getY(),
+                closestOpp.getX(),
+                // closestOpp.getY() + closestOpp.getWidth() / 2
+                closestOpp.getY() - closestOpp.getWidth() / 2
+            );
+        }
     }
 
     private void checkIfCharacterOutOfScreen() {

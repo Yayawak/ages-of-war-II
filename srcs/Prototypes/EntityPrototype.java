@@ -3,11 +3,14 @@ package srcs.Prototypes;
 import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.GameUI.MainUI;
+import srcs.StateMachine.State;
 
 import java.awt.*;
-import java.util.ArrayList;;
+import java.util.ArrayList;
+
 
 public class EntityPrototype {
+    protected State state;
     protected TeamType teamType = TeamType.PLAYER;
     protected int attackSpeed;
     protected ImageData imgData;
@@ -55,6 +58,7 @@ public class EntityPrototype {
     }
 
     private void init() {
+        state = State.MOVE;
         int spawnX = (teamType == TeamType.PLAYER) ?
             200 :
             // (int) MainUI.getInstance().getScreenSize().getWidth()
@@ -164,6 +168,14 @@ public class EntityPrototype {
 
     public void setAttackASprites(ArrayList<Image> attackASprites) {
         this.attackASprites = attackASprites;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 
 

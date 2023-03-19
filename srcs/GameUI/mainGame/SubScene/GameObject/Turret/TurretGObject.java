@@ -30,8 +30,6 @@ public class TurretGObject extends GameObject implements RangeUnit {
         // super.update();
         // System.out.println("update from Turret game object");
         closestCgo = findClosestOpponent(turretPrototype);
-        // repaint();
-        // System.out.println("POSITIOn of turet = " + turretPrototype.getPosition());
         // System.out.println("POSITIOn of turet = " + getLocation());
 
         setLocation(turretPrototype.getPosition());
@@ -45,10 +43,10 @@ public class TurretGObject extends GameObject implements RangeUnit {
             // todo : draw line to that gameobject
             float d = getDistanceBetweenGameObject(this, closestCgo);
             if (d < turretPrototype.getAttackRange()) {
-                System.out.format("Turret (%s) : found enemy (%s)\n",
-                    turretPrototype.getName(),
-                    closestCgo.getCharacter().getName()
-                );
+                // System.out.format("Turret (%s) : found enemy (%s)\n",
+                    // turretPrototype.getName(),
+                    // closestCgo.getCharacter().getName()
+                // );
                 g2d.setStroke(new BasicStroke(10));
                 g2d.setColor(new Color(0, 255, 10));
                 g2d.drawLine(

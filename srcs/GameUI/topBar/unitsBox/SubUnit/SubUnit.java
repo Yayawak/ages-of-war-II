@@ -35,26 +35,17 @@ public class SubUnit extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                // System.out.println(e);
-                // todo : send character data by mouse clikc
-                    character.setTeamType(TeamType.PLAYER);
-                    // new
-                // character.get
-                    // new
-                    GameObject go = new CharacterGObject(character);
-                    if (QueueProgress.getInstance().isProgressBarAvailable()
-                            &&
-                            IntegratedSystem.getInstance().getPlayerGoldSystem()
-                                    .getGold() > character.getGold())
-                    {
-                        MainGame.getInstance().addGameObjectToScene(go);
-                        QueueProgress.getInstance().startQueue(character.getBuildTime());
-                        IntegratedSystem.getInstance().getPlayerGoldSystem()
-                                .decreasedGold(character.getGold());
-                    }
-
-
-                // System.out.println(e);
+                character.setTeamType(TeamType.PLAYER);
+                GameObject go = new CharacterGObject(character);
+                if (QueueProgress.getInstance().isProgressBarAvailable()
+                    &&
+                    IntegratedSystem.getInstance().getPlayerGoldSystem()
+                        .getGold() > character.getGold())
+                {
+                    QueueProgress.getInstance().startQueue(character.getBuildTime());
+                    QueueProgress.getInstance().setCurrentCharacterPrototypeToBuild(character);
+                    QueueProgress.getInstance().setCurrentGameObjectToBuild(go);
+                }
             }
 
             @Override

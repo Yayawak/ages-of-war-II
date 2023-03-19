@@ -20,7 +20,8 @@ public class RedLaserTurret extends TurretPrototype {
         setProjectileSpeed(2);
         // todo : add bullet image
         setBulletImgData(turretImgData);
-        setAttackRange(400);
+        setAttackRange(1000);
+        setAttackDamage(1);
     }
 
     public RedLaserTurret(TeamType teamType, int attackSpeed, ImageData imgData, String name, int gold, Point position,

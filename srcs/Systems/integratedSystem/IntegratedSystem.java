@@ -41,9 +41,11 @@ public class IntegratedSystem {
 
     private void startSystem() {
 
-        playerGoldSystem = new GoldSystem(300);
+        playerGoldSystem = new GoldSystem(850);
+        // playerGoldSystem = new GoldSystem(300);
+        enemyGoldSystem = new GoldSystem(500);
         // enemyGoldSystem = new GoldSystem(500);
-        enemyGoldSystem = new GoldSystem(200);
+        // enemyGoldSystem = new GoldSystem(200);
         // enemyGoldSystem = new GoldSystem(100);
         // enemyGoldSystem = new GoldSystem(30);
         // enemyGoldSystem = new GoldSystem(50);
@@ -51,7 +53,7 @@ public class IntegratedSystem {
         // playerExpSystem = new ExpSystem(50);
         playerExpSystem = new ExpSystem(10000);
         // playerExpSystem = new ExpSystem(1250);
-        enemyExpSystem = new ExpSystem(75);
+        enemyExpSystem = new ExpSystem(8000);
 
         playerTowerSystem = new TowerSystem(
             SkeletonAge.getInstance().getTowerPrototype()
