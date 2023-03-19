@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import srcs.Enums.TeamType;
+import srcs.GameUI.mainGame.Debugger.DebugPanel;
+import srcs.GameUI.mainGame.Debugger.DebugPanelDepreicated;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
@@ -54,12 +56,23 @@ public class MainGame extends JPanel implements ComponentSizeItf,
 
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                int expToUp = 1000;
+                IntegratedSystem.getInstance().getEnemyExpSystem()
+                    .increasedExperience(expToUp);
+                System.out.println("increase enemy exp by : " + expToUp);
+                DebugPanel.getInstance().setDebugText(
+                    "Enemy's experiance is " +
+                    IntegratedSystem.getInstance().getEnemyExpSystem().getExperiance()
+                );
             }
         });
+
+        setLayout(null);
+        add(DebugPanel.getInstance());
     }
 
     private void drawBg(Graphics g) {
-        Image bgSprite = IntegratedSystem.getInstance().getCurrentAgeData()
+        Image bgSprite = IntegratedSystem.getInstance().getCurrentPlayerAgeData()
             .getBackgroundImage();
         g.drawImage(bgSprite, 0, 0,
             // getWidth(), getHeight(),

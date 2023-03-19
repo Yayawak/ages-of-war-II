@@ -22,6 +22,7 @@ import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphe
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Rubick;
 import srcs.Systems.AgeSystem.AgeList.SkeletonAge;
 import srcs.Systems.AgeSystem.AgeList.StoneAge;
+import srcs.Systems.Exp.ExpSystem;
 import srcs.Systems.Gold.GoldSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
@@ -30,6 +31,7 @@ import java.awt.Color;
 public class EnemyIntegratedSystem implements Loopable {
     private static EnemyIntegratedSystem instance;
     private GoldSystem enemyGoldSystem;
+    private ExpSystem enemyExpSystem;
     private ArrayList<GameObject> currentAvailableCharacters
     // private List<CharacterGObject> currentAvailableCharacters
             = new ArrayList<>();
@@ -45,6 +47,8 @@ public class EnemyIntegratedSystem implements Loopable {
     }
 
     private void startSystem() {
+        enemyGoldSystem = IntegratedSystem.getInstance().getEnemyGoldSystem();
+        enemyExpSystem = IntegratedSystem.getInstance().getEnemyExpSystem();
         // currentAvailableCharacters = CharactersData.getInstance().
         // getCharactersList().stream().map(cData -> new CharacterGObject(cData))
         // .collect(Collectors.toList());
@@ -56,35 +60,57 @@ public class EnemyIntegratedSystem implements Loopable {
         // currentAvailableCharacters.forEach(cgo -> {
         // GameObject go = new CharacterGObject(character);
         // });
+        // new Thread(()).start();
+        // new Thread(new Runnable() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                periodicChecker();
+            }
+        }).start();
+    }
+
+    private void periodicChecker() {
+        int spawnEnemyIntervalInMs = 2000;
+        while (true) {
+            try {
+                Thread.sleep(spawnEnemyIntervalInMs);
+                if (enemyGoldSystem.getGold() > 0) {
+                    int ranI = (int)(Math.random() * 4);
+                    // CharacterPrototype dummy = SkeletonAge.getInstance().getCharacterPrototypes().get(ranI);
+                    CharacterPrototype dummy = IntegratedSystem.getInstance()
+                        .getCurrentEnemyAgeData()
+                        .getCharacterPrototypes().get(ranI);
+                    // dummy.setTeamType(TeamType.ENEMY
+                    dummy.setTeamType(TeamType.ENEMY);
+                    dummy.setPosition(new Point(1500, 300));
+
+                    CharacterGObject c = new CharacterGObject(dummy);
+                    // todo : make this enemy system usable
+                    MainGame.getInstance().addGameObjectToScene(c);
+                    enemyGoldSystem.decreasedGold(c
+                            .getCharacter().getGold());
+
+                } else {
+                    // enemyGoldSystem.setGold(1000);
+                }
+            } catch (Exception e) { }
+        }
     }
 
     @Override
     public void update() {
-        enemyGoldSystem = IntegratedSystem.getInstance().getEnemyGoldSystem();
-        // System.out.println("enemy start loop");
-        try {
-            Thread.sleep(100);
-            // Thread.sleep(10);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        // System.out.println("Enemy Gold = " + enemyGoldSystem.getGold());
-
-        if (enemyGoldSystem.getGold() > 0) {
-            int ranI = (int)(Math.random() * 4);
-            CharacterPrototype dummy = SkeletonAge.getInstance().getCharacterPrototypes().get(ranI);
-            // dummy.setTeamType(TeamType.ENEMY
-            dummy.setTeamType(TeamType.ENEMY);
-            dummy.setPosition(new Point(1500, 300));
-
-            CharacterGObject c = new CharacterGObject(dummy);
-            // todo : make this enemy system usable
-            MainGame.getInstance().addGameObjectToScene(c);
-            enemyGoldSystem.decreasedGold(c
-                    .getCharacter().getGold());
-
-        } else {
-            // enemyGoldSystem.setGold(1000);
+        if (
+            IntegratedSystem.getInstance()
+                .getCurrentEnemyAgeData().getNextAgeData() != null
+            &&
+            enemyExpSystem.getExperiance() >
+                IntegratedSystem.getInstance()
+                .getCurrentEnemyAgeData().getExpRequiredToUpgrade()
+        ) {
+            // sout
+            // System.out.println("try to upgrade enemy age");
+            IntegratedSystem.getInstance().upgradeAge(TeamType.ENEMY);
         }
     }
 

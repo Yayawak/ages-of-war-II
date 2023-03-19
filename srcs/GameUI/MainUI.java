@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import srcs.GameUI.lowerBar.LowerBar;
 import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.Debugger.DebugPanelDepreicated;
 import srcs.GameUI.topBar.TopBar;
 import srcs.GameUI.topBar.goldExpProgPanel.GoldExpProgPanel;
 import srcs.GameUI.topBar.goldExpProgPanel.expPanel.ExpPanel;
@@ -117,6 +118,7 @@ public class MainUI extends JPanel implements Runnable {
         // new Thread(() -> {
             QueueProgress.getInstance().update();
         // }).start();
+        DebugPanelDepreicated.getInstance().update();
     }
 
 

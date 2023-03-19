@@ -19,19 +19,7 @@ public abstract class AgeData {
     private int expRequiredToUpgrade;
     private Image upgradeImage;
 
-    // protected AgeData(String relPathToBgImage,
-    //     ArrayList<CharacterPrototype> characterPrototypes,
-    //     ArrayList<TurretPrototype> turretPrototypes,
-    //     TowerPrototype towerPrototype,
-    //     int expRequiredToUpgrade
-    // ) {
-    //     this.backgroundImage = new ImageData(relPathToBgImage).getSprite();
-    //     this.characterPrototypes = characterPrototypes;
-    //     this.turretPrototypes = turretPrototypes;
-    //     this.expRequiredToUpgrade = expRequiredToUpgrade;
-    // }
-
-    protected AgeData() { }
+    // protected AgeData() { }
 
     public Image getBackgroundImage() {
         return backgroundImage;

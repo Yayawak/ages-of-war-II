@@ -161,7 +161,9 @@ public class CharacterGObject extends GameObject {
             Graphics2D g2d = (Graphics2D)g;
             g2d.setColor(Color.cyan);
             g2d.setStroke(new BasicStroke(1));
-            g2d.drawString(getCharacter().getName(), getX(), getY());
+            g2d.drawString(getCharacter().getName(), getX(), getY()
+                - 30
+            );
             g2d.drawLine(
                 getX(),
                 // getY() + (int)(Math.random() * 300 + 100),
@@ -191,11 +193,11 @@ public class CharacterGObject extends GameObject {
     private void move(Direction dir) {
         // int mul = 20;
         // int mul = 10;
-        int mul = 2;
-        int x = getX();
-        int y = getY();
-        int speed = character.getMovementSpeed() * mul;
-        Point newPos = new Point(x, y);
+        double mul = 0.5;
+        double x = getX();
+        double y = getY();
+        double speed = character.getMovementSpeed() * mul;
+        Point newPos = new Point((int)x, (int)y);
         switch (dir) {
             case RIGHT:
                 newPos.setLocation(x + speed, y);

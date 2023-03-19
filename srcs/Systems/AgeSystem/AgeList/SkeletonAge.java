@@ -75,7 +75,6 @@ public class SkeletonAge extends AgeData {
             new Point(50, 210)
         );
         setTowerPrototype(towerPrototype);
-    // new Tower
 
         setExpRequiredToUpgrade(1000);
 

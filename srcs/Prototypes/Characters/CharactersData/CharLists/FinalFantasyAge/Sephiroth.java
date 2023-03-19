@@ -3,9 +3,6 @@
 package srcs.Prototypes.Characters.CharactersData.CharLists.FinalFantasyAge;
 
 import java.awt.Image;
-import java.io.File;
-import java.util.ArrayList;
-
 import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;

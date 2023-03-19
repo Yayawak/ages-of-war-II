@@ -42,22 +42,27 @@ public class UnitsBox extends JPanel {
                 // CharacterPrototype character = SkeletonAge.getInstance().
                     // getCharacterPrototypes().get(i);
                 CharacterPrototype character = IntegratedSystem.getInstance()
-                    .getCurrentAgeData().getCharacterPrototypes().get(i);
+                    .getCurrentPlayerAgeData().getCharacterPrototypes().get(i);
                 SubUnit unit = new SubUnit(character);
+                System.out.println("i = " + i);
                 unitBoxes.add(unit);
 
-            } catch (Exception e) { System.out.println(e); }
+            } catch (Exception e) {
+                System.out.println("problem fetching character i = " + i);
+                System.out.println(e);
+            }
         }
         unitBoxes.stream().forEach(panel -> {
             add(panel);
         });
+        System.out.println("# panels : " + unitBoxes.size());
 
     }
 
     public void updateUnitsPanel() {
         for (int i = 0; i < unitBoxes.size(); i++) {
             unitBoxes.get(i).setCharacter(
-                IntegratedSystem.getInstance().getCurrentAgeData()
+                IntegratedSystem.getInstance().getCurrentPlayerAgeData()
                 .getCharacterPrototypes().get(i)
             );
             unitBoxes.get(i).setCharacterTooltip(

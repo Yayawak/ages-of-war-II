@@ -24,7 +24,7 @@ public class TowerGameObject extends GameObject {
 
     public void upgradeTowerToNewAge() {
         setImg(IntegratedSystem.getInstance()
-            .getCurrentAgeData().getTowerPrototype()
+            .getCurrentPlayerAgeData().getTowerPrototype()
             .getImageData().getSprite()
         );
         System.out.println("upgrade otwer entered");
