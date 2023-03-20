@@ -4,7 +4,10 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import srcs.Enums.Direction;
 import srcs.Enums.TeamType;
@@ -187,6 +190,13 @@ public class CharacterGObject extends GameObject {
             && getX() < 0
             ) {
             destroyGameObject();
+            // JFrame endFrame = new JFrame();
+            // endFrame.add(new JLabel("GAME OVER"));
+            // endFrame.setAlwaysOnTop(true);
+            // endFrame.setVisible(true);
+            // MainUI.getInstance().setVisible(false);
+            JOptionPane.showMessageDialog(null, "GAME OVER");
+            System.exit(0);
         }
     }
 

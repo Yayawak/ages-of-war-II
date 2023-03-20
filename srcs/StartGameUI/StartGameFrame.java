@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SpringLayout.Constraints;
 
 import helpers.ImageData;
 import srcs.GameUI.MainFrame;
@@ -16,7 +17,9 @@ public class StartGameFrame extends JFrame {
     MainFrame mainFrame;
 
     public StartGameFrame() {
-        setTitle("AOW");
+        // setTitle("อิอิอิอิ");
+        setTitle("Warlorant");
+        // setTitle("Hahawar");
         setPreferredSize(new Dimension(1000, 600));
         setLayout(new BorderLayout());
         init();
@@ -31,12 +34,26 @@ public class StartGameFrame extends JFrame {
         botPane.setBackground(Color.blue);
 
         JPanel startPane = new JPanel();
-        startPane.setBackground(Color.PINK);
-        JLabel startLabel = new JLabel("START");
-        Font font = new Font(Font.SANS_SERIF,
+        // startPane.setBackground(Color.black);
+        // startPane.setBackground(Color.white);
+        JLabel startLabel = new JLabel("START"
+        // Constraints.
+        );
+        Font font = new Font(
+            Font.SANS_SERIF,
             Font.BOLD, 30);
         startLabel.setFont(font);
+        Image startImg = new ImageData("UI/start.png"
+            // ,1500, 700
+            ,1500, 400
+            // ,startPane.getWidth(),
+            // startPane.getHeight()
+        ).getSprite();
+        // startLabel.setFont(new );
+
+        startPane.add(new JLabel(new ImageIcon(startImg)));
         startPane.add(startLabel);
+        // Graphics gStart = startPane.getGraphics();
 
         startPane.addMouseListener(new MouseAdapter() {
             @Override
@@ -52,13 +69,30 @@ public class StartGameFrame extends JFrame {
 
 
         JPanel exitPane = new JPanel();
-        exitPane.setBackground(Color.cyan);
+        // exitPane.setBackground(Color.black);
+        // exitPane.setBackground(Color.white);
         JLabel exitLabel = new JLabel("EXIT");
         exitLabel.setFont(font);
-        exitPane.add(exitLabel);
+        Image exitImg = new ImageData("UI/exit.png"
+            // ,1500, 700
+            // ,1500, 400
+            ,500, 300
+            // ,300, 200
+            // ,1500, 200
+            // ,startPane.getWidth(),
+            // startPane.getHeight()
+        ).getSprite();
+        // startLabel.setFont(new );
 
-        Image bgImage = new ImageData("backgrounds/war_bg.jpeg").getSprite();
-        exitPane.add(new JLabel(new ImageIcon(bgImage)));
+        exitPane.add(new JLabel(new ImageIcon(exitImg)));
+        // exitPane.add(exitLabel);
+
+        // exitPane.add(new JLabel(new ImageIcon(bgImage)));
+        // Color c = new Color(0, 0, 0, 0);
+        // Color c = new Color(0, 0, 0, 5);
+        Color c = Color.black;
+        startPane.setBackground(c);
+        exitPane.setBackground(c);
 
         exitPane.addMouseListener(new MouseAdapter() {
             @Override
@@ -76,13 +110,5 @@ public class StartGameFrame extends JFrame {
         // add(botPane, BorderLayout.SOUTH);
         // repaint();
         pack();
-    }
-
-    @Override
-    public void paintComponents(Graphics g) {
-        // super.paintComponents(g);
-        System.out.println("paintocmponent form gameFrame initor");
-        // Image bgImage = new ImageData("backgrounds/war_bg.jpeg").getSprite();
-        // g.drawImage(bgImage, 0, 0, null);
     }
 }

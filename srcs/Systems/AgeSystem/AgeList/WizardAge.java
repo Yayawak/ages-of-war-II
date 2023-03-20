@@ -12,6 +12,8 @@ import srcs.GameUI.mainGame.MainGame;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.*;
 import srcs.Prototypes.Characters.CharactersData.CharLists.WizardAge.FireWizard;
+import srcs.Prototypes.Characters.CharactersData.CharLists.WizardAge.Santana;
+import srcs.Prototypes.Characters.CharactersData.CharLists.WizardAge.Teera;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
@@ -40,9 +42,11 @@ public class WizardAge extends AgeData {
         CharacterPrototype[] cps = {
             new FireWizard(TeamType.PLAYER),
             // new FireWizard(TeamType.PLAYER),
-            new FireWizard(TeamType.PLAYER),
             // new FireWizard(TeamType.PLAYER),
-            new GrimStroke(TeamType.PLAYER),
+            new Santana(TeamType.PLAYER),
+            // new FireWizard(TeamType.PLAYER),
+            new Teera(TeamType.PLAYER),
+            // new GrimStroke(TeamType.PLAYER),
             // new NatureProphet(TeamType.PLAYER),
             new Rubick(TeamType.PLAYER),
             // new Morphling(TeamType.PLAYER)

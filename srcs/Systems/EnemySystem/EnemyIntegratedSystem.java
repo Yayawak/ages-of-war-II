@@ -71,7 +71,10 @@ public class EnemyIntegratedSystem implements Loopable {
     }
 
     private void periodicChecker() {
-        int spawnEnemyIntervalInMs = 2000;
+        // int spawnEnemyIntervalInMs = 2000;
+        // int spawnEnemyIntervalInMs = 1000 / 2;
+        int spawnEnemyIntervalInMs = 800;
+        // int spawnEnemyIntervalInMs = 1000;
         while (true) {
             try {
                 Thread.sleep(spawnEnemyIntervalInMs);

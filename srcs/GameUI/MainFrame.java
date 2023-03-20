@@ -13,7 +13,7 @@ public class MainFrame extends JFrame {
     }
 
     private void init() {
-        setTitle("Age of War mock");
+        setTitle("Warapex");
         // setResizable(false);
         // setLocationRelativeTo(null); //center
 

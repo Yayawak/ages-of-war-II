@@ -75,10 +75,7 @@ public class SkeletonAge extends AgeData {
             new Point(50, 210)
         );
         setTowerPrototype(towerPrototype);
-
         setExpRequiredToUpgrade(1000);
-
-
         setUpgradeImage(
             new ImageData(
                 "upgradeIcons/stoneAgeUp.png"

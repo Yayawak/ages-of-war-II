@@ -1,33 +1,34 @@
-package srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge;
+package srcs.Prototypes.Characters.CharactersData.CharLists.WizardAge;
 
 import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
 
-public class GrimStroke extends CharacterPrototype {
+public class Teera extends CharacterPrototype {
 
-    public GrimStroke(TeamType tt) {
+    public Teera(TeamType tt) {
         super(tt);
-        ImageData grimImageData = new ImageData(
-            "characters/stoneAge/grimStroke.png"
-            // "characters/stoneAge/santa.png"
+        ImageData img = new ImageData(
+            // "characters/stoneAge/grimStroke.png"
+            "characters/wizardAge/Teera.JPG"
             // "characters/stoneAge/meme_1.jpeg"
             // "characters/stoneAge/santaKid.JPG"
-            // , 200, 200
+            , 200, 200
             // ,400,400
         );
-        setName("grim");
+        setName("Teera");
         setExperiance(1);
         setGold(10);
-        setMaxHp(30);
+        // setMaxHp(300);
+        setMaxHp(100);
         setMovementSpeed(3);
         setAttackSpeed(3);
         // setTeam(teamType);
-        setImgData(grimImageData);
+        setImgData(img);
         setBuildTime(1);
         setAttackRange(300);
+        // setAttackDamage(10);
         setAttackDamage(10);
-        // setAttackDamage(1);
     }
 
 }
