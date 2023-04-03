@@ -43,7 +43,16 @@ public class SubUnit extends JPanel {
                         .getGold() > character.getGold())
                 {
                     QueueProgress.getInstance().startQueue(character.getBuildTime());
-                    QueueProgress.getInstance().setCurrentCharacterPrototypeToBuild(character);
+                    // QueueProgress.getInstance().setCurrentCharacterPrototypeToBuild(character);
+                    Class<TeamType> c = TeamType.class;
+                    try {
+                        QueueProgress.getInstance().setCurrentCharacterPrototypeToBuild(
+                            character.getClass().getDeclaredConstructor(c).newInstance(TeamType.PLAYER)
+                            // Class.forName())
+                        );
+                    } catch (Exception e2) {
+                        System.out.println(e2);
+                    }
                     QueueProgress.getInstance().setCurrentGameObjectToBuild(go);
                 }
             }
