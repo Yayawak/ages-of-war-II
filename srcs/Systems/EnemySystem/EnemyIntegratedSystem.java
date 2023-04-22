@@ -83,19 +83,23 @@ public class EnemyIntegratedSystem implements Loopable {
                     // CharacterPrototype dummy = SkeletonAge.getInstance().getCharacterPrototypes().get(ranI);
                     CharacterPrototype dummy = IntegratedSystem.getInstance()
                         .getCurrentEnemyAgeData()
-                        .getCharacterPrototypes().get(ranI);
+                        .getCharacterPrototypes().get(ranI).getClass()
+                        .getDeclaredConstructor(TeamType.class)
+                        .newInstance(TeamType.ENEMY);
+
                     // dummy.setTeamType(TeamType.ENEMY
-                    dummy.setTeamType(TeamType.ENEMY);
+                    // dummy.setTeamType(TeamType.ENEMY);
                     dummy.setPosition(new Point(1500, 300));
                     // dummy.getClass().getDeclaredConstructor(c).newInstance(TeamType.PLAYER)
 
                     // Class<CharacterPrototype> c = dummy.getClass();
                     // Class<TeamType> c = TeamType.class;
-                    CharacterGObject c = new CharacterGObject(
-                        dummy.getClass().getDeclaredConstructor(
-                            TeamType.class
-                        ).newInstance(TeamType.ENEMY)
-                    );
+                    // CharacterGObject c = new CharacterGObject(
+                    //     dummy.getClass().getDeclaredConstructor(
+                    //         TeamType.class
+                    //     ).newInstance(TeamType.ENEMY)
+                    // );
+                    CharacterGObject c = new CharacterGObject(dummy);
                     // todo : make this enemy system usable
                     MainGame.getInstance().addGameObjectToScene(c);
                     enemyGoldSystem.decreasedGold(c

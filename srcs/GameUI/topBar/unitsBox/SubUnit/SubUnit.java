@@ -36,24 +36,31 @@ public class SubUnit extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 character.setTeamType(TeamType.PLAYER);
-                GameObject go = new CharacterGObject(character);
-                if (QueueProgress.getInstance().isProgressBarAvailable()
-                    &&
-                    IntegratedSystem.getInstance().getPlayerGoldSystem()
-                        .getGold() > character.getGold())
-                {
-                    QueueProgress.getInstance().startQueue(character.getBuildTime());
-                    // QueueProgress.getInstance().setCurrentCharacterPrototypeToBuild(character);
-                    Class<TeamType> c = TeamType.class;
-                    try {
-                        QueueProgress.getInstance().setCurrentCharacterPrototypeToBuild(
-                            character.getClass().getDeclaredConstructor(c).newInstance(TeamType.PLAYER)
-                            // Class.forName())
-                        );
-                    } catch (Exception e2) {
-                        System.out.println(e2);
+                try {
+                    GameObject go = new CharacterGObject(
+                        character.getClass().getDeclaredConstructor(TeamType.class).newInstance(TeamType.PLAYER)
+                    );
+                    if (QueueProgress.getInstance().isProgressBarAvailable()
+                        &&
+                        IntegratedSystem.getInstance().getPlayerGoldSystem()
+                            .getGold() > character.getGold())
+                    {
+                        QueueProgress.getInstance().startQueue(character.getBuildTime());
+                        // QueueProgress.getInstance().setCurrentCharacterPrototypeToBuild(character);
+                        // Class<TeamType> c = TeamType.class;
+                        try {
+                            QueueProgress.getInstance().setCurrentCharacterPrototypeToBuild(
+                                // character.getClass().getDeclaredConstructor(c).newInstance(TeamType.PLAYER)
+                                character.getClass().getDeclaredConstructor(TeamType.class).newInstance(TeamType.PLAYER)
+                                // Class.forName())
+                            );
+                        } catch (Exception e2) {
+                            System.out.println(e2);
+                        }
+                        QueueProgress.getInstance().setCurrentGameObjectToBuild(go);
                     }
-                    QueueProgress.getInstance().setCurrentGameObjectToBuild(go);
+                } catch (Exception ee) {
+                    System.out.println(ee);
                 }
             }
 
