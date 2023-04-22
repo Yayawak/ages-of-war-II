@@ -15,7 +15,6 @@ public class TowerSystem implements Loopable {
     private TowerPrototype towerPrototype;
 
     public TowerSystem(TowerPrototype initTp) {
-        // this.towerPrototype = initTp;
         setTowerPrototype(initTp);
     }
 
@@ -34,21 +33,26 @@ public class TowerSystem implements Loopable {
 
     public void setTowerPrototype(TowerPrototype tp) {
         // newTowerSetup
-        if (this.towerPrototype != tp) {
+        if (towerPrototype != tp) {
+            towerPrototype = tp;
             //todo : remove old tower game object
             for (GameObject go : MainGame.getInstance().getObjectsInScene()) {
                 if (go instanceof TowerGameObject) {
                     TowerGameObject towerToBeReplaced = (TowerGameObject)go;
                     if (towerPrototype.getTeamType() == towerToBeReplaced.getTeamType()) {
+                        // if (towerPrototype[])
+                        if (tp.getTeamType() == TeamType.ENEMY) {
+                            System.out.println("Tower is Enemy !!!!!!!!!!!");
+                        }
                         MainGame.getInstance().removeGameObjectFromScene(towerToBeReplaced);
                         break;
                     }
                 }
             }
             //todo : add new tower
-            this.towerPrototype = tp;
-            TowerGameObject playerTowerGameObject = new TowerGameObject(towerPrototype);
-            MainGame.getInstance().addGameObjectToScene(playerTowerGameObject);
+            // this.towerPrototype = tp;
+            TowerGameObject newTgo = new TowerGameObject(towerPrototype);
+            MainGame.getInstance().addGameObjectToScene(newTgo);
         }
     }
 }

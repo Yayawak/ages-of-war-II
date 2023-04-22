@@ -63,9 +63,11 @@ public class IntegratedSystem {
 
         // ! bug can draw firsst unit because cant get tower prototype ?
         playerTowerSystem = new TowerSystem(
-            SkeletonAge.getInstance().getTowerPrototype()
+            SkeletonAge.getInstance().getNewTowerPrototype(TeamType.PLAYER)
         );
-
+        enemyTowerSystem = new TowerSystem(
+            SkeletonAge.getInstance().getNewTowerPrototype(TeamType.ENEMY)
+        );
     }
 
     public GoldSystem getPlayerGoldSystem() {

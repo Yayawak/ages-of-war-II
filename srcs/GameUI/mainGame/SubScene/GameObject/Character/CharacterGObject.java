@@ -113,7 +113,6 @@ public class CharacterGObject extends GameObject {
 
         checkIfCharacterOutOfScreen();
 
-
     }
 
     @Override
@@ -185,7 +184,6 @@ public class CharacterGObject extends GameObject {
             && getX() > screenWidth) {
             destroyGameObject();
         }
-
         if (getCharacter().getTeamType() == TeamType.ENEMY
             && getX() < 0
             ) {
@@ -220,8 +218,10 @@ public class CharacterGObject extends GameObject {
             default:
                 break;
         }
-        character.setPosition(newPos);
-        setLocation(character.getPosition());
+        // ! maybe bug if absent for these 2 below lines
+        // character.setPosition(newPos);
+        // setLocation(character.getPosition());
+        setPos(newPos);
     }
 
     public CharacterPrototype getCharacter() {
@@ -262,5 +262,12 @@ public class CharacterGObject extends GameObject {
         MainGame.getInstance().remove(hpBar);
         super.destroyGameObject();
 
+    }
+
+    @Override
+    public void setPos(Point newPos) {
+        this.pos = newPos;
+        setLocation(newPos);
+        character.setPosition(newPos);
     }
 }

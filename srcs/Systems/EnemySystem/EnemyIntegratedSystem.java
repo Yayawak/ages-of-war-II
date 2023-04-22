@@ -13,6 +13,7 @@ import srcs.Enums.TeamType;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Turret.TurretGObject;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharactersData;
@@ -20,10 +21,13 @@ import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonW
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Morphling;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphet;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.Rubick;
+import srcs.Prototypes.Turrets.TurretPrototype;
+import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
 import srcs.Systems.AgeSystem.AgeList.SkeletonAge;
 import srcs.Systems.AgeSystem.AgeList.StoneAge;
 import srcs.Systems.Exp.ExpSystem;
 import srcs.Systems.Gold.GoldSystem;
+import srcs.Systems.TowerSystem.TowerSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
 import java.awt.Color;
@@ -32,6 +36,7 @@ public class EnemyIntegratedSystem implements Loopable {
     private static EnemyIntegratedSystem instance;
     private GoldSystem enemyGoldSystem;
     private ExpSystem enemyExpSystem;
+    private TowerSystem enemyTowerSystem;
     private ArrayList<GameObject> currentAvailableCharacters
     // private List<CharacterGObject> currentAvailableCharacters
             = new ArrayList<>();
@@ -53,10 +58,10 @@ public class EnemyIntegratedSystem implements Loopable {
         // getCharactersList().stream().map(cData -> new CharacterGObject(cData))
         // .collect(Collectors.toList());
         CharactersData.getInstance().getCharactersList()
-                .forEach(character -> {
-                    GameObject go = new CharacterGObject(character);
-                    currentAvailableCharacters.add(go);
-                });
+            .forEach(character -> {
+                GameObject go = new CharacterGObject(character);
+                currentAvailableCharacters.add(go);
+            });
         // currentAvailableCharacters.forEach(cgo -> {
         // GameObject go = new CharacterGObject(character);
         // });
@@ -68,6 +73,14 @@ public class EnemyIntegratedSystem implements Loopable {
                 periodicChecker();
             }
         }).start();
+
+        enemyTowerSystem = IntegratedSystem.getInstance().getEnemyTowerSystem();
+        TurretPrototype initialEnemyTurret =  new FireGunTurret();
+        initialEnemyTurret.setTeamType(TeamType.ENEMY);
+        enemyTowerSystem.getTowerPrototype().setTurretBelow(
+            new TurretGObject(initialEnemyTurret)
+            // new FireGunTurret()
+        );
     }
 
     private void periodicChecker() {
@@ -86,19 +99,7 @@ public class EnemyIntegratedSystem implements Loopable {
                         .getCharacterPrototypes().get(ranI).getClass()
                         .getDeclaredConstructor(TeamType.class)
                         .newInstance(TeamType.ENEMY);
-
-                    // dummy.setTeamType(TeamType.ENEMY
-                    // dummy.setTeamType(TeamType.ENEMY);
                     dummy.setPosition(new Point(1500, 300));
-                    // dummy.getClass().getDeclaredConstructor(c).newInstance(TeamType.PLAYER)
-
-                    // Class<CharacterPrototype> c = dummy.getClass();
-                    // Class<TeamType> c = TeamType.class;
-                    // CharacterGObject c = new CharacterGObject(
-                    //     dummy.getClass().getDeclaredConstructor(
-                    //         TeamType.class
-                    //     ).newInstance(TeamType.ENEMY)
-                    // );
                     CharacterGObject c = new CharacterGObject(dummy);
                     // todo : make this enemy system usable
                     MainGame.getInstance().addGameObjectToScene(c);

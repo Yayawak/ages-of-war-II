@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import helpers.ImageData;
 import srcs.Enums.AgeType;
+import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
@@ -18,7 +19,6 @@ public abstract class AgeData {
     private TowerPrototype towerPrototype;
     private int expRequiredToUpgrade;
     private Image upgradeImage;
-
     // protected AgeData() { }
 
     public Image getBackgroundImage() {
@@ -84,4 +84,19 @@ public abstract class AgeData {
     public void setNextAgeData(AgeData nextAgeData) {
         this.nextAgeData = nextAgeData;
     }
+
+    // * This is for factory pattern
+    public TowerPrototype getNewTowerPrototype(TeamType team) {
+        // return new TowerPrototype(0, null, null, null, null, null)
+        return new TowerPrototype(
+            towerPrototype.getHp(),
+            team,
+            towerPrototype.getTurretAbove(),
+            towerPrototype.getTurretBelow(),
+            towerPrototype.getImageData(),
+            towerPrototype.getPosition()
+        );
+
+    }
+
 }

@@ -238,6 +238,7 @@ public class GameObject extends JPanel implements Loopable {
     }
 
     public void setPos(Point pos) {
+        this.setLocation(pos);
         this.pos = pos;
     }
 
