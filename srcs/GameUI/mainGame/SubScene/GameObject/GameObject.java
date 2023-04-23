@@ -136,12 +136,11 @@ public abstract class GameObject extends JPanel implements Loopable {
             }
         }
         // System.out.println("==========================".repeat(4));
+        // attacker.setState(State.MOVE);
         if (min <= ent.getAttackRange()) {
             // System.out.println("get attack");
             if (closetCharacter != null
-                &&
-                closetCharacter.getCharacter().getTeamType()
-                    != ent.getTeamType()
+                && closetCharacter.getCharacter().getTeamType() != ent.getTeamType()
             ) {
                 // todo : combat
                 if (closetCharacter != null) {
@@ -149,7 +148,11 @@ public abstract class GameObject extends JPanel implements Loopable {
                     damager = closetCharacter.getCharacter();
                 }
             }
+            else {
+                // attacker.setState(State.MOVE);
+            }
         } else {
+            // attacker.setState(State.MOVE);
         }
         // if (closetCharacter == null) { System.out.println("Closest character = NULL");}
         return closetCharacter;
@@ -187,15 +190,17 @@ public abstract class GameObject extends JPanel implements Loopable {
                 // todo : fix bug
                 while (true) {
                     try { Thread.sleep(atkRate); } catch (Exception e) { }
-                    attacker.setState(State.ATTACK);
                     // no need to check for attacker becuase attaker will always exists because we setted all attacker in constructor
                     // System.out.println("attack from : " + attacker.getName());
                     if (damager != null && damager.getHp() > 0) {
+                        attacker.setState(State.ATTACK);
                         // System.out.println("damger will be : " + damager.getName());
                         damager.decreaseHp(atkDmg);
-                    } else
+                    } else {
+                        // System.out.println("damager is now NULL & set state to MOVE");
                         attacker.setState(State.MOVE);
                         damager = null;
+                    }
                     // }
                 }
             }, "attacking Thread"

@@ -22,6 +22,7 @@ public class FireWizard extends CharacterPrototype {
         setMaxHp(70);
         // setMovementSpeed(4);
         setMovementSpeed(1);
+        // setMovementSpeed(2);
         // setAttackSpeed(1);
         setAttackSpeed(1);
         // setTeam(teamType);

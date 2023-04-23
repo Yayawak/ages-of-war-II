@@ -138,7 +138,8 @@ public class CharacterGObject extends GameObject {
         }
 
         // if (!getCollide()) {
-        if (!getCollide()) {
+        // if (!getCollide() && character.getState() == State.MOVE) {
+        if (character.getState() == State.MOVE) {
         // if (false) {
             switch (character.getTeamType()) {
                 case PLAYER:
@@ -211,10 +212,14 @@ public class CharacterGObject extends GameObject {
     private void move(Direction dir) {
         // int mul = 20;
         // int mul = 10;
-        double mul = 0.5;
+        double mul = 0.4;
         double x = getX();
         double y = getY();
-        double speed = character.getMovementSpeed() * mul;
+        float rawMoveSpeed = (float)character.getMovementSpeed();
+        if (rawMoveSpeed <= 1) {
+            rawMoveSpeed += 0.25f;
+        }
+        double speed = rawMoveSpeed * mul;
         Point newPos = new Point((int)x, (int)y);
         switch (dir) {
             case RIGHT:
@@ -228,9 +233,6 @@ public class CharacterGObject extends GameObject {
             default:
                 break;
         }
-        // ! maybe bug if absent for these 2 below lines
-        // character.setPosition(newPos);
-        // setLocation(character.getPosition());
         setPos(newPos);
     }
 

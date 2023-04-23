@@ -20,7 +20,6 @@ public class EntityPrototype {
     protected int gold;
     protected Point position;
     protected float buildTime;
-    protected EntityPrototype copyInstance;
     protected int attackRange;
     protected int attackDamage;
     // protected ArrayList<Image> walkSprites = new ArrayList<>();
@@ -54,12 +53,6 @@ public class EntityPrototype {
         this.buildTime = buildTime;
         this.attackRange = attackRange;
         this.attackDamage = attackDamage;
-    }
-
-    public EntityPrototype getCopyInstance() {
-        if (copyInstance == null)
-            copyInstance = new EntityPrototype(this);
-        return copyInstance;
     }
 
     private void init() {
@@ -132,15 +125,12 @@ public class EntityPrototype {
         this.buildTime = buildTime;
     }
 
-    public void setCopyInstance(EntityPrototype copyInstance) {
-        this.copyInstance = copyInstance;
-    }
-
     @Override
     public String toString() {
         return "EntityPrototype [teamType=" + teamType + ", attackSpeed=" + attackSpeed + ", imgData=" + imgData
                 + ", name=" + name + ", gold=" + gold + ", position=" + position + ", buildTime=" + buildTime
-                + ", copyInstance=" + copyInstance + "]";
+                // + ", copyInstance=" + copyInstance
+                + "]";
     }
 
     public int getAttackRange() {
