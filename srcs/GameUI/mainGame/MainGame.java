@@ -59,11 +59,20 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                 int expToUp = 1000;
                 IntegratedSystem.getInstance().getEnemyExpSystem()
                     .increasedExperience(expToUp);
-                System.out.println("increase enemy exp by : " + expToUp);
+                // System.out.println("increase enemy exp by : " + expToUp);
+                // DebugPanel.getInstance().setDebugText(
+                //     "Enemy's experiance is " +
+                //     IntegratedSystem.getInstance().getEnemyExpSystem().getExperiance()
+                // );
+
+                IntegratedSystem.getInstance().getEnemyGoldSystem()
+                    .increasedGold(100);
+                int enemyGold = IntegratedSystem.getInstance().getEnemyGoldSystem().getGold();
                 DebugPanel.getInstance().setDebugText(
-                    "Enemy's experiance is " +
-                    IntegratedSystem.getInstance().getEnemyExpSystem().getExperiance()
+                    String.format("enemy gold = %d💰\n", enemyGold)
+                    // String.format("enemy gold = %d🤑💰💸\n")
                 );
+                System.out.println("current enemy gold = " + enemyGold);
             }
         });
 

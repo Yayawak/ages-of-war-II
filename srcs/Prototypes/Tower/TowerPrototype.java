@@ -6,11 +6,13 @@ import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.GameUI.mainGame.SubScene.GameObject.Turret.TurretGObject;
+import srcs.Prototypes.EntityPrototype;
 
 import java.awt.*;
 
-public class TowerPrototype {
-    private int hp;
+// public class TowerPrototype {
+public class TowerPrototype extends EntityPrototype {
+    // private int hp;
     private String towerName;
     private TeamType teamType;
     private TurretGObject turretAbove = null;
@@ -34,14 +36,6 @@ public class TowerPrototype {
 
     public void setPosition(Point position) {
         this.position = position;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
     }
 
     public TeamType getTeamType() {

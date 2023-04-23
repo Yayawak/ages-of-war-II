@@ -29,7 +29,8 @@ public class WizardAge extends AgeData {
     }
 
     public WizardAge() {
-        setNextAgeData(FF7Age.getInstance());
+        // setNextAgeData(FF7Age.getInstance());
+        setNextAgeData(SamuraiAge.getInstance());
         setAgeType(AgeType.WIZARD);
 
         // /Users/rio/Desktop/ages-of-war-II/images/backgrounds/nightPlain.jpeg

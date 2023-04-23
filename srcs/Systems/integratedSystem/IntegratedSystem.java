@@ -16,6 +16,7 @@ import srcs.Systems.Gold.GoldSystem;
 import srcs.Systems.TowerSystem.TowerSystem;
 
 public class IntegratedSystem {
+    public static int count_threads = 0;
     private static IntegratedSystem instance;
     private GoldSystem playerGoldSystem;
     private GoldSystem enemyGoldSystem;
@@ -127,7 +128,7 @@ public class IntegratedSystem {
                 // todo : remove old tower(Skeleton) and change pointer to point to tower(Stone)
                 for (GameObject go : MainGame.getInstance().getObjectsInScene()) {
                     if (go instanceof TowerGameObject
-                        && go.getTeamType() == TeamType.ENEMY
+                        // && go.getTeamType() == TeamType.PLAYER
                     ) {
                         TowerGameObject playerTower = (TowerGameObject)go;
                         System.out.println("Enter player tower changer state");

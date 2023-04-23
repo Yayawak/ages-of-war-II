@@ -3,17 +3,21 @@ package srcs.GameUI.mainGame.SubScene.GameObject;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+import helpers.AttackData;
 import srcs.Enums.TeamType;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.EntityPrototype;
 import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.StateMachine.State;
+import srcs.Systems.integratedSystem.IntegratedSystem;
 
 import java.awt.*;
 
-public class GameObject extends JPanel implements Loopable {
+// public class GameObject extends JPanel implements Loopable {
+public abstract class GameObject extends JPanel implements Loopable {
     protected TeamType teamType;
     protected Image img;
     protected Point pos;
@@ -21,7 +25,10 @@ public class GameObject extends JPanel implements Loopable {
     protected boolean isCollide = false;
     protected long spawnTime;
     protected boolean hasAttacked;
+    protected EntityPrototype damager;
+    protected EntityPrototype attacker;
 
+    // public GameObject(Image img, Point pos, Dimension imgSize) {
     public GameObject(Image img, Point pos, Dimension imgSize) {
         spawnTime = System.nanoTime();
         setLocation(pos);
@@ -35,6 +42,8 @@ public class GameObject extends JPanel implements Loopable {
 
     private void init() {
         setLayout(null);
+        // attackOpponent();
+        startAttackSubroutine();
     }
 
     public Image getImg() {
@@ -82,9 +91,9 @@ public class GameObject extends JPanel implements Loopable {
         MainGame.getInstance().removeGameObjectFromScene(this);
     }
 
-    public GameObject copy() {
-        return new GameObject(img, pos, imgSize);
-    }
+    // public GameObject copy() {
+        // return new GameObject(img, pos, imgSize);
+    // }
 
 
     protected float getDistanceBetweenGameObject(
@@ -144,9 +153,12 @@ public class GameObject extends JPanel implements Loopable {
                     // if (closetCharacter != null) {
                     if (closetCharacter != null) {
                         hasAttacked = true;
-                        attackOpponent(ent,
-                            closetCharacter.getCharacter()
-                        );
+
+                        // ! danger if move
+                        // attackOpponent(ent,
+                        //     closetCharacter.getCharacter()
+                        // );
+                        damager = closetCharacter.getCharacter();
                     }
                     // if (closi)
                 }
@@ -162,72 +174,67 @@ public class GameObject extends JPanel implements Loopable {
         return closetCharacter;
 
     }
-
-    // protected void attackOpponent(CharacterPrototype attacker,
-    private void attackOpponent(EntityPrototype attacker,
-        CharacterPrototype damager) {
-
-        // is
-        // if (attacker.getState().equals(State.ATTACK)) {
-        // if (attacker.getState().equals(State.ATTACK)) {
-        // attacker.setState(State.ATTACK);
-
-        // if (attacker.getState() == State.ATTACK) {
-        //     // donothing
-        // } else {
-
-        // damager.decreaseHp(attacker.getAttackDamage());
-        // }
-        // if (isAttacking)
-        System.out.format("Attacker(%s) : id(%s) -> Damager(%s) : id(%s)\n",
-            attacker.getName(),
-            String.valueOf(attacker.hashCode()).substring(5),
-            damager.getName(),
-            String.valueOf(damager.hashCode()).substring(5)
-        );
-        // try {
-        //     // int atkInterval = 1 / attacker.getAttackSpeed();
-        //     // int atkInterval = 1 / attacker.getAttackSpeed();
-        //     Thread.sleep(1000);
-        //     damager.decreaseHp(attacker.getAttackDamage());
-        // } catch (Exception e) { System.out.println(e); }
-        // if (attacker.getState() == State.ATTACK) {
-
-        // }
-
-        // if (attacker.getState() == State.MOVE) {
-        //     attacker.setState(State.ATTACK);
-        // }
-        // else {
-
-        // }
+    // private void attackOpponent() {
+    private void startAttackSubroutine() {
+        // ! this is importance debug line
+        // System.out.format("Attacker(%s) : id(%s) -> Damager(%s) : id(%s)\n",
+        //     attacker.getName(),
+        //     String.valueOf(attacker.hashCode()).substring(5),
+        //     damager.getName(),
+        //     String.valueOf(damager.hashCode()).substring(5)
+        // );
         System.out.println("Create new Thread" + "-->".repeat(9));
-        // return;
-        // try {
-        //     Thread.sleep(2000);
-        // } catch (Exception e) {
-        // }
-        // System.out.println("Start Thread");
         new Thread(
             () -> {
-                int atkRate = attacker.getAttackSpeed();
-                // while (damager != null
-                while ( damager.getHp() > 0
-                ) {
-                    System.out.format("%s -> %s\n",
-                        attacker.getName(),
-                        damager.getName()
-                    );
-                    // long ms = (atkRate * 1000);
-                    // long ms = (1000);
-                    long ms = (100);
-                    damager.decreaseHp(attacker.getAttackDamage());
-                    try {
-                        Thread.sleep(ms);
-                    } catch (Exception e) { }
+                IntegratedSystem.count_threads++;
+                System.out.println("count threads = " + IntegratedSystem.count_threads);
+                if (attacker == null) {
+                    System.out.println("attacker is null from the start.");
                 }
-                hasAttacked = false; // reset attacker to be attack again if enemy is die
-                attacker.setState(State.MOVE);
+                int atkRate;
+                int atkDmg;
+                // int atkRate = attacker.getAttackSpeed();
+                atkDmg = attacker.getAttackDamage();
+                long ms = 100;
+                // long ms = 10;
+                // long ms = 1000;
+                // todo : fix bug
+                while (true) {
+                // while (attacker.getHp() > 0) {
+                    // no need to check for attacker becuase attaker will always exists because we setted all attacker in constructor
+                    // if (attacker != null)
+                    // {
+                    // System.out.println("attack from : " + attacker.getName());
+                    if (damager != null) {
+                        // System.out.println("damger will be : " + damager.getName());
+                        // damager.decreaseHp(attacker.getAttackDamage());
+                        damager.decreaseHp(atkDmg);
+                    }
+                    // }
+                    try { Thread.sleep(ms); } catch (Exception e) { }
+                }
+                // while (true) {
+                // while ( damager.getHp() > 0) {
+                    // if (damager != null && attacker != null) {
+                    //     // atkRate = attacker.getAttackSpeed();
+                    //     atkDmg = attacker.getAttackDamage();
+                    //     // ! this is important debugger
+                    //     // System.out.format("%s -> %s\n",
+                    //     //     attacker.getName(),
+                    //     //     damager.getName()
+                    //     // );
+                    //     // long ms = (atkRate * 1000);
+                    //     // long ms = (1000);
+                    //     if (damager.getHp() <= 0)
+                    //         break;
+                    //     damager.decreaseHp(atkDmg);
+                    //     try {
+                    //         // Thread.sleep(ms);
+                    //     } catch (Exception e) { }
+                    // }
+                // }
+                // hasAttacked = false; // reset attacker to be attack again if enemy is die
+                // attacker.setState(State.MOVE);
             }, "attacking Thread"
         ).start();
     }

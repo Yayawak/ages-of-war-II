@@ -23,6 +23,7 @@ public class TurretGObject extends GameObject implements RangeUnit {
         super(turretPrototype.getImgData().getSprite(), turretPrototype.getPosition(),
                 new Dimension(turretPrototype.getImgData().getImgWidth(), turretPrototype.getImgData().getImgHeight()));
         this.turretPrototype = turretPrototype;
+        this.attacker = this.turretPrototype;
     }
 
     @Override
@@ -86,12 +87,12 @@ public class TurretGObject extends GameObject implements RangeUnit {
             // }
             BufferedImage bi = new BufferedImage(
                     50, 50, BufferedImage.TYPE_INT_ARGB);
-            GameObject bulletGo = new GameObject(
-                    bulletImgData.getSprite(),
-                    // turretPrototype.get
-                    // bi,
-                    tgo.getLocation(),
-                    tgo.getSize());
+            // GameObject bulletGo = new GameObject(
+            //         bulletImgData.getSprite(),
+            //         // turretPrototype.get
+            //         // bi,
+            //         tgo.getLocation(),
+            //         tgo.getSize());
 
             // ! : find bug of this
             // MainGame.getObjectsInScene().add(bulletGo);

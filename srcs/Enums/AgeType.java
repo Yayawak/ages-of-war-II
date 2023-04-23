@@ -6,6 +6,7 @@ public enum AgeType {
     EGYPT("egypt age"),
     KNIGHT("knight age"),
     WIZARD("wizard age"),
+    SAMURAI("samurai age"),
     FF7("final fantasy age"),
     SOLDER("soldier age"),
     ALIEN("alien age"),

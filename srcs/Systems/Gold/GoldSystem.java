@@ -14,12 +14,9 @@ public class GoldSystem {
     public void decreasedGold(int amount) { // buy or upgrade sth
         gold -= amount;
         if (gold < 0) {
-            restartGold();
+            gold = 0;
+            // restartGold();
         }
-    }
-
-    public void restartGold() { // restart game
-        gold = 0;
     }
 
     public int getGold() {

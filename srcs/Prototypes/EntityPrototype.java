@@ -7,6 +7,7 @@ import srcs.StateMachine.State;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class EntityPrototype {
@@ -21,8 +22,11 @@ public class EntityPrototype {
     protected EntityPrototype copyInstance;
     protected int attackRange;
     protected int attackDamage;
-    protected ArrayList<Image> walkSprites = new ArrayList<>();
+    // protected ArrayList<Image> walkSprites = new ArrayList<>();
+    protected LinkedList<Image> walkSprites = new LinkedList<>();
     protected ArrayList<Image> attackASprites = new ArrayList<>();
+    protected int hp;
+    protected int maxHp;
 
     public EntityPrototype(EntityPrototype entProt) {
         init();
@@ -154,11 +158,11 @@ public class EntityPrototype {
         this.attackDamage = attackDamage;
     }
 
-    public ArrayList<Image> getWalkSprites() {
+    public LinkedList<Image> getWalkSprites() {
         return walkSprites;
     }
 
-    public void setWalkSprites(ArrayList<Image> walkSprites) {
+    public void setWalkSprites(LinkedList<Image> walkSprites) {
         this.walkSprites = walkSprites;
     }
 
@@ -178,5 +182,38 @@ public class EntityPrototype {
         this.state = state;
     }
 
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        if (hp > this.maxHp) {
+            hp = this.maxHp;
+        }
+        if (hp < 0) {
+            hp = 0;
+        }
+        this.hp = hp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+        setHp(maxHp);
+    }
+
+
+    public void decreaseHp(int amount) {
+        // int currentHp = cgo.getCharacter().getHp();
+        // cgo.getCharacter().setHp(
+            // currentHp - amount
+        // );
+        setHp(getHp() - amount);
+    }
+
+    public void increaseHp(int amount) {
+        // int currentHp = cgo.getCharacter().getHp();
+        // cgo.getCharacter().setHp( currentHp + amount);
+        setHp(getHp() + amount);
+    }
 
 }

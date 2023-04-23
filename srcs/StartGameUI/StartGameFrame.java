@@ -1,5 +1,6 @@
 package srcs.StartGameUI;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -43,19 +44,31 @@ public class StartGameFrame extends JFrame {
             Font.SANS_SERIF,
             Font.BOLD, 30);
         startLabel.setFont(font);
+        // set
         Image startImg = new ImageData("UI/start.png"
+        // Image startImg = new ImageData("game covers/japan hometown  1.png"
             // ,1500, 700
             ,1500, 400
             // ,startPane.getWidth(),
             // startPane.getHeight()
         ).getSprite();
         // startLabel.setFont(new );
-
-        startPane.add(new JLabel(new ImageIcon(startImg)));
-        startPane.add(startLabel);
+        Image gameCover = new ImageData(
+            "game covers/japan hometown  1.png",
+            // getWidth(), getHeight()
+            1500, 700
+        ).getSprite();
+        JLabel coverImageLabel = new JLabel( new ImageIcon(gameCover));
+        JLabel startImageUILabel = new JLabel(new ImageIcon(startImg));
+        startPane.add(startImageUILabel);
+        // startPane.add(startLabel);
         // Graphics gStart = startPane.getGraphics();
 
-        startPane.addMouseListener(new MouseAdapter() {
+        // startPane.addMouseListener(new MouseAdapter() {
+        // coverImageLabel.add(startPane);
+        // startPane.addMouseListener(new MouseAdapter() {
+        // startImageUILabel.addMouseListener(new MouseAdapter() {
+        coverImageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent ev) {
                 mainFrame = new MainFrame();
@@ -68,7 +81,7 @@ public class StartGameFrame extends JFrame {
 
 
 
-        JPanel exitPane = new JPanel();
+        // JPanel exitPane = new JPanel();
         // exitPane.setBackground(Color.black);
         // exitPane.setBackground(Color.white);
         JLabel exitLabel = new JLabel("EXIT");
@@ -84,7 +97,8 @@ public class StartGameFrame extends JFrame {
         ).getSprite();
         // startLabel.setFont(new );
 
-        exitPane.add(new JLabel(new ImageIcon(exitImg)));
+        // exitPane.add(new JLabel(new ImageIcon(exitImg)));
+        startPane.add(new JLabel(new ImageIcon(exitImg)));
         // exitPane.add(exitLabel);
 
         // exitPane.add(new JLabel(new ImageIcon(bgImage)));
@@ -92,9 +106,10 @@ public class StartGameFrame extends JFrame {
         // Color c = new Color(0, 0, 0, 5);
         Color c = Color.black;
         startPane.setBackground(c);
-        exitPane.setBackground(c);
+        // exitPane.setBackground(c);
 
-        exitPane.addMouseListener(new MouseAdapter() {
+        // exitPane.addMouseListener(new MouseAdapter() {
+        exitLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent ev) {
                 dispose();
@@ -102,13 +117,33 @@ public class StartGameFrame extends JFrame {
         });
 
         centerPane.setLayout(new GridLayout(0, 1));
-        centerPane.add(startPane);
-        centerPane.add(exitPane);
+        // centerPane.setLayout(null);
+        // centerPane.setLayout(new BoxLayout());
+        // centerPane.add(startPane);
+        // centerPane.add(startLabel);
+        // centerPane.setLayout(null);
+        // coverImageLabel.add(startImageUILabel);
+        // coverImageLabel.setLocation(0, 0);
+        centerPane.add(coverImageLabel);
+        // centerPane.add(startLabel);
+        // centerPane.add(exitPane);
 
         // add(topPane, BorderLayout.NORTH);
         add(centerPane, BorderLayout.CENTER);
         // add(botPane, BorderLayout.SOUTH);
-        // repaint();
         pack();
     }
+
+    // ? not called
+    // @Override
+    // public void paintComponents(Graphics g) {
+    //     System.out.println("Enter Start Game Frame : paintComponent");
+    //     // super.paintComponents(g);
+    //     Image gameCover = new ImageData(
+    //         "game covers/japan hometown  1.png",
+    //         // getWidth(), getHeight()
+    //         1500, 700
+    //     ).getSprite();
+    //     g.drawImage(gameCover, 0, 0, null);
+    // }
 }

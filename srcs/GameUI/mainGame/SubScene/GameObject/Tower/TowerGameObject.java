@@ -19,11 +19,9 @@ public class TowerGameObject extends GameObject {
         if (towerPrototype.getTeamType() == TeamType.ENEMY) {
             System.out.println("This is tower game object ENEMY !!!!!!!!!!!!!!!!!!");
             // todo : set initial positon of enemy or player tower
-            int spawnX = (int) MainUI.getInstance().getScreenSize().getWidth() - 200;
-            Point spawnPos = new Point(spawnX, 200);
-            this.setPos(spawnPos);
-            // this.setLocation(spawnPos);
-            // towerPrototype.setPosition(spawnPos);
+            int spawnX = (int) MainUI.getInstance().getScreenSize().getWidth() - 250;
+            Point spawnPos = new Point(spawnX, 150);
+            setPos(spawnPos);
         }
     }
 
@@ -39,7 +37,7 @@ public class TowerGameObject extends GameObject {
             .getCurrentPlayerAgeData().getTowerPrototype()
             .getImageData().getSprite()
         );
-        System.out.println("upgrade otwer entered");
+        System.out.println("upgrade tower entered");
     }
 
     @Override

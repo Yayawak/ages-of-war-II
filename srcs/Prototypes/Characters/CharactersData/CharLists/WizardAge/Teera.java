@@ -18,7 +18,7 @@ public class Teera extends CharacterPrototype {
         );
         setName("Teera");
         setExperiance(1);
-        setGold(10);
+        setGold(150);
         // setMaxHp(300);
         setMaxHp(100);
         setMovementSpeed(3);

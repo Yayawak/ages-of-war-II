@@ -3,16 +3,19 @@ package srcs.GameUI.mainGame.SubScene.GameObject.Character;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import helpers.ImageData;
 import srcs.Enums.Direction;
 import srcs.Enums.TeamType;
 import srcs.GameUI.MainUI;
 import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.Debugger.DebugPanel;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.characterHpBar.CharacterHpBar;
 import srcs.Interfaces.Loopable;
@@ -25,6 +28,9 @@ public class CharacterGObject extends GameObject {
     private CharacterPrototype character;
     private Point position;
     private CharacterHpBar hpBar;
+    List<Image> currentAnimatingSprites;
+    private Thread animateThread;
+
     public CharacterGObject(CharacterPrototype character) {
         super(character.getImgData().getSprite(),
                 new Point(
@@ -37,34 +43,54 @@ public class CharacterGObject extends GameObject {
         this.position = character.getPosition();
         super.teamType = character.getTeamType();
         // System.out.println(this.teamType);
+        this.attacker = this.character;
         init();
     }
 
     private void init() {
         hpBar = new CharacterHpBar(this);
         if (hpBar != null) {
-            // System.out.format("hpBar of %s is exists : %s\n\n",
-            //     character.getName(),
-            //     hpBar.toString()
-            //     );
-            // setLayout(null);
             //todo  : make hp bar appear on screen
-            // MainUI.getInstance().add(hpBar);
-            // MainUI.getInstance().revalidate();
-            // MainUI.getInstance().repaint();
             MainGame.getInstance().add(hpBar);
             MainGame.getInstance().revalidate();
             MainGame.getInstance().repaint();
-            // this.add(hpBar);
-            // this.revalidate();
-            // this.repaint();
-            // add(hpBar);
-            // revalidate();
-            // repaint();
-            // updateUI();
-            // this.setVisible(false);
         }
-        // setVisible(true);
+        animate();
+    }
+
+    private void animate() {
+        // List<Image> currentAnimatingSprites;
+        // List<Image> currentAnimatingSprites = character.getWalkSprites();
+        currentAnimatingSprites = character.getWalkSprites();
+        boolean isAttackASpritesExists = character.getAttackASprites() != null;
+        if (isAttackASpritesExists) {
+            currentAnimatingSprites = character.getAttackASprites();
+        }
+        int freq = 200;
+        animateThread = new Thread(() -> {
+        // new Thread(() -> {
+            // List<Image> currentAnimatingSprites = character.getWalkSprites();
+            int i = 0;
+            while (true) {
+                // if (isCollide) {
+                //     currentAnimatingSprites = character.getAttackASprites();
+                //     i = 0;
+                // } else {
+                //     currentAnimatingSprites = character.getWalkSprites();
+                // }
+                try {
+                    if (i != currentAnimatingSprites.size() - 1) {
+                        setImg(currentAnimatingSprites.get(i));
+                    } else {
+                        i = 0;
+                    }
+                    i++;
+                    Thread.sleep(freq);
+                } catch (Exception e) { }
+            }
+        }, "animate");
+        // }).start();
+        animateThread.start();
     }
 
     // ? not called
@@ -123,42 +149,10 @@ public class CharacterGObject extends GameObject {
             hpBar.draw(g);
         }
 
-        int n =character.getWalkSprites().size();
-        if (n != 0) {
-            // if (character instanceof SkeletonWarrior) {
-            int r = (int)(Math.random() * n);
-            setImg(character.getWalkSprites().get(r));
-
-            // int n = character.getWalkSprites().size();
-            // for (int i = 0; i < n; i++) {
-            //     setImg(character.getWalkSprites().get(i % n));
-            // }
-            // Iterator<Image> iter = character.getWalkSprites().iterator();
-            // while (iter.hasNext()) {
-            //     // setImg(character.getWalkSprites().get(r));
-            //     // iter.ne
-            //     setImg(iter.next());
-            // }
-            // }
-        } else {
-            // System.out.println("length of charatc te walk sprint = 0");
-            // System.out.format("character name : %s\n\tlength of walk sprits = 0",
-            //     character.getName()
-            // );
-        }
         // todo : animation of attacking
         // ! BUG : sephiroth attacked emptyness lol, because closestOpponent is not null
         // ! but clossetOpponent really false null (it's not really findClosestOpponent)
         GameObject closestOpp = findClosestOpponent(getCharacter());
-        ArrayList<Image> atkAImgs = character.getAttackASprites();
-        if (closestOpp != null
-            &&
-            atkAImgs.size() != 0
-        ) {
-            // int r = (int)(Math.random() * atkAImgs.size());
-            // setImg(atkAImgs.get(r));
-        }
-
         if (closestOpp != null) {
             Graphics2D g2d = (Graphics2D)g;
             g2d.setColor(Color.cyan);
@@ -249,6 +243,11 @@ public class CharacterGObject extends GameObject {
                     .increasedGold(character.getGold());
                 IntegratedSystem.getInstance().getPlayerExpSystem()
                         .increasedExperience(character.getExperiance());
+                DebugPanel.getInstance().setDebugText(
+                    String.format("enemy gold = %d💰\n", IntegratedSystem.getInstance()
+                        .getPlayerGoldSystem().getGold())
+                    // String.format("enemy gold = %d🤑💰💸\n")
+                );
                 break;
             case ENEMY:
                 IntegratedSystem.getInstance().getPlayerGoldSystem()
@@ -261,7 +260,7 @@ public class CharacterGObject extends GameObject {
         }
         MainGame.getInstance().remove(hpBar);
         super.destroyGameObject();
-
+        animateThread.stop();
     }
 
     @Override

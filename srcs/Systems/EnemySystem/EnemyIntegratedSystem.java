@@ -89,9 +89,11 @@ public class EnemyIntegratedSystem implements Loopable {
         int spawnEnemyIntervalInMs = 800;
         // int spawnEnemyIntervalInMs = 1000;
         while (true) {
+            enemyGoldSystem = IntegratedSystem.getInstance().getEnemyGoldSystem();
             try {
                 Thread.sleep(spawnEnemyIntervalInMs);
-                if (enemyGoldSystem.getGold() > 0) {
+                System.out.println("enemy tick tock");
+                if (enemyGoldSystem.getGold() >= 0) {
                     int ranI = (int)(Math.random() * 4);
                     // CharacterPrototype dummy = SkeletonAge.getInstance().getCharacterPrototypes().get(ranI);
                     CharacterPrototype dummy = IntegratedSystem.getInstance()
@@ -102,14 +104,17 @@ public class EnemyIntegratedSystem implements Loopable {
                     dummy.setPosition(new Point(1500, 300));
                     CharacterGObject c = new CharacterGObject(dummy);
                     // todo : make this enemy system usable
-                    MainGame.getInstance().addGameObjectToScene(c);
-                    enemyGoldSystem.decreasedGold(c
-                            .getCharacter().getGold());
+                    System.out.println("enemy gold : " + enemyGoldSystem.getGold());
+                    if (enemyGoldSystem.getGold() >= dummy.getGold()) {
+                        MainGame.getInstance().addGameObjectToScene(c);
+                        enemyGoldSystem.decreasedGold(c.getCharacter().getGold());
+                    }
 
                 } else {
+                    System.out.println("enemy gold is below zero");
                     // enemyGoldSystem.setGold(1000);
                 }
-            } catch (Exception e) { }
+            } catch (Exception e) { System.out.println(e); }
         }
     }
 
