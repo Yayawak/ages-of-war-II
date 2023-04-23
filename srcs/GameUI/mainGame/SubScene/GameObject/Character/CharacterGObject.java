@@ -204,15 +204,18 @@ public class CharacterGObject extends GameObject {
             // endFrame.setAlwaysOnTop(true);
             // endFrame.setVisible(true);
             // MainUI.getInstance().setVisible(false);
-            JOptionPane.showMessageDialog(null, "GAME OVER");
-            System.exit(0);
+            // ! used to exit game
+            // JOptionPane.showMessageDialog(null, "GAME OVER");
+            // System.exit(0);
         }
     }
 
     private void move(Direction dir) {
         // int mul = 20;
         // int mul = 10;
-        double mul = 0.4;
+        // double mul = 0.4;
+        double mul = 0.3;
+        // double mul = 0.2;
         double x = getX();
         double y = getY();
         float rawMoveSpeed = (float)character.getMovementSpeed();
@@ -220,6 +223,7 @@ public class CharacterGObject extends GameObject {
             rawMoveSpeed += 0.25f;
         }
         double speed = rawMoveSpeed * mul;
+        if (speed < 1) { speed = 1; }
         Point newPos = new Point((int)x, (int)y);
         switch (dir) {
             case RIGHT:

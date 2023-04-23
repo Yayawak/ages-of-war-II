@@ -93,10 +93,12 @@ public abstract class AgeData {
             team,
             towerPrototype.getTurretAbove(),
             towerPrototype.getTurretBelow(),
-            towerPrototype.getImageData(),
+            // towerPrototype.getImageData(),
+            towerPrototype.getImgData(),
             towerPrototype.getPosition()
         );
 
     }
 
+    public abstract void useUltimate(TeamType team);
 }

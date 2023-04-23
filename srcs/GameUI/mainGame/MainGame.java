@@ -3,6 +3,7 @@ package srcs.GameUI.mainGame;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import srcs.Enums.TeamType;
 import srcs.GameUI.mainGame.Debugger.DebugPanel;
@@ -20,6 +21,7 @@ import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretsData;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
+import srcs.Systems.Tooltips.DebugTooltip;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
 import java.awt.*;
@@ -56,23 +58,18 @@ public class MainGame extends JPanel implements ComponentSizeItf,
 
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                int expToUp = 1000;
-                IntegratedSystem.getInstance().getEnemyExpSystem()
-                    .increasedExperience(expToUp);
-                // System.out.println("increase enemy exp by : " + expToUp);
-                // DebugPanel.getInstance().setDebugText(
-                //     "Enemy's experiance is " +
-                //     IntegratedSystem.getInstance().getEnemyExpSystem().getExperiance()
-                // );
-
-                IntegratedSystem.getInstance().getEnemyGoldSystem()
-                    .increasedGold(100);
-                int enemyGold = IntegratedSystem.getInstance().getEnemyGoldSystem().getGold();
-                DebugPanel.getInstance().setDebugText(
-                    String.format("enemy gold = %d💰\n", enemyGold)
-                    // String.format("enemy gold = %d🤑💰💸\n")
-                );
-                System.out.println("current enemy gold = " + enemyGold);
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    System.out.println("left mouse");
+                    DebugTooltip.getInstance().setVisible(false);
+                } else {
+                    System.out.println("right mouse");
+                    DebugTooltip.getInstance().setVisible(true);
+                    // DebugTooltip.getInstance().setLocation( getMousePosition());
+                    DebugTooltip.getInstance().setLocation(
+                        (int)getMousePosition().getX(),
+                        (int)(getMousePosition().getY() + DebugTooltip.getInstance().getHeight())
+                    );
+                }
             }
         });
 
@@ -97,7 +94,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                         obj.getX(), obj.getY(),
                         this);
             } else {
-                System.out.println("SceneObject is null");
+                // System.out.println("SceneObject is null");
             }
         });
         // } catch (Exception e) {
@@ -121,7 +118,8 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                 if (obj != null)
                     obj.draw(g);
             });
-        } catch (Exception e) { System.out.println(e); }
+        // } catch (Exception e) { System.out.println(e); }
+        } catch (Exception e) {}
         draw(g);
     }
 
@@ -144,7 +142,8 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                     });
                 }
             ).start();
-        } catch (Exception e) { System.out.println(e); }
+        // } catch (Exception e) { System.out.println(e); }
+        } catch (Exception e) {}
     }
 
     @Override

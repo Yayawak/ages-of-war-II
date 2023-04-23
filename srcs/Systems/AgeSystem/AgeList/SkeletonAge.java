@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+
 import helpers.ImageData;
 import srcs.Enums.AgeType;
 import srcs.Enums.TeamType;
@@ -88,4 +90,23 @@ public class SkeletonAge extends AgeData {
         );
     }
 
+    @Override
+    public void useUltimate(TeamType team) {
+        System.out.println("ultimate in skeleton age is called.");
+                // ((i < 10) ? "0" : "") +
+                // Image
+        LinkedList<Image> greenHandImages = new LinkedList<>();
+        for (int i = 3; i < 13; i++) {
+            // String path = "effects/green hands/green-hand-hell_03.png";
+            String prefix = (i < 10) ? "0" : "";
+            // String path = "effects/green hands/green-hand-hell_" +
+            //     prefix +
+            //     String.valueOf(i) +
+            //     ".png";
+            String path = "effects/green hands/hand-from-ground.png";
+            greenHandImages.add(
+                new ImageData(path).getSprite()
+            );
+        }
+    }
 }

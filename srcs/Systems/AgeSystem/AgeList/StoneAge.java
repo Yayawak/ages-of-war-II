@@ -82,4 +82,10 @@ public class StoneAge extends AgeData {
         );
     }
 
+    @Override
+    public void useUltimate(TeamType team) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'useUltimate'");
+    }
+
 }

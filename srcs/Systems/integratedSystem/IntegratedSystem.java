@@ -11,6 +11,7 @@ import srcs.GameUI.topBar.unitsBox.UnitsBox;
 import srcs.Systems.AgeSystem.AgeData;
 import srcs.Systems.AgeSystem.AgeList.FF7Age;
 import srcs.Systems.AgeSystem.AgeList.SkeletonAge;
+import srcs.Systems.EnemySystem.EnemyIntegratedSystem;
 import srcs.Systems.Exp.ExpSystem;
 import srcs.Systems.Gold.GoldSystem;
 import srcs.Systems.TowerSystem.TowerSystem;
@@ -150,13 +151,10 @@ public class IntegratedSystem {
             if (getEnemyExpSystem().getExperiance() >
                 currentEnemyAgeData.getExpRequiredToUpgrade()
             ) {
+                System.out.println("Enemy upgard AGE");
                 // todo : decrease exp :
-                DebugPanel.getInstance().setDebugText(
-                    "Enemy Exp system before upgrade is : " +
-                    enemyExpSystem.getExperiance()
-                );
-                enemyExpSystem.decreaseExperiance(
-                    currentPlayerAgeData.getExpRequiredToUpgrade()
+                EnemyIntegratedSystem.getInstance().decreaseEnemyExp(
+                    currentEnemyAgeData.getExpRequiredToUpgrade()
                 );
                 DebugPanel.getInstance().setDebugText(
                     "Enemy Exp system after upgrade is : " +
@@ -179,34 +177,6 @@ public class IntegratedSystem {
                 }
             }
         }
-
-
-        // get current age
-        // AgeType currentAge = AgeType.STONE;
-        // switch (currentAge) {
-        //     case SKELETON:
-        //         currentAge = AgeType.STONE;
-        //         break;
-        //     case STONE:
-        //         currentAge = AgeType.EGYPT;
-        //         break;
-        //     case EGYPT:
-        //         currentAge = AgeType.KNIGHT;
-        //         break;
-        //     case KNIGHT:
-        //         currentAge = AgeType.WIZARD;
-        //         break;
-        //     case WIZARD:
-        //         currentAge = AgeType.SOLDER;
-        //         break;
-        //     case SOLDER:
-        //         currentAge = AgeType.ALIEN;
-        //         break;
-        //     case ALIEN:
-        //         currentAge = AgeType.NONE;
-        //         break;
-        //     default:
-        //         break;
 
     }
 

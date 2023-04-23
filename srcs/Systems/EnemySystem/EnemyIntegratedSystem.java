@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import srcs.Enums.TeamType;
 import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.Debugger.DebugPanel;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Turret.TurretGObject;
@@ -89,10 +90,10 @@ public class EnemyIntegratedSystem implements Loopable {
         int spawnEnemyIntervalInMs = 800;
         // int spawnEnemyIntervalInMs = 1000;
         while (true) {
-            enemyGoldSystem = IntegratedSystem.getInstance().getEnemyGoldSystem();
+            // enemyGoldSystem = IntegratedSystem.getInstance().getEnemyGoldSystem();
             try {
                 Thread.sleep(spawnEnemyIntervalInMs);
-                System.out.println("enemy tick tock");
+                // System.out.println("enemy tick tock");
                 if (enemyGoldSystem.getGold() >= 0) {
                     int ranI = (int)(Math.random() * 4);
                     // CharacterPrototype dummy = SkeletonAge.getInstance().getCharacterPrototypes().get(ranI);
@@ -104,15 +105,21 @@ public class EnemyIntegratedSystem implements Loopable {
                     dummy.setPosition(new Point(1500, 300));
                     CharacterGObject c = new CharacterGObject(dummy);
                     // todo : make this enemy system usable
-                    System.out.println("enemy gold : " + enemyGoldSystem.getGold());
+                    // System.out.println("enemy gold : " + enemyGoldSystem.getGold());
                     if (enemyGoldSystem.getGold() >= dummy.getGold()) {
                         MainGame.getInstance().addGameObjectToScene(c);
-                        enemyGoldSystem.decreasedGold(c.getCharacter().getGold());
+                        // enemyGoldSystem.decreasedGold(c.getCharacter().getGold());
+                        decreaseEnemyGold(c.getCharacter().getGold());
                     }
 
                 } else {
                     System.out.println("enemy gold is below zero");
                     // enemyGoldSystem.setGold(1000);
+                }
+
+                if (enemyExpSystem.getExperiance() > IntegratedSystem.getInstance().getCurrentEnemyAgeData()
+                    .getExpRequiredToUpgrade()) {
+                    IntegratedSystem.getInstance().upgradeAge(TeamType.ENEMY);
                 }
             } catch (Exception e) { System.out.println(e); }
         }
@@ -137,4 +144,31 @@ public class EnemyIntegratedSystem implements Loopable {
     @Override
     public void draw(Graphics g) {
     }
+
+    public void increaseEnemyGold(int gold) {
+        enemyGoldSystem.increasedGold(gold);
+        DebugPanel.getInstance().setDebugText(
+            // String.format("enemy gold : %d\n", enemyGoldSystem.getGold())
+            String.format("%d 💸", enemyGoldSystem.getGold())
+        );
+    }
+    public void decreaseEnemyGold(int gold) {
+        enemyGoldSystem.decreasedGold(gold);
+        DebugPanel.getInstance().setDebugText(
+            String.format("%d 💸", enemyGoldSystem.getGold())
+        );
+    }
+    public void increaseEnemyExp(int exp) {
+        enemyExpSystem.increasedExperience(exp);
+        DebugPanel.getInstance().setDebugText(
+            String.format( "%d✡︎", enemyExpSystem.getExperiance())
+        );
+    }
+    public void decreaseEnemyExp(int exp) {
+        enemyExpSystem.decreaseExperiance(exp);
+        DebugPanel.getInstance().setDebugText(
+            String.format( "%d✡︎", enemyExpSystem.getExperiance())
+        );
+    }
+
 }

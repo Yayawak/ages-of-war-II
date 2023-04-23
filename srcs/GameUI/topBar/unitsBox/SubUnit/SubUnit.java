@@ -20,19 +20,63 @@ public class SubUnit extends JPanel {
     // private Image img; // pointer is points to the same object as character's image
     private CharacterPrototype character;
     private CharacterTooltip characterTooltip;
+    // private boolean isCursorOnSubUnitBox = false;
+    // private boolean isCursorOnSubUnitBox = true;
 
     public SubUnit(CharacterPrototype c) {
-        initGraphic();
-        initEvent();
         this.character = c;
         // this.img = character.getImgData().getSprite();
         characterTooltip = new CharacterTooltip(c);
+        initGraphic();
+        initEvent(); //
+        // initTooltipCallback();
+    }
+
+    private void initTooltipCallback() {
+        new Thread(() -> {
+            while (true) {
+                // if (isCursorOnSubUnitBox && getMousePosition() != null) {
+                // try {
+                // if (getMousePosition(true) != null)
+                // ! bug no x on p (position mouse)
+                // if (getMousePosition() != null)
+                    // characterTooltip.setLocation(getMousePosition());
+                // } catch (Exception e) { System.out.println(e); }
+                // characterTooltip.setVisible(isCursorOnSubUnitBox);
+
+                // System.out.println("is cursor on subunit = " + isCursorOnSubUnitBox);
+
+                // if (getMousePosition() != null) {
+                //     if (getBounds().contains(getMousePosition())) {
+                //         isCursorOnSubUnitBox = true;
+                //     } else {
+                //         isCursorOnSubUnitBox = false;
+                //     }
+                // }
+            }
+        }).start();
     }
 
     private void initEvent() {
+        characterTooltip.addMouseListener(new MouseAdapter() {
+            // @Override
+            // public void mouseEntered(MouseEvent e) {
+            // // public void mouseMoved(MouseEvent e) {
+            //     // isCursorOnSubUnitBox = true;
+            //     System.out.println("ENTER Char TOOLTIP");
+            // }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                characterTooltip.setVisible(false);
+            }
+        });
+        characterTooltip.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                characterTooltip.setVisible(true);
+            }
+        });
         addMouseListener(new MouseAdapter() {
-            private Timer timer;
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 character.setTeamType(TeamType.PLAYER);
@@ -66,49 +110,33 @@ public class SubUnit extends JPanel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                timer = new Timer(1, new ActionListener() {
-                    public void actionPerformed(ActionEvent ev) {
-
-                        // getPos
-                        // Point cursorPos = MainGame.getInstance().getMousePosition();
-                        // Point cursorPos = e.getPoint(); //? relative to subUnit JPanel
-                        // System.out.println("X of image : " + getX()); // absolute pos
-                        // System.out.println("Width of image : " + getSize().getWidth()); // absolute pos
-                        // System.out.println(cursorPos);
-                        // characterTooltip.setVisible(false);
-                        characterTooltip.setLocation(e.getPoint());
-                        // while ()
-                        // characterTooltip.setLocation(new Point(
-                        //     e.getX() + 20,
-                        //     e.getY() + 25
-                        // ));
-                        // characterTooltip.removeAll();
-                        // characterTooltip.repaint();
-                        // characterTooltip.
-                        // characterTooltip.
-                        characterTooltip.setVisible(true);
-                    }
-                });
-                timer.start();
+                // isCursorOnSubUnitBox = true;
+                characterTooltip.setVisible(true);
+                // System.out.println("enter");
             }
-
+            // @Override
+            // public void mouseMoved(MouseEvent e) {
+            //     // characterTooltip.setLocation(getMousePosition());
+            // }
             @Override
             public void mouseExited(MouseEvent e) {
-                if (timer != null) {
-                    timer.stop();
-                    timer = null;
-                }
+                // isCursorOnSubUnitBox = false;
                 characterTooltip.setVisible(false);
+                // System.out.println("exit");
             }
-
         });
-
         addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseMoved(MouseEvent ev) {
+            public void mouseMoved(MouseEvent e) {
+                // System.out.println("Move");
+                // characterTooltip.setLocation(e.getPoint());
+                characterTooltip.setLocation(
+                    getMousePosition(true).x,
+                    getMousePosition(true).y
+                );
             }
-
         });
+
     }
 
     private void initGraphic() {
@@ -173,5 +201,9 @@ public class SubUnit extends JPanel {
     public void setCharacterTooltip(CharacterTooltip characterTooltip) {
         this.characterTooltip = characterTooltip;
     }
+
+    // public void setCursorOnSubUnitBox(boolean isCursorOnSubUnitBox) {
+    //     this.isCursorOnSubUnitBox = isCursorOnSubUnitBox;
+    // }
 
 }
