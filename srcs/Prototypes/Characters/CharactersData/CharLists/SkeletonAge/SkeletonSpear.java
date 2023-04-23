@@ -1,5 +1,4 @@
 
-
 package srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge;
 
 import java.awt.Image;
@@ -14,8 +13,8 @@ public class SkeletonSpear extends CharacterPrototype {
     public SkeletonSpear(TeamType tt) {
         super(tt);
         ImageData imgData = new ImageData(
-            "characters/skeletonAge/skeletonSpear/walk/Walk_00.png"
-        // "    II/images/characters/skeletonAge/skeletonSpear/walk/Walk_00.png"
+                "characters/skeletonAge/skeletonSpear/walk/Walk_00.png"
+        // " II/images/characters/skeletonAge/skeletonSpear/walk/Walk_00.png"
         );
         setName("Skeleton Spearman");
         setExperiance(15);
@@ -28,17 +27,19 @@ public class SkeletonSpear extends CharacterPrototype {
         setAttackRange(400);
         setAttackDamage(5);
 
-        for (int i = 0; i < 6; i++) {
-            String formatter =
-            String.format(
-            // "characters/skeletonArcher/walk/Skeleton_Archer_Sprite_0%d.png"
-            "characters/skeletonAge/skeletonSpear/walk/Walk_0%d.png"
-                , i
-            );
+        for (int i = 0; i < 7; i++) {
+            String formatter = String.format(
+                    // "characters/skeletonArcher/walk/Skeleton_Archer_Sprite_0%d.png"
+                    "characters/skeletonAge/skeletonSpear/walk/Walk_0%d.png", i);
             Image imgWalk = new ImageData(formatter).getSprite();
             getWalkSprites().add(imgWalk);
         }
-        System.out.println("ELIO SPEARMAN");
-        System.out.println(getWalkSprites());
+        for (int i = 0; i < 4; i++) {
+            String formatter = String.format(
+                    // "characters/skeletonArcher/walk/Skeleton_Archer_Sprite_0%d.png"
+                    "characters/skeletonAge/skeletonSpear/attack/tile00%d.png", i);
+            Image atkImg = new ImageData(formatter).getSprite();
+            getWalkSprites().add(atkImg);
+        }
     }
 }

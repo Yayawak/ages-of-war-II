@@ -1,5 +1,4 @@
 
-
 package srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge;
 
 import java.awt.Image;
@@ -14,8 +13,7 @@ public class SkeletonWarrior extends CharacterPrototype {
     public SkeletonWarrior(TeamType tt) {
         super(tt);
         ImageData imgData = new ImageData(
-            "characters/skeletonAge/skeletonWarrior/walk/skeletonWalk_0000.png"
-        );
+                "characters/skeletonAge/skeletonWarrior/walk/skeletonWalk_0000.png");
         setName("Skeleton warrior");
         setExperiance(3);
         setGold(5);
@@ -29,13 +27,16 @@ public class SkeletonWarrior extends CharacterPrototype {
         setAttackDamage(4);
 
         for (int i = 0; i < 7; i++) {
-            String formatter =
-                String.format(
-            "characters/skeletonAge/skeletonWarrior/walk/skeletonWalk_000%d.png",i
-            );
+            String formatter = String.format(
+                    "characters/skeletonAge/skeletonWarrior/walk/skeletonWalk_000%d.png", i);
             Image imgWalk = new ImageData(formatter).getSprite();
             getWalkSprites().add(imgWalk);
         }
-        // System.out.println(getWalkSprites());
+        for (int i = 0; i < 4; i++) {
+            String formatter = String.format(
+                    "characters/skeletonAge/skeletonWarrior/attack/tile00%d.png", i);
+            Image atkImg = new ImageData(formatter).getSprite();
+            getWalkSprites().add(atkImg);
+        }
     }
 }

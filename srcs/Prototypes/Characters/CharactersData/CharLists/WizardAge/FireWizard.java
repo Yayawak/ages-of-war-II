@@ -11,9 +11,9 @@ public class FireWizard extends CharacterPrototype {
     public FireWizard(TeamType tt) {
         super(tt);
         ImageData img = new ImageData(
-            // "characters/wizrdAge/fireWizard/fireFire/fireball_00.png"
-// /Users/rio/Desktop/ages-of-war-II/images/characters/wizardAge/fireWizard/walk/Walk_00.png
-            "characters/wizardAge/fireWizard/walk/Walk_00.png"
+                // "characters/wizrdAge/fireWizard/fireFire/fireball_00.png"
+                // /Users/rio/Desktop/ages-of-war-II/images/characters/wizardAge/fireWizard/walk/Walk_00.png
+                "characters/wizardAge/fireWizard/walk/Walk_00.png"
         // /characters/wizardAge/fireWizard/walk/Walk_00.png
         );
         setName("FireFire The Wizer");
@@ -31,23 +31,17 @@ public class FireWizard extends CharacterPrototype {
         // setAttackDamage(50);
         setAttackDamage(20);
 
-        for (int i = 0; i < 5; i++) {
-            String formatter =
-            String.format(
-                "characters/wizardAge/fireWizard/walk/Walk_0%d.png"
-                , i
-            );
+        for (int i = 0; i < 6; i++) {
+            String formatter = String.format(
+                    "characters/wizardAge/fireWizard/walk/Walk_0%d.png", i);
             Image imgWalk = new ImageData(formatter).getSprite();
             getWalkSprites().add(imgWalk);
         }
 
         for (int i = 0; i < 8; i++) {
-            String formatter =
-            String.format(
-//ages-of-war-II/images/characters/wizardAge/fireWizard/fireFire/fireball_00.png
-                "characters/wizardAge/fireWizard/fireFire/fireball_0%d.png"
-                , i
-            );
+            String formatter = String.format(
+                    // ages-of-war-II/images/characters/wizardAge/fireWizard/fireFire/fireball_00.png
+                    "characters/wizardAge/fireWizard/fireFire/fireball_0%d.png", i);
             Image atkImg = new ImageData(formatter).getSprite();
             getAttackASprites().add(atkImg);
         }
