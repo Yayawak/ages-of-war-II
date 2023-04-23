@@ -13,6 +13,7 @@ import java.util.LinkedList;
 public class EntityPrototype {
     protected State state;
     protected TeamType teamType = TeamType.PLAYER;
+    // protected int attackSpeed;
     protected int attackSpeed;
     protected ImageData imgData;
     protected String name;
@@ -148,6 +149,10 @@ public class EntityPrototype {
 
     public void setAttackRange(int attackRange) {
         this.attackRange = attackRange;
+    }
+
+    public long getAttackRateInMillisec() {
+        return (long)(getAttackSpeed() * 25.0f + 100);
     }
 
     public int getAttackDamage() {

@@ -20,13 +20,16 @@ public class FireWizard extends CharacterPrototype {
         setExperiance(50);
         setGold(100);
         setMaxHp(70);
-        setMovementSpeed(4);
+        // setMovementSpeed(4);
+        setMovementSpeed(1);
+        // setAttackSpeed(1);
         setAttackSpeed(1);
         // setTeam(teamType);
         setImgData(img);
-        setBuildTime(5);
-        setAttackRange(200);
-        setAttackDamage(50);
+        setBuildTime(1);
+        setAttackRange(500);
+        // setAttackDamage(50);
+        setAttackDamage(20);
 
         for (int i = 0; i < 5; i++) {
             String formatter =

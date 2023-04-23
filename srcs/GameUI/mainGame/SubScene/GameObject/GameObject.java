@@ -24,7 +24,6 @@ public abstract class GameObject extends JPanel implements Loopable {
     protected Dimension imgSize;
     protected boolean isCollide = false;
     protected long spawnTime;
-    protected boolean hasAttacked;
     protected EntityPrototype damager;
     protected EntityPrototype attacker;
 
@@ -145,30 +144,12 @@ public abstract class GameObject extends JPanel implements Loopable {
                     != ent.getTeamType()
             ) {
                 // todo : combat
-                // ent.setState(State.ATTACK);
-                // attackOpponent(ent, closetCharacter.getCharacter());
-                // Check if tha attack has no been made yet
-                if (!hasAttacked) {
-                    //  Find the closet enemy and attack it
-                    // if (closetCharacter != null) {
-                    if (closetCharacter != null) {
-                        hasAttacked = true;
-
-                        // ! danger if move
-                        // attackOpponent(ent,
-                        //     closetCharacter.getCharacter()
-                        // );
-                        damager = closetCharacter.getCharacter();
-                    }
-                    // if (closi)
+                if (closetCharacter != null) {
+                    // ! danger if move
+                    damager = closetCharacter.getCharacter();
                 }
-                // ent.getState().nex
-                // attackOpponent(closestCgo.getCharacter(), character);
-                // System.out.println("combat occured");
-                // System.out.println("Min = " + min);
-                // System.out.format("Name of closest character is : %s\n",
-                    // closetCharacter.getCharacter().getName());
             }
+        } else {
         }
         // if (closetCharacter == null) { System.out.println("Closest character = NULL");}
         return closetCharacter;
@@ -191,50 +172,32 @@ public abstract class GameObject extends JPanel implements Loopable {
                 if (attacker == null) {
                     System.out.println("attacker is null from the start.");
                 }
-                int atkRate;
+                // rnage of attack is in [0, 200 millisec]
                 int atkDmg;
                 // int atkRate = attacker.getAttackSpeed();
                 atkDmg = attacker.getAttackDamage();
-                long ms = 100;
+                // long ms = 100;
+                // * I want attack rate : map from [0, 8] -> [100, 200 millesc / one attck]
+                // ? using linera approxiamtion
+                // long atkRate = (long)(12.5f * attacker.getAttackSpeed() + 100);
+                long atkRate = attacker.getAttackRateInMillisec();
+                // long atkRate = 500;
                 // long ms = 10;
                 // long ms = 1000;
                 // todo : fix bug
                 while (true) {
-                // while (attacker.getHp() > 0) {
+                    try { Thread.sleep(atkRate); } catch (Exception e) { }
+                    attacker.setState(State.ATTACK);
                     // no need to check for attacker becuase attaker will always exists because we setted all attacker in constructor
-                    // if (attacker != null)
-                    // {
                     // System.out.println("attack from : " + attacker.getName());
-                    if (damager != null) {
+                    if (damager != null && damager.getHp() > 0) {
                         // System.out.println("damger will be : " + damager.getName());
-                        // damager.decreaseHp(attacker.getAttackDamage());
                         damager.decreaseHp(atkDmg);
-                    }
+                    } else
+                        attacker.setState(State.MOVE);
+                        damager = null;
                     // }
-                    try { Thread.sleep(ms); } catch (Exception e) { }
                 }
-                // while (true) {
-                // while ( damager.getHp() > 0) {
-                    // if (damager != null && attacker != null) {
-                    //     // atkRate = attacker.getAttackSpeed();
-                    //     atkDmg = attacker.getAttackDamage();
-                    //     // ! this is important debugger
-                    //     // System.out.format("%s -> %s\n",
-                    //     //     attacker.getName(),
-                    //     //     damager.getName()
-                    //     // );
-                    //     // long ms = (atkRate * 1000);
-                    //     // long ms = (1000);
-                    //     if (damager.getHp() <= 0)
-                    //         break;
-                    //     damager.decreaseHp(atkDmg);
-                    //     try {
-                    //         // Thread.sleep(ms);
-                    //     } catch (Exception e) { }
-                    // }
-                // }
-                // hasAttacked = false; // reset attacker to be attack again if enemy is die
-                // attacker.setState(State.MOVE);
             }, "attacking Thread"
         ).start();
     }

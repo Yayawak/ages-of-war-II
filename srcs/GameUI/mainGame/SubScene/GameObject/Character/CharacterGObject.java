@@ -21,6 +21,7 @@ import srcs.GameUI.mainGame.SubScene.characterHpBar.CharacterHpBar;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
 import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonWarrior;
+import srcs.StateMachine.State;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
 public class CharacterGObject extends GameObject {
@@ -29,7 +30,8 @@ public class CharacterGObject extends GameObject {
     private Point position;
     private CharacterHpBar hpBar;
     List<Image> currentAnimatingSprites;
-    private Thread animateThread;
+    // private boolean isAttacking;
+    // private Thread animateThread;
 
     public CharacterGObject(CharacterPrototype character) {
         super(character.getImgData().getSprite(),
@@ -62,35 +64,49 @@ public class CharacterGObject extends GameObject {
         // List<Image> currentAnimatingSprites;
         // List<Image> currentAnimatingSprites = character.getWalkSprites();
         currentAnimatingSprites = character.getWalkSprites();
-        boolean isAttackASpritesExists = character.getAttackASprites() != null;
+        boolean isAttackASpritesExists = character.getAttackASprites().size() != 0;
         if (isAttackASpritesExists) {
             currentAnimatingSprites = character.getAttackASprites();
         }
-        int freq = 200;
-        animateThread = new Thread(() -> {
-        // new Thread(() -> {
+        // long freq = 200;
+        // long freq =
+        // long freq = 20;
+        // int size = currentAnimatingSprites.size();
+        // animateThread = new Thread(() -> {
+        new Thread(() -> {
+            long freq = 40;
+            int size;
             // List<Image> currentAnimatingSprites = character.getWalkSprites();
             int i = 0;
             while (true) {
-                // if (isCollide) {
-                //     currentAnimatingSprites = character.getAttackASprites();
-                //     i = 0;
-                // } else {
-                //     currentAnimatingSprites = character.getWalkSprites();
-                // }
-                try {
-                    if (i != currentAnimatingSprites.size() - 1) {
+                // if (isInAttackRange) {
+                if (attacker.getState() == State.ATTACK) {
+                    currentAnimatingSprites = character.getAttackASprites();
+                    freq = character.getAttackRateInMillisec();
+                    // i = 0;
+                } else if (attacker.getState() == State.MOVE ) {
+                    currentAnimatingSprites = character.getWalkSprites();
+                    freq = 40;
+                }
+                size = currentAnimatingSprites.size();
+                // if (i != currentAnimatingSprites.size() - 1) {
+                if (i != size - 1) {
+                    try {
                         setImg(currentAnimatingSprites.get(i));
-                    } else {
+                    // } catch (Exception e) {
+                    } catch (IndexOutOfBoundsException e) {
                         i = 0;
+                        // System.out.println(e);
                     }
-                    i++;
-                    Thread.sleep(freq);
-                } catch (Exception e) { }
+                } else {
+                    i = 0;
+                }
+                i++;
+                try { Thread.sleep(freq); } catch (Exception e) { System.out.println(e); }
             }
-        }, "animate");
-        // }).start();
-        animateThread.start();
+        // }, "animate");
+        }).start();
+        // animateThread.start();
     }
 
     // ? not called
@@ -230,10 +246,10 @@ public class CharacterGObject extends GameObject {
         return position;
     }
 
-    public CharacterGObject copy() {
-        return new CharacterGObject(new CharacterPrototype(character));
-        // return new CharacterGObject(character);
-    }
+    // public CharacterGObject copy() {
+    //     return new CharacterGObject(new CharacterPrototype(character));
+    //     // return new CharacterGObject(character);
+    // }
 
     @Override
     public void destroyGameObject() {
@@ -260,7 +276,7 @@ public class CharacterGObject extends GameObject {
         }
         MainGame.getInstance().remove(hpBar);
         super.destroyGameObject();
-        animateThread.stop();
+        // animateThread.stop();
     }
 
     @Override
