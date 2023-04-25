@@ -13,7 +13,7 @@ public class SamuraiFlag extends CharacterPrototype {
         setName("SamuraiFlag");
         setExperiance(30);
         setGold(50);
-        setMaxHp(200);
+        setMaxHp(800);
         setMovementSpeed(3);
         setAttackSpeed(1);
         setImgData(imgData);

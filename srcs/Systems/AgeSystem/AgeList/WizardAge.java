@@ -11,7 +11,9 @@ import srcs.GameUI.MainUI;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.*;
+import srcs.Prototypes.Characters.CharactersData.CharLists.WizardAge.BlackHoodWizard;
 import srcs.Prototypes.Characters.CharactersData.CharLists.WizardAge.FireWizard;
+import srcs.Prototypes.Characters.CharactersData.CharLists.WizardAge.LightningWitch;
 import srcs.Prototypes.Characters.CharactersData.CharLists.WizardAge.Santana;
 import srcs.Prototypes.Characters.CharactersData.CharLists.WizardAge.Teera;
 import srcs.Prototypes.Tower.TowerPrototype;
@@ -44,12 +46,13 @@ public class WizardAge extends AgeData {
             new FireWizard(TeamType.PLAYER),
             // new FireWizard(TeamType.PLAYER),
             // new FireWizard(TeamType.PLAYER),
-            new Santana(TeamType.PLAYER),
+            new LightningWitch(TeamType.PLAYER),
+            // new Santana(TeamType.PLAYER),
             // new FireWizard(TeamType.PLAYER),
-            new Teera(TeamType.PLAYER),
+            new BlackHoodWizard(TeamType.PLAYER)
+            // new Teera(TeamType.PLAYER),
             // new GrimStroke(TeamType.PLAYER),
             // new NatureProphet(TeamType.PLAYER),
-            new Rubick(TeamType.PLAYER),
             // new Morphling(TeamType.PLAYER)
         };
         setCharacterPrototypes(
@@ -89,6 +92,12 @@ public class WizardAge extends AgeData {
                 "upgradeIcons/stoneAgeUp.png"
             ).getSprite()
         );
+    }
+
+    @Override
+    public void useUltimate(TeamType team) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'useUltimate'");
     }
 
 }

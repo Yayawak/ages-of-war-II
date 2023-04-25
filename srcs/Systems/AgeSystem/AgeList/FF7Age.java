@@ -10,6 +10,7 @@ import srcs.Enums.TeamType;
 import srcs.GameUI.MainUI;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Characters.CharactersData.CharLists.Charlies;
 import srcs.Prototypes.Characters.CharactersData.CharLists.FinalFantasyAge.Cloud;
 import srcs.Prototypes.Characters.CharactersData.CharLists.FinalFantasyAge.Sephiroth;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.*;
@@ -42,8 +43,7 @@ public class FF7Age extends AgeData {
         CharacterPrototype[] cps = {
             new Sephiroth(TeamType.PLAYER),
             new Cloud(TeamType.PLAYER),
-            new Sephiroth(TeamType.PLAYER),
-            new Cloud(TeamType.PLAYER),
+            new Charlies(TeamType.PLAYER)
         };
         setCharacterPrototypes(
             new ArrayList<CharacterPrototype>(
@@ -81,6 +81,12 @@ public class FF7Age extends AgeData {
                 "upgradeIcons/stoneAgeUp.png"
             ).getSprite()
         );
+    }
+
+    @Override
+    public void useUltimate(TeamType team) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'useUltimate'");
     }
 
 }

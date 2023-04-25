@@ -24,7 +24,8 @@ public class EntityPrototype {
     protected int attackDamage;
     // protected ArrayList<Image> walkSprites = new ArrayList<>();
     protected LinkedList<Image> walkSprites = new LinkedList<>();
-    protected ArrayList<Image> attackASprites = new ArrayList<>();
+    // protected ArrayList<Image> attackASprites = new ArrayList<>();
+    protected LinkedList<Image> attackASprites = new LinkedList<>();
     protected int hp;
     protected int maxHp;
 
@@ -161,11 +162,11 @@ public class EntityPrototype {
         this.walkSprites = walkSprites;
     }
 
-    public ArrayList<Image> getAttackASprites() {
+    public LinkedList<Image> getAttackASprites() {
         return attackASprites;
     }
 
-    public void setAttackASprites(ArrayList<Image> attackASprites) {
+    public void setAttackASprites(LinkedList<Image> attackASprites) {
         this.attackASprites = attackASprites;
     }
 

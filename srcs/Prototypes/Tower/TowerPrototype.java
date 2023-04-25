@@ -12,13 +12,9 @@ import java.awt.*;
 
 // public class TowerPrototype {
 public class TowerPrototype extends EntityPrototype {
-    // private int hp;
-    private String towerName;
-    private TeamType teamType;
+    // private String towerName;
     private TurretGObject turretAbove = null;
     private TurretGObject turretBelow = null;
-    private ImageData imageData;
-    private Point position;
 
     public TowerPrototype(int hp, TeamType teamType, TurretGObject turretAbove, TurretGObject turretBelow,
             ImageData imageData, Point position) {
@@ -26,25 +22,11 @@ public class TowerPrototype extends EntityPrototype {
         this.teamType = teamType;
         this.turretAbove = turretAbove;
         this.turretBelow = turretBelow;
-        this.imageData = imageData;
+        // this.imageData = imageData;
+        this.imgData = imageData;
         this.position = position;
     }
 
-    public Point getPosition() {
-        return position;
-    }
-
-    public void setPosition(Point position) {
-        this.position = position;
-    }
-
-    public TeamType getTeamType() {
-        return teamType;
-    }
-
-    public void setTeamType(TeamType teamType) {
-        this.teamType = teamType;
-    }
 
     public TurretGObject getTurretAbove() {
         return turretAbove;
@@ -74,19 +56,19 @@ public class TowerPrototype extends EntityPrototype {
         System.out.println("positions of turret is : " + turretBelow.getTurretPrototype().getPosition());
     }
 
-    public ImageData getImageData() {
-        return imageData;
-    }
+    // public ImageData getImageData() {
+    //     return imageData;
+    // }
 
-    public void setImageData(ImageData imageData) {
-        this.imageData = imageData;
-    }
+    // public void setImageData(ImageData imageData) {
+    //     this.imageData = imageData;
+    // }
 
-    public String getTowerName() {
-        return towerName;
-    }
+    // public String getTowerName() {
+    //     return towerName;
+    // }
 
-    public void setTowerName(String towerName) {
-        this.towerName = towerName;
-    }
+    // public void setTowerName(String towerName) {
+    //     this.towerName = towerName;
+    // }
 }

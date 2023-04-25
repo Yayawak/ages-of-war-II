@@ -81,7 +81,6 @@ public abstract class GameObject extends JPanel implements Loopable {
             checkCollision(this, go);
         }
         // closeest
-
     }
 
     public void destroyGameObject() {
@@ -167,15 +166,17 @@ public abstract class GameObject extends JPanel implements Loopable {
         //     damager.getName(),
         //     String.valueOf(damager.hashCode()).substring(5)
         // );
-        System.out.println("Create new Thread" + "-->".repeat(9));
+        // System.out.println("Create new Thread" + "-->".repeat(9));
         new Thread(
             () -> {
                 IntegratedSystem.count_threads++;
-                System.out.println("count threads = " + IntegratedSystem.count_threads);
+                // System.out.println("count threads = " + IntegratedSystem.count_threads);
                 if (attacker == null) {
                     System.out.println("attacker is null from the start.");
+                    return;
+                } else {
+
                 }
-                // rnage of attack is in [0, 200 millisec]
                 int atkDmg;
                 // int atkRate = attacker.getAttackSpeed();
                 atkDmg = attacker.getAttackDamage();

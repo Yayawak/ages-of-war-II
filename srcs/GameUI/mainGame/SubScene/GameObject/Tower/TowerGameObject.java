@@ -12,9 +12,12 @@ import java.awt.Point;
 public class TowerGameObject extends GameObject {
     private TowerPrototype towerPrototype;
     public TowerGameObject(TowerPrototype towerPrototype) {
-        super(towerPrototype.getImageData().getSprite(),
-                towerPrototype.getPosition(), new Dimension(towerPrototype.getImageData().getImgWidth(),
-                        towerPrototype.getImageData().getImgHeight()));
+        // super(towerPrototype.getImageData().getSprite(),
+        //         towerPrototype.getPosition(), new Dimension(towerPrototype.getImageData().getImgWidth(),
+        //                 towerPrototype.getImageData().getImgHeight()));
+        super(towerPrototype.getImgData().getSprite(),
+                towerPrototype.getPosition(), new Dimension(towerPrototype.getImgData().getImgWidth(),
+                        towerPrototype.getImgData().getImgHeight()));
         this.towerPrototype = towerPrototype;
         if (towerPrototype.getTeamType() == TeamType.ENEMY) {
             System.out.println("This is tower game object ENEMY !!!!!!!!!!!!!!!!!!");
@@ -35,7 +38,8 @@ public class TowerGameObject extends GameObject {
     public void upgradeTowerToNewAge() {
         setImg(IntegratedSystem.getInstance()
             .getCurrentPlayerAgeData().getTowerPrototype()
-            .getImageData().getSprite()
+            // .getImageData().getSprite()
+            .getImgData().getSprite()
         );
         System.out.println("upgrade tower entered");
     }

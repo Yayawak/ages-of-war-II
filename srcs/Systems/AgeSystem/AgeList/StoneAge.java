@@ -68,4 +68,10 @@ public class StoneAge extends AgeData {
                         "upgradeIcons/stoneAgeUp.png").getSprite());
     }
 
+    @Override
+    public void useUltimate(TeamType team) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'useUltimate'");
+    }
+
 }

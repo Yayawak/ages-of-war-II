@@ -10,6 +10,7 @@ import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.FontUIResource;
 
 import helpers.ImageData;
+import srcs.Enums.TeamType;
 import srcs.Interfaces.Loopable;
 import srcs.Systems.Exp.ExpSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
@@ -43,6 +44,8 @@ public class UltimatePanel extends JPanel implements
             @Override
             public void mouseClicked(MouseEvent e) {
                 //todo : metheor depends on each ages
+                IntegratedSystem.getInstance().getCurrentPlayerAgeData()
+                    .useUltimate(TeamType.PLAYER);
             }
         });
     }

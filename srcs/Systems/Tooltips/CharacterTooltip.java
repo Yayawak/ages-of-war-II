@@ -7,13 +7,18 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet.CharacterAttribute;
 
+import srcs.GameUI.topBar.unitsBox.SubUnit.SubUnit;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
 // public class CharacterTooltip extends JPanel {
 public class CharacterTooltip extends JPopupMenu {
     private CharacterPrototype characterPrototype;
+
+    // public CharacterTooltip(CharacterPrototype characterPrototype) {
     public CharacterTooltip(CharacterPrototype characterPrototype) {
         this.characterPrototype = characterPrototype;
         init();
@@ -48,7 +53,6 @@ public class CharacterTooltip extends JPopupMenu {
         }
     }
 }
-
 
 // class TextWithValue extends JTextField {
 class TextWithValue extends JTextArea {
