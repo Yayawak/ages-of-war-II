@@ -1,5 +1,3 @@
-
-
 package srcs.Systems.AgeSystem.AgeList;
 
 import java.awt.Image;
@@ -15,7 +13,6 @@ import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonArcher;
 import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonSpear;
 import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonWarrior;
-import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.*;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
@@ -25,67 +22,58 @@ import srcs.Systems.AgeSystem.AgeData;
 public class SkeletonAge extends AgeData {
 
     private static SkeletonAge instance;
+
     public static SkeletonAge getInstance() {
-        if (instance == null) instance = new SkeletonAge();
+        if (instance == null)
+            instance = new SkeletonAge();
         return instance;
     }
+
     public SkeletonAge() {
-        setNextAgeData(StoneAge.getInstance());
+        setNextAgeData(NinjaAge.getInstance());
         setAgeType(AgeType.SKELETON);
-        Image bgImg = new ImageData("backgrounds/dirtAge.png",
-            MainUI.getInstance().getWidth(),
-            (int)MainGame.getInstance().getPreferredSize().getHeight() + 50
-        ).getSprite();
+
+        Image bgImg = new ImageData("backgrounds/skeleton_bg.png",
+                MainUI.getInstance().getWidth(),
+                (int) MainGame.getInstance().getPreferredSize().getHeight() + 50).getSprite();
         setBackgroundImage(bgImg);
 
         CharacterPrototype[] cps = {
-            // new GrimStroke(TeamType.PLAYER),
-            new SkeletonWarrior(TeamType.PLAYER),
-            new SkeletonArcher(TeamType.PLAYER),
-            new SkeletonSpear(TeamType.PLAYER),
-            new Morphling(TeamType.PLAYER)
+                new SkeletonSpear(TeamType.PLAYER),
+                new SkeletonArcher(TeamType.PLAYER),
+                new SkeletonWarrior(TeamType.PLAYER)
         };
         setCharacterPrototypes(
-            new ArrayList<CharacterPrototype>(
-                Arrays.asList(cps)
-            )
-        );
-
+                new ArrayList<CharacterPrototype>(
+                        Arrays.asList(cps)));
 
         TurretPrototype[] turretPrototypes = {
-            new RedLaserTurret(),
-            new FireGunTurret()
+                new RedLaserTurret(),
+                new FireGunTurret()
         };
         setTurretPrototypes(
-            new ArrayList<TurretPrototype>(
-                Arrays.asList(turretPrototypes)
-            )
-        );
+                new ArrayList<TurretPrototype>(
+                        Arrays.asList(turretPrototypes)));
 
-        // /Users/rio/Desktop/games dev/ages-of-war-II/images/tower/skeleton based  0.png
+        // /Users/rio/Desktop/games dev/ages-of-war-II/images/tower/skeleton based 0.png
         ImageData towerImgData = new ImageData(
                 // "tower/tower1.png",
                 "tower/skeleton based  0.png",
                 // 116, 228
                 // 150, 200
-                200, 275
-        );
+                200, 275);
         TowerPrototype towerPrototype = new TowerPrototype(
-            1000,
-            TeamType.PLAYER,
-            null,
-            null,
-            towerImgData,
-            // new Point(50, 210)
-            new Point(50, 150)
-        );
+                1000,
+                TeamType.PLAYER,
+                null,
+                null,
+                towerImgData,
+                // new Point(50, 210)
+                new Point(50, 150));
         setTowerPrototype(towerPrototype);
         setExpRequiredToUpgrade(1000);
         setUpgradeImage(
-            new ImageData(
-                "upgradeIcons/stoneAgeUp.png"
-            ).getSprite()
-        );
+                new ImageData(
+                        "upgradeIcons/stoneAgeUp.png").getSprite());
     }
-
 }
