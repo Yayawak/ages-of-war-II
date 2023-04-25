@@ -13,9 +13,6 @@ import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharLists.NinjaAge.Kunoichi;
 import srcs.Prototypes.Characters.CharactersData.CharLists.NinjaAge.NinjaMonk;
 import srcs.Prototypes.Characters.CharactersData.CharLists.NinjaAge.NinjaPeasant;
-import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonArcher;
-import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonSpear;
-import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonWarrior;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
@@ -77,5 +74,10 @@ public class NinjaAge extends AgeData {
         setUpgradeImage(
                 new ImageData(
                         "upgradeIcons/stoneAgeUp.png").getSprite());
+    }
+
+    @Override
+    public void useUltimate(TeamType team) {
+        throw new UnsupportedOperationException("Unimplemented method 'useUltimate'");
     }
 }

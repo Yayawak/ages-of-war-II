@@ -4,8 +4,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
-
 import helpers.ImageData;
 import srcs.Enums.AgeType;
 import srcs.Enums.TeamType;
@@ -79,4 +77,9 @@ public class SkeletonAge extends AgeData {
                         "upgradeIcons/stoneAgeUp.png").getSprite());
     }
 
-} 
+    @Override
+    public void useUltimate(TeamType team) {
+        throw new UnsupportedOperationException("Unimplemented method 'useUltimate'");
+    }
+
+}
