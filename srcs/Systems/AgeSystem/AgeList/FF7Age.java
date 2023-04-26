@@ -13,8 +13,6 @@ import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharLists.Charlies;
 import srcs.Prototypes.Characters.CharactersData.CharLists.FinalFantasyAge.Cloud;
 import srcs.Prototypes.Characters.CharactersData.CharLists.FinalFantasyAge.Sephiroth;
-import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.*;
-import srcs.Prototypes.Characters.CharactersData.CharLists.WizardAge.FireWizard;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
@@ -25,7 +23,8 @@ public class FF7Age extends AgeData {
     private static AgeData instance;
 
     public static AgeData getInstance() {
-        if (instance == null) instance = new FF7Age();
+        if (instance == null)
+            instance = new FF7Age();
         return instance;
     }
 
@@ -35,52 +34,42 @@ public class FF7Age extends AgeData {
         setAgeType(AgeType.FF7);
 
         Image bgImg = new ImageData("backgrounds/juggernautWood.jpeg",
-            MainUI.getInstance().getWidth(),
-            (int)MainGame.getInstance().getPreferredSize().getHeight() + 50
-        ).getSprite();
+                MainUI.getInstance().getWidth(),
+                (int) MainGame.getInstance().getPreferredSize().getHeight() + 50).getSprite();
         setBackgroundImage(bgImg);
 
         CharacterPrototype[] cps = {
-            new Sephiroth(TeamType.PLAYER),
-            new Cloud(TeamType.PLAYER),
-            new Charlies(TeamType.PLAYER)
+                new Sephiroth(TeamType.PLAYER),
+                new Cloud(TeamType.PLAYER),
+                new Charlies(TeamType.PLAYER)
         };
         setCharacterPrototypes(
-            new ArrayList<CharacterPrototype>(
-                Arrays.asList(cps)
-            )
-        );
-
+                new ArrayList<CharacterPrototype>(
+                        Arrays.asList(cps)));
 
         TurretPrototype[] turretPrototypes = {
-            new RedLaserTurret(),
-            new FireGunTurret()
+                new RedLaserTurret(),
+                new FireGunTurret()
         };
         setTurretPrototypes(
-            new ArrayList<TurretPrototype>(
-                Arrays.asList(turretPrototypes)
-            )
-        );
+                new ArrayList<TurretPrototype>(
+                        Arrays.asList(turretPrototypes)));
 
         ImageData towerImgData = new ImageData(
                 "tower/shinra.png", 116, 228);
         TowerPrototype towerPrototype = new TowerPrototype(1000,
-            TeamType.PLAYER,
-            null,
-            null,
-            towerImgData,
-            new Point(50, 210)
-        );
+                TeamType.PLAYER,
+                null,
+                null,
+                towerImgData,
+                new Point(50, 210));
         setTowerPrototype(towerPrototype);
 
         setExpRequiredToUpgrade(1000);
 
-
         setUpgradeImage(
-            new ImageData(
-                "upgradeIcons/stoneAgeUp.png"
-            ).getSprite()
-        );
+                new ImageData(
+                        "upgradeIcons/stoneAgeUp.png").getSprite());
     }
 
     @Override
@@ -90,4 +79,3 @@ public class FF7Age extends AgeData {
     }
 
 }
-

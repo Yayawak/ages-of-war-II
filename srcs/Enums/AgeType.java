@@ -2,6 +2,7 @@ package srcs.Enums;
 
 public enum AgeType {
     SKELETON("skeleton age"),
+    NINJA("ninja age"),
     STONE("stone age"),
     EGYPT("egypt age"),
     KNIGHT("knight age"),
@@ -14,6 +15,7 @@ public enum AgeType {
 
     // public abstract String getAgeName();
     private String ageName;
+
     private AgeType(String ageName) {
         this.ageName = ageName;
     }
