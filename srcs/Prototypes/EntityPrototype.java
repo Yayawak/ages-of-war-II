@@ -8,13 +8,15 @@ import srcs.StateMachine.State;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 
-public class EntityPrototype {
+public abstract class EntityPrototype {
     protected State state;
     protected TeamType teamType = TeamType.PLAYER;
     // protected int attackSpeed;
-    protected int attackSpeed;
+    // protected int attackSpeed;
+    protected float attackSpeed;
     protected ImageData imgData;
     protected String name;
     protected int gold;
@@ -23,9 +25,10 @@ public class EntityPrototype {
     protected int attackRange;
     protected int attackDamage;
     // protected ArrayList<Image> walkSprites = new ArrayList<>();
-    protected LinkedList<Image> walkSprites = new LinkedList<>();
-    // protected ArrayList<Image> attackASprites = new ArrayList<>();
-    protected LinkedList<Image> attackASprites = new LinkedList<>();
+    // protected LinkedList<Image> walkSprites = new LinkedList<>();
+    // protected LinkedList<Image> attackASprites = new LinkedList<>();
+    protected List<Image> walkSprites = new LinkedList<>();
+    protected List<Image> attackASprites = new LinkedList<>();
     protected int hp;
     protected int maxHp;
 
@@ -78,11 +81,11 @@ public class EntityPrototype {
         this.teamType = teamType;
     }
 
-    public int getAttackSpeed() {
+    public float getAttackSpeed() {
         return attackSpeed;
     }
 
-    public void setAttackSpeed(int attackSpeed) {
+    public void setAttackSpeed(float attackSpeed) {
         this.attackSpeed = attackSpeed;
     }
 
@@ -130,7 +133,7 @@ public class EntityPrototype {
     public String toString() {
         return "EntityPrototype [teamType=" + teamType + ", attackSpeed=" + attackSpeed + ", imgData=" + imgData
                 + ", name=" + name + ", gold=" + gold + ", position=" + position + ", buildTime=" + buildTime
-                // + ", copyInstance=" + copyInstance
+                + ", attack damage is " + attackDamage
                 + "]";
     }
 
@@ -143,7 +146,19 @@ public class EntityPrototype {
     }
 
     public long getAttackRateInMillisec() {
-        return (long)(getAttackSpeed() * 25.0f + 100);
+        // return (long)(getAttackSpeed() * 25.0f + 100);
+        // return (long)(getAttackSpeed() / 25.0f + 300);
+        // return (long)(getAttackSpeed() / 25.0f + 300);
+        // ? from range atkSpd = [0 -> 10 unit]
+        // * range of attack per sec is [0.5sec -> 2sec]
+        // ? want average is 1000
+        // * use mapping function y = 1000 + (100x - 500)
+        // return (long)(100 * getAttackSpeed() + 1000);
+        // return (long)(100 * getAttackSpeed() + 300);
+        // return (long)(1000 + (100 * getAttackSpeed() - 300));
+        // * use mapping function y = -190x + 2000
+        return (long)((-190) * getAttackSpeed() + 2000);
+        // return (long)(getAttackSpeed() / 25.0f);
     }
 
     public int getAttackDamage() {
@@ -154,7 +169,8 @@ public class EntityPrototype {
         this.attackDamage = attackDamage;
     }
 
-    public LinkedList<Image> getWalkSprites() {
+    // public LinkedList<Image> getWalkSprites() {
+    public List<Image> getWalkSprites() {
         return walkSprites;
     }
 
@@ -162,11 +178,13 @@ public class EntityPrototype {
         this.walkSprites = walkSprites;
     }
 
-    public LinkedList<Image> getAttackASprites() {
+    // public LinkedLis<Image> getAttackASprites() {
+    public List<Image> getAttackASprites() {
         return attackASprites;
     }
 
-    public void setAttackASprites(LinkedList<Image> attackASprites) {
+    // public void setAttackASprites(LinkedList<Image> attackASprites) {
+    public void setAttackASprites(java.util.List<Image> attackASprites) {
         this.attackASprites = attackASprites;
     }
 

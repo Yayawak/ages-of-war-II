@@ -19,6 +19,7 @@ public abstract class AgeData {
     private TowerPrototype towerPrototype;
     private int expRequiredToUpgrade;
     private Image upgradeImage;
+    private Image ultimateImage;
     // protected AgeData() { }
 
     public Image getBackgroundImage() {
@@ -101,4 +102,12 @@ public abstract class AgeData {
     }
 
     public abstract void useUltimate(TeamType team);
+
+    public Image getUltimateImage() {
+        return ultimateImage;
+    }
+
+    public void setUltimateImage(Image ultimateImage) {
+        this.ultimateImage = ultimateImage;
+    }
 }

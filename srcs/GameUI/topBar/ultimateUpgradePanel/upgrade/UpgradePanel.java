@@ -36,6 +36,7 @@ public class UpgradePanel extends JPanel implements Loopable {
         // setSize(getPreferredSize());
         setBackground(Color.red);
         upgradeImg = StoneAge.getInstance().getUpgradeImage();
+        // set
     }
 
     private void initEvent() {
@@ -60,4 +61,5 @@ public class UpgradePanel extends JPanel implements Loopable {
     @Override
     public void draw(Graphics g) {
     }
+
 }

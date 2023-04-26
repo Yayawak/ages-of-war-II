@@ -29,6 +29,30 @@ public class ImageData {
         init();
     }
 
+    public static Image getSprite(String relPath) {
+        return getSprite(relPath, 100, 100);
+    }
+    public static Image getSprite(String relPath, int imgWidth, int imgHeight) {
+        String basePath = new File("").getAbsolutePath();
+        basePath += "/images/";
+        String fullPath = basePath + relPath;
+        // System.out.println(fullPath);
+        BufferedImage bfi = null;
+        try {
+            bfi = ImageIO.read(new File(fullPath));
+            // resizeSprite(imgWidth, imgHeight);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        Image sprite = null;
+        if (bfi != null) {
+            sprite = bfi.getScaledInstance(
+                imgWidth, imgHeight, Image.SCALE_FAST
+            );
+        }
+        return sprite;
+    }
+
     private void init() {
         readImageFromFile(relativePath);
     }

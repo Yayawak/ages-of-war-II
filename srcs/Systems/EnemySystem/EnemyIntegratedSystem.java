@@ -95,7 +95,8 @@ public class EnemyIntegratedSystem implements Loopable {
                 Thread.sleep(spawnEnemyIntervalInMs);
                 // System.out.println("enemy tick tock");
                 if (enemyGoldSystem.getGold() >= 0) {
-                    int ranI =(int)(Math.random() * 4);
+                    // int ranI =(int)(Math.random() * 4);
+                    int ranI =(int)(Math.random() * currentAvailableCharacters.size());
                     // CharacterPrototype dummy = SkeletonAge.getInstance().getCharacterPrototypes().get(ranI);
                     CharacterPrototype dummy = IntegratedSystem.getInstance()
                         .getCurrentEnemyAgeData()
@@ -121,7 +122,11 @@ public class EnemyIntegratedSystem implements Loopable {
                     .getExpRequiredToUpgrade()) {
                     IntegratedSystem.getInstance().upgradeAge(TeamType.ENEMY);
                 }
-            } catch (Exception e) { System.out.println(e); }
+                // java.lang.IndexOutOfBoundsException: Index 3 out of bounds for length 3
+                // ? this catch is for indicate access no exists character avialable (out of bounds)
+            // } catch (Exception e) { System.out.println(e); }
+
+            } catch (Exception e) {}
         }
     }
 

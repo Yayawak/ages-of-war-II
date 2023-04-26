@@ -1,5 +1,6 @@
 
 
+import helpers.SpritesInstallator;
 import srcs.GameUI.MainFrame;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.StartGameUI.StartGameFrame;

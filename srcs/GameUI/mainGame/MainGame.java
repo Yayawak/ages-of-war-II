@@ -10,6 +10,7 @@ import srcs.GameUI.mainGame.Debugger.DebugPanel;
 import srcs.GameUI.mainGame.Debugger.DebugPanelDepreicated;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Effects.LightningStrikeEffect;
 import srcs.GameUI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Turret.TurretGObject;
 import srcs.Interfaces.ComponentSizeItf;
@@ -61,6 +62,11 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     System.out.println("left mouse");
                     DebugTooltip.getInstance().setVisible(false);
+
+                    LightningStrikeEffect lightning = new LightningStrikeEffect();
+                    lightning.setPos(getMousePosition());
+                    addGameObjectToScene(lightning);
+
                 } else {
                     System.out.println("right mouse");
                     DebugTooltip.getInstance().setVisible(true);

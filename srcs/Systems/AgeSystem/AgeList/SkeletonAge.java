@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
+
 import javax.sound.midi.Track;
 import helpers.ImageData;
 import srcs.Enums.AgeType;
@@ -15,67 +17,21 @@ import srcs.GameUI.mainGame.MainGame;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.Interfaces.Animatable;
+import srcs.Prototypes.EntityPrototype;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonArcher;
 import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonSpear;
 import srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge.SkeletonWarrior;
+import srcs.Prototypes.Effects.HandGrapperPrototype;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
 import srcs.Prototypes.Turrets.TurretLists.RedLaserTurret;
 import srcs.Systems.AgeSystem.AgeData;
+import srcs.GameUI.mainGame.SubScene.GameObject.Effects.HandGrapperGObject;
 
-class HandGrapperGobj extends GameObject {
-// class HandGrapper extends GameObject implements Animatable {
-    List<Image> handFrames;
-    // LinkedList<Image> handFrames;
-    // frames
-    // public HandGrapper(Image img, Point pos, Dimension imgSize, List<Image> frames) {
-    public HandGrapperGobj(Image img, Point pos, Dimension imgSize, List<Image> frames,
-        TeamType team
-    ) {
-        super(img, pos, imgSize);
-        this.handFrames = frames;
-        this.teamType = team;
-        initAnimation();
-    }
-
-    private void initAnimation() {
-        new Thread(() -> {
-            long animationSpeed = 150;
-            int i = 0;
-            while (true) {
-                try { Thread.sleep(animationSpeed); } catch (Exception e) { }
-                if (i < handFrames.size()) {
-                    setImg(handFrames.get(i));
-                    // todo : random spawn x OR kill random enemy OR gradullay damage closest gobj
-                    // * 1. create hand entitiy class for using in findClosestCharacter()
-                    // * 2. get closest enemy
-                    // * 3. spawn hands at enemy below position
-
-                    CharacterGObject foe = findClosestOpponent();
-                    setPos(foe.getPos());
-                    // damager = foe;
-                    // setPos(
-
-                        // new Point(
-                        //     (int)Math.random() * 200,
-                        //     (int)Math.random() * 40
-                        // )
-                    // );
-                } else {
-                    i = 0;
-                    continue;
-                }
-                // if (findClosestOpponent(attacker))
-                i++;
-            }
-        }).start();
-    }
-}
 public class SkeletonAge extends AgeData {
     private static SkeletonAge instance;
-    private List<Image> handGrapperImages;
     public static SkeletonAge getInstance() {
         if (instance == null)
             instance = new SkeletonAge();
@@ -130,21 +86,24 @@ public class SkeletonAge extends AgeData {
                 "upgradeIcons/stoneAgeUp.png"
             ).getSprite()
         );
+        setUltimateImage(new ImageData(
+            "effects/green hands/hand-from-ground.png"
+        ).getSprite());
 
-        handGrapperImages = new LinkedList<>();
-        for (int i = 3; i < 13; i++) {
-            // String path = "effects/green hands/green-hand-hell_03.png";
-            String prefix = (i < 10) ? "0" : "";
-            String path = "effects/green hands/green-hand-hell_" +
-                prefix +
-                String.valueOf(i) +
-                ".png";
-            // String path =;
-            handGrapperImages.add(
-                new ImageData(path).getSprite()
-            );
-        }
-        //todo : create game hand object and can damger opponent !!!!!
+        // handGrapperImages = new LinkedList<>();
+        // for (int i = 3; i < 13; i++) {
+        //     // String path = "effects/green hands/green-hand-hell_03.png";
+        //     String prefix = (i < 10) ? "0" : "";
+        //     String path = "effects/green hands/green-hand-hell_" +
+        //         prefix +
+        //         String.valueOf(i) +
+        //         ".png";
+        //     // String path =;
+        //     handGrapperImages.add(
+        //         new ImageData(path).getSprite()
+        //     );
+        // }
+        // //todo : create game hand object and can damger opponent !!!!!
     }
 
     @Override
@@ -153,14 +112,8 @@ public class SkeletonAge extends AgeData {
         MainGame.getInstance().addGameObjectToScene(getNewHandGrapperGobj());
     }
 
-    public HandGrapperGobj getNewHandGrapperGobj() {
-        return new HandGrapperGobj(
-            new ImageData("effects/green hands/hand-from-ground.png").getSprite(),
-            new Point(400, 200),
-            new Dimension(30, 40),
-            handGrapperImages,
-            TeamType.PLAYER
-        );
+    public HandGrapperGObject getNewHandGrapperGobj() {
+        return new HandGrapperGObject(new HandGrapperPrototype(TeamType.PLAYER));
     }
 
 }

@@ -16,7 +16,8 @@ import java.util.ArrayList;;
 
 public class UnitsBox extends JPanel {
     private static UnitsBox instance = null;
-    private int numberOfUnits = 4;
+    private int numberOfUnits = IntegratedSystem.getInstance().getCurrentPlayerAgeData()
+        .getCharacterPrototypes().size();
     // private static ArrayList<SubUnit> unitBoxes = new ArrayList<>();
     private ArrayList<SubUnit> unitBoxes = new ArrayList<>();
 
@@ -32,7 +33,8 @@ public class UnitsBox extends JPanel {
 
     private void init() {
         // setBackground(new Color(124, 50, 42));
-        setBackground(Color.cyan);
+        // setBackground(Color.cyan);
+        setBackground(Color.LIGHT_GRAY);
         setLayout(new GridLayout(1, 0, 20, 10));
 
         // System.out.println(subUnitPanelDimension.toString());
@@ -49,7 +51,7 @@ public class UnitsBox extends JPanel {
 
             } catch (Exception e) {
                 System.out.println("problem fetching character i = " + i);
-                System.out.println(e);
+                // System.out.println(e);
             }
         }
         unitBoxes.stream().forEach(panel -> {
@@ -60,7 +62,9 @@ public class UnitsBox extends JPanel {
     }
 
     public void updateUnitsPanel() {
-        for (int i = 0; i < unitBoxes.size(); i++) {
+        // for (int i = 0; i < unitBoxes.size(); i++) {
+        setNumberOfUnits(IntegratedSystem.getInstance().getCurrentPlayerAgeData().getCharacterPrototypes().size());
+        for (int i = 0; i < numberOfUnits; i++) {
             unitBoxes.get(i).setCharacter(
                 IntegratedSystem.getInstance().getCurrentPlayerAgeData()
                 .getCharacterPrototypes().get(i)

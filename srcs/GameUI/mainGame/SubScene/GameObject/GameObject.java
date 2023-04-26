@@ -38,6 +38,9 @@ public abstract class GameObject extends JPanel implements Loopable {
         this.pos = pos;
         init();
     }
+    public GameObject() {
+        init();
+    }
 
     private void init() {
         setLayout(null);

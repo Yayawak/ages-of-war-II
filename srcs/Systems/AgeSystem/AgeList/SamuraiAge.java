@@ -29,6 +29,7 @@ public class SamuraiAge extends AgeData {
         }
 
         public SamuraiAge() {
+                // setNextAgeData(WizardAge.getInstance());
                 setNextAgeData(FF7Age.getInstance());
                 setAgeType(AgeType.SAMURAI);
 

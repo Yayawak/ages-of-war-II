@@ -12,6 +12,7 @@ import javax.swing.plaf.FontUIResource;
 import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.Interfaces.Loopable;
+import srcs.Systems.AgeSystem.AgeList.SkeletonAge;
 import srcs.Systems.Exp.ExpSystem;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 import java.awt.*;
@@ -36,7 +37,10 @@ public class UltimatePanel extends JPanel implements
 
     private void init() {
         // setBackground(Color.blue);
-        ultimateImage = new ImageData("characters/phynix_ck_cw.png").getSprite();
+        // ultimateImage = new ImageData("characters/phynix_ck_cw.png").getSprite();
+        // todo : this is dummy data
+        // ultimateImage = new ImageData("characters/phynix_ck_cw.png").getSprite();
+        ultimateImage = SkeletonAge.getInstance().getUltimateImage();
     }
 
     private void initEvent() {
@@ -62,5 +66,9 @@ public class UltimatePanel extends JPanel implements
     // not connected manually from mainUI.draw
     @Override
     public void draw(Graphics g) {
+    }
+
+    public void setUltiImage(Image newUltimateImage) {
+        this.ultimateImage = newUltimateImage;
     }
 }
