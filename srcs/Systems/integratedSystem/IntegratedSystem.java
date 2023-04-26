@@ -7,6 +7,7 @@ import srcs.GameUI.mainGame.Debugger.DebugPanel;
 import srcs.GameUI.mainGame.Debugger.DebugPanelDepreicated;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
+import srcs.GameUI.topBar.ultimateUpgradePanel.ultimate.UltimatePanel;
 import srcs.GameUI.topBar.unitsBox.UnitsBox;
 import srcs.Systems.AgeSystem.AgeData;
 import srcs.Systems.AgeSystem.AgeList.FF7Age;
@@ -144,6 +145,7 @@ public class IntegratedSystem {
                 //     getCurrentPlayerAgeData().getCharacterPrototypes().size()
                 // );
                 UnitsBox.getInstance().updateUnitsPanel();
+                UltimatePanel.getInstance().setUltiImage(getCurrentPlayerAgeData().getUltimateImage());
 
                 // todo : replace old ultimateImages to new
                 DebugPanel.getInstance().setDebugText("Player has upgrader ages to be ... "
@@ -155,7 +157,7 @@ public class IntegratedSystem {
             if (getEnemyExpSystem().getExperiance() >
                 currentEnemyAgeData.getExpRequiredToUpgrade()
             ) {
-                System.out.println("Enemy upgard AGE");
+                System.out.println("Enemy upgraded AGE");
                 // todo : decrease exp :
                 EnemyIntegratedSystem.getInstance().decreaseEnemyExp(
                     currentEnemyAgeData.getExpRequiredToUpgrade()

@@ -165,6 +165,7 @@ public class SubUnit extends JPanel {
 
     private void drawUnit(Graphics g) {
         Image img = character.getImgData().getSprite();
+        img = img.getScaledInstance(getWidth(), getHeight(), Image.SCALE_FAST);
         if (img != null) {
             g.drawImage(img,
                     0, 0,

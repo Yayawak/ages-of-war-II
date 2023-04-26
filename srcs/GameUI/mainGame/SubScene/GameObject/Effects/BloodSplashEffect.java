@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.LinkedList;
 import helpers.ImageData;
+import helpers.SpritesInstallator;
 
 public class BloodSplashEffect extends AbstractEffect {
 
@@ -16,25 +17,13 @@ public class BloodSplashEffect extends AbstractEffect {
         // Dimension size = new Dimension(effectImage.getWidth(null),
         //     effectImage.getHeight(null)
         // );
-
         Dimension size = new Dimension(30, 30);
         setImg(effectImage);
         setSize(size);
         setPreferredSize(size);
         setImgSize(size);
         // this.imgSize = size;
-        for (int i = 1; i < 10; i++) {
-            // String path = "effects/green hands/green-hand-hell_03.png";
-            String prefix = (i < 10) ? "0" : "";
-            String path = "effects/blood splash/blood_splash_" +
-                prefix +
-                String.valueOf(i) +
-                ".png";
-            // String path =;
-            effectFrames.add(
-                new ImageData(path).getSprite()
-            );
-        }
+        effectFrames = SpritesInstallator.getSpritesInFolder("effects/blood splash");
         initAnimation();
     }
 

@@ -10,6 +10,7 @@ import srcs.GameUI.mainGame.Debugger.DebugPanel;
 import srcs.GameUI.mainGame.Debugger.DebugPanelDepreicated;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Effects.HealingDrone;
 import srcs.GameUI.mainGame.SubScene.GameObject.Effects.LightningStrikeEffect;
 import srcs.GameUI.mainGame.SubScene.GameObject.Tower.TowerGameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Turret.TurretGObject;
@@ -27,6 +28,7 @@ import srcs.Systems.integratedSystem.IntegratedSystem;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.function.ObjIntConsumer;
 
@@ -63,9 +65,9 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                     System.out.println("left mouse");
                     DebugTooltip.getInstance().setVisible(false);
 
-                    LightningStrikeEffect lightning = new LightningStrikeEffect();
-                    lightning.setPos(getMousePosition());
-                    addGameObjectToScene(lightning);
+                    // HealingDrone hd = new HealingDrone(TeamType.PLAYER);
+                    // hd.setPos(getMousePosition());
+                    // addGameObjectToScene(hd);
 
                 } else {
                     System.out.println("right mouse");
@@ -174,5 +176,23 @@ public class MainGame extends JPanel implements ComponentSizeItf,
             objectsInScene.remove(go);
         } catch (Exception e) { System.out.println(e);
         }
+    }
+
+    public List<GameObject> getGameObjectsFromTeam(TeamType team) {
+        return getObjectsInScene().stream().filter(go -> go.getTeamType() == team).toList();
+    }
+
+    public List<CharacterGObject> getCharacterGameObjectsFromTeam(TeamType team) {
+        return getObjectsInScene().stream().filter(go ->
+            go.getTeamType() == team
+            &&  go instanceof CharacterGObject
+        ).map(go -> (CharacterGObject)go)
+        .toList();
+    }
+
+    public CharacterGObject getRandomCharacterGameObjectFromTeam(TeamType team) {
+        int size = getCharacterGameObjectsFromTeam(team).size();
+        // System.out.println("size " + size);
+        return getCharacterGameObjectsFromTeam(team).get((int)(Math.random() * size));
     }
 }

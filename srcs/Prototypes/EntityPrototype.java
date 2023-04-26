@@ -174,7 +174,7 @@ public abstract class EntityPrototype {
         return walkSprites;
     }
 
-    public void setWalkSprites(LinkedList<Image> walkSprites) {
+    public void setWalkSprites(List<Image> walkSprites) {
         this.walkSprites = walkSprites;
     }
 
@@ -230,4 +230,7 @@ public abstract class EntityPrototype {
         setHp(getHp() + amount);
     }
 
+    protected void attack1St() {
+
+    }
 }

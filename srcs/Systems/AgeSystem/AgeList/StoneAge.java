@@ -11,6 +11,7 @@ import srcs.Enums.TeamType;
 import srcs.GameUI.MainUI;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Effects.LightningStrikeEffect;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.*;
 import srcs.Prototypes.Tower.TowerPrototype;
@@ -29,7 +30,7 @@ public class StoneAge extends AgeData {
     }
 
     public StoneAge() {
-        setNextAgeData(WizardAge.getInstance());
+        setNextAgeData(NinjaAge.getInstance());
         setAgeType(AgeType.STONE);
 
         Image bgImg = new ImageData("backgrounds/stoneAge.png",
@@ -68,12 +69,16 @@ public class StoneAge extends AgeData {
         setUpgradeImage(
                 new ImageData(
                         "upgradeIcons/stoneAgeUp.png").getSprite());
+        setUltimateImage(
+            ImageData.getSprite("effects/lightning strikes/lightning-strike_18.png")
+        );
     }
 
     @Override
     public void useUltimate(TeamType team) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'useUltimate'");
+        System.out.println("using lightning strike");
+        MainGame.getInstance().addGameObjectToScene(
+            new LightningStrikeEffect((team == TeamType.PLAYER) ? TeamType.ENEMY : TeamType.PLAYER)
+        );
     }
-
 }

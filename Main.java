@@ -1,5 +1,6 @@
 
 
+import audio.Music;
 import helpers.SpritesInstallator;
 import srcs.GameUI.MainFrame;
 import srcs.GameUI.mainGame.MainGame;
@@ -18,6 +19,7 @@ public class Main {
 
                 // new TestTooltip();
                 // new TileGeneratorApp().setVisible(true);
+
             }
         });
 

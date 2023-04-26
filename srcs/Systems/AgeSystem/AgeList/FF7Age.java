@@ -30,7 +30,7 @@ public class FF7Age extends AgeData {
 
     public FF7Age() {
         // setNextAgeData(SkeletonAge.getInstance());
-        setNextAgeData(null);
+        setNextAgeData(CyberAge.getInstance());
         setAgeType(AgeType.FF7);
 
         Image bgImg = new ImageData("backgrounds/juggernautWood.jpeg",

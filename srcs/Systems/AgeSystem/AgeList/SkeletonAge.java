@@ -39,7 +39,8 @@ public class SkeletonAge extends AgeData {
     }
 
     public SkeletonAge() {
-        setNextAgeData(NinjaAge.getInstance());
+        // setNextAgeData(NinjaAge.getInstance());
+        setNextAgeData(StoneAge.getInstance());
         setAgeType(AgeType.SKELETON);
 
         Image bgImg = new ImageData("backgrounds/skeleton_bg.png",

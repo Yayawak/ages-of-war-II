@@ -111,6 +111,28 @@ public abstract class GameObject extends JPanel implements Loopable {
         return (float)d;
     }
 
+    public CharacterGObject findClosestAlly() {
+        double min = Integer.MAX_VALUE;
+        CharacterGObject closetCharacter = null;
+        for (GameObject gameObject : MainGame.getInstance().getObjectsInScene()) {
+            if (gameObject instanceof CharacterGObject
+                && gameObject != this
+                && gameObject != null
+            ) {
+                CharacterGObject cgo = (CharacterGObject) gameObject;
+                TeamType anotherCgoTeam = cgo.getCharacter().getTeamType();
+                if (teamType != anotherCgoTeam) continue;
+                long dx = (long) (getX() - cgo.getLocation().getX());
+                long dy = (long) (getY() - cgo.getLocation().getY());
+                double d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+                if (d < min) {
+                    min = d;
+                    closetCharacter = cgo;
+                }
+            }
+        }
+        return closetCharacter;
+    }
     // public CharacterGObject findClosestOpponent(GameObject) {
     public CharacterGObject findClosestOpponent() {
         double min = Integer.MAX_VALUE;
@@ -250,6 +272,8 @@ public abstract class GameObject extends JPanel implements Loopable {
 
     public void setImgSize(Dimension imgSize) {
         this.imgSize = imgSize;
+        setSize(imgSize);
+        setPreferredSize(imgSize);
     }
 
     public boolean getCollide() {

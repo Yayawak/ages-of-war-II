@@ -7,7 +7,7 @@ import java.util.List;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 
 public abstract class AbstractEffect extends GameObject {
-    List<Image> effectFrames = new LinkedList<>();
+    protected List<Image> effectFrames = new LinkedList<>();
     protected boolean isEffectDied = false;
 
     protected void initAnimation() {

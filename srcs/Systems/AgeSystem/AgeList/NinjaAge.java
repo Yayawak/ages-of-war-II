@@ -32,7 +32,7 @@ public class NinjaAge extends AgeData {
         setNextAgeData(SamuraiAge.getInstance());
         setAgeType(AgeType.NINJA);
 
-        Image bgImg = new ImageData("backgrounds/ninja_bg.png",
+        Image bgImg = new ImageData("backgrounds/japan hometown  0-2.png",
                 MainUI.getInstance().getWidth(),
                 (int) MainGame.getInstance().getPreferredSize().getHeight() + 50).getSprite();
         setBackgroundImage(bgImg);

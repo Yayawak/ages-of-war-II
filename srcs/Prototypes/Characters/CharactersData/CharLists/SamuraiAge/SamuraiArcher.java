@@ -3,6 +3,7 @@ package srcs.Prototypes.Characters.CharactersData.CharLists.SamuraiAge;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import java.awt.Image;
 import helpers.ImageData;
+import helpers.SpritesInstallator;
 import srcs.Enums.TeamType;
 
 public class SamuraiArcher extends CharacterPrototype {
@@ -15,22 +16,14 @@ public class SamuraiArcher extends CharacterPrototype {
         setGold(50);
         setMaxHp(800);
         setMovementSpeed(3);
-        setAttackSpeed(1);
+        // setAttackSpeed(5);
+        setAttackSpeed(8);
         setImgData(imgData);
         setBuildTime(1);
-        setAttackRange(150);
+        setAttackRange(1000);
         setAttackDamage(14);
 
-        for (int i = 0; i < 8; i++) {
-            String formatter = String.format(
-                    "characters/samurai/samuraiArcher/walk/tile00%d.png", i);
-            Image imgWalk = new ImageData(formatter).getSprite();
-            getWalkSprites().add(imgWalk);
-        }
-        for (int i = 0; i < 5; i++) {
-            String formatter = String.format("characters/samurai/samuraiArcher/attack/tile00%d.png", i);
-            Image atkImg = new ImageData(formatter).getSprite();
-            getAttackASprites().add(atkImg);
-        }
+        setWalkSprites(SpritesInstallator.getSpritesInFolder("characters/samurai/samuraiArcher/walk/"));
+        setAttackASprites(SpritesInstallator.getSpritesInFolder("characters/samurai/samuraiArcher/attack/"));
     }
 }

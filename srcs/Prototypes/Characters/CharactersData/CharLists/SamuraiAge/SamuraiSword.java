@@ -15,7 +15,7 @@ public class SamuraiSword extends CharacterPrototype {
         setGold(50);
         setMaxHp(800);
         setMovementSpeed(3);
-        setAttackSpeed(1);
+        setAttackSpeed(8);
         setImgData(imgData);
         setBuildTime(1);
         setAttackRange(150);

@@ -2,13 +2,15 @@ package srcs.Enums;
 
 public enum AgeType {
     SKELETON("skeleton age"),
-    NINJA("ninja age"),
     STONE("stone age"),
     EGYPT("egypt age"),
     KNIGHT("knight age"),
-    WIZARD("wizard age"),
+    NINJA("ninja age"),
     SAMURAI("samurai age"),
+    WIZARD("wizard age"),
     FF7("final fantasy age"),
+    CYBER("cyber age"),
+    TEACHER("teacher age"),
     SOLDER("soldier age"),
     ALIEN("alien age"),
     NONE("none age");

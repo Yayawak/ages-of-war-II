@@ -2,6 +2,7 @@ package srcs.Prototypes.Characters.CharactersData.CharLists;
 
 import java.awt.Image;
 import helpers.ImageData;
+import helpers.SpritesInstallator;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
 
@@ -24,7 +25,7 @@ public class Charlies extends CharacterPrototype {
         setMovementSpeed(3);
         // setMovementSpeed(2);
         // setAttackSpeed(1);
-        setAttackSpeed(1);
+        setAttackSpeed(10);
         // setTeam(teamType);
         setImgData(img);
         setBuildTime(1);
@@ -33,23 +34,8 @@ public class Charlies extends CharacterPrototype {
         // setAttackDamage(20);
         setAttackDamage(2);
 
-        for (int i = 3; i < 17; i++) {
-            String formatter = String.format(
-                "characters/chalies/chalies ninja walks/Charlie-Ninja_walkes_" +
-                ((i < 10) ? "0" : "") + String.valueOf(i) +
-               ".png");
-            Image imgWalk = new ImageData(formatter).getSprite();
-            getWalkSprites().add(imgWalk);
-        }
-
-        for (int i = 3; i < 21; i++) {
-            String formatter = String.format(
-                "characters/chalies/chalies ninja spin atks/Charlie-Ninja_spin_atk_" +
-                ((i < 10) ? "0" : "") + String.valueOf(i) +
-               ".png");
-            Image atkImg = new ImageData(formatter).getSprite();
-            getAttackASprites().add(atkImg);
-        }
+        setWalkSprites(SpritesInstallator.getSpritesInFolder("characters/chalies/chalies ninja walks/"));
+        setAttackASprites(SpritesInstallator.getSpritesInFolder("characters/chalies/chalies ninja spin atks"));
     }
 
 }

@@ -75,6 +75,8 @@ public class CharacterGObject extends GameObject {
         // animateThread = new Thread(() -> {
         new Thread(() -> {
             long freq = 40;
+            // long freq = 100;
+            // long freq = 100;
             int size;
             // List<Image> currentAnimatingSprites = character.getWalkSprites();
             int i = 0;
@@ -83,26 +85,32 @@ public class CharacterGObject extends GameObject {
                 if (attacker.getState() == State.ATTACK) {
                     currentAnimatingSprites = character.getAttackASprites();
                     freq = character.getAttackRateInMillisec();
+                    // freq = 10;
                     // i = 0;
-                } else if (attacker.getState() == State.MOVE ) {
+                // } else if (attacker.getState() == State.MOVE ) {
+                }
+                if (attacker.getState() == State.MOVE ) {
                     currentAnimatingSprites = character.getWalkSprites();
-                    freq = 40;
+                    // freq = 40;
+                    // freq = 70;
+                    freq = 100;
                 }
                 size = currentAnimatingSprites.size();
-                // if (i != currentAnimatingSprites.size() - 1) {
-                if (i != size - 1) {
-                    try {
-                        setImg(currentAnimatingSprites.get(i));
-                    // } catch (Exception e) {
-                    } catch (IndexOutOfBoundsException e) {
-                        i = 0;
-                        // System.out.println(e);
-                    }
-                } else {
-                    i = 0;
+                // if (i != size - 1) {
+                //     try {
+                //         setImg(currentAnimatingSprites.get(i));
+                //     } catch (IndexOutOfBoundsException e) { i = 0; }
+                // } else {
+                //     i = 0;
+                // }
+                // i++;
+                while (i < size) {
+                    setImg(currentAnimatingSprites.get(i));
+                    i++;
+                    try { Thread.sleep(freq); } catch (Exception e) { System.out.println(e); }
                 }
-                i++;
-                try { Thread.sleep(freq); } catch (Exception e) { System.out.println(e); }
+                i = 0;
+                // try { Thread.sleep(freq); } catch (Exception e) { System.out.println(e); }
             }
         // }, "animate");
         }).start();

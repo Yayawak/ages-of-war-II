@@ -12,6 +12,9 @@ import java.util.stream.Stream;
 
 public class SpritesInstallator {
     public static List<Image> getSpritesInFolder(String relativePath) {
+        return getSpritesInFolder(relativePath, 100, 100);
+    }
+    public static List<Image> getSpritesInFolder(String relativePath, int width, int height) {
     // public static LinkedList<Image> getSpritesInFolder(String relativePath) {
         // relativePath = "charactes/Knight/Knight_1";
         String basePath = new File("").getAbsolutePath();
@@ -24,7 +27,9 @@ public class SpritesInstallator {
             )
             .sorted((f1, f2) -> f1.compareTo(f2))
             // .peek(System.out::println)
-            .map(f -> ImageData.getSprite(f))
+            // .map(f -> ImageData.getSprite(f))
+            .map(f -> ImageData.getSprite(f, width, height))
             .toList();
+
     }
 }

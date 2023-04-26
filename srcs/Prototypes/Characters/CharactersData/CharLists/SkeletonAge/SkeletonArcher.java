@@ -15,10 +15,12 @@ public class SkeletonArcher extends CharacterPrototype {
         setGold(60);
         setMaxHp(12);
         setMovementSpeed(1);
-        setAttackSpeed(1);
+        // setAttackSpeed(1);
+        // setAttackSpeed(8);
+        setAttackSpeed(9);
         setImgData(imgData);
         setBuildTime(2);
-        setAttackRange(300);
+        setAttackRange(550);
         setAttackDamage(3);
 
         for (int i = 0; i < 7; i++) {
