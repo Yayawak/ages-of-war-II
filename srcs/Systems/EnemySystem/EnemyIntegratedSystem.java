@@ -95,7 +95,7 @@ public class EnemyIntegratedSystem implements Loopable {
                 Thread.sleep(spawnEnemyIntervalInMs);
                 // System.out.println("enemy tick tock");
                 if (enemyGoldSystem.getGold() >= 0) {
-                    int ranI = (int)(Math.random() * 4);
+                    int ranI =(int)(Math.random() * 4);
                     // CharacterPrototype dummy = SkeletonAge.getInstance().getCharacterPrototypes().get(ranI);
                     CharacterPrototype dummy = IntegratedSystem.getInstance()
                         .getCurrentEnemyAgeData()

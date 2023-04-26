@@ -1,5 +1,6 @@
 package srcs.Systems.AgeSystem.AgeList;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import srcs.Enums.AgeType;
 import srcs.Enums.TeamType;
 import srcs.GameUI.MainUI;
 import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.*;
 import srcs.Prototypes.Tower.TowerPrototype;
@@ -85,7 +87,7 @@ public class StoneAge extends AgeData {
     @Override
     public void useUltimate(TeamType team) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'useUltimate'");
+        // throw new UnsupportedOperationException("Unimplemented method 'useUltimate'");
     }
 
 }

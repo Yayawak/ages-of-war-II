@@ -108,6 +108,35 @@ public abstract class GameObject extends JPanel implements Loopable {
         return (float)d;
     }
 
+    // public CharacterGObject findClosestOpponent(GameObject) {
+    public CharacterGObject findClosestOpponent() {
+        double min = Integer.MAX_VALUE;
+        CharacterGObject closetCharacter = null;
+        for (GameObject gameObject : MainGame.getInstance().getObjectsInScene()) {
+            if (gameObject instanceof CharacterGObject
+                && gameObject != this
+                && gameObject != null
+            ) {
+                CharacterGObject cgo = (CharacterGObject) gameObject;
+                TeamType anotherCgoTeam = cgo.getCharacter().getTeamType();
+                if (teamType == anotherCgoTeam) continue;
+                // System.out.println("turret position " + ent.getPosition());
+                // System.out.println("cgo postion " + cgo.getPosition());
+                long dx = (long) (getX() - cgo.getLocation().getX());
+                long dy = (long) (getY() - cgo.getLocation().getY());
+                // System.out.println("turret position " + turret.getPosition());
+                // System.out.println("cgo postion " + cgo.getPosition());
+                // System.out.println("dx = " + dx);
+                // System.out.println("dy = " + dy);
+                double d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+                if (d < min) {
+                    min = d;
+                    closetCharacter = cgo;
+                }
+            }
+        }
+        return closetCharacter;
+    }
     public CharacterGObject findClosestOpponent(EntityPrototype ent) {
         double min = Integer.MAX_VALUE;
         CharacterGObject closetCharacter = null;
@@ -147,13 +176,7 @@ public abstract class GameObject extends JPanel implements Loopable {
                     damager = closetCharacter.getCharacter();
                 }
             }
-            else {
-                // attacker.setState(State.MOVE);
-            }
-        } else {
-            // attacker.setState(State.MOVE);
         }
-        // if (closetCharacter == null) { System.out.println("Closest character = NULL");}
         return closetCharacter;
 
     }

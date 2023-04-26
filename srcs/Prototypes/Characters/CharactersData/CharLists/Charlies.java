@@ -4,6 +4,7 @@ import java.awt.Image;
 import helpers.ImageData;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
+
 public class Charlies extends CharacterPrototype {
 
     public Charlies(TeamType tt) {
