@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import javax.swing.plaf.nimbus.AbstractRegionPainter;
 
+import audio.Music;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
@@ -35,13 +36,17 @@ public class HandGrapperGObject extends GameObject {
     private void initAnimation() {
         BloodSplashEffect bloodSplash = new BloodSplashEffect();
         MainGame.getInstance().addGameObjectToScene(bloodSplash);
+        Music bloodSound = new Music();
+        bloodSound.setFile("blood_bleez.wav");
         new Thread(() -> {
             // long animationSpeed = 150;
+            // bloodSound.play();
             long animationSpeed = handGrapperPtt.getAttackRateInMillisec();
             int i = 0;
             // boolean stopAttacking = false;
             // while (!stopAttacking) {
             int totalDamageToDeal = 100;
+            bloodSound.play();
             while (true) {
                 try { Thread.sleep(animationSpeed); } catch (Exception e) { }
                 if (i < handGrapperPtt.getAttackASprites().size()) {
@@ -56,6 +61,7 @@ public class HandGrapperGObject extends GameObject {
                 bloodSplash.setPos(foe.getPos());
                 damager = foe.getCharacter();
                 if (totalDamageToDeal <= 0 || damager == null || foe == null) {
+                    try { bloodSound.stop(); } catch (Exception e) { }
                     bloodSplash.destroyGameObject();
                     destroyGameObject();
                     return;

@@ -1,5 +1,6 @@
 package srcs.Systems.integratedSystem;
 
+import audio.Music;
 import srcs.Enums.AgeType;
 import srcs.Enums.TeamType;
 import srcs.GameUI.mainGame.MainGame;
@@ -146,6 +147,10 @@ public class IntegratedSystem {
                 // );
                 UnitsBox.getInstance().updateUnitsPanel();
                 UltimatePanel.getInstance().setUltiImage(getCurrentPlayerAgeData().getUltimateImage());
+
+                Music upgradeSfx = new Music();
+                upgradeSfx.setFile("retro-arcade.wav");
+                upgradeSfx.play();
 
                 // todo : replace old ultimateImages to new
                 DebugPanel.getInstance().setDebugText("Player has upgrader ages to be ... "

@@ -48,7 +48,8 @@ public class Kula extends CharacterPrototype {
         150, 150
         ));
         icebergEffect = new IcebergEffect();
-        initThreadChecker();
+        // initThreadChecker();
+        // MainGame.getInstance().addGameObjectToScene(icebergEffect);
     }
     private void initThreadChecker() {
         new Thread(() -> {

@@ -14,7 +14,9 @@ import srcs.Systems.integratedSystem.IntegratedSystem;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.Timer;;
+import javax.swing.Timer;
+
+import audio.Music;;
 
 public class SubUnit extends JPanel {
     // private Image img; // pointer is points to the same object as character's image
@@ -89,6 +91,10 @@ public class SubUnit extends JPanel {
                         IntegratedSystem.getInstance().getPlayerGoldSystem()
                             .getGold() > character.getGold())
                     {
+                        Music goldSfx = new Music();
+                        goldSfx.setFile("spilled_coins.wav");
+                        goldSfx.play();
+                        // IntegratedSystem.getInstance().getPlayerGoldSystem().decreasedGold(character.getGold());
                         QueueProgress.getInstance().startQueue(character.getBuildTime());
                         // QueueProgress.getInstance().setCurrentCharacterPrototypeToBuild(character);
                         // Class<TeamType> c = TeamType.class;

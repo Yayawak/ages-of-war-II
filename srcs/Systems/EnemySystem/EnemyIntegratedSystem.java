@@ -113,6 +113,11 @@ public class EnemyIntegratedSystem implements Loopable {
                         decreaseEnemyGold(c.getCharacter().getGold());
                     }
 
+                    int expPerTick = 20;
+                    enemyExpSystem.increasedExperience(expPerTick);
+                    int goldPerTick = 10;
+                    enemyGoldSystem.increasedGold(goldPerTick);
+
                 } else {
                     System.out.println("enemy gold is below zero");
                     // enemyGoldSystem.setGold(1000);
