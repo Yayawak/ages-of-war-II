@@ -47,7 +47,8 @@ public class MainUI extends JPanel implements Runnable {
     @Override
     public void run() {
         init();
-        System.out.println("after init");
+        // System.out.println("after init");
+        initMainGameThread();
         gameStart();
     }
 
@@ -57,6 +58,7 @@ public class MainUI extends JPanel implements Runnable {
         long lastTime = System.nanoTime();
         long currentTime;
         long timer = 0;
+
 
         while (gameThread != null) {
             currentTime = System.nanoTime();
@@ -72,6 +74,31 @@ public class MainUI extends JPanel implements Runnable {
                 timer = 0;
             }
         }
+    }
+
+    private void initMainGameThread() {
+        new Thread(() -> {
+            double drawInterval = 1000000000 / FPS;
+            double delta = 0;
+            long lastTime = System.nanoTime();
+            long currentTime;
+            long timer = 0;
+            while (true) {
+                currentTime = System.nanoTime();
+                delta += (currentTime - lastTime) / drawInterval;
+                timer += (currentTime - lastTime);
+                lastTime = currentTime;
+                if (delta >= 1) {
+                    // todo : ? add updater here
+                    try { MainGame.getInstance().update(); } catch (Exception e) { }
+                    delta--;
+                }
+                if (timer >= 1000000000) {
+                    timer = 0;
+                }
+            }
+        }).start();
+
     }
 
 
@@ -95,28 +122,31 @@ public class MainUI extends JPanel implements Runnable {
         add(topBar);
         add(mainGame);
         add(lowerBar);
+
     }
 
     private void update() {
         // System.out.println("kkkk");
         EnemyIntegratedSystem.getInstance().update();
-        new Thread(() -> {
-            MainGame.getInstance().update();
-        }).start();
+        // * Must have thread for fast
+        // new Thread(() -> {
+        //     MainGame.getInstance().update();
+        // }).start();
+        // MainGame.getInstance().update();
 
         // new Thread(() -> {
-            GoldPanel.getInstance().update();
+        GoldPanel.getInstance().update();
         // }).start();
 
         // new Thread(() -> {
-            ExpPanel.getInstance().update();
+        ExpPanel.getInstance().update();
         // }).start();
 
         // new Thread(() -> {
         // }).start();
 
         // new Thread(() -> {
-            QueueProgress.getInstance().update();
+        QueueProgress.getInstance().update();
         // }).start();
         DebugPanelDepreicated.getInstance().update();
     }
@@ -125,9 +155,10 @@ public class MainUI extends JPanel implements Runnable {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        new Thread(() -> {
-            MainGame.getInstance().draw(g);
-        }).start();
+        // new Thread(() -> {
+        //     MainGame.getInstance().draw(g);
+        // }).start();
+        MainGame.getInstance().draw(g);
         GoldPanel.getInstance().draw(g);
         ExpPanel.getInstance().draw(g);
         QueueProgress.getInstance().draw(g);

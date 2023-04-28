@@ -10,6 +10,8 @@ import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.EntityPrototype;
 import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Characters.CharactersData.CharLists.CyberAge.GhostGameObject;
+import srcs.Prototypes.Characters.CharactersData.CharLists.CyberAge.Kula;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.StateMachine.State;
 import srcs.Systems.integratedSystem.IntegratedSystem;
@@ -17,6 +19,7 @@ import srcs.Systems.integratedSystem.IntegratedSystem;
 import java.awt.*;
 
 // public class GameObject extends JPanel implements Loopable {
+// public abstract class GameObject extends JPanel implements Loopable {
 public abstract class GameObject extends JPanel implements Loopable {
     protected TeamType teamType;
     protected Image img;
@@ -26,6 +29,7 @@ public abstract class GameObject extends JPanel implements Loopable {
     protected long spawnTime;
     protected EntityPrototype damager;
     protected EntityPrototype attacker;
+    private boolean isGameObjectDied = false;
 
     // public GameObject(Image img, Point pos, Dimension imgSize) {
     public GameObject(Image img, Point pos, Dimension imgSize) {
@@ -40,11 +44,17 @@ public abstract class GameObject extends JPanel implements Loopable {
     }
     public GameObject() {
         init();
+
+        // new Thread(() -> {
+        //     while (!isGameObjectDied()) {
+        //         update();
+        //     }
+        // }).start();
     }
+
 
     private void init() {
         setLayout(null);
-        // attackOpponent();
         startAttackSubroutine();
     }
 
@@ -76,19 +86,25 @@ public abstract class GameObject extends JPanel implements Loopable {
 
     @Override
     public void update() {
-        // System.out.println("update from gameobjct ");
+        // System.out.println("do update on GameObject Very Top Class.");
+        // System.out.println("update from gameobject ");
         setCollide(false);
-        for (GameObject go : MainGame.getInstance().
-            getObjectsInScene())
-        {
-            checkCollision(this, go);
-        }
+        // MainGame.getInstance().getObjectsInScene()
+        //     .stream()
+        //     .filter((go) -> go != null)
+        //     .forEach(go -> checkCollision(this, go));
+        try {
+            MainGame.getInstance().getObjectsInScene()
+                .forEach(go -> checkCollision(this, go));
+        } catch (Exception e) { }
         // closeest
     }
 
     public void destroyGameObject() {
+        this.isGameObjectDied = true;
         revalidate();
         repaint();
+        // validate();
         MainGame.getInstance().removeGameObjectFromScene(this);
     }
 
@@ -157,6 +173,10 @@ public abstract class GameObject extends JPanel implements Loopable {
                 if (d < min) {
                     min = d;
                     closetCharacter = cgo;
+                    // if (this instanceof GhostGameObject) {
+                    //     System.out.println("this gameobject is ghost");
+                    //     System.out.println("damager of ghost is " + closetCharacter.getCharacter().getName());
+                    // }
                 }
             }
         }
@@ -220,7 +240,7 @@ public abstract class GameObject extends JPanel implements Loopable {
                 IntegratedSystem.count_threads++;
                 // System.out.println("count threads = " + IntegratedSystem.count_threads);
                 if (attacker == null) {
-                    System.out.println("attacker is null from the start.");
+                    // System.out.println("attacker is null from the start.");
                     return;
                 } else {
 
@@ -237,12 +257,16 @@ public abstract class GameObject extends JPanel implements Loopable {
                 // long ms = 10;
                 // long ms = 1000;
                 // todo : fix bug
-                while (true) {
+                while (!isGameObjectDied) {
                     try { Thread.sleep(atkRate); } catch (Exception e) { }
                     // no need to check for attacker becuase attaker will always exists because we setted all attacker in constructor
                     // System.out.println("attack from : " + attacker.getName());
                     if (damager != null && damager.getHp() > 0) {
                         attacker.setState(State.ATTACK);
+                        if (attacker instanceof Kula) {
+                            Kula kula = (Kula)attacker;
+                            kula.normalAttack(damager);
+                        }
                         // System.out.println("damger will be : " + damager.getName());
                         damager.decreaseHp(atkDmg);
                     } else {
@@ -345,5 +369,11 @@ public abstract class GameObject extends JPanel implements Loopable {
 
     public boolean isCollide() {
         return isCollide;
+    }
+    public boolean isGameObjectDied() {
+        return isGameObjectDied;
+    }
+    public void setGameObjectDied(boolean isGameObjectDied) {
+        this.isGameObjectDied = isGameObjectDied;
     }
 }

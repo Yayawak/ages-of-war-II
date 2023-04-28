@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
         setPreferredSize(new Dimension(1400, 700));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // setSize(new Dimension(1400, 850));
-        MainUI.getInstance();
+        // MainUI.getInstance();
         add(MainUI.getInstance());
         pack();
 

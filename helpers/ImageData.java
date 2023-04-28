@@ -1,5 +1,6 @@
 package helpers;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
 
@@ -20,6 +21,12 @@ public class ImageData {
         this.imgHeight = 100;
         init();
     }
+    public ImageData(String relativePath, Dimension size) {
+        this.relativePath = relativePath;
+        this.imgWidth = (int)size.getWidth();
+        this.imgHeight = (int)size.getHeight();
+        init();
+    }
 
     public ImageData(String relativePath,
             int imgWidth, int imgHeight) {
@@ -31,6 +38,9 @@ public class ImageData {
 
     public static Image getSprite(String relPath) {
         return getSprite(relPath, 100, 100);
+    }
+    public static Image getSprite(String relPath, Dimension size) {
+        return getSprite(relPath, (int)size.getWidth(), (int)size.getHeight());
     }
     public static Image getSprite(String relPath, int imgWidth, int imgHeight) {
         String basePath = new File("").getAbsolutePath();

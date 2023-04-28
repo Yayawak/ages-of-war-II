@@ -15,6 +15,7 @@ import java.awt.Dimension;
 public class CharacterHpBar extends JProgressBar
     implements Loopable {
     private CharacterGObject cgo = null;
+    private boolean isHpBarDestroyed = false;
 
     public CharacterHpBar(CharacterGObject cgo) {
         if (cgo == null) System.out.println("this hpbar have no proper character to attach with.");
@@ -47,7 +48,7 @@ public class CharacterHpBar extends JProgressBar
             () -> {
                 // int maxHp = cgo.getCharacter().getMaxHp() | 100;
                 int maxHp = cgo.getCharacter().getMaxHp();
-                while (true) {
+                while (!isHpBarDestroyed) {
                     setValue(cgo.getCharacter().getHp());
                     if (getValue() >= maxHp) {
                         cgo.getCharacter().setHp(0);
@@ -56,7 +57,10 @@ public class CharacterHpBar extends JProgressBar
                         // Thread.sleep(1000);
                         Thread.sleep(ms);
                         cgo.getCharacter().increaseHp(1);
-                    } catch (Exception e) { System.out.println(e); }
+                    } catch (Exception e) { System.out.println(e);
+                        System.out.println("from CHaraterHPBAr");
+                     }
+                    // } catch (Exception e) {}
                 }
             }
         ).start();
@@ -87,6 +91,14 @@ public class CharacterHpBar extends JProgressBar
             cgo.getY()
         ));
         setSize(40, 20);
+    }
+
+    public boolean isHpBarDestroyed() {
+        return isHpBarDestroyed;
+    }
+
+    public void setHpBarDestroyed(boolean isHpBarDestroyed) {
+        this.isHpBarDestroyed = isHpBarDestroyed;
     }
 
 }

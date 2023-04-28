@@ -10,6 +10,7 @@ import srcs.Enums.TeamType;
 import srcs.GameUI.MainUI;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Characters.CharactersData.CharLists.CyberAge.Ghost;
 import srcs.Prototypes.Characters.CharactersData.CharLists.CyberAge.Howell;
 import srcs.Prototypes.Characters.CharactersData.CharLists.CyberAge.Kula;
 import srcs.Prototypes.Characters.CharactersData.CharLists.SamuraiAge.SamuraiArcher;
@@ -42,7 +43,7 @@ public class CyberAge extends AgeData {
         CharacterPrototype[] cps = {
             new Howell(TeamType.PLAYER),
             new Kula(TeamType.PLAYER),
-        new SamuraiArcher(TeamType.PLAYER),
+                new Ghost(TeamType.PLAYER)
         };
         setCharacterPrototypes(
                 new ArrayList<CharacterPrototype>(
@@ -76,7 +77,6 @@ public class CyberAge extends AgeData {
 
     @Override
     public void useUltimate(TeamType team) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'useUltimate'");
     }
 

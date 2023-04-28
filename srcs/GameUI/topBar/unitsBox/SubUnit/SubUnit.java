@@ -9,6 +9,8 @@ import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.GameUI.topBar.goldExpProgPanel.qProgress.QueueProgress;
 import srcs.Prototypes.Characters.CharacterPrototype;
+import srcs.Prototypes.Characters.CharactersData.CharLists.CyberAge.Ghost;
+import srcs.Prototypes.Characters.CharactersData.CharLists.CyberAge.GhostGameObject;
 import srcs.Systems.Tooltips.CharacterTooltip;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
@@ -83,9 +85,12 @@ public class SubUnit extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 character.setTeamType(TeamType.PLAYER);
                 try {
-                    GameObject go = new CharacterGObject(
-                        character.getClass().getDeclaredConstructor(TeamType.class).newInstance(TeamType.PLAYER)
-                    );
+                    CharacterPrototype ctp = character.getClass().getDeclaredConstructor(TeamType.class).newInstance(TeamType.PLAYER);
+                    // todo ! custom for entityProtopye that have it's own gameObject
+                    GameObject go = new CharacterGObject(ctp);
+                    if (ctp instanceof Ghost) {
+                         go = new GhostGameObject((Ghost)ctp);
+                    }
                     if (QueueProgress.getInstance().isProgressBarAvailable()
                         &&
                         IntegratedSystem.getInstance().getPlayerGoldSystem()
@@ -104,9 +109,8 @@ public class SubUnit extends JPanel {
                                 character.getClass().getDeclaredConstructor(TeamType.class).newInstance(TeamType.PLAYER)
                                 // Class.forName())
                             );
-                        } catch (Exception e2) {
-                            System.out.println(e2);
-                        }
+                        // } catch (Exception e2) { System.out.println(e2); }
+                        } catch (Exception e2) {}
                         QueueProgress.getInstance().setCurrentGameObjectToBuild(go);
                     }
                 } catch (Exception ee) {
@@ -117,7 +121,7 @@ public class SubUnit extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 // isCursorOnSubUnitBox = true;
-                characterTooltip.setVisible(true);
+                // characterTooltip.setVisible(true);
                 // System.out.println("enter");
             }
             // @Override
@@ -136,10 +140,10 @@ public class SubUnit extends JPanel {
             public void mouseMoved(MouseEvent e) {
                 // System.out.println("Move");
                 // characterTooltip.setLocation(e.getPoint());
-                characterTooltip.setLocation(
-                    getMousePosition(true).x,
-                    getMousePosition(true).y
-                );
+                // characterTooltip.setLocation(
+                //     getMousePosition(true).x,
+                //     getMousePosition(true).y
+                // );
             }
         });
 

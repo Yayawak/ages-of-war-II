@@ -1,15 +1,19 @@
 package srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import helpers.ImageData;
+import helpers.SpritesInstallator;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
 
 public class SkeletonWarrior extends CharacterPrototype {
     public SkeletonWarrior(TeamType tt) {
         super(tt);
+        // Dimension size = new Dimension(125, 150);
+        Dimension size = new Dimension(75, 100);
         ImageData imgData = new ImageData(
-                "characters/skeletonAge/skeletonWarrior/walk/skeletonWalk_0000.png");
+            "characters/skeletonAge/skeletonWarrior/walk/skeletonWalk_0000.png", size);
         setName("SkeletonWarrior");
         setExperiance(25);
         setGold(50);
@@ -21,17 +25,15 @@ public class SkeletonWarrior extends CharacterPrototype {
         setAttackRange(100);
         setAttackDamage(6);
 
-        for (int i = 0; i < 7; i++) {
-            String formatter = String.format(
-                    "characters/skeletonAge/skeletonWarrior/walk/skeletonWalk_000%d.png", i);
-            Image imgWalk = new ImageData(formatter).getSprite();
-            getWalkSprites().add(imgWalk);
-        }
-        for (int i = 0; i < 4; i++) {
-            String formatter = String.format(
-                    "characters/skeletonAge/skeletonWarrior/attack/tile00%d.png", i);
-            Image atkImg = new ImageData(formatter).getSprite();
-            getWalkSprites().add(atkImg);
-        }
+        setWalkSprites(SpritesInstallator.getSpritesInFolder(
+            "characters/skeletonAge/skeletonWarrior/walk"
+            , size
+        ));
+        setAttackASprites(
+            SpritesInstallator.getSpritesInFolder(
+                "characters/skeletonAge/skeletonWarrior/attack"
+                , size
+            )
+        );
     }
 }

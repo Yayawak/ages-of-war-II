@@ -15,8 +15,8 @@ public class Main {
             @Override
             public void run() {
                 Music riskMusic = new Music();
-                riskMusic.setFile("risk.wav");
-                riskMusic.play();
+                // riskMusic.setFile("risk.wav");
+                // riskMusic.play();
                 StartGameFrame startGameFrame = new StartGameFrame();
                 startGameFrame.setVisible(true);
 

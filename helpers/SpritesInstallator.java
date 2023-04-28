@@ -1,5 +1,6 @@
 package helpers;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
 import java.util.Collection;
@@ -13,6 +14,9 @@ import java.util.stream.Stream;
 public class SpritesInstallator {
     public static List<Image> getSpritesInFolder(String relativePath) {
         return getSpritesInFolder(relativePath, 100, 100);
+    }
+    public static List<Image> getSpritesInFolder(String relativePath, Dimension size) {
+        return getSpritesInFolder(relativePath, (int)size.getWidth(), (int)size.getHeight());
     }
     public static List<Image> getSpritesInFolder(String relativePath, int width, int height) {
     // public static LinkedList<Image> getSpritesInFolder(String relativePath) {

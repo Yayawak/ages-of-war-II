@@ -18,6 +18,8 @@ import srcs.Interfaces.ComponentSizeItf;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
 import srcs.Prototypes.Characters.CharactersData.CharactersData;
+import srcs.Prototypes.Characters.CharactersData.CharLists.CyberAge.Ghost;
+import srcs.Prototypes.Characters.CharactersData.CharLists.CyberAge.GhostGameObject;
 import srcs.Prototypes.Characters.CharactersData.CharLists.StoneAge.NatureProphet;
 import srcs.Prototypes.Tower.TowerPrototype;
 import srcs.Prototypes.Turrets.TurretPrototype;
@@ -65,6 +67,11 @@ public class MainGame extends JPanel implements ComponentSizeItf,
                     System.out.println("left mouse");
                     DebugTooltip.getInstance().setVisible(false);
 
+                    // GhostGameObject ghost = new GhostGameObject(TeamType.PLAYER);
+                    // GhostGameObject ghost = new GhostGameObject(new Ghost(TeamType.PLAYER));
+                    // ghost.setPos(getMousePosition());
+                    // addGameObjectToScene(ghost);
+
                     // HealingDrone hd = new HealingDrone(TeamType.PLAYER);
                     // hd.setPos(getMousePosition());
                     // addGameObjectToScene(hd);
@@ -96,15 +103,17 @@ public class MainGame extends JPanel implements ComponentSizeItf,
     // ! bug on start game when first clicked happend delay for 5 sec
     private void drawGameObjects(Graphics g) {
         // try {
-        objectsInScene.stream().forEach(obj -> {
-            if (obj != null) {
-                g.drawImage(obj.getImg(),
-                        obj.getX(), obj.getY(),
-                        this);
-            } else {
-                // System.out.println("SceneObject is null");
-            }
-        });
+        try {
+            objectsInScene.stream().forEach(obj -> {
+                if (obj != null) {
+                    g.drawImage(obj.getImg(),
+                            obj.getX(), obj.getY(),
+                            this);
+                } else {
+                    // System.out.println("SceneObject is null");
+                }
+            });
+        } catch (Exception e) { }
         // } catch (Exception e) {
             // System.out.println(e);
         // }
@@ -115,7 +124,7 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         // public void draw(Graphics g) {
         super.paintComponent(g);
         // System.out.println("Paint component from MainGame");
-        drawBg(g);
+        try { drawBg(g); } catch (Exception e) { }
     // ? bug on start game when first clicked happend delay for 5 sec
         // ! FOR DRAW ()
         drawGameObjects(g);
@@ -141,17 +150,28 @@ public class MainGame extends JPanel implements ComponentSizeItf,
         // System.out.println("update from MainGame");
         // System.out.println(Math.random());
         try {
-            new Thread(
-                () -> {
-                    objectsInScene.forEach(obj -> {
-                        new Thread(() -> {
-                            obj.update();
-                        }).start();
-                    });
-                }
-            ).start();
+            objectsInScene.forEach(obj -> {
+                obj.update();
+            });
+        } catch (Exception e) { }
+        // objectsInScene.forEach(obj -> {
+        //     new Thread(() -> {
+        //         obj.update();
+        //     }).start();
+        // });
+
+        // try {
+        //     new Thread(
+        //         () -> {
+        //             objectsInScene.forEach(obj -> {
+        //                 new Thread(() -> {
+        //                     obj.update();
+        //                 }).start();
+        //             });
+        //         }
+        //     ).start();
         // } catch (Exception e) { System.out.println(e); }
-        } catch (Exception e) {}
+        // } catch (Exception e) {}
     }
 
     @Override
@@ -174,8 +194,8 @@ public class MainGame extends JPanel implements ComponentSizeItf,
     public void removeGameObjectFromScene(GameObject go) {
         try {
             objectsInScene.remove(go);
-        } catch (Exception e) { System.out.println(e);
-        }
+        // } catch (Exception e) { System.out.println(e); }
+        } catch (Exception e) {}
     }
 
     public List<GameObject> getGameObjectsFromTeam(TeamType team) {

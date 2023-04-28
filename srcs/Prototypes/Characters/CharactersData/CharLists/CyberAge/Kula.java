@@ -7,9 +7,11 @@ import helpers.ImageData;
 import helpers.SpritesInstallator;
 import srcs.Enums.TeamType;
 import srcs.GameUI.mainGame.MainGame;
+import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 import srcs.GameUI.mainGame.SubScene.GameObject.Effects.HealingDrone;
 import srcs.GameUI.mainGame.SubScene.GameObject.Effects.IcebergEffect;
+import srcs.Prototypes.EntityPrototype;
 import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.StateMachine.State;
 
@@ -36,7 +38,8 @@ public class Kula extends CharacterPrototype {
         // setAttackDamage(50);
         // setAttackDamage(20);
         // setAttackDamage(1);
-        setAttackDamage(2);
+        // setAttackDamage(2);
+        setAttackDamage(4);
 
         setWalkSprites(SpritesInstallator.getSpritesInFolder(
             "characters/cyberAge/kula/walk"
@@ -48,16 +51,17 @@ public class Kula extends CharacterPrototype {
         150, 150
         ));
         icebergEffect = new IcebergEffect();
+        icebergEffect.setVisible(false);
         // initThreadChecker();
-        // MainGame.getInstance().addGameObjectToScene(icebergEffect);
+        MainGame.getInstance().addGameObjectToScene(icebergEffect);
     }
-    private void initThreadChecker() {
-        new Thread(() -> {
-            while (true) {
-                initChecker();
-            }
-        }).start();
-    }
+    // private void initThreadChecker() {
+    //     new Thread(() -> {
+    //         while (true) {
+    //             initChecker();
+    //         }
+    //     }).start();
+    // }
 
     // private void initChecker() {
     private void initChecker() {
@@ -74,6 +78,15 @@ public class Kula extends CharacterPrototype {
     protected void attack1St() {
         super.attack1St();
         // icebergEffect.setPos();
+    }
+
+    // iceberg attack
+    // public void normalAttack(GameObject enemy) {
+    public void normalAttack(EntityPrototype enemy) {
+        // this.skillName = skillName
+        // System.out.println("kula normal attack");
+        icebergEffect.setVisible(true);
+        icebergEffect.setPos(enemy.getPosition());
     }
     // private void skill1() {
     //     // long cooldown = 5000l;

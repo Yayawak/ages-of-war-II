@@ -12,7 +12,7 @@ import srcs.Prototypes.Characters.CharacterPrototype;
 import srcs.Systems.integratedSystem.IntegratedSystem;
 
 public class QueueProgress extends JProgressBar implements
-    Loopable {
+        Loopable {
     private static QueueProgress instance = null;
     // private float timeToUseInSec = 5;
     private float timeToUseInSec;
@@ -22,7 +22,7 @@ public class QueueProgress extends JProgressBar implements
 
     private GameObject currentGameObjectToBuild;
     private CharacterPrototype currentCharacterPrototypeToBuild;
-
+    private boolean isCurrentThreadEnd = false;
 
     private QueueProgress() {
         init();
@@ -34,6 +34,7 @@ public class QueueProgress extends JProgressBar implements
         setStringPainted(true);
         setLayout(null);
         setValue(0);
+        // initChecker();
     }
 
     public static QueueProgress getInstance() {
@@ -49,26 +50,50 @@ public class QueueProgress extends JProgressBar implements
             isEnableCounting = true;
         }
     }
+
+    // private void initChecker() {
+    //     new Thread( () -> {
+    //         while (true) {
+    //             if (isEnableCounting) {
+    //                 // isEnableCounting = false; // * important line : prevent thread to overly generate new thread
+    //                 // isProgressBarAvailable = false;
+    //                 if (getValue() >= 100) {
+    //                     setValue(0);
+    //                     // isEnableCounting = false;
+    //                     generateUnit();
+    //                     break;
+    //                 }
+    //                 long ms = ((long) timeToUseInSec * 10);
+    //                 setValue(getValue() + 1);
+    //                 try { Thread.sleep(ms); } catch (Exception e) { }
+    //             }
+    //             // isProgressBarAvailable = true;
+    //         }
+    //     }).start();
+
+    // }
+
     @Override
     public void update() {
         if (isEnableCounting) {
-            isEnableCounting = false; // * important line : prevent thread to overly generate new thread
+            isCurrentThreadEnd = false;
+            isEnableCounting = false; // * important line : prevent thread to overly
+            // generate new thread
             isProgressBarAvailable = false;
-            new Thread(
-                () -> {
-                    while (true) {
-                        if (getValue() >= 100) {
-                            setValue(0);
-                            isEnableCounting = false;
-                            generateUnit();
-                            break;
-                        }
-                        long ms = ((long)timeToUseInSec * 10);
-                        setValue(getValue() + 1);
-                        try {
-                            Thread.sleep(ms);
-                        } catch (Exception e) { System.out.println(e); }
+            new Thread( () -> {
+                System.out.println("CRATE NEW TRHEAD FOR QUEUE PROGRESS");
+                while (!isCurrentThreadEnd) {
+                // while (true) {
+                    if (getValue() >= 100) {
+                        setValue(0);
+                        isEnableCounting = false;
+                        generateUnit();
+                        isCurrentThreadEnd = true;
+                        // break;
                     }
+                    long ms = ((long)timeToUseInSec * 10);
+                    setValue(getValue() + 1);
+                    try { Thread.sleep(ms); } catch (Exception e) {} }
                     isProgressBarAvailable = true;
                 }
             ).start();
@@ -78,19 +103,18 @@ public class QueueProgress extends JProgressBar implements
     // public void generateUnit(GameObject go, CharacterPrototype character) {
     private void generateUnit() {
         MainGame.getInstance().addGameObjectToScene(
-            currentGameObjectToBuild
-        );
-        IntegratedSystem.getInstance().getPlayerGoldSystem()
+                currentGameObjectToBuild);
+    IntegratedSystem.getInstance().getPlayerGoldSystem()
             .decreasedGold(
-                currentCharacterPrototypeToBuild.getGold()
-            );
+                    currentCharacterPrototypeToBuild.getGold());
 
     }
+
     @Override
     public void draw(Graphics g) {
         // startQueue(2);
         // if (System.nanoTime() > expectedEndTime) {
-            // setValue(0);
+        // setValue(0);
         // }
         // setValue(getValue() + 1);
     }

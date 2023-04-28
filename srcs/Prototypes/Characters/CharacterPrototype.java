@@ -9,7 +9,7 @@ import java.nio.charset.spi.CharsetProvider;
 
 public class CharacterPrototype extends EntityPrototype {
     private int experiance;
-    private int movementSpeed;
+    private float movementSpeed;
 
     public CharacterPrototype(EntityPrototype entProt) {
         super(entProt);
@@ -34,11 +34,11 @@ public class CharacterPrototype extends EntityPrototype {
     }
 
 
-    public int getMovementSpeed() {
+    public float getMovementSpeed() {
         return movementSpeed;
     }
 
-    public void setMovementSpeed(int movementSpeed) {
+    public void setMovementSpeed(float movementSpeed) {
         this.movementSpeed = movementSpeed;
     }
 

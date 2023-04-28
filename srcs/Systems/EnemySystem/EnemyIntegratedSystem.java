@@ -86,8 +86,11 @@ public class EnemyIntegratedSystem implements Loopable {
 
     private void periodicChecker() {
         // int spawnEnemyIntervalInMs = 2000;
+        int spawnEnemyIntervalInMs = 3330;
         // int spawnEnemyIntervalInMs = 1000 / 2;
-        int spawnEnemyIntervalInMs = 800;
+        // int spawnEnemyIntervalInMs = 800;
+        // int spawnEnemyIntervalInMs = 800;
+        // int spawnEnemyIntervalInMs = 80;
         // int spawnEnemyIntervalInMs = 1000;
         while (true) {
             // enemyGoldSystem = IntegratedSystem.getInstance().getEnemyGoldSystem();
@@ -123,13 +126,13 @@ public class EnemyIntegratedSystem implements Loopable {
                     // enemyGoldSystem.setGold(1000);
                 }
 
+                // java.lang.IndexOutOfBoundsException: Index 3 out of bounds for length 3
+                // ? this catch is for indicate access no exists character avialable (out of bounds)
+            // } catch (Exception e) { System.out.println(e); }
                 if (enemyExpSystem.getExperiance() > IntegratedSystem.getInstance().getCurrentEnemyAgeData()
                     .getExpRequiredToUpgrade()) {
                     IntegratedSystem.getInstance().upgradeAge(TeamType.ENEMY);
                 }
-                // java.lang.IndexOutOfBoundsException: Index 3 out of bounds for length 3
-                // ? this catch is for indicate access no exists character avialable (out of bounds)
-            // } catch (Exception e) { System.out.println(e); }
 
             } catch (Exception e) {}
         }

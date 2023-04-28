@@ -6,7 +6,8 @@ import srcs.GameUI.mainGame.SubScene.GameObject.Character.CharacterGObject;
 
 public class HealingDrone extends AbstractEffect {
     int healAmountPerTick = 30;
-    int totalHealAmount = 150;
+    // int totalHealAmount = 150;
+    int totalHealAmount = 10;
     public HealingDrone(TeamType team, int healAmountPerTick) {
         this(team);
         this.healAmountPerTick = healAmountPerTick;

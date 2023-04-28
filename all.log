@@ -130,8 +130,8 @@ public class TestTooltip extends JFrame {
             public void mouseMoved(MouseEvent e) {
                 try {
                     Thread.sleep(1000);
-                } catch (Exception ee) { System.out.println(ee);
-                }
+                // } catch (Exception ee) { System.out.println(ee); }
+                } catch (Exception ee) {}
                 popup.setVisible(false);
                 popup.setLocation(e.getPoint());
                 popup.removeAll();
@@ -1284,7 +1284,8 @@ public class CharacterHpBar extends JProgressBar
                         // Thread.sleep(1000);
                         Thread.sleep(ms);
                         cgo.getCharacter().increaseHp(1);
-                    } catch (Exception e) { System.out.println(e); }
+                    //} catch (Exception e) { System.out.println(e); }
+                    } catch (Exception e) {}
                 }
             }
         ).start();
@@ -2015,8 +2016,8 @@ public class MainGame extends JPanel implements ComponentSizeItf,
     public void removeGameObjectFromScene(GameObject go) {
         try {
             objectsInScene.remove(go);
-        } catch (Exception e) { System.out.println(e);
-        }
+        //} catch (Exception e) { System.out.println(e);
+        } catch (Exception e) {        }
     }
 }
 package srcs.GameUI.lowerBar;
@@ -2583,7 +2584,8 @@ public class UnitsBox extends JPanel {
                 SubUnit unit = new SubUnit(character);
                 unitBoxes.add(unit);
 
-            } catch (Exception e) { System.out.println(e); }
+            //} catch (Exception e) { System.out.println(e); }
+            } catch (Exception e) {}
         }
         unitBoxes.stream().forEach(panel -> {
             add(panel);
@@ -2668,7 +2670,8 @@ public class QueueProgress extends JProgressBar implements
                         setValue(getValue() + 1);
                         try {
                             Thread.sleep(ms);
-                        } catch (Exception e) { System.out.println(e); }
+                        //} catch (Exception e) { System.out.println(e); }
+                        } catch (Exception e) {}
                     }
                     isProgressBarAvailable = true;
                 }

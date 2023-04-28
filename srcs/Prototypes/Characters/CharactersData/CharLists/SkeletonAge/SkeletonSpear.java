@@ -1,15 +1,18 @@
 package srcs.Prototypes.Characters.CharactersData.CharLists.SkeletonAge;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import helpers.ImageData;
+import helpers.SpritesInstallator;
 import srcs.Enums.TeamType;
 import srcs.Prototypes.Characters.CharacterPrototype;
 
 public class SkeletonSpear extends CharacterPrototype {
     public SkeletonSpear(TeamType tt) {
         super(tt);
+        Dimension size = new Dimension(150, 175);
         ImageData imgData = new ImageData(
-                "characters/skeletonAge/skeletonSpear/walk/Walk_00.png");
+                "characters/skeletonAge/skeletonSpear/walk/Walk_00.png", size);
         setName("SkeletonSpear");
         setExperiance(25);
         setGold(40);
@@ -20,18 +23,12 @@ public class SkeletonSpear extends CharacterPrototype {
         setBuildTime(1);
         setAttackRange(150);
         setAttackDamage(5);
+        setWalkSprites(
+            SpritesInstallator.getSpritesInFolder( "characters/skeletonAge/skeletonSpear/walk", size)
+        );
+        setAttackASprites(SpritesInstallator.getSpritesInFolder(
+            "characters/skeletonAge/skeletonSpear/attack"
 
-        for (int i = 0; i < 7; i++) {
-            String formatter = String.format(
-                    "characters/skeletonAge/skeletonSpear/walk/Walk_0%d.png", i);
-            Image imgWalk = new ImageData(formatter).getSprite();
-            getWalkSprites().add(imgWalk);
-        }
-        for (int i = 0; i < 4; i++) {
-            String formatter = String.format(
-                    "characters/skeletonAge/skeletonSpear/attack/tile00%d.png", i);
-            Image atkImg = new ImageData(formatter).getSprite();
-            getWalkSprites().add(atkImg);
-        }
+        ));
     }
 }

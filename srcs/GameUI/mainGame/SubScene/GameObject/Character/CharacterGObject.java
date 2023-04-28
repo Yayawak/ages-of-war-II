@@ -11,12 +11,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import helpers.ImageData;
+import helpers.SpritesInstallator;
 import srcs.Enums.Direction;
 import srcs.Enums.TeamType;
 import srcs.GameUI.MainUI;
 import srcs.GameUI.mainGame.MainGame;
 import srcs.GameUI.mainGame.Debugger.DebugPanel;
 import srcs.GameUI.mainGame.SubScene.GameObject.GameObject;
+import srcs.GameUI.mainGame.SubScene.GameObject.Effects.BloodDieEffect;
 import srcs.GameUI.mainGame.SubScene.characterHpBar.CharacterHpBar;
 import srcs.Interfaces.Loopable;
 import srcs.Prototypes.Characters.*;
@@ -26,8 +28,9 @@ import srcs.Systems.integratedSystem.IntegratedSystem;
 
 public class CharacterGObject extends GameObject {
 
-    private CharacterPrototype character;
-    private Point position;
+    // private CharacterPrototype character;
+    protected CharacterPrototype character;
+    // private Point position;
     private CharacterHpBar hpBar;
     List<Image> currentAnimatingSprites;
     // private boolean isAttacking;
@@ -42,14 +45,22 @@ public class CharacterGObject extends GameObject {
                         character.getImgData().getImgWidth(),
                         character.getImgData().getImgHeight()));
         this.character = character;
-        this.position = character.getPosition();
+        // this.position = character.getPosition();
         super.teamType = character.getTeamType();
         // System.out.println(this.teamType);
         this.attacker = this.character;
         init();
     }
 
+    // public abstract CharacterGObject();
+    // public CharacterGObject() {
+    //     init();
+    //  }
+
+    // private void init() {
     private void init() {
+        // System.out.println("init cgo : name " + getCharacter().getName());
+        this.update();
         hpBar = new CharacterHpBar(this);
         if (hpBar != null) {
             //todo  : make hp bar appear on screen
@@ -80,7 +91,7 @@ public class CharacterGObject extends GameObject {
             int size;
             // List<Image> currentAnimatingSprites = character.getWalkSprites();
             int i = 0;
-            while (true) {
+            while (!isGameObjectDied()) {
                 // if (isInAttackRange) {
                 if (attacker.getState() == State.ATTACK) {
                     currentAnimatingSprites = character.getAttackASprites();
@@ -107,7 +118,8 @@ public class CharacterGObject extends GameObject {
                 while (i < size) {
                     setImg(currentAnimatingSprites.get(i));
                     i++;
-                    try { Thread.sleep(freq); } catch (Exception e) { System.out.println(e); }
+                    // try { Thread.sleep(freq); } catch (Exception e) { System.out.println(e); }
+                    try { Thread.sleep(freq); } catch (Exception e) {}
                 }
                 i = 0;
                 // try { Thread.sleep(freq); } catch (Exception e) { System.out.println(e); }
@@ -131,6 +143,7 @@ public class CharacterGObject extends GameObject {
 
     @Override
     public void update() {
+        // System.out.println("character gameobject entered local updater");
         super.update();
         // System.out.println("Enter update function");
         // System.out.println(Math.random());
@@ -139,7 +152,8 @@ public class CharacterGObject extends GameObject {
             hpBar.update();
         }
 
-        // findClosestOpponent(character);
+        // ! must have this line for ghost
+        findClosestOpponent(character);
 
         if (character.getHp() <= 0) {
             destroyGameObject();
@@ -147,11 +161,15 @@ public class CharacterGObject extends GameObject {
 
         // if (!getCollide()) {
         // if (!getCollide() && character.getState() == State.MOVE) {
+        // System.out.println("enterd ");
         if (character.getState() == State.MOVE) {
+        //     System.out.println("tick move");
+        // if (true) {
         // if (false) {
             switch (character.getTeamType()) {
                 case PLAYER:
                     move(Direction.RIGHT);
+                    // move(Direction.LEFT);
                     break;
                 case ENEMY:
                     move(Direction.LEFT);
@@ -180,7 +198,7 @@ public class CharacterGObject extends GameObject {
         GameObject closestOpp = findClosestOpponent(getCharacter());
         if (closestOpp != null) {
             Graphics2D g2d = (Graphics2D)g;
-            g2d.setColor(Color.cyan);
+            g2d.setColor(Color.yellow);
             g2d.setStroke(new BasicStroke(1));
             g2d.drawString(getCharacter().getName(), getX(), getY()
                 - 30
@@ -219,32 +237,75 @@ public class CharacterGObject extends GameObject {
     }
 
     private void move(Direction dir) {
+        // System.out.println("ENTERD MOVE FUNCTION !");
+        // int mul = 80;
         // int mul = 20;
+        // int mul = 200;
         // int mul = 10;
-        // double mul = 0.4;
-        double mul = 0.3;
+        double mul = 0.4;
+        // double mul = 0.3;
         // double mul = 0.2;
-        double x = getX();
-        double y = getY();
+        // setTeamType(TeamType.ENEMY);
+        // System.out.println("Team of cgo : " + getTeamType());
+        double x = character.getPosition().getX();
+        double y = character.getPosition().getY();
+        // double x = getX();
+        // double x = getLocation().x;
+        // double y = getY();
+        // double x = getLocation().getX();
+        // double y = getLocation().getY();
+        // System.out.println("1 ) current point is " + getLocation());
         float rawMoveSpeed = (float)character.getMovementSpeed();
         if (rawMoveSpeed <= 1) {
             rawMoveSpeed += 0.25f;
         }
         double speed = rawMoveSpeed * mul;
+        // double speed = 30;
         if (speed < 1) { speed = 1; }
+        // ! debug newPos is bug
+        // System.out.println("-------------------------------");
+        // System.out.println("x of this cgo : " + x);
+        // System.out.println("y of this cgo : " + y);
+        // // x = 170;
+        // // x = character.getPosition().x;
+        // speed = 100;
+        // System.out.println("speed = " + speed);
+        // System.out.println("speed = " + 100);
         Point newPos = new Point((int)x, (int)y);
         switch (dir) {
             case RIGHT:
                 newPos.setLocation(x + speed, y);
+                // setPos(character.getPosition().x + speed, character.getPosition().y);
+                // setPos(new Point(
+                //     (int)(character.getPosition().x + speed), character.getPosition().y)
+                // );
+                // newPos.setLocation(x + 100, y);
                 break;
 
             case LEFT:
+                // setPos(new Point(
+                //     (int)(character.getPosition().x - speed), character.getPosition().y)
+                // );
                 newPos.setLocation(x - speed, y);
+                // newPos.setLocation(x - 100, y);
                 break;
 
             default:
+                System.out.println("default case from move cgo bug !");
                 break;
         }
+
+        // System.out.println("2) expected next point is " + newPos);
+        // System.out.println("2 ) current point is " + getLocation());
+        // setPos(new Point(
+        //     (int)(Math.random() * 500),
+        //     400
+        //     // (int)(Math.random() * 500)
+        // ));
+        // if (getTeamType() == TeamType.PLAYER)
+        // System.out.println("new position is " + newPos);
+        // System.out.println("current point is " + getLocation());
+        // System.out.println("-------------------------------");
         setPos(newPos);
     }
 
@@ -256,9 +317,9 @@ public class CharacterGObject extends GameObject {
         this.character = character;
     }
 
-    public Point getPosition() {
-        return position;
-    }
+    // public Point getPosition() {
+    //     return position;
+    // }
 
     // public CharacterGObject copy() {
     //     return new CharacterGObject(new CharacterPrototype(character));
@@ -267,6 +328,7 @@ public class CharacterGObject extends GameObject {
 
     @Override
     public void destroyGameObject() {
+        new BloodDieEffect().setPos(character.getPosition());
         switch (getCharacter().getTeamType()) {
             case PLAYER:
                 IntegratedSystem.getInstance().getEnemyGoldSystem()
@@ -288,6 +350,7 @@ public class CharacterGObject extends GameObject {
             default:
                 break;
         }
+        hpBar.setHpBarDestroyed(true);
         MainGame.getInstance().remove(hpBar);
         super.destroyGameObject();
         // animateThread.stop();
@@ -296,7 +359,13 @@ public class CharacterGObject extends GameObject {
     @Override
     public void setPos(Point newPos) {
         this.pos = newPos;
-        setLocation(newPos);
         character.setPosition(newPos);
+        // System.out.println("character postion is : " + character.getPosition());
+        // this.position =
+        // System.out.println();
+        // System.out.println("set position is " + newPos);
+        setLocation(character.getPosition());
+        // System.out.println("real location og cgo is " + getLocation());
+        // super.setPos(newPos);
     }
 }

@@ -47,7 +47,7 @@ public class HandGrapperGObject extends GameObject {
             // while (!stopAttacking) {
             int totalDamageToDeal = 100;
             bloodSound.play();
-            while (true) {
+            while (!isGameObjectDied()) {
                 try { Thread.sleep(animationSpeed); } catch (Exception e) { }
                 if (i < handGrapperPtt.getAttackASprites().size()) {
                     setImg(handGrapperPtt.getAttackASprites().get(i));
@@ -57,6 +57,7 @@ public class HandGrapperGObject extends GameObject {
                 }
                 // todo : random spawn x OR kill random enemy OR gradullay damage closest gobj
                 CharacterGObject foe = findClosestOpponent();
+                if (foe == null) continue;
                 setPos(foe.getPos());
                 bloodSplash.setPos(foe.getPos());
                 damager = foe.getCharacter();
@@ -73,4 +74,9 @@ public class HandGrapperGObject extends GameObject {
             }
         }).start();
     }
+
+    // @Override
+    // public void destroyGameObject() {
+    //     super.destroyGameObject();
+    // }
 }
