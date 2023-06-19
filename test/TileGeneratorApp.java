@@ -1,4 +1,5 @@
 package test;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 import javax.swing.text.AbstractDocument.LeafElement;
@@ -8,6 +9,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 
 public class TileGeneratorApp extends JFrame {
     // int rows = 8;
@@ -21,7 +26,7 @@ public class TileGeneratorApp extends JFrame {
 
     public TileGeneratorApp() {
         // screenSize = new Dimension(1300, 700);
-        screenSize = new Dimension(600,1000);
+        screenSize = new Dimension(600, 1000);
         setSize(screenSize);
         initApp();
         // setPreferredSize(new Dimension(1300, 700));
@@ -33,8 +38,8 @@ public class TileGeneratorApp extends JFrame {
         // int gridWidth = getWidth() / cols;
         // int gridHeight = getHeight() / rows;
         System.out.println("scrernsize " + getSize());
-        int gridWidth = (int)screenSize.getWidth() / cols;
-        int gridHeight = (int)screenSize.getHeight() / rows;
+        int gridWidth = (int) screenSize.getWidth() / cols;
+        int gridHeight = (int) screenSize.getHeight() / rows;
         System.out.println("grid w : " + gridWidth);
         System.out.println("grid h : " + gridHeight);
 
@@ -52,8 +57,8 @@ public class TileGeneratorApp extends JFrame {
                 grid.setLocation(currentPos);
                 // Color color = 0 + j % 2 == 0 ?
                 Color color = (i + j) % 2 == 0 ?
-                    // Color.green : Color.blue;
-                    Color.black : Color.white;
+                // Color.green : Color.blue;
+                        Color.black : Color.white;
                 grid.setBackground(color);
 
                 getContentPane().add(grid);
@@ -64,21 +69,21 @@ public class TileGeneratorApp extends JFrame {
             currentPos.setLocation(currentPos.getX(), currentPos.getY() + gridHeight);
         }
         // setSize(
-        //     cols * getWidth(),
-        //     rows * getHeight()
+        // cols * getWidth(),
+        // rows * getHeight()
         // );
         setSize(screenSize);
 
-
     }
+
     class CustomPanel extends JPanel {
         private static boolean canChangeColor = false;
 
         public CustomPanel(int i, int j) {
             // setBackground(new Color(
-            //     (float)(Math.random()),
-            //     (float)(Math.random()),
-            //     (float)(Math.random())
+            // (float)(Math.random()),
+            // (float)(Math.random()),
+            // (float)(Math.random())
             // ));
             addMouseMotionListener(new MouseMotionAdapter() {
                 @Override
@@ -87,6 +92,7 @@ public class TileGeneratorApp extends JFrame {
                         setBackground(Color.red);
                         TileGeneratorApp.gridBinary[i][j] = 1;
                         printMatrix(gridBinary);
+                        genCsvMaze(gridBinary);
                     }
                 }
             });
@@ -109,24 +115,61 @@ public class TileGeneratorApp extends JFrame {
             for (int i = 0; i < mat.length; i++) {
                 for (int j = 0; j < mat[0].length; j++) {
                     int elem = mat[i][j];
-                    String color = elem == 0 ?
-                        Colors.ANSI_BLUE :
-                        Colors.ANSI_RED;
-                        // Colors.ANSI_RED_BACKGROUND;
+                    String color = elem == 0 ? Colors.ANSI_BLUE : Colors.ANSI_RED;
+                    // Colors.ANSI_RED_BACKGROUND;
                     System.out.print(
-                        color +
-                        mat[i][j] + " " +
-                        Colors.ANSI_RESET
-                    );
+                            color +
+                                    mat[i][j] + " " +
+                                    Colors.ANSI_RESET);
                 }
                 System.out.println();
             }
             System.out.println();
             System.out.println();
+            genCsvMaze(mat);
         }
+
+        public static void genCsvMaze(int[][] mat) {
+            StringBuilder bd = new StringBuilder("");
+
+            for (int i = 0; i < mat.length; i++) {
+                for (int j = 0; j < mat[0].length; j++) {
+                    int elem = mat[i][j];
+                    bd.append(String.valueOf(elem));
+                    if (j != mat[0].length - 1)
+                        bd.append(",");
+                    else {
+                        bd.append("\n");
+                    }
+                    // String color = elem == 0 ?
+                    // Colors.ANSI_BLUE :
+                    // Colors.ANSI_RED;
+                    // // Colors.ANSI_RED_BACKGROUND;
+                    // System.out.print(
+                    // color +
+                    // mat[i][j] + " " +
+                    // Colors.ANSI_RESET
+                    // );
+                }
+                System.out.println();
+            }
+            System.out.println(bd.toString());
+            System.out.println(new File("").getAbsolutePath());
+
+            try {
+                FileWriter myWriter = new FileWriter("gridData.csv", false);
+                myWriter.write(bd.toString());
+                // new File
+                myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        }
+
     }
 }
-
 
 class Colors {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -139,13 +182,12 @@ class Colors {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
-public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
-public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
-public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
-public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+    public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
+    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 }

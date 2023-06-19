@@ -19,6 +19,7 @@ import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
 import srcs.Prototypes.Turrets.TurretLists.RedLaserTurret;
 import srcs.Systems.AgeSystem.AgeData;
+import srcs.Systems.integratedSystem.IntegratedSystem;
 
 public class StoneAge extends AgeData {
     private static AgeData instance;
@@ -76,6 +77,7 @@ public class StoneAge extends AgeData {
 
     @Override
     public void useUltimate(TeamType team) {
+        IntegratedSystem.getInstance().getPlayerExpSystem().decreaseExperiance(250);
         System.out.println("using lightning strike");
         MainGame.getInstance().addGameObjectToScene(
             new LightningStrikeEffect((team == TeamType.PLAYER) ? TeamType.ENEMY : TeamType.PLAYER)

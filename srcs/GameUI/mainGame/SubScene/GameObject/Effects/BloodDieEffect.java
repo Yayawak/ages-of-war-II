@@ -12,7 +12,7 @@ public class BloodDieEffect extends AbstractEffect {
         MainGame.getInstance().addGameObjectToScene(this);
         Music bloodSound = new Music();
         bloodSound.setFile("blood_bleez.wav");
-        // bloodSound.play();
+        bloodSound.play();
         initAnimation(70);
         countDownToDestroy(0.7f);
     }

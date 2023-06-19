@@ -19,7 +19,7 @@ public class FireGunTurret extends TurretPrototype {
 
 
         // this = new FireGunTurret()
-        setAttackSpeed(5);
+        setAttackSpeed(10);
         setImgData(turretImgData);
         setName("Fire gun hell");
         setGold(200);

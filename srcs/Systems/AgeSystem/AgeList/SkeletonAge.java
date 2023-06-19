@@ -28,6 +28,7 @@ import srcs.Prototypes.Turrets.TurretPrototype;
 import srcs.Prototypes.Turrets.TurretLists.FireGunTurret;
 import srcs.Prototypes.Turrets.TurretLists.RedLaserTurret;
 import srcs.Systems.AgeSystem.AgeData;
+import srcs.Systems.integratedSystem.IntegratedSystem;
 import srcs.GameUI.mainGame.SubScene.GameObject.Effects.HandGrapperGObject;
 
 public class SkeletonAge extends AgeData {
@@ -109,6 +110,7 @@ public class SkeletonAge extends AgeData {
 
     @Override
     public void useUltimate(TeamType team) {
+        IntegratedSystem.getInstance().getPlayerExpSystem().decreaseExperiance(250);
         System.out.println("ultimate in skeleton age is called.");
         MainGame.getInstance().addGameObjectToScene(getNewHandGrapperGobj());
     }

@@ -10,7 +10,7 @@ public class RedLaserTurret extends TurretPrototype {
     public RedLaserTurret() {
         super();
         ImageData turretImgData = new ImageData("turrets/red_laser.png");
-        setAttackSpeed(5);
+        setAttackSpeed(10);
         setImgData(turretImgData);
         setName("Red Laser hell");
         setGold(200);
@@ -20,8 +20,8 @@ public class RedLaserTurret extends TurretPrototype {
         setProjectileSpeed(2);
         // todo : add bullet image
         setBulletImgData(turretImgData);
-        setAttackRange(1000);
-        setAttackDamage(1);
+        setAttackRange(300);
+        setAttackDamage(2);
     }
 
     public RedLaserTurret(TeamType teamType, int attackSpeed, ImageData imgData, String name, int gold, Point position,

@@ -116,7 +116,7 @@ public class EnemyIntegratedSystem implements Loopable {
                         decreaseEnemyGold(c.getCharacter().getGold());
                     }
 
-                    int expPerTick = 20;
+                    int expPerTick = 50;
                     enemyExpSystem.increasedExperience(expPerTick);
                     int goldPerTick = 10;
                     enemyGoldSystem.increasedGold(goldPerTick);
@@ -131,6 +131,7 @@ public class EnemyIntegratedSystem implements Loopable {
             // } catch (Exception e) { System.out.println(e); }
                 if (enemyExpSystem.getExperiance() > IntegratedSystem.getInstance().getCurrentEnemyAgeData()
                     .getExpRequiredToUpgrade()) {
+                    System.out.println("will upgrade enemy age");
                     IntegratedSystem.getInstance().upgradeAge(TeamType.ENEMY);
                 }
 

@@ -1,5 +1,7 @@
 package srcs.Systems.integratedSystem;
 
+import javax.print.attribute.standard.MediaSize.Engineering;
+
 import audio.Music;
 import srcs.Enums.AgeType;
 import srcs.Enums.TeamType;
@@ -49,24 +51,24 @@ public class IntegratedSystem {
         currentEnemyAgeData = SkeletonAge.getInstance();
         // currentEnemyAgeData = FF7Age.getInstance();
 
-        // playerGoldSystem = new GoldSystem(200);
+        playerGoldSystem = new GoldSystem(200);
+        enemyGoldSystem = new GoldSystem(500);
         // playerGoldSystem = new GoldSystem(850);
-        playerGoldSystem = new GoldSystem(500);
+        // playerGoldSystem = new GoldSystem(500);
         // playerGoldSystem = new GoldSystem(300);
         // enemyGoldSystem = new GoldSystem(500);
         // enemyGoldSystem = new GoldSystem(5000);
-        enemyGoldSystem = new GoldSystem(500);
         // enemyGoldSystem = new GoldSystem(200);
         // enemyGoldSystem = new GoldSystem(100);
         // enemyGoldSystem = new GoldSystem(30);
         // enemyGoldSystem = new GoldSystem(50);
 
         // playerExpSystem = new ExpSystem(50);
-        playerExpSystem = new ExpSystem(10000);
-        // playerExpSystem = new ExpSystem(500);
+        // playerExpSystem = new ExpSystem(10000);
+        playerExpSystem = new ExpSystem(200);
         // playerExpSystem = new ExpSystem(1250);
         // enemyExpSystem = new ExpSystem(8000);
-        enemyExpSystem = new ExpSystem(500);
+        enemyExpSystem = new ExpSystem(99);
 
         // ! bug can draw firsst unit because cant get tower prototype ?
         playerTowerSystem = new TowerSystem(
@@ -151,8 +153,8 @@ public class IntegratedSystem {
                 UltimatePanel.getInstance().setUltiImage(getCurrentPlayerAgeData().getUltimateImage());
 
                 Music upgradeSfx = new Music();
-                // upgradeSfx.setFile("retro-arcade.wav");
-                // upgradeSfx.play();
+                upgradeSfx.setFile("retro-arcade.wav");
+                upgradeSfx.play();
 
                 // todo : replace old ultimateImages to new
                 DebugPanel.getInstance().setDebugText("Player has upgrader ages to be ... "
@@ -161,9 +163,9 @@ public class IntegratedSystem {
             }
         }
         if (teamToUpgrade == TeamType.ENEMY) {
-            if (getEnemyExpSystem().getExperiance() >
-                currentEnemyAgeData.getExpRequiredToUpgrade()
-            ) {
+            // if (getEnemyExpSystem().getExperiance() >=
+            //     currentEnemyAgeData.getExpRequiredToUpgrade()
+            // ) {
                 System.out.println("Enemy upgraded AGE");
                 // todo : decrease exp :
                 EnemyIntegratedSystem.getInstance().decreaseEnemyExp(
@@ -188,7 +190,7 @@ public class IntegratedSystem {
                         break;
                     }
                 }
-            }
+            // }
         }
 
     }
